@@ -1,2 +1,7 @@
-# irBs
-Integrated bus reservation system Repository
+# 프로젝트 메모장
+
+## 해야할 것 
+
+0. 회의 진행
+1. 프로젝트 진행 우선순위 정하기
+2. 통합버스 앱에 대한 불편함 및 필요성을 입증하기 위한 설문조사 준비 
