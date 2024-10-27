@@ -1,0 +1,77 @@
+.container {
+    max-width: 480px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: rgb(243, 244, 246);
+    padding-bottom: 54px;
+    font-family: Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif;
+    color: rgb(0, 0, 0);
+    overflow: hidden;
+  }
+  
+  .header {
+    background-color: #fff;
+    display: flex;
+    gap: 40px;
+    font-size: 24px;
+    font-weight: 700;
+    padding: 32px 200px 32px 87px;
+    margin: 0 19px 0 9px;
+  }
+  
+  .headerIcon {
+    aspect-ratio: 1.05;
+    object-fit: contain;
+    width: 39px;
+    margin-left: -4px;
+  }
+  
+  .headerTitle {
+    margin-right: -5px;
+  }
+  
+  .scheduleGrid {
+    display: flex;
+    margin-top: 18px;
+    width: 100%;
+    flex-direction: column;
+    font-size: 14px;
+    padding: 0 17px 0 8px;
+    gap: 17px;
+  }
+  
+  .scheduleRow {
+    display: flex;
+    gap: 7px;
+  }
+  
+  .scheduleCard {
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 16px 21px;
+  }
+  
+  .locationName {
+    color: rgb(51, 51, 51);
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+  }
+  
+  .scheduleTime {
+    margin-top: 14px;
+  }
+  
+  .noSchedule {
+    color: rgb(246, 24, 87);
+  }
+  
+  @media (max-width: 640px) {
+    .header {
+      padding-right: 177px;
+    }
+  }

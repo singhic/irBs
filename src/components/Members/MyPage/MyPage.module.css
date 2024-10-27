@@ -1,0 +1,127 @@
+.page {
+    background-color: #f3f4f6;
+    display: flex;
+    max-width: 480px;
+    width: 100%;
+    padding-bottom: 178px;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  
+  .header {
+    background: linear-gradient(180deg, #87ceeb -7.29%, #f3f4f6 100%);
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    color: #000;
+    text-align: center;
+    padding: 61px 80px 61px 22px;
+    font: 700 24px 'Noto Sans KR', sans-serif;
+  }
+  
+  .headerTop {
+    display: flex;
+    width: 240px;
+    max-width: 100%;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  
+  .userProfile {
+    display: flex;
+    margin-top: 63px;
+    width: 105px;
+    max-width: 100%;
+    gap: 6px;
+  }
+  
+  .profileImage {
+    aspect-ratio: 1.09;
+    object-fit: contain;
+    width: 100%;
+  }
+  
+  .userName {
+    margin-top: 11px;
+  }
+  
+  .mainContent {
+    z-index: 10;
+    display: flex;
+    margin-top: -34px;
+    width: 100%;
+    flex-direction: column;
+    padding: 0 22px;
+  }
+  
+  .statsContainer {
+    display: flex;
+    gap: 19px;
+    font-family: 'Noto Sans KR', sans-serif;
+    text-align: center;
+  }
+  
+  .statCard {
+    border-radius: 20px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 15px 20px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .statTitle {
+    display: flex;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  
+  .statValue {
+    color: #ff0000;
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 18px;
+    text-align: right;
+  }
+  
+  .sectionHeader {
+    display: flex;
+    gap: 8px;
+    margin: 25px 0 0 11px;
+    font: 700 16px 'Noto Sans KR', sans-serif;
+  }
+  
+  .contentCard {
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    margin-top: 8px;
+    padding: 24px 26px;
+    justify-content: space-between;
+  }
+  
+  .recentList {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .recentItem {
+    font-size: 20px;
+    font-weight: 400;
+  }
+  
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }

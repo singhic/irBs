@@ -1,0 +1,106 @@
+.profileContainer {
+    max-width: 480px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 46px 27px 24px;
+    background: linear-gradient(180deg, #87ceeb -7.29%, #f3f4f6 100%);
+    font-family: Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .headerSection {
+    display: flex;
+    width: 232px;
+    max-width: 100%;
+    gap: 20px;
+    font-size: 24px;
+    color: #000;
+    font-weight: 700;
+    text-align: center;
+    justify-content: space-between;
+  }
+  
+  .backIcon {
+    aspect-ratio: 1.05;
+    object-fit: contain;
+    width: 39px;
+    align-self: start;
+    margin-top: 4px;
+  }
+  
+  .userInfoSection {
+    display: flex;
+    gap: 33px;
+    font-size: 24px;
+    color: #000;
+    font-weight: 700;
+    margin: 77px 0 0 14px;
+  }
+  
+  .userAvatar {
+    aspect-ratio: 1.09;
+    object-fit: contain;
+    width: 88px;
+  }
+  
+  .userName {
+    margin: auto 0;
+  }
+  
+  .formCard {
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    margin-top: 28px;
+    flex-direction: column;
+    padding: 22px 23px;
+  }
+  
+  .formTitle {
+    color: #000;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    align-self: start;
+  }
+  
+  .formInput {
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.08);
+    margin-top: 17px;
+    padding: 17px 11px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.7);
+  }
+  
+  .submitButton {
+    aspect-ratio: 3.42;
+    width: 106px;
+    border-radius: 10px;
+    align-self: center;
+    margin-top: 10px;
+    max-width: 100%;
+  }
+  
+  .deactivateLink {
+    color: #0088ff;
+    text-align: center;
+    align-self: end;
+    margin-top: 143px;
+    font: 400 15px Niramit, sans-serif;
+  }
+  
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }

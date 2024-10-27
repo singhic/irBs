@@ -1,0 +1,17 @@
+.input {
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 400;
+    padding: 16px 11px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    width: 100%;
+  }
+  
+  .inputSpacing {
+    margin-top: 10px;
+  }
+  
+  .inputLarge {
+    margin-top: 26px;
+  }

@@ -1,0 +1,82 @@
+.faqSection {
+    max-width: 480px;
+    width: 100%;
+    margin: 0 auto;
+    background: #f8f8f8;
+    color: #000;
+    padding-bottom: 31px;
+  }
+  
+  .faqHeader {
+    background: #fff;
+    padding: 37px 35px;
+    display: flex;
+    gap: 58px;
+    align-items: center;
+    max-width: 385px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .headerIcon {
+    width: 39px;
+    aspect-ratio: 1.05;
+    object-fit: contain;
+  }
+  
+  .headerTitle {
+    font: 700 24px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
+    flex-grow: 1;
+  }
+  
+  .faqContent {
+    padding: 16px 27px;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+  }
+  
+  .accordionItem {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    padding: 17px 20px;
+    margin-bottom: 13px;
+  }
+  
+  .questionWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .question {
+    font: 400 16px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
+    margin: 0;
+  }
+  
+  .toggleButton {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  
+  .toggleIcon {
+    width: 16px;
+    aspect-ratio: 1.6;
+    object-fit: contain;
+  }
+  
+  .answer {
+    font: 700 16px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
+    margin: 16px 0 0;
+  }
+  
+  .helpText {
+    color: #0088ff;
+    text-align: center;
+    margin-top: 99px;
+    font: 500 14px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
+  }

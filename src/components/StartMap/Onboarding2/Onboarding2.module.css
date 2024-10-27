@@ -1,0 +1,73 @@
+.container {
+    max-width: none !important;
+  }
+  
+  .onboardingWrapper {
+    background-color: #fff;
+    display: flex;
+    max-width: 480px;
+    width: 100%;
+    padding: 173px 0 0;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 0 auto;
+    font: 700 14px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
+  }
+  
+  .heroImage {
+    aspect-ratio: 1.45;
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+  }
+  
+  .contentSection {
+    background: linear-gradient(180deg, #87ceeb -7.29%, #f3f4f6 100%);
+    display: flex;
+    margin-top: 111px;
+    width: 100%;
+    flex-direction: column;
+    align-items: start;
+    padding: 99px 50px;
+  }
+  
+  .title {
+    color: #333;
+    font-size: 20px;
+  }
+  
+  .description {
+    color: #000;
+    font-weight: 400;
+    line-height: 20px;
+    margin: 7px 0 0;
+  }
+  
+  .startButton {
+    border-radius: 20px;
+    background-color: rgba(176, 224, 230, 0.9);
+    align-self: stretch;
+    color: rgba(56, 56, 56, 0.9);
+    white-space: nowrap;
+    margin: 17px 0 -22px;
+    padding: 14px 70px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .startButton:hover {
+    background-color: rgba(176, 224, 230, 1);
+  }
+  
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
