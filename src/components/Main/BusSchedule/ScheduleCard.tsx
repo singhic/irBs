@@ -1,26 +1,19 @@
 import React from 'react';
 import styles from './BusSchedule.module.css';
+import { ScheduleCardProps } from './types';
 
-interface ScheduleCardProps {
-  location: string;
-  arrivalTimes: string[];
-  departureTimes: string[];
-}
-
-export const ScheduleCard: React.FC<ScheduleCardProps> = ({
-  location,
-  arrivalTimes,
-  departureTimes
-}) => {
+export const ScheduleCard: React.FC<ScheduleCardProps> = ({ route }) => {
   return (
     <article className={styles.scheduleCard}>
-      <h2 className={styles.locationName}>{location}</h2>
-      <p className={styles.scheduleTime}>
-        등교: {arrivalTimes.length ? arrivalTimes.join('/ ') : <span className={styles.noSchedule}>배차 없음</span>}
+      <h3 className={styles.locationName}>{route.location}</h3>
+      <p className={styles.departureTime}>
+        등교: {route.schedule.toSchool.length ? route.schedule.toSchool.join('/ ') : (
+          <span className={styles.noSchedule}>배차 없음</span>
+        )}
       </p>
-      {departureTimes.length > 0 && (
-        <p className={styles.scheduleTime}>
-          하교: {departureTimes.join('/ ')}
+      {route.schedule.fromSchool.length > 0 && (
+        <p className={styles.arrivalTime}>
+          하교: {route.schedule.fromSchool.join('/ ')}
         </p>
       )}
     </article>

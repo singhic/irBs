@@ -1,13 +1,12 @@
-import { FC } from 'react';
-import styles from './SeatMap.module.css';
-import { LegendItemProps } from './types.ts';
 import React from 'react';
+import styles from './SeatSelection.module.css';
+import { LegendItemProps } from './types';
 
-export const LegendItem: FC<LegendItemProps> = ({ icon, text }) => {
+export const LegendItem: React.FC<LegendItemProps> = ({ icon, label, alt }) => {
   return (
     <div className={styles.legendItem}>
-      <img src={icon} alt="" className={styles.legendIcon} />
-      <span className={styles.legendText}>{text}</span>
+      <img src={icon} alt={alt} className={styles.legendIcon} />
+      <span>{label}</span>
     </div>
   );
 };

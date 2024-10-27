@@ -4,7 +4,7 @@ import './App.css';
 
 import MainPage from './components/Main/MainPage/MainPage.tsx';
 import BusSchedule from './components/Main/BusSchedule/BusSchedule.tsx';
-import SeatMap from './components/Main/SeatMap/Seat.tsx';
+import SeatMap from './components/Main/SeatMap/SeatSelection.tsx';
 import Reservations from './components/Main/Reservations/ReservationStatus.tsx';
 
 import Mypage from './components/Members/MyPage/MyPage.tsx';

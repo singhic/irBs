@@ -1,46 +1,115 @@
 import React from 'react';
 import styles from './BusSchedule.module.css';
 import { ScheduleCard } from './ScheduleCard.tsx';
+import { BusRoute } from './types.ts';
 
-const scheduleData = [
+const busRoutes: BusRoute[] = [
   {
-    location: '동래',
-    arrivalTimes: ['07:50', '09:00', '09:50'],
-    departureTimes: ['17:20', '18:20', '21:00']
+    location: "동래",
+    schedule: {
+      toSchool: ["07:50", "09:00", "09:50"],
+      fromSchool: ["17:20", "18:20", "21:00"]
+    }
   },
   {
-    location: '마산',
-    arrivalTimes: ['08:00', '10:00'],
-    departureTimes: ['16:20', '17:20', '18:20']
+    location: "마산",
+    schedule: {
+      toSchool: ["08:00", "10:00"],
+      fromSchool: ["16:20", "17:20", "18:20"]
+    }
   },
-  // ... rest of the schedule data
+  {
+    location: "양산-물금",
+    schedule: {
+      toSchool: ["07:40"],
+      fromSchool: ["18:10"]
+    }
+  },
+  {
+    location: "양산-북정",
+    schedule: {
+      toSchool: ["07:50"],
+      fromSchool: ["18:10"]
+    }
+  },
+  {
+    location: "영도/부산역",
+    schedule: {
+      toSchool: ["07:20"],
+      fromSchool: ["18:10"]
+    }
+  },
+  {
+    location: "울산",
+    schedule: {
+      toSchool: ["07:30", "08:30", "09:40"],
+      fromSchool: ["16:20", "17:30", "20:00"]
+    }
+  },
+  {
+    location: "장유",
+    schedule: {
+      toSchool: ["07:55"],
+      fromSchool: ["18:10"]
+    }
+  },
+  {
+    location: "진해",
+    schedule: {
+      toSchool: ["07:30"],
+      fromSchool: ["18:10"]
+    }
+  },
+  {
+    location: "창원",
+    schedule: {
+      toSchool: ["08:00", "09:00", "10:00"],
+      fromSchool: ["16:20", "17:20", "18:20"]
+    }
+  },
+  {
+    location: "창원-마산",
+    schedule: {
+      toSchool: [],
+      fromSchool: ["21:00"]
+    }
+  },
+  {
+    location: "하단",
+    schedule: {
+      toSchool: ["07:50", "09:00", "09:50"],
+      fromSchool: ["17:20", "18:20", "21:00"]
+    }
+  },
+  {
+    location: "해운대",
+    schedule: {
+      toSchool: ["07:20"],
+      fromSchool: ["18:10"]
+    }
+  }
 ];
 
 export const BusSchedule: React.FC = () => {
   return (
-    <main className={styles.container}>
-      <header className={styles.header}>
+    <section className={styles.scheduleContainer}>
+      <header className={styles.scheduleHeader}>
         <img 
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/181bc38d531314cbdd6f1b038d9e41ee3e50485be6c75a3505fc1e3114998472?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30" 
-          alt="Bus schedule icon" 
-          className={styles.headerIcon}
+          src="/images/bus-icon.png" 
+          alt="버스 스케줄 아이콘" 
+          className={styles.headerIcon} 
         />
-        <h1 className={styles.headerTitle}>지역</h1>
+        <h2 className={styles.headerTitle}>지역</h2>
       </header>
-      
-      <section className={styles.scheduleGrid}>
-        {scheduleData.map((schedule, index) => (
-          <div className={styles.scheduleRow} key={index}>
-            <ScheduleCard
-              location={schedule.location}
-              arrivalTimes={schedule.arrivalTimes}
-              departureTimes={schedule.departureTimes}
-            />
-          </div>
+      <main className={styles.scheduleGrid}>
+        {busRoutes.map((route) => (
+          <ScheduleCard 
+            key={route.location} 
+            route={route} 
+          />
         ))}
-      </section>
-    </main>
+      </main>
+    </section>
   );
 };
-
 export default BusSchedule;

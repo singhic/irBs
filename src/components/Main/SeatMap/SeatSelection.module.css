@@ -1,0 +1,349 @@
+.seatSelection {
+  background-color: #f3f4f6;
+  display: flex;
+  max-width: 480px;
+  width: 100%;
+  padding-bottom: 44px;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.header {
+  background-color: #ffffff;
+  display: flex;
+  gap: 40px;
+  padding: 32px 21px;
+  align-items: center;
+}
+
+.backIcon {
+  width: 39px;
+  height: 37px;
+}
+
+.title {
+  color: #000000;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.dateSection {
+  display: flex;
+  gap: 15px;
+  padding: 19px 18px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.dateSection::-webkit-scrollbar {
+  display: none;
+}
+
+.dateButton {
+  border-radius: 20px;
+  background-color: #f3f4f6;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  padding: 11px 18px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: fit-content;
+}
+
+.dateButtonActive {
+  background-color: rgba(176, 224, 230, 0.9);
+}
+
+.dateText {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 10px;
+  color: #0c0c0c;
+}
+
+.dayText {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: #0c0c0c;
+  margin-top: 4px;
+}
+
+.scheduleSection {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  margin: 0 18px;
+  padding: 9px 9px 18px;
+}
+
+.tripType {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.tripButton {
+  border-radius: 10px;
+  background-color: #f3f4f6;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px 26px 10px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #727272;
+  transition: all 0.2s ease;
+}
+
+.tripButtonActive {
+  background-color: rgba(176, 224, 230, 0.9);
+  color: #666666;
+}
+
+.scheduleDivider {
+  background-color: rgba(0, 0, 0, 0.21);
+  height: 1px;
+  margin: 16px 29px;
+}
+
+.scheduleCards {
+  display: flex;
+  gap: 14px;
+  padding: 0 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scheduleCards::-webkit-scrollbar {
+  display: none;
+}
+
+.scheduleCard {
+  border-radius: 10px;
+  background-color: #f3f4f6;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  flex: 1;
+  text-align: left;
+  min-width: 100px;
+  transition: all 0.2s ease;
+}
+
+.scheduleCardActive {
+  background-color: rgba(176, 224, 230, 0.9);
+}
+
+.scheduleTime {
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.seatsInfo {
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  margin: 4px 0;
+}
+
+.waitingInfo {
+  font-family: 'Poppins', sans-serif;
+  font-size: 7px;
+  font-weight: 300;
+  margin: 0;
+}
+
+.seatingSection {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  margin: 14px 18px;
+  padding: 39px 13px;
+}
+
+.legend {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 15px;
+  font-size: 17px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.legendIcon {
+  width: 32px;
+  height: 31px;
+}
+
+.busLayout {
+  margin-top: 47px;
+  position: relative;
+}
+
+.driverIcon {
+  width: 20px;
+  height: 21px;
+  position: absolute;
+  left: 26px;
+  top: 0;
+}
+
+.steeringIcon {
+  width: 31px;
+  height: 32px;
+  position: absolute;
+  left: 20px;
+  top: 30px;
+}
+
+.seatGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 0 20px;
+  margin-top: 70px;
+}
+
+.seat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.seat:hover {
+  transform: scale(1.05);
+}
+
+.seat[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.seatTop {
+  border-radius: 8px 8px 0 0;
+  padding: 3px;
+  width: 100%;
+}
+
+.seat-red .seatTop {
+  background-color: #ea2427;
+}
+
+.seat-grey .seatTop {
+  background-color: #949494;
+}
+
+.seat-green .seatTop {
+  background-color: #2ca961;
+}
+
+.seatBorder {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  padding: 2px;
+}
+
+.seatHandle {
+  width: 7px;
+  height: 21px;
+  background-color: #ffffff;
+  border-radius: 4px;
+}
+
+.seat-red .seatHandle {
+  border: 1px solid #ea2427;
+}
+
+.seat-grey .seatHandle {
+  border: 1px solid #949494;
+}
+
+.seat-green .seatHandle {
+  border: 1px solid #2ca961;
+}
+
+.seatNumber {
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  padding: 0 4px;
+}
+
+.seatBase {
+  height: 7px;
+  background-color: #ffffff;
+  border-radius: 0 0 4px 4px;
+}
+
+.seat-red .seatBase {
+  border: 1px solid #ea2427;
+}
+
+.seat-grey .seatBase {
+  border: 1px solid #949494;
+}
+
+.seat-green .seatBase {
+  border: 1px solid #2ca961;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 29px;
+  margin-top: 42px;
+}
+
+.confirmButton {
+  border-radius: 20px;
+  background-color: rgba(176, 224, 230, 0.9);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  padding: 14px 70px 4px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.confirmButton:hover {
+  background-color: rgba(156, 204, 210, 0.9);
+}
+
+.cancelButton {
+  border-radius: 20px;
+  background-color: rgba(248, 146, 148, 0.9);
+  padding: 15px 70px 3px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.cancelButton:hover {
+  background-color: rgba(228, 126, 128, 0.9);
+}
