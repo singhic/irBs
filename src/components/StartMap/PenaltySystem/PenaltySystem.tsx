@@ -22,6 +22,7 @@ const PenaltySystem: React.FC = () => {
           자세한 기준은 자주 묻는 질문탭에서 확인 가능합니다.
         </p>
 
+        <a href='./Onboarding2'>
         <button 
           className={styles.nextButton}
           onClick={() => {}}
@@ -29,6 +30,7 @@ const PenaltySystem: React.FC = () => {
         >
           다음
         </button>
+        </a>
       </section>
     </main>
   );
