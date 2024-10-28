@@ -10,8 +10,10 @@ export const PasswordReset: React.FC = () => {
       
       <form>
         <Input
+          type="text"
+          className={styles.inputField}
+          placeholder="아이디 (학번/사번)"
           id="userId"
-          label="아이디 (학번/사번)"
           spacing="large"
         />
         

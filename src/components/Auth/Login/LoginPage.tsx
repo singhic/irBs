@@ -24,31 +24,34 @@ const LoginPage: React.FC = () => {
           type="text"
           id="userId"
           className={styles.inputField}
-          placeholder="아이디 (학번/사번)"
+          placeholder="      아이디 (학번/사번)"
         />
 
-        <div className={styles.passwordContainer}>
+
           <label htmlFor="password" className={styles['visually-hidden']}>
             비밀번호
           </label>
-          <input
-            type={showPassword ? 'text' : 'password'}
-            id="password"
-            placeholder="비밀번호"
-            className={styles.inputField}
-          />
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            aria-label={showPassword ? '비밀번호 숨기기' : '비밀번호 보기'}
-          >
-            <img 
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/32d79ff2a100ed4ac1e5d06ca835cb8f8297e2a4970f5859f1a109b670fd299c?placeholderIfAbsent=true" 
-              alt="" 
-              className={styles.passwordIcon}
+          <div className={styles.inputWrapper}>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              id="password"
+              placeholder="      비밀번호"
+              className={styles.inputField}
             />
-          </button>
-        </div>
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? '비밀번호 숨기기' : '비밀번호 보기'}
+              className={styles.iconButton}
+            >
+              <img 
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/32d79ff2a100ed4ac1e5d06ca835cb8f8297e2a4970f5859f1a109b670fd299c?placeholderIfAbsent=true" 
+                alt="" 
+                className={styles.passwordIcon}
+              />
+            </button>
+          </div>
+
 
         <button type="submit" className={styles.loginButton}>
           <img 
@@ -61,7 +64,7 @@ const LoginPage: React.FC = () => {
       </form>
 
       <nav className={styles.helpLinks}>
-        <a href="/password-reset">비밀번호 찾기</a>
+        <a href="/passwordreset">비밀번호 찾기</a>
         <div className={styles.divider} aria-hidden="true" />
         <a href="/signup">회원가입</a>
       </nav>

@@ -30,7 +30,7 @@
   
   .inputField {
     width: 100%;
-    padding: 16px 12px;
+    padding: 16px 0px;
     border: 1px solid rgba(0, 0, 0, 0.4);
     border-radius: 10px;
     background: #fff;
@@ -38,20 +38,25 @@
     color: rgba(0, 0, 0, 0.7);
     font-weight: 400;
     margin-bottom: 13px;
+    padding-right: 40px; /* 아이콘 공간 확보 */
+    box-sizing: border-box;
   }
-  
+
   .passwordContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 15px;
+    padding: 16px 0px;
     border: 1px solid rgba(0, 0, 0, 0.4);
     border-radius: 10px;
     background: #fff;
+    position: relative;
+    width: 100%;
   }
   
   .passwordIcon {
     width: 24px;
+    height: 24px;
     aspect-ratio: 1;
     object-fit: contain;
   }
@@ -109,4 +114,18 @@
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
+  }
+
+  .inputWrapper {
+    position: relative;
+  }
+
+  .iconButton {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-70%);
+    background: none;
+    border: none;
+    cursor: pointer;
   }

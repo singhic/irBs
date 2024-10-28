@@ -22,7 +22,6 @@ const OnboardingPage: React.FC = () => {
         <a href='/Login'>
         <button 
           className={styles.startButton}
-          onClick={() => {/* handle start action */}}
         >
           시작하기
         </button>

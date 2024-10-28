@@ -25,18 +25,20 @@ const Signup: React.FC = () => {
               placeholder="생년월일(주민번호 앞자리)"
             />
           </div>
+          <button type="button" className={styles.verifyButton}>
           <img 
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/384718c8a2226903135deccb78910cca6a57fbc6d7246521c2eb0f9246ded2c9?placeholderIfAbsent=true"
             alt=""
             className={styles.verifyImage}
           />
+          </button>
         </div>
 
         <label htmlFor="phone" className={styles['visually-hidden']}>핸드폰번호</label>
         <input
           type="tel"
           id="phone"
-          className={styles.formInput}
+          className={styles.formInput_phonenum}
           placeholder="핸드폰번호"
         />
 
@@ -76,22 +78,20 @@ const Signup: React.FC = () => {
           type="text"
           id="cardNumber"
           className={styles.cardInput}
-          placeholder="카드번호를 입력하세요&#13;이즐(구 케시비) 또는 신한카드 후불교통카드 16자리"
+          placeholder="카드번호를 입력하세요 <br> 이즐(구 케시비) 또는 신한카드 후불교통카드 16자리"
         />
-
+        <br/>
         <button type="submit" className={styles.submitButton}>
-          <img 
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/51f399c668cf84790f8b367c5bc84fca6f89d929db0f0a1e133b964d49a288db?placeholderIfAbsent=true"
-            alt=""
-            className={styles.submitBackground}
-          />
+          <a href='/Login'>
           <span>회원가입 완료</span>
+          </a>
         </button>
       </form>
 
       <div className={styles.loginPrompt}>
-        <p className={styles.loginText}>비밀번호가 있나요?</p>
-        <button className={styles.loginLink}>로그인</button>
+      <a href='/Login'>
+        <p className={styles.loginText}>아이디가 있나요?</p>
+      </a>
       </div>
     </main>
   );

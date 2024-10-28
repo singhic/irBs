@@ -28,10 +28,27 @@
   .formInput {
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.08);
-    padding: 16px 11px;
+    padding: 16px 160px;
     border: 1px solid rgba(0, 0, 0, 0.4);
     color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 10px;
+    margin-top: 10px;
   }
+
+  .formInput_phonenum {
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 16px 160px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: left;
+  }
+
+  input::placeholder {
+    text-align: left;
+}
   
   .verifyImage {
     aspect-ratio: 0.71;
@@ -56,10 +73,13 @@
   .cardInput {
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.08);
-    margin-top: 29px;
-    font-size: 11px;
-    padding: 9px 10px;
+    padding: 26px 160px;
     border: 1px solid rgba(0, 0, 0, 0.4);
+    color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: left;
+    white-space: pre-wrap;
   }
   
   .submitButton {
@@ -95,12 +115,6 @@
     font-weight: 500;
   }
   
-  .loginLink {
-    color: #0088ff;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  
   .visually-hidden {
     position: absolute;
     width: 1px;
@@ -111,3 +125,5 @@
     clip: rect(0, 0, 0, 0);
     border: 0;
   }
+
+  
