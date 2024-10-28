@@ -13,7 +13,7 @@ export const MainPage: React.FC = () => {
       <header className={styles.notificationBar}>
         <div className={styles.notificationContent}>
           <img 
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/3ef9aedfc9b62a5ef5418720705177a18d6ad3a44771951bd8bc03bb620b248e?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30" 
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/3ef9aedfc9b62a5ef5418720705177a18d6ad3a44771951bd8bc03bb620b248e?placeholderIfAbsent=true" 
             alt="Warning icon" 
             className={styles.notificationIcon} 
           />
@@ -22,7 +22,7 @@ export const MainPage: React.FC = () => {
           </p>
         </div>
         <img 
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/000f5f913f98483ee512f05f509b6c27a28917768973c443b3543c86a04612d4?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30" 
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/000f5f913f98483ee512f05f509b6c27a28917768973c443b3543c86a04612d4?placeholderIfAbsent=true" 
           alt="Settings" 
           className={styles.settingsIcon} 
         />
@@ -38,7 +38,7 @@ export const MainPage: React.FC = () => {
           </h1>
         </div>
         <img 
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/e4e208546ef4b7480e5ab6a347461c87993eeabd950ffebecb7912371e49e91a?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30" 
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/e4e208546ef4b7480e5ab6a347461c87993eeabd950ffebecb7912371e49e91a?placeholderIfAbsent=true" 
           alt="Weather" 
           className={styles.weatherIcon} 
         />
@@ -48,7 +48,7 @@ export const MainPage: React.FC = () => {
         <a href='./BusSchedule'>
         <span className={styles.bookingText}>예약하기</span>
         <img 
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/406181a727603b6744c65a734692215707f5036ec231fe2445b98845343e8c94?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30" 
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/406181a727603b6744c65a734692215707f5036ec231fe2445b98845343e8c94?placeholderIfAbsent=true" 
           alt="" 
           className={styles.bookingIcon} 
         />
@@ -75,7 +75,7 @@ export const MainPage: React.FC = () => {
         <div className={styles.noticeFooter}>
           <span>전체공지 보기</span>
           <img 
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/39d3da592bbe83d18c101160fb790b68b8b3c44297531c445b233d2f5354dec7?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30" 
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/39d3da592bbe83d18c101160fb790b68b8b3c44297531c445b233d2f5354dec7?placeholderIfAbsent=true" 
             alt="" 
             className={styles.noticeIcon} 
           />
@@ -88,7 +88,7 @@ export const MainPage: React.FC = () => {
 
       <section className={styles.recentBooking}>
         <img 
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/fe829013-c35b-4444-ab77-aaf9850d8c8d?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30" 
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/fe829013-c35b-4444-ab77-aaf9850d8c8d?placeholderIfAbsent=true" 
           alt="" 
           className={styles.recentBookingIcon} 
         />

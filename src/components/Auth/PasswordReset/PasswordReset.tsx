@@ -26,7 +26,7 @@ export const PasswordReset: React.FC = () => {
             label="인증번호"
           />
           <img 
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/d792d2b4046da4913898ec2aec68a453f4af99795cf5dfc8f7389aee52907903?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/d792d2b4046da4913898ec2aec68a453f4af99795cf5dfc8f7389aee52907903?placeholderIfAbsent=true"
             alt=""
             className={styles.verifyButton}
           />

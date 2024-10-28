@@ -26,7 +26,7 @@ export const Ticket: FC<TicketProps> = ({
       </p>
       <div className={styles.ticketDivider} />
       <img 
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/81cf9b6e0172de95c49cfa812c93f09b349e6320d14d7afbde154fa130b072d1?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30"
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/81cf9b6e0172de95c49cfa812c93f09b349e6320d14d7afbde154fa130b072d1?placeholderIfAbsent=true"
         alt="QR Code"
         className={styles.qrCode}
       />

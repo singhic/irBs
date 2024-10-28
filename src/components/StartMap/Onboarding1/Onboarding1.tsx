@@ -9,7 +9,7 @@ const OnboardingInfo: React.FC = () => {
   return (
     <main className={styles.container}>
       <img 
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/6461bb6e39fe3abfff37f1da48ec1c5f8741bc365f466629151fd3e7115d4635?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30" 
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/6461bb6e39fe3abfff37f1da48ec1c5f8741bc365f466629151fd3e7115d4635?placeholderIfAbsent=true" 
         alt="Onboarding illustration" 
         className={styles.heroImage} 
       />
@@ -22,6 +22,7 @@ const OnboardingInfo: React.FC = () => {
           <br />
           새로워진 예약 시스템을 이용해보세요.
         </p>
+        <a href='/Penalty'>
         <button 
           className={styles.nextButton}
           onClick={handleNext}
@@ -29,6 +30,7 @@ const OnboardingInfo: React.FC = () => {
         >
           다음
         </button>
+        </a>
       </section>
     </main>
   );

@@ -32,6 +32,7 @@
   .title {
     color: #333;
     font-size: 20px;
+    text-align:left;
   }
   
   .description {
@@ -39,6 +40,7 @@
     font-weight: 400;
     line-height: 20px;
     margin-top: 7px;
+    text-align:left;
   }
   
   .nextButton {
@@ -49,9 +51,10 @@
     color: rgba(56, 56, 56, 0.9);
     white-space: nowrap;
     margin: 17px 0 -22px;
-    padding: 13px 70px;
+    padding: 12px 180px;
     border: none;
     cursor: pointer;
+    transition: opacity 0.2s;
   }
   
   .nextButton:focus {

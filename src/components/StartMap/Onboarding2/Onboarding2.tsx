@@ -6,7 +6,7 @@ const OnboardingPage: React.FC = () => {
     <main className={styles.onboardingWrapper}>
       <img 
         loading="lazy" 
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/5c5bac3f88aab697059b3aadf82d2b250f9a6772de9c41d201614c05d07bd294?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30" 
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/5c5bac3f88aab697059b3aadf82d2b250f9a6772de9c41d201614c05d07bd294?placeholderIfAbsent=true" 
         className={styles.heroImage} 
         alt="Bus reservation system illustration"
       />
@@ -19,12 +19,14 @@ const OnboardingPage: React.FC = () => {
           버스 예약 후 탑승권 확인에 번거로움없이<br />
           빠르고 편리하게 탑승하세요.
         </p>
+        <a href='/Login'>
         <button 
           className={styles.startButton}
           onClick={() => {/* handle start action */}}
         >
           시작하기
         </button>
+        </a>
       </section>
     </main>
   );

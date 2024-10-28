@@ -5,7 +5,7 @@ const PenaltySystem: React.FC = () => {
   return (
     <main className={styles.container}>
       <img 
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/0b74ddd0b53d5d2e05bc2395c9d4f6172cf57b505231f2fbbda674440c3752f8?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30" 
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/0b74ddd0b53d5d2e05bc2395c9d4f6172cf57b505231f2fbbda674440c3752f8?placeholderIfAbsent=true" 
         alt="Penalty system illustration" 
         className={styles.banner} 
         loading="lazy" 
@@ -17,7 +17,7 @@ const PenaltySystem: React.FC = () => {
         </h1>
         
         <p className={styles.description}>
-          예약 후 탑승을 하지 않았나요?<br />
+          예약 후 탑승을 하지 않는 학우에 불편을 느꼈나요?<br />
           패널티 시스템으로 불이익을 받을 수 있습니다.<br />
           자세한 기준은 자주 묻는 질문탭에서 확인 가능합니다.
         </p>

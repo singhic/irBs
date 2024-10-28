@@ -1,1 +1,1 @@
-{"last_found_secrets": [{"match": "8d5d19e283aaa410e98c6c6d70c90f24181d29305ecdad13c882a08009bc5be6", "name": "Generic High Entropy Secret - c:\\Users\\ssb50\\irBs\\src\\components\\Main\\BusSchedule\\BusSchedule.tsx"}]}
+{"last_found_secrets": [{"name": "Generic High Entropy Secret - c:\\Users\\ssb50\\irBs\\src\\components\\Main\\MainPage\\MainPage.tsx", "match": "8d5d19e283aaa410e98c6c6d70c90f24181d29305ecdad13c882a08009bc5be6"}]}

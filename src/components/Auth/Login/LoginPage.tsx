@@ -7,7 +7,7 @@ const LoginPage: React.FC = () => {
   return (
     <main className={styles.loginContainer}>
       <img 
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/ae3ee0e389dff35e40300bc2397c9fe81fb76d12614c12cef8a5b883e7581063?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30" 
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/ae3ee0e389dff35e40300bc2397c9fe81fb76d12614c12cef8a5b883e7581063?placeholderIfAbsent=true" 
         alt="인제대학교 로고" 
         className={styles.logo}
       />
@@ -43,7 +43,7 @@ const LoginPage: React.FC = () => {
             aria-label={showPassword ? '비밀번호 숨기기' : '비밀번호 보기'}
           >
             <img 
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/32d79ff2a100ed4ac1e5d06ca835cb8f8297e2a4970f5859f1a109b670fd299c?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30" 
+              src="https://cdn.builder.io/api/v1/image/assets/TEMP/32d79ff2a100ed4ac1e5d06ca835cb8f8297e2a4970f5859f1a109b670fd299c?placeholderIfAbsent=true" 
               alt="" 
               className={styles.passwordIcon}
             />
@@ -52,7 +52,7 @@ const LoginPage: React.FC = () => {
 
         <button type="submit" className={styles.loginButton}>
           <img 
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/27ab334dd17dc9de946c30c832cb0a06db7c8dbea05cb2dacbcfc926384075b5?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30" 
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/27ab334dd17dc9de946c30c832cb0a06db7c8dbea05cb2dacbcfc926384075b5?placeholderIfAbsent=true" 
             alt="" 
             className={styles.loginButtonBg} 
           />
@@ -65,8 +65,10 @@ const LoginPage: React.FC = () => {
         <div className={styles.divider} aria-hidden="true" />
         <a href="/signup">회원가입</a>
       </nav>
-
+      
+      <a href='/Onboarding'>
       <p className={styles.newUserText}>처음이신가요?</p>
+      </a>
     </main>
   );
 };

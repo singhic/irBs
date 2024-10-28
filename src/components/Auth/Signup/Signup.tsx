@@ -26,7 +26,7 @@ const Signup: React.FC = () => {
             />
           </div>
           <img 
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/384718c8a2226903135deccb78910cca6a57fbc6d7246521c2eb0f9246ded2c9?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/384718c8a2226903135deccb78910cca6a57fbc6d7246521c2eb0f9246ded2c9?placeholderIfAbsent=true"
             alt=""
             className={styles.verifyImage}
           />
@@ -49,7 +49,7 @@ const Signup: React.FC = () => {
             placeholder="인증번호"
           />
           <img 
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/1ebcadbfbb3dbee30aafba733f3375e883d0cf2eb1ef3e19b2409957e0a6e375?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/1ebcadbfbb3dbee30aafba733f3375e883d0cf2eb1ef3e19b2409957e0a6e375?placeholderIfAbsent=true"
             alt=""
             className={styles.verifyButton}
           />
@@ -81,7 +81,7 @@ const Signup: React.FC = () => {
 
         <button type="submit" className={styles.submitButton}>
           <img 
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/51f399c668cf84790f8b367c5bc84fca6f89d929db0f0a1e133b964d49a288db?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/51f399c668cf84790f8b367c5bc84fca6f89d929db0f0a1e133b964d49a288db?placeholderIfAbsent=true"
             alt=""
             className={styles.submitBackground}
           />
