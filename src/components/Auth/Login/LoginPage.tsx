@@ -6,6 +6,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <main className={styles.loginContainer}>
+    
       <img 
         src="https://cdn.builder.io/api/v1/image/assets/TEMP/ae3ee0e389dff35e40300bc2397c9fe81fb76d12614c12cef8a5b883e7581063?placeholderIfAbsent=true" 
         alt="인제대학교 로고" 
@@ -54,6 +55,7 @@ const LoginPage: React.FC = () => {
 
 
         <button type="submit" className={styles.loginButton}>
+          
           <img 
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/27ab334dd17dc9de946c30c832cb0a06db7c8dbea05cb2dacbcfc926384075b5?placeholderIfAbsent=true" 
             alt="" 

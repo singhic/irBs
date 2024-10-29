@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './Input.module.css';
 
-interface InputProps {
+interface InputProps 
+{
   id: string;
   label: string;
   className?: string;
@@ -11,7 +12,7 @@ interface InputProps {
 export const Input: React.FC<InputProps> = ({ id, label, className, spacing }) => {
   return (
     <>
-      <label htmlFor={id} className="visually-hidden">{label}</label>
+      <label htmlFor={id} className="visually-hidden"></label>
       <input
         id={id}
         placeholder={label}
