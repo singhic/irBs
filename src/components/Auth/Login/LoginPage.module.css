@@ -1,15 +1,16 @@
 .loginContainer {
-    max-width: 500px;
+    max-width: 360px;
     max-height: 740px;
     width: 100%;
     margin: 0 auto;
-    padding: 199px 50px 73px;
+    /* padding: 199px 50px 73px; */
     background: #fff;
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font: 700 14px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
+    
   }
   
   .logo {
