@@ -9,15 +9,14 @@ export const PasswordReset: React.FC = () => {
       <h1 className={styles.title}>비밀번호 찾기</h1>
       
       <form>
-        <Input
-          type="text"
+        <Input  
           className={styles.inputField}
-          placeholder="아이디 (학번/사번)"
+          label = "아이디(학번/사번) "
           id="userId"
           spacing="large"
         />
-        
         <Input
+          
           id="phone"
           label="핸드폰번호"
         />
@@ -27,11 +26,9 @@ export const PasswordReset: React.FC = () => {
             id="verification"
             label="인증번호"
           />
-          <img 
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/d792d2b4046da4913898ec2aec68a453f4af99795cf5dfc8f7389aee52907903?placeholderIfAbsent=true"
-            alt=""
-            className={styles.verifyButton}
-          />
+        <button type="submit" className={styles.verifyButton}>
+              인증
+        </button>
         </div>
         
         <Input

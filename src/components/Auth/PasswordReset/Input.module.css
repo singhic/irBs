@@ -6,6 +6,8 @@
     padding: 16px 11px;
     border: 1px solid rgba(0, 0, 0, 0.4);
     width: 100%;
+    width:300px;
+    type :true
   }
   
   .inputSpacing {
@@ -13,5 +15,5 @@
   }
   
   .inputLarge {
-    margin-top: 26px;
+    margin-top: 20px;
   }
