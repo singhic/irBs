@@ -1,299 +1,317 @@
 .page {
-    background-color: rgb(243, 244, 246);
-    display: flex;
-    max-width: 480px;
-    width: 100%;
-    flex-direction: column;
-    overflow: hidden;
-    font-family: Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif;
-    margin: 0 auto;
-    padding: 0 12px;
+  background-color: rgb(243, 244, 246);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* font-family: Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif; */
+  /* margin: 0 12px; */
+  /* padding: 0 12px 0 0; */
+}
+/* 전체 페이지 설정-------------------------------------------------- */
+.notificationBar {
+  background-color: #fff;
+  display: flex;
+  width: 100%;
+  gap: 40px 60px;
+  font-size: 13px;
+  color: #000;
+  font-weight: 350;
+  text-align: center;
+  padding: 3px 3px ;
+}
+
+.notificationContent {
+  display: flex;
+  gap: 14px;
+  flex-grow: 1;
+  flex-basis: auto;
+  margin: auto 0;
+}
+
+.notificationIcon {
+  aspect-ratio: 1.09;
+  object-fit: contain;
+  object-position: center;
+  width: 24px;
+  padding-left: 5px;
+}
+
+.notificationText {
+  flex-basis: auto;
+}
+
+@media (max-width: 640px) {
+  .notificationText {
+    margin: 2px -42px 0 -4px;
   }
+}
+
+.settingsIcon {
+  aspect-ratio: 0.89;
+  object-fit: contain;
+  object-position: center;
+  width: 31px;
+  margin-right: 10px;
+}
+/* 앱바 ---------------------------------------------------------------------------  */
+.weatherCard {
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  margin: 5px;
+  gap: 20px;
+  text-align: center;
+  justify-content: space-between;
+  padding: 23px 15px;
+  margin-top: 12px;
   
-  .notification-bar {
-    background-color: #fff;
-    display: flex;
-    width: 100%;
-    gap: 40px 60px;
-    font-size: 13px;
-    color: #000;
-    font-weight: 350;
-    text-align: center;
-    padding: 15px 12px;
-  }
+}
+
+.weatherInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.weatherStatus {
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  align-self: start;
+}
+
+.greeting {
+  color: #333;
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.weatherIcon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 50px;
+  align-self: start;
+}
+/* 안녕하세요 사용자님 ----------------------------------------------------------------- */
+.bookingButton {
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  margin-top: 12px;
+  /* gap: 20px; */
+  font-size: 25px;
+  /* color: #000; */
+  /* font-weight: 500; */
+  /* white-space: nowrap; */
+  /* text-align: center; */
+  /* justify-content: space-between; */
+  padding: 11px 27px;
+  cursor: pointer;
+  border: none;
+}
+
+.bookingText {
+  margin: auto 0;
+  /* align-items: center;  */
+}
+
+.bookingIcon {
+  /* aspect-ratio: 1.1; */
+  object-fit: contain;
+  object-position: center;
+  width: 34px;
+  /* margin-left: auto; */
   
-  .notification-content {
-    display: flex;
-    gap: 14px;
-    flex-grow: 1;
-    flex-basis: auto;
-    margin: auto 0;
+}
+/* 빠른예약 */
+.quickBooking {
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  /* display: flex; */
+  margin: 3px;
+  margin-top: 12px;
+  /* width: 100%; */
+  align-items: end;
+  gap: 9px;
+  color: #000;
+  text-align: center;
+  padding: 16px 0 25px 10px;
+}
+
+.quickBookingContent {
+  align-self: stretch;
+  display: flex;
+  /* flex-direction: column; */
+  /* width: 200px; */
+  gap: 10px;
+}
+
+.quickBookingTitle {
+  font-size: 20px;
+  font-weight: 500;
+  /* align-self: left; */
+  text-align: left;
+  margin-left: 10px;
+}
+/* 빠른 예약 안쪽 ------------------------------------------------------ */
+.routeCard {
+  width: 100px;
+  border-radius: 20px;
+  background-color: rgb(243, 244, 246);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  /* display: flex;
+  align-items: flex-start; */
+  gap: 16px;
+  /* white-space: nowrap; */
+  padding: 16px 19px 8px;
+  /* margin-top: 22px; */
+}
+
+.routeInfo {
+  /* align-self: start; */
+  display: flex;
+  /* flex-direction: column; */
+  /* flex: 1; */
+}
+
+.routeDestination {
+  font-size: 24px;
+  font-weight: 400;
+}
+.routeDestination2 {
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 640px) {
+  .routeDestination {
+    margin-top: -5px;
   }
+}
+
+.routeTime {
+  /* font-size: 13px; */
+  font-weight: 700;
+  /* align-self: start; */
+  /* margin-top: 4px; */
+  /* margin-bottom: 3px; */
+}
+
+.routeSeats {
+  font-size: 10px;
+  font-weight: 500;
+  /* align-self: end; */
+  margin-top: 4px;
   
-  .notification-icon {
-    aspect-ratio: 1.09;
-    object-fit: contain;
-    object-position: center;
-    width: 24px;
+}
+/* 공지사항 ---------------------------------------------------------------------------- */
+.noticeSection {
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  /* width: 100%; */
+  flex-direction: column;
+  align-items: start;
+  text-align: center;
+  padding: 23px 18px 8px;
+  margin-top: 12px;
+  margin: 3px;
+}
+
+.noticeTitle {
+  color: #000;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.noticeDivider {
+  width: 317px;
+  max-width: 100%;
+  height: 1px;
+  margin: 237px 0 0 12px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.noticeFooter {
+  align-self: end;
+  display: flex;
+  margin-top: 6px;
+  width: 203px;
+  max-width: 100%;
+  gap: 20px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.45);
+  font-weight: 700;
+  justify-content: space-between;
+}
+
+.noticeIcon {
+  aspect-ratio: 1.04;
+  object-fit: contain;
+  object-position: center;
+  width: 26px;
+}
+
+.supportText {
+  color: rgb(0, 136, 255);
+  font-size: 14px;
+  font-weight: 500;
+  align-self: center;
+  margin-top: 9px;
+}
+
+.recentBooking {
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  margin-top: 16px;
+  flex-direction: column;
+  color: rgba(56, 56, 56, 0.9);
+  font-weight: 700;
+  padding: 6px 0 18px;
+}
+
+.recentBookingIcon {
+  aspect-ratio: 1.1;
+  object-fit: contain;
+  object-position: center;
+  width: 32px;
+  background-color: rgba(0, 0, 0, 0.14);
+  align-self: center;
+}
+
+.recentBookingContent {
+  display: flex;
+  margin-top: 21px;
+  flex-direction: column;
+  align-items: start;
+  padding: 0 16px ;
+}
+
+.recentBookingTitle {
+  font-size: 24px;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .recentBookingTitle {
+    margin-right: -30px;
   }
-  
-  .notification-text {
-    flex-basis: auto;
+}
+
+.recentBookingDetails {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+@media (max-width: 640px) {
+  .recentBookingDetails {
+    margin-top: -1px;
   }
-  
-  @media (max-width: 640px) {
-    .notification-text {
-      margin: 2px -42px 0 -4px;
-    }
-  }
-  
-  .settings-icon {
-    aspect-ratio: 0.89;
-    object-fit: contain;
-    object-position: center;
-    width: 31px;
-  }
-  
-  .weather-card {
-    border-radius: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    margin-top: 13px;
-    gap: 20px;
-    text-align: center;
-    justify-content: space-between;
-    padding: 23px 15px;
-  }
-  
-  .weather-info {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .weather-status {
-    color: #000;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1;
-    align-self: start;
-  }
-  
-  .greeting {
-    color: #333;
-    font-size: 24px;
-    font-weight: 700;
-    margin-top: 10px;
-  }
-  
-  .weather-icon {
-    aspect-ratio: 1;
-    object-fit: contain;
-    object-position: center;
-    width: 50px;
-    align-self: start;
-  }
-  
-  .booking-button {
-    border-radius: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    margin-top: 16px;
-    gap: 20px;
-    font-size: 20px;
-    color: #000;
-    font-weight: 500;
-    white-space: nowrap;
-    text-align: center;
-    justify-content: space-between;
-    padding: 11px 27px;
-    cursor: pointer;
-  }
-  
-  .booking-text {
-    margin: auto 0;
-  }
-  
-  .booking-icon {
-    aspect-ratio: 1.1;
-    object-fit: contain;
-    object-position: center;
-    width: 34px;
-  }
-  
-  .quick-booking {
-    border-radius: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    margin-top: 12px;
-    width: 100%;
-    align-items: end;
-    gap: 9px;
-    color: #000;
-    text-align: center;
-    padding: 16px 0 25px 10px;
-  }
-  
-  .quick-booking-content {
-    align-self: stretch;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .quick-booking-title {
-    font-size: 20px;
-    font-weight: 500;
-    align-self: center;
-  }
-  
-  .route-card {
-    border-radius: 20px;
-    background-color: rgb(243, 244, 246);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    white-space: nowrap;
-    padding: 16px 19px 8px;
-    margin-top: 22px;
-  }
-  
-  .route-info {
-    align-self: start;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-  
-  .route-destination {
-    font-size: 24px;
-    font-weight: 400;
-  }
-  
-  @media (max-width: 640px) {
-    .route-destination {
-      margin-top: -5px;
-    }
-  }
-  
-  .route-time {
-    font-size: 13px;
-    font-weight: 700;
-    align-self: start;
-    margin-top: 4px;
-  }
-  
-  .route-seats {
-    font-size: 10px;
-    font-weight: 400;
-    align-self: end;
-    margin-top: 30px;
-  }
-  
-  .notice-section {
-    border-radius: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    margin-top: 12px;
-    width: 100%;
-    flex-direction: column;
-    align-items: start;
-    text-align: center;
-    padding: 23px 18px 8px;
-  }
-  
-  .notice-title {
-    color: #000;
-    font-size: 20px;
-    font-weight: 500;
-  }
-  
-  .notice-divider {
-    width: 317px;
-    max-width: 100%;
-    height: 1px;
-    margin: 237px 0 0 12px;
-    border: 1px solid rgba(0, 0, 0, 0.4);
-  }
-  
-  .notice-footer {
-    align-self: end;
-    display: flex;
-    margin-top: 6px;
-    width: 203px;
-    max-width: 100%;
-    gap: 20px;
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.45);
-    font-weight: 700;
-    justify-content: space-between;
-  }
-  
-  .notice-icon {
-    aspect-ratio: 1.04;
-    object-fit: contain;
-    object-position: center;
-    width: 26px;
-  }
-  
-  .support-text {
-    color: rgb(0, 136, 255);
-    font-size: 14px;
-    font-weight: 500;
-    align-self: center;
-    margin-top: 9px;
-  }
-  
-  .recent-booking {
-    border-radius: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    margin-top: 16px;
-    flex-direction: column;
-    color: rgba(56, 56, 56, 0.9);
-    font-weight: 700;
-    padding: 6px 0 18px;
-  }
-  
-  .recent-booking-icon {
-    aspect-ratio: 1.1;
-    object-fit: contain;
-    object-position: center;
-    width: 32px;
-    background-color: rgba(0, 0, 0, 0.14);
-    align-self: center;
-  }
-  
-  .recent-booking-content {
-    display: flex;
-    margin-top: 21px;
-    flex-direction: column;
-    align-items: start;
-    padding: 0 76px 0 19px;
-  }
-  
-  .recent-booking-title {
-    font-size: 24px;
-    text-align: center;
-  }
-  
-  @media (max-width: 640px) {
-    .recent-booking-title {
-      margin-right: -30px;
-    }
-  }
-  
-  .recent-booking-details {
-    font-size: 20px;
-    margin-top: 20px;
-  }
-  
-  @media (max-width: 640px) {
-    .recent-booking-details {
-      margin-top: -1px;
-    }
-  }
+}

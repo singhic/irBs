@@ -1,5 +1,5 @@
 import React from "react";
-
+import styles from './MainPage.module.css';
 interface RouteCardProps {
     destination: string;
     time: string;
@@ -8,12 +8,14 @@ interface RouteCardProps {
   
   export const RouteCard: React.FC<RouteCardProps> = ({ destination, time, seats }) => {
     return (
-      <article className="route-card">
-        <div className="route-info">
-          <h3 className="route-destination">{destination}</h3>
-          <time className="route-time">{time}</time>
+      <article className={styles.routeCard}>
+        <div className={styles.routeInfo}>
+          <h3 className={styles.routeDestination}>{destination}</h3>
         </div>
-        <p className="route-seats">{seats}</p>
+        <div className={styles.routeDestination2}>
+        <time className={styles.routeTime}>{time}</time>
+        <p className={styles.routeSeats}>{seats}</p>
+        </div>
       </article>
     );
   };

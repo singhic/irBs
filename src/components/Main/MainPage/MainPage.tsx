@@ -56,8 +56,8 @@ export const MainPage: React.FC = () => {
       </button>
 
       <section className={styles.quickBooking}>
+        <h2 className={styles.quickBookingTitle}>빠른 예약하기</h2>
         <div className={styles.quickBookingContent}>
-          <h2 className={styles.quickBookingTitle}>빠른 예약하기</h2>
           {routeData.map((route, index) => (
             <RouteCard
               key={index}
