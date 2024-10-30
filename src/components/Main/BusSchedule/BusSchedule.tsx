@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './BusSchedule.module.css';
 import { ScheduleCard } from './ScheduleCard.tsx';
 import { BusRoute } from './types.ts';
-
+import arrowLeftIcon from '../img/icon/arrow-left.png';
 const busRoutes: BusRoute[] = [
   {
     location: "동래",
@@ -95,8 +95,8 @@ export const BusSchedule: React.FC = () => {
     <section className={styles.scheduleContainer}>
       <header className={styles.scheduleHeader}>
         <img 
-          src="/images/bus-icon.png" 
-          alt="버스 스케줄 아이콘" 
+          src="img/icon/arrow-left.png" 
+          alt="arrow-left" 
           className={styles.headerIcon} 
         />
         <h2 className={styles.headerTitle}>지역</h2>
