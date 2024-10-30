@@ -59,41 +59,44 @@
   background-color: #fff;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  margin: 5px;
+  /* margin: 5px; */
   gap: 20px;
   text-align: center;
   justify-content: space-between;
-  padding: 23px 15px;
-  margin-top: 12px;
+  padding: 10px 20px;
+  margin: 2% 2%;
   
 }
 
 .weatherInfo {
   display: flex;
   flex-direction: column;
+  align-items: flex-start; /* 왼쪽 정렬 */
+
 }
 
 .weatherStatus {
   color: #000;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 1;
   align-self: start;
+  margin-bottom: 3px;
 }
 
 .greeting {
   color: #333;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
 .weatherIcon {
-  aspect-ratio: 1;
-  object-fit: contain;
-  object-position: center;
+  /* aspect-ratio: 1; */
+  /* object-fit: contain; */
+  /* object-position: center; */
   width: 50px;
-  align-self: start;
+  /* align-self: start; */
 }
 /* 안녕하세요 사용자님 ----------------------------------------------------------------- */
 .bookingButton {
@@ -101,17 +104,15 @@
   background-color: #fff;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  margin-top: 12px;
-  /* gap: 20px; */
-  font-size: 25px;
-  /* color: #000; */
-  /* font-weight: 500; */
-  /* white-space: nowrap; */
-  /* text-align: center; */
-  /* justify-content: space-between; */
+  margin: 0 2%;
+  font-size: 20px;
+
   padding: 11px 27px;
   cursor: pointer;
   border: none;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .bookingText {
@@ -121,20 +122,23 @@
 
 .bookingIcon {
   /* aspect-ratio: 1.1; */
-  object-fit: contain;
-  object-position: center;
+  /* object-fit: contain; */
+  /* object-position: center; */
   width: 34px;
-  /* margin-left: auto; */
+  
+  /* margin-right: auto; */
+  position: absolute;
+  left:85%;
+  /* transform: translateX(-%); */
   
 }
-/* 빠른예약 */
+/* 빠른예약 ----------------------------------------------------------*/
 .quickBooking {
   border-radius: 20px;
   background-color: #fff;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
   /* display: flex; */
-  margin: 3px;
-  margin-top: 12px;
+  margin: 2% 2%;
   /* width: 100%; */
   align-items: end;
   gap: 9px;
@@ -156,7 +160,7 @@
   font-weight: 500;
   /* align-self: left; */
   text-align: left;
-  margin-left: 10px;
+  margin-left: 20px;
 }
 /* 빠른 예약 안쪽 ------------------------------------------------------ */
 .routeCard {
@@ -219,14 +223,14 @@
   align-items: start;
   text-align: center;
   padding: 23px 18px 8px;
-  margin-top: 12px;
-  margin: 3px;
+  margin: 0 2%;
 }
 
 .noticeTitle {
   color: #000;
   font-size: 20px;
   font-weight: 500;
+  margin-left: 10px;
 }
 
 .noticeDivider {

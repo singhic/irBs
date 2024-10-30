@@ -17,7 +17,7 @@ export const Seat: React.FC<SeatProps> = ({ seatNumber, status, color, onSelect 
 
   return (
     <div
-      className={`${styles.seat} ${styles[`seat-${color}`]}`}
+      className={`${styles.seat} ${styles[`seat${color}`]}`}
       role="button"
       tabIndex={status === 'available' ? 0 : -1}
       onClick={handleClick}

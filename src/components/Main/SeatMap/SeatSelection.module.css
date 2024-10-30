@@ -257,15 +257,15 @@
   width: 100%;
 }
 
-.seat-red .seatTop {
-  background-color: #ea2427;
+.seatWHITE.seatTop {
+  background-color: #ffffff;
 }
 
-.seat-grey .seatTop {
+.seatGREY .seatTop {
   background-color: #949494;
 }
 
-.seat-green .seatTop {
+.seatGREEN .seatTop {
   background-color: #2ca961;
 }
 
@@ -283,15 +283,15 @@
   border-radius: 4px;
 }
 
-.seat-red .seatHandle {
+.seatWHITE .seatHandle {
   border: 1px solid #ea2427;
 }
 
-.seat-grey .seatHandle {
+.seatGREY .seatHandle {
   border: 1px solid #949494;
 }
 
-.seat-green .seatHandle {
+.seatGREEN .seatHandle {
   border: 1px solid #2ca961;
 }
 
@@ -308,15 +308,15 @@
   border-radius: 0 0 4px 4px;
 }
 
-.seat-red .seatBase {
+.seatWHITE .seatBase {
   border: 1px solid #ea2427;
 }
 
-.seat-grey .seatBase {
+.seatGREY  .seatBase {
   border: 1px solid #949494;
 }
 
-.seat-green .seatBase {
+.seatGREEN .seatBase {
   border: 1px solid #2ca961;
 }
 
