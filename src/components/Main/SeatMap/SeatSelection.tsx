@@ -54,7 +54,7 @@ const handleSeatSelect = (seatNumber: string) => {
 return (
   <div className={styles.seatSelection}>
     <header className={styles.header}>
-      <img src="/back-icon.svg" alt="Back" className={styles.backIcon} />
+      <img src="\img\icon\arrow-left.png" alt="Back" className={styles.backIcon} />
       <h1 className={styles.title}>좌석 선택</h1>
     </header>
 

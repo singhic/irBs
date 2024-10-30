@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './BusSchedule.module.css';
 import { ScheduleCard } from './ScheduleCard.tsx';
 import { BusRoute } from './types.ts';
-import arrowLeftIcon from '../img/icon/arrow-left.png';
+
 const busRoutes: BusRoute[] = [
   {
     location: "동래",

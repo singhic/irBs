@@ -1,7 +1,7 @@
 .scheduleContainer {
-  max-width: 480px;
-  width: 100%;
-  margin: 0 auto;
+  /* max-width: 360px; */
+  /* width: 100%; */
+  /* margin: 0 auto; */
   background: #f3f4f6;
   font-family: 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
   color: #000;
@@ -19,10 +19,14 @@
 .headerIcon {
   width: 39px;
   aspect-ratio: 1.05;
-  object-fit: contain;
+  /* object-fit: contain; */
+  /* margin: auto 0; */
 }
 
 .headerTitle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 24px;
   font-weight: 700;
   margin: 0;
@@ -44,7 +48,7 @@
 
 .locationName {
   color: #333;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   margin: 0;
 }
@@ -52,7 +56,7 @@
 .departureTime,
 .arrivalTime {
   margin: 14px 0 0;
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 400;
 }
 
