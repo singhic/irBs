@@ -23,7 +23,7 @@
     width: 100%;
     flex-direction: column;
     align-items: start;
-    padding: 99px 50px;
+    padding: 99px 35px;
   }
   
   .title {
@@ -48,7 +48,7 @@
     color: rgba(56, 56, 56, 0.9);
     white-space: nowrap;
     margin: 17px 0 -22px;
-    padding: 12px 180px;
+    padding: 12px 140px;
     border: none;
     cursor: pointer;
     transition: opacity 0.2s;
