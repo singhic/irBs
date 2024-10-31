@@ -1,7 +1,7 @@
 export interface SeatProps {
   seatNumber: string;
   status: 'available' | 'reserved' | 'selected';
-  color: 'red' | 'grey' | 'green';
+  color: 'WHITE' | 'GREY' | 'GREEN';
   onSelect?: (seatNumber: string) => void;
 }
 
