@@ -1,8 +1,40 @@
 import React, { useState } from 'react';
 import styles from './LoginPage.module.css';
+import axios from 'axios';
 
 const LoginPage: React.FC = () => {
+  const [userId, setUserId] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+
+  const handleLogin = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+    const loginData = {
+      id: userId,
+      password: password,
+      s_cookie: ""
+    };
+  
+    const formBody = Object.keys(loginData)
+      .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(loginData[key]))
+      .join('&');
+  
+    try {
+      const response = await axios.post('https://bus.inje.ac.kr/login_proc.php', formBody, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      });
+  
+      if (response.status === 200) {
+        console.log(response.data); // 서버에서 응답으로 오는 데이터를 확인
+        alert('로그인 성공');
+      }
+    } catch (error) {
+      console.error("Login failed:", error); // 에러 상세 정보 출력
+      alert('로그인 실패');
+    }
+  };
 
   return (
     <main className={styles.loginContainer}>
@@ -23,17 +55,21 @@ const LoginPage: React.FC = () => {
         </label>
         <input
           type="text"
-          id="userId"
+          value={userId}
+          onChange={(e) => setUserId(e.target.value)}
           className={styles.inputField}
           placeholder="      아이디 (학번/사번)"
         />
+
+
           <label htmlFor="password" className={styles['visually-hidden']}>
             비밀번호
           </label>
           <div className={styles.inputWrapper}>
             <input
-              type={showPassword ? 'text' : 'password'}
-              id="password"
+              type="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="      비밀번호"
               className={styles.inputField}
             />
@@ -52,7 +88,7 @@ const LoginPage: React.FC = () => {
           </div>
 
 
-        <button type="submit" className={styles.loginButton}>
+        <button className={styles.loginButton} onClick={handleLogin}>
           
           <img 
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/27ab334dd17dc9de946c30c832cb0a06db7c8dbea05cb2dacbcfc926384075b5?placeholderIfAbsent=true" 
