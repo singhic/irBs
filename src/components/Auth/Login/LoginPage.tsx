@@ -9,30 +9,36 @@ const LoginPage: React.FC = () => {
 
   const handleLogin = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
-    const loginData = {
-      id: userId,
-      password: password,
-      s_cookie: ""
-    };
-  
-    const formBody = Object.keys(loginData)
-      .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(loginData[key]))
-      .join('&');
-  
+    
+    // x-www-form-urlencoded에 맞게 데이터를 변환
+    const loginData = new URLSearchParams();
+    loginData.append('id', userId);
+    loginData.append('password', password);
+    loginData.append('s_cookie', '');
+
     try {
-      const response = await axios.post('https://bus.inje.ac.kr/login_proc.php', formBody, {
+      const response = await axios.post('/login_proc.php', loginData, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
+          "Content-Type": `application/x-www-form-urlencoded`,
+          "Accept": "application/json",
+          // 추가  
+          "Access-Control-Allow-Origin": `/login_proc.php`,
+          'Access-Control-Allow-Credentials':"true",
+      }
       });
-  
       if (response.status === 200) {
         console.log(response.data); // 서버에서 응답으로 오는 데이터를 확인
-        alert('로그인 성공');
+        if (response.data.status === 'success') {
+          alert('로그인 성공');
+          window.location.href = '/MainPage';
+      }
+      } else {
+        console.error("Login failed:", response.status); // 에러 상세 정보 출력
+        alert('로그인 실패');
       }
     } catch (error) {
-      console.error("Login failed:", error); // 에러 상세 정보 출력
-      alert('로그인 실패');
+      console.error("Network or server error:", error); // 네트워크 또는 서버 오류를 출력
+      alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
     }
   };
 
