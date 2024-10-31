@@ -4,16 +4,18 @@ import { UserStats } from './UserStats.tsx';
 import { SectionHeader } from './SectionHeader.tsx';
 import { RecentItem } from './RecentItem.tsx';
 
+
+
 const MyPage: React.FC = () => {
   const recentItems = [
-    { title: '최근 예약 내역', icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/3b5b699760f9f36075bc9a552e56880c6bd0c84df0b47dd25314d709e0f5a2a8?placeholderIfAbsent=true' },
-    { title: '최근 패널티 내역', icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/3b5b699760f9f36075bc9a552e56880c6bd0c84df0b47dd25314d709e0f5a2a8?placeholderIfAbsent=true' },
-    { title: '최근 비매너 내역', icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/3b5b699760f9f36075bc9a552e56880c6bd0c84df0b47dd25314d709e0f5a2a8?placeholderIfAbsent=true' }
+    { title: '최근 예약 내역', icon:  '/light-left-arrow.svg'},
+    { title: '최근 패널티 내역', icon: '/light-left-arrow.svg' },
+    { title: '최근 비매너 내역', icon: '/light-left-arrow.svg' }
   ];
 
   const inquiryItems = [
-    { title: '문의하기', icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/36ac5afc41fb8dfec1741df2d612b8dcfd8bba445b9637163186741855d9e248?placeholderIfAbsent=true' },
-    { title: '최근 문의 내역', icon: 'https://cdn.builder.io/api/v1/image/assets/TEMP/36ac5afc41fb8dfec1741df2d612b8dcfd8bba445b9637163186741855d9e248?placeholderIfAbsent=true' }
+    { title: '문의하기', icon: '/light-left-arrow.svg' },
+    { title: '최근 문의 내역', icon: '/light-left-arrow.svg' }
   ];
 
   return (
