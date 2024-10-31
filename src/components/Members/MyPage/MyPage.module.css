@@ -1,15 +1,17 @@
 .page {
     background-color: #f3f4f6;
     display: flex;
-    max-width: 480px;
+    /*max-width: 480px;
     width: 100%;
-    padding-bottom: 178px;
+    padding-bottom: 178px;*/
     flex-direction: column;
     overflow: hidden;
-    margin: 1 auto;
-    height: 740px;
+    /*margin: 1 auto;
+    height: 740px;*/
+    max-width: 360px;
+    max-height: 740px;
   }
-  
+  /*마이페이지 text*/
   .header {
     background: linear-gradient(180deg, #87ceeb -7.29%, #f3f4f6 100%);
     display: flex;
@@ -17,35 +19,41 @@
     flex-direction: column;
     color: #000;
     text-align: center;
-    padding: 61px 80px 61px 22px;
-    font: 700 24px 'Noto Sans KR', sans-serif;
+    padding: 36px 80px 61px 0px;
+    font: 700 11px 'Noto Sans KR', sans-serif;
   }
   
   .headerTop {
     display: flex;
     width: 240px;
     max-width: 100%;
-    gap: 20px;
-    justify-content: space-between;
+    padding-bottom: 10%;
+    /*margin-left:-7.5px;*/
+    /*justify-content: space-between;*/
+  }
+
+
+  .myHeader {
+    margin-left: 87px;
   }
   
   .userProfile {
     display: flex;
-    margin-top: 63px;
     margin: 0 auto;
-    width: 105px;
-    max-width: 100%;
+    width: 100px;
     gap: 6px;
   }
   
   .profileImage {
     aspect-ratio: 1.00;
     object-fit: contain;
-    width: 100%;
+    width: 90%;
+
   }
   
   .userName {
     margin-top: 11px;
+    font: 700 17px 'Noto Sans KR', sans-serif;
   }
   
   .mainContent {
@@ -54,7 +62,7 @@
     margin-top: -34px;
     width: 90%;
     flex-direction: column;
-    padding: 0 22px;
+    padding: 0 17px;
   }
   
   .statsContainer {
@@ -91,9 +99,9 @@
   
   .sectionHeader {
     display: flex;
-    gap: 8px;
-    margin: 25px 0 0 11px;
-    font: 700 16px 'Noto Sans KR', sans-serif;
+    gap: 0px;
+    margin: 5px 0 0 1px;
+    font: 700 10px 'Noto Sans KR', sans-serif;
   }
   
   .contentCard {
@@ -109,11 +117,11 @@
   .recentList {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 20px;
   }
   
   .recentItem {
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 400;
   }
   

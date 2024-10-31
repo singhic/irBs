@@ -22,8 +22,10 @@ const MyPage: React.FC = () => {
     <main className={styles.page}>
       <header className={styles.header}>
         <div className={styles.headerTop}>
-          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/c6f39fd7de10126956016a660e84671a37b66231dcc86d58ff090a6a35e1599c?placeholderIfAbsent=true" alt="마이페이지 아이콘" />
-          <h1>마이페이지</h1>
+          <img id="icon" src="https://cdn.builder.io/api/v1/image/assets/TEMP/c6f39fd7de10126956016a660e84671a37b66231dcc86d58ff090a6a35e1599c?placeholderIfAbsent=true" alt="마이페이지 아이콘" />
+          <div className={styles.myHeader}>
+            <h1>마이페이지</h1>
+          </div>
         </div>
         <div className={styles.userProfile}>
           <div>
