@@ -23,5 +23,5 @@ npm run start
 ### 빌드
 
 ```
-npm build
+npm run build
 ```
