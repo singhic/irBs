@@ -6,7 +6,8 @@
     padding-bottom: 178px;
     flex-direction: column;
     overflow: hidden;
-    margin: 0 auto;
+    margin: 1 auto;
+    height: 740px;
   }
   
   .header {
@@ -31,13 +32,14 @@
   .userProfile {
     display: flex;
     margin-top: 63px;
+    margin: 0 auto;
     width: 105px;
     max-width: 100%;
     gap: 6px;
   }
   
   .profileImage {
-    aspect-ratio: 1.09;
+    aspect-ratio: 1.00;
     object-fit: contain;
     width: 100%;
   }
@@ -50,7 +52,7 @@
     z-index: 10;
     display: flex;
     margin-top: -34px;
-    width: 100%;
+    width: 90%;
     flex-direction: column;
     padding: 0 22px;
   }
