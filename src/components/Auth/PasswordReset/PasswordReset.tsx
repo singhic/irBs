@@ -18,28 +18,10 @@ export const PasswordReset: React.FC = () => {
         <Input
           
           id="phone"
-          label="핸드폰번호"
+          label="이름"
         />
         
-        <div className={styles.verificationSection}>
-          <Input
-            id="verification"
-            label="인증번호"
-          />
-        <button type="submit" className={styles.verifyButton}>
-              인증
-        </button>
-        </div>
-        
-        <Input
-          id="newPassword"
-          label="변경하고싶은 비밀번호를 입력하세요"
-        />
-        
-        <Input
-          id="confirmPassword"
-          label="변경하고싶은 비밀번호를 재입력하세요"
-        />
+      
         
         <button type="submit" className={styles.submitButton}>
           비밀번호 변경 완료
@@ -50,9 +32,12 @@ export const PasswordReset: React.FC = () => {
         <p className={styles.footerText}>
           로그인 화면으로 돌아갈까요?
         </p>
-        <button className={styles.loginLink}>
-          로그인
-        </button>
+       
+        <a href='Login'>
+        <p className={styles.loginLink}>
+            로그인
+       </p>
+       </a>
       </footer>
     </main>
   );

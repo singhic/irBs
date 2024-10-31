@@ -27,8 +27,6 @@ const LoginPage: React.FC = () => {
           className={styles.inputField}
           placeholder="      아이디 (학번/사번)"
         />
-
-
           <label htmlFor="password" className={styles['visually-hidden']}>
             비밀번호
           </label>

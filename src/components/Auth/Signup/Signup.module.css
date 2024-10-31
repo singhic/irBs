@@ -1,10 +1,11 @@
 .container {
-    max-width: 480px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 151px 50px;
-    font: 12px Noto Sans KR, sans-serif;
-    background-color: #fff;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font: 12px 'Noto Sans KR', sans-serif;
+  justify-content: center;
+  align-items: center;
   }
   
   .title {
@@ -14,51 +15,85 @@
     text-align: center;
   }
   
-  .inputGroup {
-    display: flex;
+  .inputGroup 
+  {
     margin-top: 31px;
-    gap: 13px;
+    gap: 10px;
+    text-align: center;
   }
-  
-  .inputWrapper {
-    display: flex;
-    flex-direction: column;
-  }
-  
   .formInput {
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.08);
-    padding: 16px 160px;
     border: 1px solid rgba(0, 0, 0, 0.4);
     color: rgba(0, 0, 0, 0.7);
+    float: inline-start;
+    width: 190px;
+    height: 40px;
+    position: relative;
     margin-bottom: 10px;
-    margin-top: 10px;
+    margin-left: 10px;
   }
+  .formInput2
+  {
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    color: rgba(0, 0, 0, 0.7);
+    float: inline-start;
+    width: 190px;
+    height: 40px;
+    position: relative;
+    margin-bottom: 20px;
+    margin-left: 10px;
+  }
+
 
   .formInput_phonenum {
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.08);
-    padding: 16px 160px;
     border: 1px solid rgba(0, 0, 0, 0.4);
     color: rgba(0, 0, 0, 0.7);
-    margin-bottom: 10px;
-    margin-top: 10px;
-    text-align: left;
+    
+    
+    text-align: center;
+    width: 300px;
+    height: 40px;
+    margin-right: 35px;
   }
 
   input::placeholder {
-    text-align: left;
+    text-align:center;
 }
   
-  .verifyImage {
-    aspect-ratio: 0.71;
-    object-fit: contain;
-    width: 77px;
-    border-radius: 10px;
-  }
+.passwordinput {
+  border-radius: 10px;
+  margin-top:10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.7);
+  float: inline-start;
+  width: 300px;
+  height: 40px;
+  position: relative;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+.repasswordinput {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.7);
+  float: inline-start;
+  width: 300px;
+  height: 40px;
+ 
+  position: relative;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
   
   .verificationGroup {
-    display: flex;
+    
     margin-top: 10px;
     gap: 9px;
   }
@@ -67,32 +102,72 @@
     aspect-ratio: 1.69;
     object-fit: contain;
     width: 81px;
+    height: 100px;
     border-radius: 10px;
+    margin-right: 10px;
+    position: relative;
+
+    
+    border: 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    
+    font-size: 15px;
+    color: rgba(56, 56, 56, 0.9);
+    font-weight: 700;
+    background-color: rgb(176, 224, 230);
+  }
+  .verifyButton2 {
+    aspect-ratio: 1.69;
+    object-fit: contain;
+    width: 81px;
+    height:46px;
+    border-radius: 10px;
+    margin-right: 10px;
+    position: relative;
+
+    
+    border: 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    
+    font-size: 15px;
+    color: rgba(56, 56, 56, 0.9);
+    font-weight: 700;
+    background-color: rgb(176, 224, 230);
   }
   
   .cardInput {
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.08);
-    padding: 26px 160px;
     border: 1px solid rgba(0, 0, 0, 0.4);
     color: rgba(0, 0, 0, 0.7);
+    float: inline-start;
     margin-bottom: 10px;
-    margin-top: 10px;
+    margin-top: 20px;
     text-align: left;
+    position: relative;
+    width:300px;
+    height:40px ;
     white-space: pre-wrap;
+    margin-left: 10px;
+    
   }
   
   .submitButton {
-    position: relative;
     border-radius: 10px;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-    width: 312px;
-    margin: 26px auto;
-    padding: 15px;
-    font-size: 20px;
-    color: rgba(56, 56, 56, 0.9);
-    font-weight: 700;
+    background-color: rgb(176, 224, 230);
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    color: rgba(0, 0, 0, 0.7);
+    float: inline-start;
+    margin-bottom: 10px;
+    margin-top: 20px;
     text-align: center;
+    position: relative;
+    width:305px;
+    height:40px ;
+    white-space: pre-wrap;
+    margin-left: 10px;
   }
   
   .submitBackground {
@@ -119,7 +194,6 @@
     position: absolute;
     width: 1px;
     height: 1px;
-    padding: 0;
     margin: -1px;
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
