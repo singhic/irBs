@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import React, { useState } from 'react';
 import styles from './Signup.module.css';
 import axios from 'axios';
@@ -191,4 +189,3 @@ const Signup: React.FC = () => {
 };
 
 export default Signup;
->>>>>>> ff980ec69f71b088898e56f5ee9af16762682690
