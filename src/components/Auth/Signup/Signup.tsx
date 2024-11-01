@@ -32,7 +32,7 @@ const Signup: React.FC = () => {
           alert('인증이 완료되었습니다.');
         }
       } else {
-        console.error("Cert failed:", response.status); // 에러 상세 정보 출력
+        console.error("School Cert failed:", response.status); // 에러 상세 정보 출력
         alert('정보를 다시 확인해주세요.');
       }
     } catch (error) {
