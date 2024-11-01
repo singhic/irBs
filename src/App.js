@@ -23,31 +23,30 @@ import Onboarding2 from './components/StartMap/Onboarding2/Onboarding2.tsx';
 function App() {
   const containerRef = useRef(null);
 
-  const scaleContainer = () => {
-    if (containerRef.current) {
-        // 화면 크기에 맞춰 scale 조정
-        const scaleX = window.innerWidth / 360;
-        const scaleY = window.innerHeight / 740;
-        const scale = Math.min(scaleX, scaleY, 1); // 최대 배율을 1로 제한하여 스크롤 방지
+    const scaleContainer = () => {
+        if (containerRef.current) {
+            // 화면 크기에 맞춰 scale 조정
+            const scaleX = window.innerWidth / 360;
+            const scaleY = window.innerHeight / 740;
+            const scale = Math.min(scaleX, scaleY, 1); // 최대 배율을 1로 제한하여 스크롤 방지
 
-        containerRef.current.style.transform = `scale(${scale})`;
-        containerRef.current.style.transformOrigin = 'top left';
+            containerRef.current.style.transform = `scale(${scale})`;
+            containerRef.current.style.transformOrigin = 'top left';
 
-        // 화면 중앙 배치를 위한 left, top 계산
-        const left = (window.innerWidth - 360 * scale) / 2;
-        const top = (window.innerHeight - 740 * scale) / 2;
+            // 상단 고정 및 수평 중앙 배치를 위한 left 계산
+            const left = (window.innerWidth - 360 * scale) / 2;
 
-        containerRef.current.style.position = 'absolute';
-        containerRef.current.style.left = `${left}px`;
-        containerRef.current.style.top = `${top}px`;
-    }
-  };
+            containerRef.current.style.position = 'absolute';
+            containerRef.current.style.left = `${left}px`;
+            containerRef.current.style.top = `0px`; // 상단에 고정
+        }
+    };
 
-  useEffect(() => {
-      scaleContainer();
-      window.addEventListener('resize', scaleContainer);
-      return () => window.removeEventListener('resize', scaleContainer);
-  }, []);
+    useEffect(() => {
+        scaleContainer();
+        window.addEventListener('resize', scaleContainer);
+        return () => window.removeEventListener('resize', scaleContainer);
+    }, []);
 
   return (
     <Router>
