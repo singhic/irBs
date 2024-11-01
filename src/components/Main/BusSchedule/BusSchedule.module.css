@@ -1,19 +1,28 @@
 .scheduleContainer {
-  /* max-width: 360px; */
   /* width: 100%; */
   /* margin: 0 auto; */
   background: #f3f4f6;
   font-family: 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
   color: #000;
   padding-bottom: 54px;
+  width: 360px;
+  
 }
 
 .scheduleHeader {
   background: #fff;
-  padding: 32px 16px;
+  padding: 20px 16px;
   display: flex;
   gap: 40px;
   align-items: center;
+  /* width: 100%;.loginContainer {
+  background: #fff;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font: 700 14px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
+} */
 }
 
 .headerIcon {
@@ -37,14 +46,16 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 17px 7px;
   padding: 18px 2%;
+  /* width: 100%; */
 }
 
 .scheduleCard {
   background: #fff;
   border-radius: 20px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-  padding: 16px 21px;
+  padding: 10px 15px;
   text-align: left;
+  /* margin : 13px; */
 }
 
 .locationName {
@@ -52,11 +63,12 @@
   font-size: 23px;
   font-weight: 600;
   margin: 0;
+  margin-bottom: 10px;
 }
 
 .departureTime,
 .arrivalTime {
-  margin: 12px 0 0;
+  margin: 0;
   font-size: 11px;
   font-weight: 600;
 }

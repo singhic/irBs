@@ -1,3 +1,4 @@
+/* 전체 페이지 설정-------------------------------------------------- */
 .page {
   background-color: rgb(243, 244, 246);
   display: flex;
@@ -7,7 +8,8 @@
   /* margin: 0 12px; */
   /* padding: 0 12px 0 0; */
 }
-/* 전체 페이지 설정-------------------------------------------------- */
+
+/* 앱바 ---------------------------------------------------------------------------  */
 .notificationBar {
   background-color: #fff;
   display: flex;
@@ -53,7 +55,8 @@
   width: 31px;
   margin-right: 10px;
 }
-/* 앱바 ---------------------------------------------------------------------------  */
+
+/* 안녕하세요 사용자님 ----------------------------------------------------------------- */
 .weatherCard {
   border-radius: 20px;
   background-color: #fff;
@@ -98,7 +101,7 @@
   width: 50px;
   /* align-self: start; */
 }
-/* 안녕하세요 사용자님 ----------------------------------------------------------------- */
+/* 예약하기 버튼 ----------------------------------------------- */
 .bookingButton {
   border-radius: 20px;
   background-color: #fff;
@@ -134,7 +137,7 @@
 }
 /* 빠른예약 ----------------------------------------------------------*/
 .quickBooking {
-  border-radius: 20px;
+  border-radius: 18px;
   background-color: #fff;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
   /* display: flex; */
@@ -157,7 +160,7 @@
 
 .quickBookingTitle {
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 600;
   /* align-self: left; */
   text-align: left;
   margin-left: 20px;
@@ -186,6 +189,7 @@
 .routeDestination {
   font-size: 24px;
   font-weight: 400;
+  margin-bottom: 2px;
 }
 .routeDestination2 {
   display: flex;
@@ -229,7 +233,7 @@
 .noticeTitle {
   color: #000;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 600;
   margin-left: 10px;
 }
 
@@ -260,7 +264,7 @@
   object-position: center;
   width: 26px;
 }
-
+/* 문제가 있으신가요 ------------------------------------------- */
 .supportText {
   color: rgb(0, 136, 255);
   font-size: 14px;
@@ -268,7 +272,7 @@
   align-self: center;
   margin-top: 9px;
 }
-
+/* 최근 예약현황이 존재합니다----------------------------------- */
 .recentBooking {
   border-radius: 20px;
   background-color: #fff;
@@ -292,7 +296,7 @@
 
 .recentBookingContent {
   display: flex;
-  margin-top: 21px;
+  /* margin-top: 10px; */
   flex-direction: column;
   align-items: start;
   padding: 0 16px ;
