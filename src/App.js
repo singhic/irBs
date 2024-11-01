@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 
@@ -21,58 +21,43 @@ import Penalty from './components/StartMap/PenaltySystem/PenaltySystem.tsx';
 import Onboarding2 from './components/StartMap/Onboarding2/Onboarding2.tsx';
 
 function App() {
+  const containerRef = useRef(null);
+
+  const scaleContainer = () => {
+    if (containerRef.current) {
+        // 화면 크기에 맞춰 scale 조정
+        const scaleX = window.innerWidth / 360;
+        const scaleY = window.innerHeight / 740;
+        const scale = Math.min(scaleX, scaleY, 1); // 최대 배율을 1로 제한하여 스크롤 방지
+
+        containerRef.current.style.transform = `scale(${scale})`;
+        containerRef.current.style.transformOrigin = 'top left';
+
+        // 화면 중앙 배치를 위한 left, top 계산
+        const left = (window.innerWidth - 360 * scale) / 2;
+        const top = (window.innerHeight - 740 * scale) / 2;
+
+        containerRef.current.style.position = 'absolute';
+        containerRef.current.style.left = `${left}px`;
+        containerRef.current.style.top = `${top}px`;
+    }
+  };
+
+  useEffect(() => {
+      scaleContainer();
+      window.addEventListener('resize', scaleContainer);
+      return () => window.removeEventListener('resize', scaleContainer);
+  }, []);
+
   return (
     <Router>
+      <div
+            ref={containerRef}
+            className="container" // 스타일은 index.css나 App.css에 추가 가능
+        >
       <div className="App">
         <main>
           <Suspense fallback={<div>로딩중...</div>}>
-            <ul>
-              <li>
-                <Link to={'/MainPage'}>메인페이지</Link>
-              </li>
-              <li>
-                <Link to={'/BusSchedule'}>스케줄</Link>
-              </li>
-              <li>
-                <Link to={'/SeatMap'}>좌석 현황</Link>
-              </li>
-              <li>
-                <Link to={'/Reservations'}>예약 내역</Link>
-              </li>
-
-              <li>
-                <Link to={'/MyPage'}>마이 페이지</Link>
-              </li>
-              <li>
-                <Link to={'/UserProfile'}>내 정보 수정</Link>
-              </li>
-              <li>
-                <Link to={'/FAQ'}>자주 묻는 질문</Link>
-              </li>
-
-              <li>
-                <Link to={'/Login'}>로그인</Link>
-              </li>
-              <li>
-                <Link to={'/PasswordReset'}>비밀번호 리셋</Link>
-              </li>
-              <li>
-                <Link to={'/Signup'}>회원가입</Link>
-              </li>
-
-              <li>
-                <Link to={'/Onboarding'}>시작하기1</Link>
-              </li>
-              <li>
-                <Link to={'/Onboarding1'}>시작하기2</Link>
-              </li>
-              <li>
-                <Link to={'/Penalty'}>패널티 시스템</Link>
-              </li>
-              <li>
-                <Link to={'/Onboarding2'}>시작하기3</Link>
-              </li>
-            </ul>
 
             <Routes>
               <Route path="/MainPage" element={<MainPage />} />
@@ -95,6 +80,7 @@ function App() {
             </Routes>
           </Suspense>
         </main>
+      </div>
       </div>
     </Router>
   );
