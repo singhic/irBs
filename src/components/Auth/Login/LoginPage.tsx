@@ -34,7 +34,7 @@ const LoginPage: React.FC = () => {
       }
       } else {
         console.error("Login failed:", response.status); // 에러 상세 정보 출력
-        alert('로그인 실패');
+        alert('비밀번호가 일치하지 않습니다. 비밀번호를 3회 이상 잘못 입력할 경우 해당 계정은 차단 됩니다(N회)');
       }
     } catch (error) {
       console.error("Network or server error:", error); // 네트워크 또는 서버 오류를 출력
@@ -85,11 +85,6 @@ const LoginPage: React.FC = () => {
               aria-label={showPassword ? '비밀번호 숨기기' : '비밀번호 보기'}
               className={styles.iconButton}
             >
-              <img 
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/32d79ff2a100ed4ac1e5d06ca835cb8f8297e2a4970f5859f1a109b670fd299c?placeholderIfAbsent=true" 
-                alt="" 
-                className={styles.passwordIcon}
-              />
             </button>
           </div>
 
