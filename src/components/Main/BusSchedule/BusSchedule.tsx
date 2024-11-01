@@ -96,7 +96,7 @@ export const BusSchedule: React.FC = () => {
     <section className={styles.scheduleContainer}>
       <header className={styles.scheduleHeader}>
         <img 
-          src="D:\irBs\src\img\icon\arrow-left.png" 
+          src="\img\icon\arrow-left.png" 
           alt="arrow-left" 
           className={styles.headerIcon} 
         />

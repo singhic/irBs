@@ -103,10 +103,10 @@ return (
 
     <section className={styles.seatingSection}>
       <div className={styles.legend}>
-        <LegendItem icon="\img\seat\seat_empty.png" label="빈좌석" alt="Empty seat icon" />
+        <LegendItem icon="\img\seat\seat_WHITE.png" label="빈좌석" alt="Empty seat icon" />
         <div className={styles.legendItem}>
-          <LegendItem icon="\img\seat\seat_Reserved.png" label="예약석" alt="Reserved seat icon" />
-          <LegendItem icon="\img\seat\seat_select.png" label="선택좌석" alt="Selected seat icon" />
+          <LegendItem icon="\img\seat\seat_GRAY.png" label="예약석" alt="Reserved seat icon" />
+          <LegendItem icon="\img\seat\seat_GREEN.png" label="선택좌석" alt="Selected seat icon" />
         </div>
       </div>
 
