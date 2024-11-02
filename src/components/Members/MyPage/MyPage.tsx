@@ -32,7 +32,6 @@ const MyPage: React.FC = () => {
             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/6596c95482616e0247ca02575e9d69257aa06be47f4bdd62637ebf1c9344ba88?placeholderIfAbsent=true" alt="프로필 이미지" className={styles.profileImage} />
             <span className={styles.userName}>사용자님</span>
           </div>
-          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/942bad32bb7686b37623a7bbd94277cca6dfadef154afacbe543d2856ad9a096?placeholderIfAbsent=true" alt="" />
         </div>
       </header>
 
