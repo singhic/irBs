@@ -29,12 +29,12 @@ const LoginPage: React.FC = () => {
       if (response.status === 200) {
         console.log(response.data); // 서버에서 응답으로 오는 데이터를 확인
         if (response.data.status === 'success') {
-          alert('로그인 성공');
+          alert(response.data.message);
           window.location.href = '/MainPage';
-      }
-      } else {
-        console.error("Login failed:", response.status); // 에러 상세 정보 출력
-        alert('비밀번호가 일치하지 않습니다. 비밀번호를 3회 이상 잘못 입력할 경우 해당 계정은 차단 됩니다(N회)');
+        } else {
+          console.error("Login failed:", response.status); // 에러 상세 정보 출력
+          alert(response.data.message);
+        }
       }
     } catch (error) {
       console.error("Network or server error:", error); // 네트워크 또는 서버 오류를 출력

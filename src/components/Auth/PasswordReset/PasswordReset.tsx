@@ -26,12 +26,12 @@ const PasswordReset: React.FC = () => {
       if (response.status === 200) {
         console.log(response.data);
         if (response.data.status === 'success') {
-          alert('임시 비밀번호가 발급되었습니다. 문자를 확인해주세요.');
+          alert(response.data.message);
           window.location.href = '/Login';
+        } else {
+          console.error("Reset failed:", response.status);
+          alert(response.data.message);
         }
-      } else {
-        console.error("Reset failed:", response.status);
-        alert('정보가 일치하지 않습니다. 다시 확인해주세요.');
       }
     } catch (error) {
       console.error("Network or server error:", error);
