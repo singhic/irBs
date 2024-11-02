@@ -4,7 +4,7 @@ import { RecentItemProps } from './types';
 
 export const RecentItem: React.FC<RecentItemProps> = ({ icon, title, alt }) => (
   <div className={styles.recentItem}>
-    <span>{title}</span>
-    <img src={icon} alt={alt || ""} />
+    <span className={styles.title}>{title}</span>
+    <img src={icon} alt={alt || ""} className={styles.icon} />
   </div>
 );

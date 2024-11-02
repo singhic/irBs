@@ -10,6 +10,7 @@
     height: 740px;*/
     max-width: 360px;
     max-height: 740px;
+    
   }
   /*마이페이지 text*/
   .header {
@@ -42,8 +43,12 @@
     margin: 0 auto;
     width: 100px;
     gap: 6px;
+    align-items: center; 
+   
   }
-  
+
+
+
   .profileImage {
     aspect-ratio: 1.00;
     object-fit: contain;
@@ -63,6 +68,8 @@
     width: 90%;
     flex-direction: column;
     padding: 0 17px;
+    max-height: 500px; /* 원하는 높이로 설정 */
+    overflow-y: auto; /* 스크롤 활성화 */
   }
   
   .statsContainer {
@@ -99,7 +106,8 @@
   
   .sectionHeader {
     display: flex;
-    gap: 0px;
+    gap: 8px;
+    align-items: center; /* 수직 중앙 정렬 */
     margin: 5px 0 0 1px;
     font: 700 10px 'Noto Sans KR', sans-serif;
   }
@@ -116,14 +124,33 @@
   
   .recentList {
     display: flex;
+    width: 300px;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
+    justify-content: space-between;
   }
   
   .recentItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* title과 icon을 좌우로 분리 */
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 8px;
+  }
+  
+  .title {
     font-size: 17px;
     font-weight: 400;
   }
+  
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+  
   
   .visually-hidden {
     position: absolute;
