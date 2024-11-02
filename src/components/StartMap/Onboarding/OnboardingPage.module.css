@@ -1,5 +1,5 @@
 .container {
-  
+  background-color: #fff;
   }
   
   .onboardingWrapper {
@@ -51,7 +51,7 @@
     color: rgba(56, 56, 56, 0.9);
     white-space: nowrap;
     margin: 17px 0 -22px;
-    padding: 12px 140px;
+    padding: 12px 200px;
     border: none;
     cursor: pointer;
     transition: opacity 0.2s;
