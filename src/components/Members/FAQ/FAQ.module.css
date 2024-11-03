@@ -1,6 +1,6 @@
 .faqSection {
-    max-width: 480px;
-    width: 100%;
+    width: 480px;
+
     margin: 0 auto;
     background: #f8f8f8;
     color: #000;
@@ -11,9 +11,8 @@
     background: #fff;
     padding: 37px 35px;
     display: flex;
-    gap: 58px;
     align-items: center;
-    max-width: 385px;
+    max-width: 410px;
     width: 100%;
     text-align: center;
   }

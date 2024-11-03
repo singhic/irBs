@@ -6,7 +6,7 @@ export const UserProfile: React.FC = () => {
   const cardInputs = {
     cardNumber: [{
       id: 'cardNumber',
-      placeholder: '카드번호를 입력하세요\n이즐(구 케시비) 또는 신한카드 후불교통카드 16자리'
+      placeholder: '이즐(케시비) 또는 신한 후불교통카드 16자리'
     }],
     password: [
       { id: 'currentPassword', placeholder: '현재 비밀번호를 입력하세요', type: 'password' },
@@ -28,7 +28,7 @@ export const UserProfile: React.FC = () => {
 
       <section className={styles.userInfoSection}>
         <img 
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/0aa52073-8701-485b-b413-faa8e0bb4201?placeholderIfAbsent=true" 
+          src="/프로필.svg" 
           alt="User avatar" 
           className={styles.userAvatar}
         />
