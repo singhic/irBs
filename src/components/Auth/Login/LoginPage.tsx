@@ -30,7 +30,6 @@ const LoginPage: React.FC = () => {
   const handleLogin = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     
-    // x-www-form-urlencoded에 맞게 데이터를 변환
     const loginData = new URLSearchParams();
     loginData.append('id', userId);
     loginData.append('password', password);
@@ -41,24 +40,23 @@ const LoginPage: React.FC = () => {
         headers: {
           "Content-Type": `application/x-www-form-urlencoded`,
           "Accept": "application/json",
-          // 추가  
           "Access-Control-Allow-Origin": `/login_proc.php`,
           'Access-Control-Allow-Credentials':"true",
       }
       });
       if (response.status === 200) {
-        console.log(response.data); // 서버에서 응답으로 오는 데이터를 확인
+        console.log(response.data);
         if (response.data.status === 'success') {
           alert(response.data.message);
           Cookies.set("id", userId, {secure: true, sameSite: 'Lax'});
           window.location.href = '/MainPage';
         } else {
-          console.error("Login failed:", response.status); // 에러 상세 정보 출력
+          console.error("Login failed:", response.status);
           alert(response.data.message);
         }
       }
     } catch (error) {
-      console.error("Network or server error:", error); // 네트워크 또는 서버 오류를 출력
+      console.error("Network or server error:", error);
       alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
     }
   };
@@ -73,7 +71,7 @@ const LoginPage: React.FC = () => {
       />
       
       <h1 className={styles.title}>
-        인제대학교 <br /> 통합 버스 예약 시스템
+        인제대학교 <br/> 통합 버스 예약 시스템
       </h1>
 
       <form className={styles.loginForm}>

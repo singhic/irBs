@@ -30,7 +30,10 @@ function App() {
   useEffect(() => {
     scaleContainer();
     window.addEventListener('resize', scaleContainer);
-    return () => window.removeEventListener('resize', scaleContainer);
+
+    return () => {
+      window.removeEventListener('resize', scaleContainer);
+    };
   }, []);
 
   return (

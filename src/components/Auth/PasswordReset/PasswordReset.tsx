@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Input } from './Input.tsx'; // Adjust the import path as necessary
-import styles from './PasswordReset.module.css'; // Adjust the import path as necessary
+import { Input } from './Input.tsx';
+import styles from './PasswordReset.module.css';
 
 const PasswordReset: React.FC = () => {
   const [idx, setIdx] = useState('');
