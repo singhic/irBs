@@ -28,7 +28,7 @@ export const UserProfile: React.FC = () => {
 
       <section className={styles.userInfoSection}>
         <img 
-          src="/프로필.svg" 
+          src="/user-profile.svg" 
           alt="User avatar" 
           className={styles.userAvatar}
         />
