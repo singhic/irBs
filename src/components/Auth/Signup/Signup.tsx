@@ -122,7 +122,10 @@ const Signup: React.FC = () => {
               value={idx}
               className={styles.formInput}
               placeholder="학번/사번"
+
             />
+           
+            <br></br>        
               <label htmlFor="birthdate" className={styles['visually-hidden']}>생년월일</label>
             <input
               type="text"
@@ -132,12 +135,14 @@ const Signup: React.FC = () => {
               className={styles.formInput2}
               placeholder="생년월일(주민번호 앞자리)"
         
-            />  
-            <button type="submit" className={styles.verifyButton} onClick={handlefirstcheck}>
-              인증
-        </button>
+            /> <button type="submit" className={styles.verifyButton} onClick={handlefirstcheck}>
+            인증
+          </button>
+             <br></br>
+           
           
         <label htmlFor="phone" className={styles['visually-hidden']}>핸드폰번호</label>
+        
         <input
           type="tel"
           id="phone"
@@ -146,7 +151,9 @@ const Signup: React.FC = () => {
           className={styles.formInput_phonenum}
           placeholder="핸드폰번호"
         />
-
+           <button type="submit" className={styles.verifyButton3} onClick={handlefirstcheck}>
+              인증
+            </button>
         <div className={styles.verificationGroup}>
           <label htmlFor="verificationCode" className={styles['visually-hidden']}>인증번호</label>
           <input
@@ -159,9 +166,30 @@ const Signup: React.FC = () => {
           />
           <button type="submit" className={styles.verifyButton2} onClick={handlephonecert}>
               인증
-        </button>
-        </div>
+        </button><br></br>
+        <label htmlFor="studentId" className={styles['visually-hidden']}>학번/사번</label>
+            <input
+              type="text"
+              id="studentId"
+              onChange={(e) => setIdx(e.target.value)}
+              value={idx}
+              className={styles.passwordinput}
+              placeholder="비밀번호를 입력해주세요"
 
+            /><br></br>
+
+              <input
+              type="text"
+              id="studentId"
+              onChange={(e) => setIdx(e.target.value)}
+              value={idx}
+              className={styles.passwordinput}
+              placeholder="비밀번호를 재입력해주세요"
+
+            />
+       
+
+        </div>
         <label htmlFor="cardNumber" className={styles['visually-hidden']}>카드번호</label>
         <input
           type="text"
@@ -169,7 +197,8 @@ const Signup: React.FC = () => {
           value={card}
           onChange={(e) => setCard(e.target.value)}
           className={styles.cardInput}
-          placeholder="카드번호를 입력하세요 <br> 이즐(구 케시비) 또는 신한카드 후불교통카드 16자리"
+          placeholder="카드번호를 입력하세요 이즐(구 케시비) 또는 신한카드 후불교통카드 16자리"
+          
         />
         <br/>
         <button type="submit" className={styles.submitButton} onClick={handleSignup}>

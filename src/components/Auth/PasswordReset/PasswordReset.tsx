@@ -52,6 +52,7 @@ const PasswordReset: React.FC = () => {
           id="userId"
           spacing="large"
         />
+        <br></br>
         <Input
           value={name}
           onChange={(e) => setName(e.target.value)}

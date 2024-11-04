@@ -13,10 +13,13 @@ interface InputProps {
 export const Input: React.FC<InputProps> = ({ id, label, className, value, onChange, spacing }) => {
   return (
     <>
-      <label htmlFor={id} className="visually-hidden">{label}</label>
+    
       <input
         id={id}
         placeholder={label}
+      
+
+
         value={value}
         onChange={onChange}
         className={`${styles.input} ${spacing === 'large' ? styles.inputLarge : styles.inputSpacing} ${className || ''}`}
