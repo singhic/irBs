@@ -10,10 +10,12 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
+    "js-cookie": "^3.0.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
     "react-scripts": "5.0.1",
+    "styled-components": "^6.1.13",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -22,7 +24,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-
+  "proxy": "https://bus.inje.ac.kr",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -42,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^22.8.4"
   }
 }

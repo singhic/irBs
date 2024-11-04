@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './LoginPage.module.css';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const LoginPage: React.FC = () => {
   const [userId, setUserId] = useState('');
@@ -30,6 +31,7 @@ const LoginPage: React.FC = () => {
         console.log(response.data); // 서버에서 응답으로 오는 데이터를 확인
         if (response.data.status === 'success') {
           alert(response.data.message);
+          Cookies.set("id", userId, {secure: true, sameSite: "Lax"});
           window.location.href = '/MainPage';
         } else {
           console.error("Login failed:", response.status); // 에러 상세 정보 출력
