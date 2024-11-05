@@ -37,7 +37,6 @@ function App() {
   }, []);
 
   return (
-    <AppRouter>
       <div
         ref={containerRef}
         className="container" // 스타일은 index.css나 App.css에 추가 가능
@@ -50,7 +49,6 @@ function App() {
           </main>
         </div>
       </div>
-    </AppRouter>
   );
 }
 
