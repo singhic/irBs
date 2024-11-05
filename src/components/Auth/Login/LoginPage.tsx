@@ -48,7 +48,7 @@ const LoginPage: React.FC = () => {
         console.log(response.data);
         if (response.data.status === 'success') {
           alert(response.data.message);
-          Cookies.set("id", userId, {secure: true, sameSite: 'Lax'});
+          Cookies.set("id", userId, {secure: true, sameSite: 'Lax' });
           window.location.href = '/MainPage';
         } else {
           console.error("Login failed:", response.status);
@@ -125,9 +125,7 @@ const LoginPage: React.FC = () => {
         <a href="/signup">회원가입</a>
       </nav>
       
-      <a href='/Onboarding'>
-      <p className={styles.newUserText}>처음이신가요?</p>
-      </a>
+      <p className={styles.newUserText}><a href='/Onboarding'>처음이신가요?</a></p>
     </main>
   );
 };

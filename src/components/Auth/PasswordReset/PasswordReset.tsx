@@ -47,7 +47,7 @@ const PasswordReset: React.FC = () => {
           type="number"
           className={styles.inputField}
           value={idx}
-          label="아이디(학번/사번)"
+          label="아이디 (학번/사번)"
           onChange={(e) => setIdx(e.target.value)}
           id="idx"
           spacing="large"
@@ -55,6 +55,7 @@ const PasswordReset: React.FC = () => {
         <br></br>
         <Input
           value={name}
+          className={styles.inputField}
           onChange={(e) => setName(e.target.value)}
           id="name"
           type="text"
