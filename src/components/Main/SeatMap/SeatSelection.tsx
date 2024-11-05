@@ -62,7 +62,7 @@ export const SeatSelection: React.FC = () => {
       {/* 헤더 섹션 */}
       <header className={styles.header}>
         <a href="/BusSchedule" className={styles.backButton}> {/* 뒤로가기 버튼 */}
-        <img src="\img\icon\arrow-left.png" alt="Back" className={styles.backIcon} /> {/* 뒤로가기 아이콘 */}
+          <img src="\img\icon\arrow-left.png" alt="Back" className={styles.backIcon} /> {/* 뒤로가기 아이콘 */}
         </a>
         <h1 className={styles.title}>좌석 선택</h1>
       </header>
