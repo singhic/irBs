@@ -100,7 +100,7 @@ export const MainPage: React.FC = () => {
         <h2 className={styles.noticeTitle}>공지사항</h2>
         <hr className={styles.noticeDivider} />
         <div className={styles.noticeFooter}>
-          <span>전체공지 보기</span>
+          <span className={styles.noticeText}>전체공지 보기</span>
           <img 
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/39d3da592bbe83d18c101160fb790b68b8b3c44297531c445b233d2f5354dec7?placeholderIfAbsent=true" 
             alt="" 

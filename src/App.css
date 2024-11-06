@@ -1,8 +1,8 @@
 .container {
   width: 100%;
   max-width: 1200px;
-  /* margin: 0 auto; 가운데 정렬 */
-  box-sizing: border-box; /* 패딩과 테두리를 포함하여 전체 넓이를 계산 */
+  /* box-sizing: border-box;  */
+  /* justify-content: center;  */
 }
 
 .App {
