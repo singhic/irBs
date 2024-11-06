@@ -4,6 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 20%;
   font: 700 14px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
 }
 
@@ -36,6 +37,7 @@
   color: rgba(12, 5, 5, 0.7);
   font-weight: 400;
   margin-bottom: 13px;
+  padding: 20px;
   padding-right: 20px; /* 아이콘 공간 확보 */
   box-sizing: border-box;
 }
@@ -91,6 +93,9 @@
 .helpLinks {
   display: flex;
   gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 14px;
   color: #0088ff;
   font-weight: 500;
@@ -126,7 +131,6 @@
 .iconButton {
   position: absolute;
   right: 65px;
-  
   top: 50%;
   transform: translateY(-70%);
   background: none;

@@ -1,6 +1,4 @@
 .profileContainer {
-    max-width: 480px;
-    width: 100%;
     margin: 0 auto;
     padding: 46px 27px 24px;
     background: linear-gradient(180deg, #87ceeb -7.29%, #f3f4f6 100%);
@@ -8,6 +6,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    
   }
   
   .headerSection {

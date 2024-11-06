@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Input } from './Input.tsx'; // Adjust the import path as necessary
-import styles from './PasswordReset.module.css'; // Adjust the import path as necessary
+import { Input } from './Input.tsx';
+import styles from './PasswordReset.module.css';
 
 const PasswordReset: React.FC = () => {
   const [idx, setIdx] = useState('');
@@ -42,40 +42,36 @@ const PasswordReset: React.FC = () => {
   return (
     <main className={styles.container}>
       <h1 className={styles.title}>비밀번호 찾기</h1>
-      
       <form>
         <Input  
+          type="number"
           className={styles.inputField}
           value={idx}
-          label="아이디(학번/사번)"
+          label="아이디 (학번/사번)"
           onChange={(e) => setIdx(e.target.value)}
-          id="userId"
+          id="idx"
           spacing="large"
         />
         <br></br>
         <Input
           value={name}
+          className={styles.inputField}
           onChange={(e) => setName(e.target.value)}
-          id="phone"
+          id="name"
+          type="text"
           label="이름"
         />
-        
         <button type="submit" className={styles.submitButton} onClick={handleReset}>
           비밀번호 변경
         </button>
       </form>
-
-      <footer className={styles.footer}>
-        <p className={styles.footerText}>
-          로그인 화면으로 돌아갈까요?
-        </p>
-       
-        <a href='Login'>
-          <p className={styles.loginLink}>
-            로그인
+      <a href='/Login'>
+        <footer className={styles.footer}>
+          <p className={styles.footerText}>
+            로그인 화면으로 돌아갈까요?
           </p>
-        </a>
-      </footer>
+        </footer>
+      </a>
     </main>
   );
 };

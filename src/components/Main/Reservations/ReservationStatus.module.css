@@ -3,12 +3,12 @@
     background: #fff;
     display: flex;
     width: 100%;
-    max-width: 480px;
+    
     flex-direction: column;
     overflow: hidden;
     align-items: center;
     margin: 0 auto;
-    padding: 29px 8px;
+
   }
   
   .logo {

@@ -1,6 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { RouteCard } from './RouteCard.tsx';
 import styles from './MainPage.module.css';
+import axios from 'axios';
+import * as cheerio from 'cheerio';
+
+async function fetchValueFromExternalSite(): Promise<string | null> {
+  try {
+    const response = await axios.get('/passport/list.php');
+    const html = response.data;
+    const $ = cheerio.load(html);
+    const value = $('#p_name').attr('value');
+
+    return value || null; // Ensure the return type is string or null
+  } catch (error) {
+    console.error('Error fetching value:', error);
+    return null;
+  }
+}
 
 const routeData = [
   { destination: '동래', time: '16:20', seats: '(44/33석)' },
@@ -8,6 +24,17 @@ const routeData = [
 ];
 
 export const MainPage: React.FC = () => {
+  const [userName, setUserName] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const value = await fetchValueFromExternalSite();
+      setUserName(value); // value is now guaranteed to be string or null
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <main className={styles.page}>
       <header className={styles.notificationBar}>
@@ -34,7 +61,7 @@ export const MainPage: React.FC = () => {
             금일 캠퍼스 날씨는 맑음입니다.
           </p>
           <h1 className={styles.greeting}>
-            안녕하세요. 사용자님
+            안녕하세요. {userName}님
           </h1>
         </div>
         <img 
