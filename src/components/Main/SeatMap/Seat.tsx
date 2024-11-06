@@ -56,10 +56,13 @@ export const Seat: React.FC<SeatProps> = ({ seatNumber, status, color, onSelect 
       </div> */}
       {/* 이미지로 변경전 코드-------------------------------------------------------------------- */}
       {/* 이미지로 변경후 코드-------------------------------------------------------------------- */}
-      
-      <img src={`/img/seat/seat_${status}.png`} alt={`Seat ${seatNumber} - ${status}`} /> 
-      {/* <img src="\img\seat\seat_GRAY.png" alt="" /> */}
-      <span className={styles.seatNumber}>{seatNumber}</span> 
+      <div className={styles.seatTop}>
+        <button>
+          <img src={`/img/seat/seat_${status}.png`} alt={`Seat ${seatNumber} - ${status}`} /> 
+          {/* <img src="\img\seat\seat_GRAY.png" alt="" /> */}
+          <span className={styles.seatNumber}>{seatNumber}</span> 
+        </button>
+      </div>
       {/* 이미지로 변경후 코드----------------------------------------------------------------  */}
     </div>
   );
