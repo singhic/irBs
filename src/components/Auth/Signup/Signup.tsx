@@ -140,11 +140,11 @@ const Signup: React.FC = () => {
       loginData.append('card_type', card_type);
   
       try {
-        const response = await axios.post('/login_proc.php', loginData, {
+        const response = await axios.post('/passport/insert_proc.php', loginData, {
           headers: {
             "Content-Type": `application/x-www-form-urlencoded`,
             "Accept": "application/json",
-            "Access-Control-Allow-Origin": `/login_proc.php`,
+            "Access-Control-Allow-Origin": `/passport/insert_proc.php`,
             'Access-Control-Allow-Credentials': "true",
           }
         });
