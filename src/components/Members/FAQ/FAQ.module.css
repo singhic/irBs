@@ -8,10 +8,9 @@
   
   .faqHeader {
     background: #fff;
-    padding: 15px 25px;
+    padding: 10px 20px;
     display: flex;
     align-items: center;
-
     text-align: center;
   }
   
@@ -19,11 +18,13 @@
     width: 39px;
     aspect-ratio: 1.05;
     object-fit: contain;
+    margin-top: 8px;
   }
   
   .headerTitle {
     font: 700 24px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
     flex-grow: 1;
+    margin-right: 30px;
   }
   
   .faqContent {
@@ -64,6 +65,7 @@
     width: 16px;
     aspect-ratio: 1.6;
     object-fit: contain;
+    margin-top: 8px;
   }
   
   .answer {

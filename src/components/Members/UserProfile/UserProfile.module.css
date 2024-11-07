@@ -19,7 +19,6 @@
     font-weight: 700;
     text-align: center;
     justify-items: left;
-
   }
   
   .backIcon {
@@ -27,7 +26,7 @@
     object-fit: contain;
     width: 39px;
     align-self: start;
-    margin-top: 4px;
+    margin-top: 20%;
   }
   
   .userInfoSection {

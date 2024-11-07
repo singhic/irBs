@@ -78,7 +78,7 @@ export const MainPage: React.FC = () => {
         <span className={styles.bookingText}>예약하기</span>
         <img 
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/406181a727603b6744c65a734692215707f5036ec231fe2445b98845343e8c94?placeholderIfAbsent=true" 
-          alt="" 
+          alt="예약하기 버튼" 
           className={styles.bookingIcon} 
         />
         </a>

@@ -35,7 +35,7 @@
 
 
   .myHeader {
-    margin-left: 87px;
+    margin-left: 80px;
   }
   
   .userProfile {
@@ -47,7 +47,10 @@
    
   }
 
-
+  .backicon{
+    margin-top: 12px;
+    padding-left: 8px;
+  }
 
   .profileImage {
     aspect-ratio: 1.00;
@@ -60,6 +63,11 @@
     margin-top: 11px;
     font: 700 17px 'Noto Sans KR', sans-serif;
   }
+
+  .move_userprofile{
+    margin-top: 85%;
+  }
+
   
   .mainContent {
     z-index: 10;

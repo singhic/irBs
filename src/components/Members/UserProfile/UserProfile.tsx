@@ -1,6 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './UserProfile.module.css';
 import { FormCard } from './FormCard.tsx';
+import axios from 'axios';
+import * as cheerio from 'cheerio';
+
+async function fetchValueFromExternalSite(): Promise<string | null> {
+  try {
+    const response = await axios.get('/passport/list.php');
+    const html = response.data;
+    const $ = cheerio.load(html);
+    const value = $('#p_name').attr('value');
+
+    return value || null; // Ensure the return type is string or null
+  } catch (error) {
+    console.error('Error fetching value:', error);
+    return null;
+  }
+}
 
 export const UserProfile: React.FC = () => {
   const cardInputs = {
@@ -9,30 +25,42 @@ export const UserProfile: React.FC = () => {
       placeholder: '이즐(케시비) 또는 신한 후불교통카드 16자리'
     }],
     password: [
-      { id: 'currentPassword', placeholder: '현재 비밀번호를 입력하세요', type: 'password' },
       { id: 'newPassword', placeholder: '변경하고싶은 비밀번호를 입력하세요', type: 'password' },
       { id: 'confirmPassword', placeholder: '변경하고싶은 비밀번호를 재입력하세요', type: 'password' }
     ]
   };
 
+  const [userName, setUserName] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const value = await fetchValueFromExternalSite();
+      setUserName(value); // value is now guaranteed to be string or null
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <main className={styles.profileContainer}>
       <header className={styles.headerSection}>
+        <a href='/MyPage'>
         <img 
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/c6f39fd7de10126956016a660e84671a37b66231dcc86d58ff090a6a35e1599c?placeholderIfAbsent=true" 
           alt="Back" 
           className={styles.backIcon}
         />
+        </a>
         <h1>내 정보 수정</h1>
       </header>
 
       <section className={styles.userInfoSection}>
         <img 
-          src="/user-profile.svg" 
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/6596c95482616e0247ca02575e9d69257aa06be47f4bdd62637ebf1c9344ba88?placeholderIfAbsent=true"
           alt="User avatar" 
           className={styles.userAvatar}
         />
-        <span className={styles.userName}>사용자님</span>
+        <span className={styles.userName}>{userName}님</span>
       </section>
 
       <FormCard

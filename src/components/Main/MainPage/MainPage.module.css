@@ -264,6 +264,7 @@
   object-fit: contain;
   width: 26px;
 }
+
 .noticeText {
   flex-grow: 1; /* 텍스트 영역을 확장 */ 
   text-align: center; /* 텍스트 가운데 정렬 */
