@@ -32,11 +32,13 @@ export const FAQ: React.FC = () => {
   return (
     <section className={styles.faqSection}>
       <header className={styles.faqHeader}>
+      <button onClick={() => window.history.back()}>
         <img 
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/6658073b441adbc80f3e37bb689f9ebf88f65cb1a25c860f9ec8adcbbf83fe3c?placeholderIfAbsent=true" 
           alt="자주 묻는 질문 아이콘" 
           className={styles.headerIcon} 
         />
+        </button>
         <h1 className={styles.headerTitle}>자주 묻는 질문</h1>
       </header>
       

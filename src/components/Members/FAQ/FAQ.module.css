@@ -1,6 +1,5 @@
 .faqSection {
-    width: 480px;
-
+  
     margin: 0 auto;
     background: #f8f8f8;
     color: #000;
@@ -9,11 +8,10 @@
   
   .faqHeader {
     background: #fff;
-    padding: 37px 35px;
+    padding: 15px 25px;
     display: flex;
     align-items: center;
-    max-width: 410px;
-    width: 100%;
+
     text-align: center;
   }
   
@@ -78,4 +76,9 @@
     text-align: center;
     margin-top: 99px;
     font: 500 14px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
+  }
+
+  button {
+    border: none;
+    background: none;
   }

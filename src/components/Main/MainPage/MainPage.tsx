@@ -48,11 +48,13 @@ export const MainPage: React.FC = () => {
             경고: 패널티 1회(2024.10.15 장유 08:20)
           </p>
         </div>
-        <img 
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/000f5f913f98483ee512f05f509b6c27a28917768973c443b3543c86a04612d4?placeholderIfAbsent=true" 
-          alt="Settings" 
-          className={styles.settingsIcon} 
-        />
+        <a href='/MyPage'>
+          <img 
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/000f5f913f98483ee512f05f509b6c27a28917768973c443b3543c86a04612d4?placeholderIfAbsent=true" 
+            alt="Settings" 
+            className={styles.settingsIcon} 
+          />
+        </a>
       </header>
 
       <section className={styles.weatherCard}>
@@ -108,10 +110,11 @@ export const MainPage: React.FC = () => {
           />
         </div>
       </section>
-
-      <button className={styles.supportText}>
-        문제가 있으신가요?
-      </button>
+      <a href='/FAQ'>
+        <button className={styles.supportText}>
+          문제가 있으신가요?
+        </button>
+      </a>
 
       <section className={styles.recentBooking}>
         <img 
