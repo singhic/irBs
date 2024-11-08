@@ -1,7 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './LoginPage.module.css';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+
+const CookieAlert: React.FC = () => {
+  const checkCookiePermission = () => {
+      Cookies.set('test_cookie', 'test', { secure: true, sameSite: 'Lax' });
+      const testCookie = Cookies.get('test_cookie');
+      if (!testCookie && !localStorage.getItem('cookieAlertShown')) {
+          alert('쿠키 설정이 비활성화되어 있습니다. 웹사이트의 원활한 사용을 위해 브라우저에서 쿠키 설정을 활성화해주세요.');
+          localStorage.setItem('cookieAlertShown', 'true');
+      } else {
+          Cookies.remove('test_cookie');
+      }
+  };
+
+  useEffect(() => {
+      checkCookiePermission();
+  }, []);
+
+  return null;
+};
 
 const LoginPage: React.FC = () => {
   const [userId, setUserId] = useState('');
@@ -31,7 +50,7 @@ const LoginPage: React.FC = () => {
         console.log(response.data); // 서버에서 응답으로 오는 데이터를 확인
         if (response.data.status === 'success') {
           alert(response.data.message);
-          Cookies.set("id", userId, {secure: true, sameSite: "Lax"});
+          Cookies.set("id", userId, {secure: true, sameSite: 'Lax'});
           window.location.href = '/MainPage';
         } else {
           console.error("Login failed:", response.status); // 에러 상세 정보 출력
@@ -46,9 +65,9 @@ const LoginPage: React.FC = () => {
 
   return (
     <main className={styles.loginContainer}>
-    
+      <CookieAlert />
       <img 
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/ae3ee0e389dff35e40300bc2397c9fe81fb76d12614c12cef8a5b883e7581063?placeholderIfAbsent=true" 
+        src="https://www.inje.ac.kr/kor/assets/images/sub/ui-logo.png" 
         alt="인제대학교 로고" 
         className={styles.logo}
       />
@@ -62,11 +81,11 @@ const LoginPage: React.FC = () => {
           아이디 (학번/사번)
         </label>
         <input
-          type="text"
+          type="number"
           value={userId}
           onChange={(e) => setUserId(e.target.value)}
           className={styles.inputField}
-          placeholder="      아이디 (학번/사번)"
+          placeholder="아이디 (학번/사번)"
         />
 
       
@@ -78,7 +97,7 @@ const LoginPage: React.FC = () => {
               type="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="      비밀번호"
+              placeholder="비밀번호"
               className={styles.inputField}
             />
             <button

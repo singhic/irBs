@@ -1,5 +1,4 @@
 .profileContainer {
-    
 
     margin: 0 auto;
     padding: 5%;
@@ -8,6 +7,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    
   }
   
   .headerSection {

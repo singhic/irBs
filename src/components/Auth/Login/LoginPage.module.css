@@ -36,6 +36,7 @@
   color: rgba(12, 5, 5, 0.7);
   font-weight: 400;
   margin-bottom: 13px;
+  padding: 20px;
   padding-right: 20px; /* 아이콘 공간 확보 */
   box-sizing: border-box;
 }
@@ -91,6 +92,9 @@
 .helpLinks {
   display: flex;
   gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 14px;
   color: #0088ff;
   font-weight: 500;
