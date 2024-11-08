@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './SeatSelection.module.css';
 import { SeatProps } from './types'; 
 
 // Seat 컴포넌트 정의
-export const Seat: React.FC<SeatProps> = ({ seatNumber, status, color, onSelect }) => {
-  
+export const Seat: React.FC<SeatProps> = ({ seatNumber, initialStatus, color, onSelect }) => {
+  // 좌석 상태를 관리하기 위한 useState
+  const [status, setStatus] = useState(initialStatus);
+
   // 클릭 핸들러 함수
   const handleClick = () => {
-    if (status === 'available' && onSelect) {
-      onSelect(seatNumber);
+    if (status === 'available') {
+      setStatus('selected'); // 상태를 업데이트 함수로 변경
+      if (onSelect) {
+        onSelect(seatNumber);
+      }
     }
   };
-  
+
   // 키보드 이벤트 핸들러 함수
   const handleKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -21,13 +26,11 @@ export const Seat: React.FC<SeatProps> = ({ seatNumber, status, color, onSelect 
 
   // 컴포넌트 렌더링
   return (
-    <div
+    <button
       // 시트 스타일 적용
-      className={`${styles.seat} ${styles[`seat_${color}`]}`}
-      // <img src={`/images/seat_${status}.png`} alt={`Seat ${seatNumber} - ${status}`} /> 
-
+      // className={`${styles.seat} ${styles[`seat_${color}`]}`}
       // 접근성 속성 설정
-      role="button"
+      // role="button"
       // 시트가 사용 가능한 경우에만 tabIndex 설정
       tabIndex={status === 'available' ? 0 : -1} 
       // 클릭 이벤트 핸들러 등록
@@ -39,31 +42,15 @@ export const Seat: React.FC<SeatProps> = ({ seatNumber, status, color, onSelect 
       // 사용 불가능한 시트인 경우 비활성화 속성 설정
       aria-disabled={status !== 'available'} 
     >
-      {/* 이미지로 변경전 코드-------------------------------------------------------------------- */}
-      {/* // 시트 상단 
-      <div className={styles.seatTop}>
-        // 시트 테두리 
-        <div className={styles.seatBorder}> 
-          // 시트 핸들
-          <div className={styles.seatHandle} /> 
-          // 시트 번호
-          <span className={styles.seatNumber}>{seatNumber}</span> 
-          // 시트 상태
-          <div className={styles.seatHandle} /> 
-        </div>
-        // 시트 상태
-        <div className={styles.seatBase} /> 
-      </div> */}
-      {/* 이미지로 변경전 코드-------------------------------------------------------------------- */}
-      {/* 이미지로 변경후 코드-------------------------------------------------------------------- */}
-      <div className={styles.seatTop}>
-        <button>
-          <img src={`/img/seat/seat_${status}.png`} alt={`Seat ${seatNumber} - ${status}`} /> 
-          {/* <img src="\img\seat\seat_GRAY.png" alt="" /> */}
-          <span className={styles.seatNumber}>{seatNumber}</span> 
-        </button>
-      </div>
-      {/* 이미지로 변경후 코드----------------------------------------------------------------  */}
-    </div>
+      <img 
+        src={status === 'selected' 
+          ? '/img/seat/seat_selected.png' // 선택된 좌석일 때 표시할 이미지 경로
+          : `/img/seat/seat_${status}.png`} // 다른 상태일 때 표시할 이미지 경로
+        alt={`Seat ${seatNumber} - ${status}`} 
+      />
+      <span className={styles.seatNumber}>
+        {status === 'selected' ? '예약함' : seatNumber}
+      </span>
+    </button>
   );
 };
