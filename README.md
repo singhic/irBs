@@ -7,7 +7,9 @@
 4. **최적화된 메뉴 구성**: 복잡한 메뉴바를 최대한 제거하고, 슬라이드 및 리스트와 같은 터치 기반 인터페이스를 최적화
 5. **직관적이고 효율적인 디자인**: 핵심 기능에 집중하여 간결하면서도 빠르고 직관적인 웹앱을 구현
 
-# 수정하기
+<img src = "https://github.com/inje-megabrain/irBs/blob/main/public/Application_architecture.png?raw=true">
+
+## 수정하기
 ### 의존성 설치
 
 ```
