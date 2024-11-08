@@ -1,6 +1,7 @@
 .profileContainer {
+
     margin: 0 auto;
-    padding: 46px 27px 24px;
+    padding: 5%;
     background: linear-gradient(180deg, #87ceeb -7.29%, #f3f4f6 100%);
     font-family: Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif;
     display: flex;
@@ -10,16 +11,14 @@
   }
   
   .headerSection {
+    position: relative;
     display: flex;
-    width: 232px;
     max-width: 100%;
     font-size: 10px;
-    gap: 25%;
     color: #000;
     font-weight: 700;
-    text-align: center;
-    justify-items: left;
-
+    text-align: center;    
+    justify-content: center; /* Centers the text within the full width */
   }
   
   .backIcon {
@@ -28,6 +27,7 @@
     width: 39px;
     align-self: start;
     margin-top: 4px;
+    align-items: left;
   }
   
   .userInfoSection {
