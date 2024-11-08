@@ -1,6 +1,9 @@
 import React from 'react';
 import styles from './UserProfile.module.css';
 import { FormCard } from './FormCard.tsx';
+import IconButton from '@mui/material/IconButton';
+import { SvgIcon } from '@mui/material';
+
 
 export const UserProfile: React.FC = () => {
   const cardInputs = {
@@ -18,11 +21,14 @@ export const UserProfile: React.FC = () => {
   return (
     <main className={styles.profileContainer}>
       <header className={styles.headerSection}>
-        <img 
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/c6f39fd7de10126956016a660e84671a37b66231dcc86d58ff090a6a35e1599c?placeholderIfAbsent=true" 
-          alt="Back" 
-          className={styles.backIcon}
-        />
+        <IconButton 
+        sx={{
+          textAlign:'center',
+     
+        }}
+        >
+          <img id="backIcon" src="https://cdn.builder.io/api/v1/image/assets/TEMP/c6f39fd7de10126956016a660e84671a37b66231dcc86d58ff090a6a35e1599c?placeholderIfAbsent=true" alt="마이페이지 아이콘" />
+        </IconButton>
         <h1>내 정보 수정</h1>
       </header>
 
