@@ -3,6 +3,7 @@ import styles from './MyPage.module.css';
 import { UserStats } from './UserStats.tsx';
 import { SectionHeader } from './SectionHeader.tsx';
 import { RecentItem } from './RecentItem.tsx';
+
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 
@@ -19,6 +20,24 @@ async function fetchValueFromExternalSite(): Promise<string | null> {
     return null;
   }
 }
+
+import { Button } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import Stack from '@mui/material/Stack';
+import { styled } from '@mui/material/styles';  
+import Paper from '@mui/material/Paper';
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+  ...theme.applyStyles('dark', {
+    backgroundColor: '#1A2027',
+  }),
+}));
+
 
 const MyPage: React.FC = () => {
   const [userName, setUserName] = useState<string | null>(null);
@@ -48,10 +67,15 @@ const MyPage: React.FC = () => {
     <main className={styles.page}>
       <header className={styles.header}>
         <div className={styles.headerTop}>
+
           <a href='/MainPage'>
             <img id="icon" src="https://cdn.builder.io/api/v1/image/assets/TEMP/c6f39fd7de10126956016a660e84671a37b66231dcc86d58ff090a6a35e1599c?placeholderIfAbsent=true" alt="뒤로가기 아이콘" className={styles.backicon}/>
           </a>
           <div className={styles.myHeader}>
+
+          <img id="icon" src="https://cdn.builder.io/api/v1/image/assets/TEMP/c6f39fd7de10126956016a660e84671a37b66231dcc86d58ff090a6a35e1599c?placeholderIfAbsent=true" alt="마이페이지 아이콘" />
+          <div id="text" className={styles.myHeader}>
+
             <h1>마이페이지</h1>
           </div>
         </div>
@@ -70,23 +94,40 @@ const MyPage: React.FC = () => {
         <UserStats penaltyCount={1} mannerScore="측정불가" />
         
         <SectionHeader title="예약" icon="https://cdn.builder.io/api/v1/image/assets/TEMP/e93cc959cb72382063af44ef50d63c214975ce83016a1d9db492a7ef89ca62c8?placeholderIfAbsent=true" />
-        <div className={styles.contentCard}>
+        {/* <div className={styles.contentCard}>
           <div className={styles.recentList}>
             {recentItems.map((item, index) => (
               <RecentItem key={index} {...item} />
             ))}
           </div>
-        </div>
+          
+        </div> */}
+
+        <Paper square={false} sx={{ padding: 2, backgroundColor: 'white',  }}>
+        <Stack spacing={2}>
+          {recentItems.map((item, index) => (
+            <RecentItem key={index} {...item} />
+            ))}
+          </Stack>
+        </Paper>
 
         <SectionHeader title="문의" icon="https://cdn.builder.io/api/v1/image/assets/TEMP/e93cc959cb72382063af44ef50d63c214975ce83016a1d9db492a7ef89ca62c8?placeholderIfAbsent=true" />
-        <div className={styles.contentCard}>
+        {/*<div className={styles.contentCard}>
           <div className={styles.recentList}>
             {inquiryItems.map((item, index) => (
               <RecentItem key={index} {...item} />
             ))}
           </div>
-        </div>
-      </section>
+        </div>*/}
+
+        <Paper square={false} sx={{ padding: 2, backgroundColor: 'white',  }}>
+        <Stack spacing={2}>
+          {inquiryItems.map((item, index) => (
+            <RecentItem key={index} {...item} />
+            ))}
+          </Stack>
+        </Paper>
+      </section> 
     </main>
   );
 };
