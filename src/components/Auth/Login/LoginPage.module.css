@@ -4,6 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 20%;
   font: 700 14px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
 }
 
@@ -92,12 +93,12 @@
 .helpLinks {
   display: flex;
   gap: 8px;
-  display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 14px;
   color: #0088ff;
   font-weight: 500;
+  margin-right: 10px;
 }
 
 .divider {
@@ -109,7 +110,9 @@
 .newUserText {
   color: #0088ff;
   font-weight: 500;
-  margin-top: 60px;
+  margin-top: 50px;
+  align-items: center;
+  justify-content: center;
 }
 
 .visually-hidden {
@@ -130,7 +133,6 @@
 .iconButton {
   position: absolute;
   right: 65px;
-  
   top: 50%;
   transform: translateY(-70%);
   background: none;

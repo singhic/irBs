@@ -3,12 +3,12 @@
     background: #fff;
     display: flex;
     width: 100%;
-    max-width: 480px;
+    
     flex-direction: column;
     overflow: hidden;
     align-items: center;
     margin: 0 auto;
-    padding: 29px 8px;
+
   }
   
   .logo {
@@ -172,7 +172,7 @@
     background-color: #f3f4f6;
     display: flex;
     margin-top: 34px;
-    width: 360px;
+    width: 80%;
     max-width: 100%;
     align-items: center;
     gap: 20px;
@@ -211,7 +211,7 @@
   .ticketDivider {
     align-self: stretch;
     width: 1px;
-    height: 105px;
+    height: 140px;
     border: 1px dashed rgba(0, 0, 0, 0.2);
   }
   
@@ -247,7 +247,7 @@
     -webkit-text-stroke-width: 0.5;
     font-style: italic;
     margin: auto 0;
-    border: 1px solid;
+    /* border: 1px solid; */
   }
   
   .seatNumberRed {

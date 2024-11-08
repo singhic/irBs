@@ -1,8 +1,7 @@
 // SeatProps 인터페이스 정의
 export interface SeatProps {  
   seatNumber: string; // 좌석 번호
-  status: 'available' | 'reserved' | 'selected'; // 좌석 상태
-  color: 'WHITE' | 'GRAY' | 'GREEN'; // 좌석 색상
+  initialStatus: 'available' | 'reserved' | 'selected'; // 좌석 상태
   onSelect?: (seatNumber: string) => void; // 선택 시 호출되는 함수 (선택적)
 }
 

@@ -1,6 +1,5 @@
 .faqSection {
-    width: 480px;
-
+  
     margin: 0 auto;
     background: #f8f8f8;
     color: #000;
@@ -9,11 +8,9 @@
   
   .faqHeader {
     background: #fff;
-    padding: 37px 35px;
+    padding: 10px 20px;
     display: flex;
     align-items: center;
-    max-width: 410px;
-    width: 100%;
     text-align: center;
   }
   
@@ -21,11 +18,13 @@
     width: 39px;
     aspect-ratio: 1.05;
     object-fit: contain;
+    margin-top: 8px;
   }
   
   .headerTitle {
     font: 700 24px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
     flex-grow: 1;
+    margin-right: 30px;
   }
   
   .faqContent {
@@ -66,6 +65,7 @@
     width: 16px;
     aspect-ratio: 1.6;
     object-fit: contain;
+    margin-top: 8px;
   }
   
   .answer {
@@ -78,4 +78,9 @@
     text-align: center;
     margin-top: 99px;
     font: 500 14px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
+  }
+
+  button {
+    border: none;
+    background: none;
   }

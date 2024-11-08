@@ -17,8 +17,10 @@
     font-size: 10px;
     color: #000;
     font-weight: 700;
-    text-align: center;    
-    justify-content: center; /* Centers the text within the full width */
+
+    text-align: center;
+    justify-items: left;
+
   }
   
   .backIcon {
@@ -26,9 +28,9 @@
     object-fit: contain;
     width: 39px;
     align-self: start;
-    margin-top: 4px;
-    align-items: left;
-  }
+
+    margin-top: 20%;
+
   
   .userInfoSection {
     display: flex;

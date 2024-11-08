@@ -1,3 +1,11 @@
+.container {
+  width: 100%;
+  max-width: 1200px;
+  min-width: 360px;
+  /* box-sizing: border-box;  */
+  /* justify-content: center;  */
+}
+
 .App {
   text-align: center;
 }
@@ -24,6 +32,7 @@
   color: white;
 } */
 
+
 .App-link {
   color: #61dafb;
 }
@@ -36,3 +45,4 @@
     transform: rotate(360deg);
   }
 }
+

@@ -95,11 +95,13 @@ export const BusSchedule: React.FC = () => {
   return (
     <section className={styles.scheduleContainer}>
       <header className={styles.scheduleHeader}>
-        <img 
-          src="\img\icon\arrow-left.png" 
-          alt="arrow-left" 
-          className={styles.headerIcon} 
-        />
+        <a href="/MainPage">
+          <img 
+            src="\img\icon\arrow-left.png" 
+            alt="arrow-left" 
+            className={styles.headerIcon} 
+          />
+        </a>
         <h2 className={styles.headerTitle}>지역</h2>
       </header>
       <main className={styles.scheduleGrid}>

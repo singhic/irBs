@@ -1,6 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { RouteCard } from './RouteCard.tsx';
 import styles from './MainPage.module.css';
+import axios from 'axios';
+import * as cheerio from 'cheerio';
+
+async function fetchValueFromExternalSite(): Promise<string | null> {
+  try {
+    const response = await axios.get('/passport/list.php');
+    const html = response.data;
+    const $ = cheerio.load(html);
+    const value = $('#p_name').attr('value');
+
+    return value || null; // Ensure the return type is string or null
+  } catch (error) {
+    console.error('Error fetching value:', error);
+    return null;
+  }
+}
 
 const routeData = [
   { destination: '동래', time: '16:20', seats: '(44/33석)' },
@@ -8,6 +24,17 @@ const routeData = [
 ];
 
 export const MainPage: React.FC = () => {
+  const [userName, setUserName] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const value = await fetchValueFromExternalSite();
+      setUserName(value); // value is now guaranteed to be string or null
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <main className={styles.page}>
       <header className={styles.notificationBar}>
@@ -21,11 +48,13 @@ export const MainPage: React.FC = () => {
             경고: 패널티 1회(2024.10.15 장유 08:20)
           </p>
         </div>
-        <img 
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/000f5f913f98483ee512f05f509b6c27a28917768973c443b3543c86a04612d4?placeholderIfAbsent=true" 
-          alt="Settings" 
-          className={styles.settingsIcon} 
-        />
+        <a href='/MyPage'>
+          <img 
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/000f5f913f98483ee512f05f509b6c27a28917768973c443b3543c86a04612d4?placeholderIfAbsent=true" 
+            alt="Settings" 
+            className={styles.settingsIcon} 
+          />
+        </a>
       </header>
 
       <section className={styles.weatherCard}>
@@ -34,7 +63,7 @@ export const MainPage: React.FC = () => {
             금일 캠퍼스 날씨는 맑음입니다.
           </p>
           <h1 className={styles.greeting}>
-            안녕하세요. 사용자님
+            안녕하세요. {userName}님
           </h1>
         </div>
         <img 
@@ -49,7 +78,7 @@ export const MainPage: React.FC = () => {
         <span className={styles.bookingText}>예약하기</span>
         <img 
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/406181a727603b6744c65a734692215707f5036ec231fe2445b98845343e8c94?placeholderIfAbsent=true" 
-          alt="" 
+          alt="예약하기 버튼" 
           className={styles.bookingIcon} 
         />
         </a>
@@ -73,7 +102,7 @@ export const MainPage: React.FC = () => {
         <h2 className={styles.noticeTitle}>공지사항</h2>
         <hr className={styles.noticeDivider} />
         <div className={styles.noticeFooter}>
-          <span>전체공지 보기</span>
+          <span className={styles.noticeText}>전체공지 보기</span>
           <img 
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/39d3da592bbe83d18c101160fb790b68b8b3c44297531c445b233d2f5354dec7?placeholderIfAbsent=true" 
             alt="" 
@@ -81,10 +110,11 @@ export const MainPage: React.FC = () => {
           />
         </div>
       </section>
-
-      <button className={styles.supportText}>
-        문제가 있으신가요?
-      </button>
+      <a href='/FAQ'>
+        <button className={styles.supportText}>
+          문제가 있으신가요?
+        </button>
+      </a>
 
       <section className={styles.recentBooking}>
         <img 
