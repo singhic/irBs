@@ -3,7 +3,11 @@ import styles from './MyPage.module.css';
 import { UserStats } from './UserStats.tsx';
 import { SectionHeader } from './SectionHeader.tsx';
 import { RecentItem } from './RecentItem.tsx';
-
+import { Button } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import Stack from '@mui/material/Stack';
+import { styled } from '@mui/material/styles';  
+import Paper from '@mui/material/Paper';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 
@@ -20,12 +24,6 @@ async function fetchValueFromExternalSite(): Promise<string | null> {
     return null;
   }
 }
-
-import { Button } from '@mui/material';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import Stack from '@mui/material/Stack';
-import { styled } from '@mui/material/styles';  
-import Paper from '@mui/material/Paper';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -87,6 +85,7 @@ const MyPage: React.FC = () => {
           <a href='/userprofile' className={styles.move_userprofile}>
           <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/942bad32bb7686b37623a7bbd94277cca6dfadef154afacbe543d2856ad9a096?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30" alt="내 정보 수정" />
           </a>
+        </div>
         </div>
       </header>
 

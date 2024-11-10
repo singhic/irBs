@@ -1,5 +1,4 @@
 .profileContainer {
-
     margin: 0 auto;
     padding: 5%;
     background: linear-gradient(180deg, #87ceeb -7.29%, #f3f4f6 100%);
@@ -17,10 +16,8 @@
     font-size: 10px;
     color: #000;
     font-weight: 700;
-
     text-align: center;
     justify-items: left;
-
   }
   
   .backIcon {
@@ -28,8 +25,8 @@
     object-fit: contain;
     width: 39px;
     align-self: start;
-
     margin-top: 20%;
+  }
 
   
   .userInfoSection {

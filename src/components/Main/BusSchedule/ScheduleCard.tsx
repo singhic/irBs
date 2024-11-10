@@ -1,21 +1,29 @@
 import React from 'react';
+import { BusRoute } from './types.ts';
 import styles from './BusSchedule.module.css';
-import { ScheduleCardProps } from './types';
 
-export const ScheduleCard: React.FC<ScheduleCardProps> = ({ route }) => {
+interface ScheduleCardProps {
+  route: BusRoute;
+  schedule: {
+    toSchool: string[];
+    fromSchool: string[];
+  };
+}
+
+export const ScheduleCard: React.FC<ScheduleCardProps> = ({ route, schedule }) => {
+  // 배열을 "/ "로 구분된 문자열로 변환
+  const toSchoolTimes = schedule.toSchool.join(' / ');
+  const fromSchoolTimes = schedule.fromSchool.join(' / ');
+
   return (
-    <article className={styles.scheduleCard}>
+    <div className={styles.scheduleCard}>
       <h3 className={styles.locationName}>{route.location}</h3>
-      <p className={styles.departureTime}>
-        등교: {route.schedule.toSchool.length ? route.schedule.toSchool.join('/ ') : (
-          <span className={styles.noSchedule}>배차 없음</span>
-        )}
-      </p>
-      {route.schedule.fromSchool.length > 0 && (
-        <p className={styles.arrivalTime}>
-          하교: {route.schedule.fromSchool.join('/ ')}
-        </p>
-      )}
-    </article>
+      <div className={styles.departureTime}>
+        <p>등교: {toSchoolTimes || '배차 없음'}</p> {/* 등교 시간 */}
+        <p>하교: {fromSchoolTimes || '배차 없음'}</p> {/* 하교 시간 */}
+      </div>
+    </div>
   );
 };
+
+export default ScheduleCard;
