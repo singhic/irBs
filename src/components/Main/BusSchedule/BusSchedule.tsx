@@ -40,83 +40,79 @@ const BusSchedule: React.FC = () => {
   const fetchBusSchedules = async () => {
     setLoading(true);
     const today = new Date();
-    const date = `20241112`;
+    const date = `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}`;
   
     try {
-      const requests = busRoutes.map(async (route) => {
-        const url = `/reserve/time_select_proc.php?lineCode=${route.value}&dateCode=${date}`;
-        const response = await axios.get(url);
-  
-        if (response.status === 200) {
-          const html = response.data;
-          const $ = cheerio.load(html);
-  
-          const toSchoolTimes: string[] = [];
-          const fromSchoolTimes: string[] = [];
-  
-          // Log the entire HTML content for debugging
-          console.log('Fetched HTML:', html);
-  
-          // Parse the <option> tags
-          $('option').each((_, element) => {
-            const text = $(element).text().trim().replace(/\u00A0/g, ' ');
-  
-            console.log('Option Text:', text); // Log each option text
-  
-            // Extract "등교" (to school) times
-            if (text.includes('등교')) {
-              const timeMatch = text.match(/\d{2}:\d{2}/);
-              if (timeMatch) {
-                toSchoolTimes.push(timeMatch[0]);
-              }
+    const requests = busRoutes.map(async (route) => {
+      const url = `/reserve/time_select_proc.php?lineCode=${route.value}&dateCode=${date}`;
+      const response = await axios.get(url, { responseType: 'arraybuffer' });
+
+      if (response.status === 200) {
+        const decodedHtml = new TextDecoder('utf-8').decode(response.data);
+        const $ = cheerio.load(decodedHtml);
+
+        // 등교 시간과 하교 시간 배열
+        const toSchoolTimes: string[] = [];
+        const fromSchoolTimes: string[] = [];
+
+        // 모든 <option> 태그 반복
+        $('option').each((_, element) => {
+          const text = $(element).text().trim().replace(/\u00A0/g, ' ');
+          
+          // 등교 텍스트 확인
+          if (text.includes('등교')) {
+            const timeMatch = text.match(/(\d{1,2}:\d{2})/);
+            if (timeMatch && timeMatch[0]) {
+              toSchoolTimes.push(timeMatch[0]);
             }
-  
-            // Extract "하교" (from school) times
-            if (text.includes('하교')) {
-              const timeMatch = text.match(/\d{2}:\d{2}/);
-              if (timeMatch) {
-                fromSchoolTimes.push(timeMatch[0]);
-              }
+          }
+        
+          // 하교 텍스트 확인
+          if (text.includes('하교')) {
+            const timeMatch = text.match(/(\d{1,2}:\d{2})/);
+            if (timeMatch && timeMatch[0]) {
+              fromSchoolTimes.push(timeMatch[0]);
             }
-          });
-  
-          console.log('To School Times:', toSchoolTimes); // Log to verify the extracted times
-          console.log('From School Times:', fromSchoolTimes);
-  
-          return {
-            lineCode: route.value,
-            data: {
-              toSchool: toSchoolTimes.length ? toSchoolTimes : ['배차 없음'],
-              fromSchool: fromSchoolTimes.length ? fromSchoolTimes : ['배차 없음'],
-            },
-          };
-        } else {
-          // Log the error if the response is not successful
-          console.log('Failed to fetch data for route', route.value);
-          return {
-            lineCode: route.value,
-            data: { toSchool: ['배차 없음'], fromSchool: ['배차 없음'] },
-          };
-        }
-      });
-  
-      const results = await Promise.all(requests);
-      const newScheduleData = { ...scheduleData };
-  
-      // Update the schedule data with the fetched results
-      results.forEach((result) => {
-        const { lineCode, data } = result;
-        newScheduleData[lineCode] = data;
-      });
-  
-      setScheduleData(newScheduleData);
-    } catch (error) {
-      console.error('Network or server error:', error);
-      alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
-    }
-  
-    setLoading(false);
-  };  
+          }
+        });
+        
+        console.log('Final To School Times:', toSchoolTimes);
+        console.log('Final From School Times:', fromSchoolTimes);
+        
+        
+
+        return {
+          lineCode: route.value,
+          data: {
+            toSchool: toSchoolTimes.length ? toSchoolTimes : ['배차 없음'],
+            fromSchool: fromSchoolTimes.length ? fromSchoolTimes : ['배차 없음'],
+          },
+        };
+      } else {
+        console.log('Failed to fetch data for route', route.value);
+        return {
+          lineCode: route.value,
+          data: { toSchool: ['배차 없음'], fromSchool: ['배차 없음'] },
+        };
+      }
+    });
+
+    const results = await Promise.all(requests);
+    const newScheduleData = { ...scheduleData };
+
+    results.forEach((result) => {
+      const { lineCode, data } = result;
+      newScheduleData[lineCode] = data;
+    });
+
+    setScheduleData(newScheduleData);
+  } catch (error) {
+    console.error('Network or server error:', error);
+    alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
+  }
+
+  setLoading(false);
+};  
 
   useEffect(() => {
     fetchBusSchedules();
