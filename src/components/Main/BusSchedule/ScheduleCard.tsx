@@ -1,21 +1,35 @@
 import React from 'react';
+import { BusRoute } from './types.ts';
 import styles from './BusSchedule.module.css';
-import { ScheduleCardProps } from './types';
 
-export const ScheduleCard: React.FC<ScheduleCardProps> = ({ route }) => {
+interface ScheduleCardProps {
+  route: BusRoute;
+  schedule: {
+    toSchool: string[];
+    fromSchool: string[];
+  };
+}
+
+export const ScheduleCard: React.FC<ScheduleCardProps> = ({ route, schedule }) => {
   return (
-    <article className={styles.scheduleCard}>
+    <div className={styles.scheduleCard}>
       <h3 className={styles.locationName}>{route.location}</h3>
-      <p className={styles.departureTime}>
-        등교: {route.schedule.toSchool.length ? route.schedule.toSchool.join('/ ') : (
-          <span className={styles.noSchedule}>배차 없음</span>
-        )}
-      </p>
-      {route.schedule.fromSchool.length > 0 && (
-        <p className={styles.arrivalTime}>
-          하교: {route.schedule.fromSchool.join('/ ')}
-        </p>
-      )}
-    </article>
+      <div className={styles.departureTime}>
+        등교
+        <ul>x
+          {schedule.toSchool.map((line, index) => (
+            <li key={index}>{line}</li>
+          ))}
+        </ul>
+        <h4>하교</h4>
+        <ul>
+          {schedule.fromSchool.map((line, index) => (
+            <li key={index}>{line}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 };
+
+export default ScheduleCard;
