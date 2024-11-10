@@ -181,11 +181,15 @@
 }
 
 .seatingSection {
+  display: flex;
+  flex-direction: column; /* 세로 정렬 */
+  
+
   background-color: #ffffff;
   border-radius: 20px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-  margin: 14px 18px;
-  padding: 39px 13px;
+  margin: 14px 10px;
+  padding: 39px 0;
 }
 
 .legend {
@@ -195,6 +199,7 @@
   font-size: 17px;
   justify-content: space-around;
   /* gap: 20px; */
+  width: 100%;
 }
 
 .legendItem {
@@ -214,123 +219,83 @@
   position: relative;
 }
 
-.driverIcon {
-  width: 20px;
-  height: 21px;
-  position: absolute;
-  left: 26px;
-  top: 0;
+.driverLayout {
+  display: flex;
+  justify-content: center; /* 안쪽 요소를 가로 중앙에 정렬 */
+  align-items: center; /* 안쪽 요소를 세로 중앙에 정렬 */
+  width: 50%;
 }
 
-.steeringIcon {
-  width: 31px;
-  height: 32px;
-  position: absolute;
-  left: 20px;
-  top: 30px;
+
+.driverIcon {
+  width: 30px;
+  height: 50px;
+  padding: 4%;
 }
+
 
 .seatGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  padding: 0 20px;
-  margin-top: 70px;
+  grid-template-columns: repeat(2, auto);
 }
-/* 시트------------------------------------------------------------------------------------------------------------- */
-/* .seat {
+
+.pair {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+  padding: 4%;
+  grid-template-columns: repeat(2, auto);
+  justify-content: center; /* 가로 방향 가운데 정렬 */
+  align-items: center; /* 세로 방향 가운데 정렬 */
 }
 
-.seat:hover {
-  transform: scale(1.05);
-}
+/* 시트아이콘 영역------------------------------------------------------------------------------------------------------------- */
 
-.seat[aria-disabled="true"] {
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-
-.seatTop {
-  border-radius: 8px 8px 0 0;
-  padding: 3px;
-  width: 100%;
-}
-
-.seatWHITE.seatTop {
-  background-color: #ffffff;
-}
-
-.seatGRAY .seatTop {
-  background-color: #949494;
-}
-
-.seatGREEN .seatTop {
-  background-color: #2ca961;
-} 
-
-.seatBorder {
+.seatButton{
   display: flex;
-  align-items: center;
-  gap: 1px;
-  padding: 0px;
-  justify-content: space-between; 
-  border-radius: 6px;
-  border: solid #b9b9b9;
+  justify-content: center; /* 가로 방향 가운데 정렬 */
+  align-items: center; /* 세로 방향 가운데 정렬 */
+  flex-direction: column; /* 세로로 정렬 */
+  width: 60px;
+  aspect-ratio: 1 / 1; /* 1:1 비율 유지 */
+  padding: 10px;
 }
+.seatImg{
+  width: 40px;
+  aspect-ratio: 1 / 1; /* 1:1 비율 유지 */
 
-.seatHandle {
-  width: 7px;
-  height: 21px;
-  background-color: #ffffff;
-  border-radius: 4px;
-  border-color: #b9b9b9;
-  border-style: solid;
 }
-
-.seatWHITE .seatHandle {
-  border: 1px solid #ea2427;
+.seatText {
+  font-size: 15px;
+  line-height: 1; 
+  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
   
+  /* width: 100%;  */
+  /* text-align: center;  */
 }
 
-.seatGRAY .seatHandle {
-  border: 1px solid #949494;
+
+/* ------------------------------------------------------------------------------------------------------- */
+/* 예약 완료 누를시 뜨는 모달? */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.seatGREEN .seatHandle {
-  border: 1px solid #2ca961;
+.modalContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
 }
 
-.seatNumber {
-  color: #414141;
-  font-family: 'Poppins', sans-serif;
-  font-size: 10px;
-  padding: 0 4px;
-}
 
-.seatBase {
-  height: 7px;
-  background-color: #ffffff;
-  border-radius: 0 0 4px 4px;
-  border-color: #b9b9b9;
-  border-style: solid;
-}
-
-.seatWHITE .seatBase {
-  border: 1px solid #ea2427;
-}
-
-.seatGREY .seatBase {
-  border: 1px solid #949494;
-}
-
-.seatGREEN .seatBase {
-  border: 1px solid #2ca961;
-}  */
+/* ------------------------------------------------------------------------------------------------------- */
 
 .footer {
   display: flex;
@@ -339,7 +304,6 @@
   gap: 29px;
   margin-top: 42px;
 }
-/* ------------------------------------------------------------------------------------------------------- */
 .confirmButton {
   border-radius: 20px;
   background-color: rgba(176, 224, 230, 0.9);
