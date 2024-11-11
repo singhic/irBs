@@ -1,13 +1,10 @@
 import { FC } from 'react';
 import styles from './ReservationStatus.module.css';
-import { Seat } from './Seat.tsx';
 import { Ticket } from './Ticket.tsx';
 import React from 'react';
+import { SeatView } from './SeatMapView.tsx'; 
 
-const seatData = Array.from({ length: 44 }, (_, i) => ({
-  number: String(i + 1),
-  type: i < 36 ? 'red' : 'grey'
-}));
+
 
 export const ReservationStatus: FC = () => {
   return (
@@ -31,25 +28,7 @@ export const ReservationStatus: FC = () => {
       </section>
 
       <h2 className={styles.seatMapTitle}>예약 좌석 위치</h2>
-      
-      <section className={styles.seatMap}>
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/40f050748d0c8768587c7fcfa441ce198a87ce8f98c2b00f3be4d7b6c10721cf?placeholderIfAbsent=true"
-          alt="Steering Wheel"
-          className={styles.steeringWheel}
-        />
-        
-        <div className={styles.seatGrid}>
-          {seatData.map(seat => (
-            <Seat
-              key={seat.number}
-              number={seat.number}
-              type={seat.type}
-            />
-          ))}
-        </div>
-      </section>
-
+      <SeatView/>
       <hr className={styles.separator} />
 
       <Ticket

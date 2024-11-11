@@ -179,7 +179,8 @@
   font-weight: 300;
   margin: 0;
 }
-
+/* ----------------------------------------------------------------------------------------- */
+/* 버스예약 페이지 전체 그리드*/
 .seatingSection {
   display: flex;
   flex-direction: column; /* 세로 정렬 */
@@ -215,7 +216,7 @@
 }
 
 .busLayout {
-  margin-top: 47px;
+  margin-top: 20px;
   position: relative;
 }
 
@@ -229,7 +230,7 @@
 
 .driverIcon {
   width: 30px;
-  height: 50px;
+  height: 30px;
   padding: 4%;
 }
 
@@ -237,11 +238,12 @@
 .seatGrid {
   display: grid;
   grid-template-columns: repeat(2, auto);
+  padding: 2%;
 }
 
 .pair {
   display: flex;
-  padding: 4%;
+  padding:0;
   grid-template-columns: repeat(2, auto);
   justify-content: center; /* 가로 방향 가운데 정렬 */
   align-items: center; /* 세로 방향 가운데 정렬 */
@@ -254,12 +256,12 @@
   justify-content: center; /* 가로 방향 가운데 정렬 */
   align-items: center; /* 세로 방향 가운데 정렬 */
   flex-direction: column; /* 세로로 정렬 */
-  width: 60px;
+  width: 40px;
   aspect-ratio: 1 / 1; /* 1:1 비율 유지 */
-  padding: 10px;
+  padding: 0;
 }
 .seatImg{
-  width: 40px;
+  width: 30px;
   aspect-ratio: 1 / 1; /* 1:1 비율 유지 */
 
 }

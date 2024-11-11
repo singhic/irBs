@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './SeatSelection.module.css';
 import { SeatProps } from './types';
-import { style } from '@mui/system';
+
 
 interface SeatComponentProps extends SeatProps {
   isSelected: boolean; // 선택 여부를 나타내는 새로운 prop
