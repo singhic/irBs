@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Seat } from '../SeatMap/Seat.tsx'; // Seat 컴포넌트를 불러옴
-import styles from '../SeatMap/SeatSelection.module.css'; // 스타일 불러오기
+import styles from './SeatMapDegin.module.css'; // 스타일 불러오기
 
 type SeatStatus = "available" | "reserved" | "selected";
 
