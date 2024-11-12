@@ -6,42 +6,55 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    min-height: 100vh; /* 전체 화면 높이를 차지하도록 설정 */
     
   }
   
   .headerSection {
     position: relative;
     display: flex;
+    align-items: center; /* 세로 정렬 */
+    justify-content: center; /* 가로 정렬 */
     max-width: 100%;
     font-size: 10px;
     color: #000;
     font-weight: 700;
     text-align: center;
-    justify-items: left;
+}
+
+  h1 {
+    font-size: 24px;
+    text-align: center; /* 텍스트 중앙 정렬 */
+    margin: 0;
   }
   
   .backIcon {
+    position:absolute;
     aspect-ratio: 1.05;
     object-fit: contain;
     width: 39px;
     align-self: start;
-    margin-top: 20%;
+    margin-top: -2.5%;
+    left:0;
   }
 
   
   .userInfoSection {
     display: flex;
-    gap: 33px;
+    gap: 3%;
     font-size: 18px;
     color: #000;
     font-weight: 700;
-    margin: 50px 0 0 14px;
+    margin-top: 8%;
+    margin-bottom: 8%;
+    justify-content: center;  /* 수평 중앙 정렬 */
+    align-items: center;      /* 수직 중앙 정렬 */
   }
   
   .userAvatar {
     aspect-ratio: 1.09;
     object-fit: contain;
-    width: 88px;
+    width: 10%;
   }
   
   .userName {
