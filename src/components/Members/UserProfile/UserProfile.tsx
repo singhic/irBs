@@ -1,94 +1,130 @@
-import React, { useEffect, useState } from 'react';
-import styles from './UserProfile.module.css';
-import { FormCard } from './FormCard.tsx';
-
+import React, { useState } from 'react';
 import axios from 'axios';
-import * as cheerio from 'cheerio';
-import IconButton from '@mui/material/IconButton';
-import { SvgIcon } from '@mui/material';
+import FormCard from './FormCard.tsx';
+import styles from './UserProfile.module.css';
 
-async function fetchValueFromExternalSite(): Promise<string | null> {
-  try {
-    const response = await axios.get('/passport/list.php');
-    const html = response.data;
-    const $ = cheerio.load(html);
-    const value = $('#p_name').attr('value');
-
-    return value || null; // Ensure the return type is string or null
-  } catch (error) {
-    console.error('Error fetching value:', error);
-    return null;
-  }
-}
-
-
-
-
-export const UserProfile: React.FC = () => {
-  const cardInputs = {
-    cardNumber: [{
-      id: 'cardNumber',
-      placeholder: '이즐(케시비) 또는 신한 후불교통카드 16자리'
-    }],
-    password: [
-      { id: 'newPassword', placeholder: '변경하고싶은 비밀번호를 입력하세요', type: 'password' },
-      { id: 'confirmPassword', placeholder: '변경하고싶은 비밀번호를 재입력하세요', type: 'password' }
-    ]
+const UserProfile: React.FC = () => {
+  const [idx, setIdx] = useState('');
+  const [newpass, setnewpass] = useState('');
+  const [pass, setpass] = useState('');
+  const [phone,setphone] = useState('');
+  const [card, setcard] = useState('');
+  const [card_type, setcard_type] = useState('');
+  const [inputValue, setInputValue] = useState('');
+  const [userName, setUserName] = useState<string | null>(null);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value); // 상태를 업데이트
+  };
+  const handlePasswordReset = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (newpass !== pass) {
+      alert('비밀번호가 일치하지 않습니다. 다시 확인해 주세요.'); // 새비번 새비번 재입력 확인 
+      return;
+    }
+    if (!newpass || !pass) {
+      alert('변경할 비밀번호를 입력해주세요.'); //아무것도 입력 x
+      return;
+    }
+    const resetData = new URLSearchParams();
+    resetData.append('id',idx);
+    resetData.append('pass',pass);
+    resetData.append('newpass',newpass);
+    
+    try {
+        const response = await axios.post('/passport/update_pass_proc.php', resetData, {
+        headers: {                        
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Accept": "application/json",
+        },
+      });
+      if (response.status === 200 && response.data.status === 'success') {
+        alert(response.data.message);
+        alert("비밀번호가 변경되었습니다.");
+        window.location.href = '/Login';
+        event.preventDefault();
+       
+      } else {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
+    }
   };
 
-  const [userName, setUserName] = useState<string | null>(null);
+  
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const value = await fetchValueFromExternalSite();
-      setUserName(value); // value is now guaranteed to be string or null
-    };
+  const handleCardNumberChange = async (event: React.FormEvent) => {
+   
 
-    fetchData();
-  }, []);
+    event.preventDefault();
+    if (!idx||!phone||!card||!card_type) {
+      alert('빈 곳을 를 입력해주세요.'); //아무것도 입력 x
+      return;
+    }
+    const resetData = new URLSearchParams();
+    resetData.append('id',idx);
+    resetData.append('card',card);
+    resetData.append('phone', phone);
+    resetData.append('card_type',card_type);
+    
+    try {
+      const response = await axios.post('/passport/update_pass_proc.php', resetData, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Accept": "application/json",
+        },
+      });
+      if (response.status === 200 && response.data.status === 'success') {
+        alert(response.data.message);
+        alert("카드번호가 변경되었습니다.");
+        window.location.href = '/Login';
+        event.preventDefault();
+      
+      } else {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
+    }
+  };
 
   return (
-    <main className={styles.profileContainer}>
-      <header className={styles.headerSection}>
-
-        <a href='/MyPage'>
-        <img 
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/c6f39fd7de10126956016a660e84671a37b66231dcc86d58ff090a6a35e1599c?placeholderIfAbsent=true" 
-          alt="Back" 
-          className={styles.backIcon}
-        />
-        </a>
-
+    <div className={styles.profileContainer}>
+           <h1 className={styles.backIcon}>
+            안녕하세요. {userName}님
+          </h1>
         
+          <img 
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/000f5f913f98483ee512f05f509b6c27a28917768973c443b3543c86a04612d4?placeholderIfAbsent=true" 
+            alt="Settings" 
+            className={styles.settingsIcon} 
+          />
+    <FormCard // 비밀번호 변경 버튼 
+  title="비밀번호 변경"
+  inputs={[
+    { id: 'pass', placeholder: '새 비밀번호 입력', type: 'password', value: pass, onChange: (e) => setpass(e.target.value) },
+    { id: 'newpass', placeholder: '새 비밀번호 재입력', type: 'password', value: newpass, onChange: (e) => setnewpass(e.target.value) },
+  ]}
+  buttonText="비밀번호 변경"
+  onSubmit={handlePasswordReset}
+  buttonDisabled={!newpass || !pass} // 아무것도 입력안했을때 버튼 비활성화
+/>
 
-        <h1>내 정보 수정</h1>
-      </header>
-
-      <section className={styles.userInfoSection}>
-        <img 
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/6596c95482616e0247ca02575e9d69257aa06be47f4bdd62637ebf1c9344ba88?placeholderIfAbsent=true"
-          alt="User avatar" 
-          className={styles.userAvatar}
-        />
-        <span className={styles.userName}>{userName}님</span>
-      </section>
-
-      <FormCard
+    <FormCard // 카드번호 변경 버튼
         title="카드번호 변경"
-        inputs={cardInputs.cardNumber}
-        submitButtonSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/d02499e6f4144a4f444d0ac404794178a86350f292f81844d4a8ecafbbd84876?placeholderIfAbsent=true"
+        inputs={[
+          { id: 'idx', placeholder: '아이디 입력', value: idx, onChange: (e) => setIdx(e.target.value) },
+          { id: 'phone', placeholder: '전화번호 입력', type: 'text', value: phone, onChange: (e) => setphone(e.target.value) },
+          { id: 'card', placeholder: '카드번호 입력', type: 'text', value: card, onChange: (e) => setcard(e.target.value) },
+          { id: 'cardType', placeholder: '카드 종류 입력', type: 'text', value: card_type, onChange: (e) =>  setcard_type(e.target.value) },
+        ]}
+        buttonText="카드번호 변경"
+        onSubmit={handleCardNumberChange}
+        buttonDisabled={!idx|| !phone||!card||!card_type}// 아무것도 입력안했을때 버튼 비활성화
       />
-
-      <FormCard
-        title="비밀번호 변경"
-        inputs={cardInputs.password}
-        submitButtonSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/ebb3d84a5c2f4cc3eb994d8431c0402baaedfce83b320239cdb47457321352b1?placeholderIfAbsent=true"
-      />
-
-      <a href="#" className={styles.deactivateLink}>
-        회원탈퇴를 찾으시나요?
-      </a>
-    </main>
+    </div>
   );
 };
 
