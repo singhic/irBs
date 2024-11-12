@@ -36,7 +36,7 @@ const LoginPage: React.FC = () => {
     loginData.append('s_cookie', '');
 
     try {
-      const response = await axios.post('https://bus.inje.ac.kr/login_proc.php', loginData, {
+      const response = await axios.post('/login_proc.php', loginData, {
         headers: {
           "Content-Type": `application/x-www-form-urlencoded`,
           "Accept": "application/json",
