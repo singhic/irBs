@@ -59,14 +59,7 @@ export const UserProfile: React.FC = () => {
         />
         </a>
 
-        <IconButton 
-        sx={{
-          textAlign:'center',
-     
-        }}
-        >
-          <img id="backIcon" src="https://cdn.builder.io/api/v1/image/assets/TEMP/c6f39fd7de10126956016a660e84671a37b66231dcc86d58ff090a6a35e1599c?placeholderIfAbsent=true" alt="마이페이지 아이콘" />
-        </IconButton>
+        
 
         <h1>내 정보 수정</h1>
       </header>
