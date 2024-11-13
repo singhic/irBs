@@ -47,6 +47,7 @@ const LoginPage: React.FC = () => {
       if (response.status === 200) {
         console.log(response.data);
         if (response.data.status === 'success') {
+
           alert(response.data.message);
           Cookies.set("id", userId, {secure: true, sameSite: 'Lax' });
           window.location.href = '/MainPage';

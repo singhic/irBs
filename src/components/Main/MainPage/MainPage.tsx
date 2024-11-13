@@ -16,7 +16,7 @@ async function fetchValueFromExternalSite(): Promise<string | null> {
     console.error('Error fetching value:', error);
     return null;
   }
-}
+}// 가져오기
 
 const routeData = [
   { destination: '동래', time: '16:20', seats: '(44/33석)' },
@@ -25,7 +25,7 @@ const routeData = [
 
 export const MainPage: React.FC = () => {
   const [userName, setUserName] = useState<string | null>(null);
-
+// 사용하기
   useEffect(() => {
     const fetchData = async () => {
       const value = await fetchValueFromExternalSite();
