@@ -1,70 +1,131 @@
-import React, { useState } from 'react'; // React와 useState 훅을 불러옴
-import styles from './SeatSelection.module.css'; // 컴포넌트의 CSS 모듈을 불러옴
-import { Seat } from './Seat.tsx'; // Seat 컴포넌트를 불러옴
-import { DateButton } from './DateButton.tsx'; // DateButton 컴포넌트를 불러옴
-import { ScheduleCard } from './ScheduleCard.tsx'; // ScheduleCard 컴포넌트를 불러옴
-import { LegendItem } from './LegendItem.tsx'; // LegendItem 컴포넌트를 불러옴
-import {DateButtonProps, ScheduleCardProps} from './types.ts';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import * as cheerio from 'cheerio';
+import styles from './SeatSelection.module.css';
+import { Seat } from './Seat.tsx';
+import { DateButton } from './DateButton.tsx';
+import { ScheduleCard } from './ScheduleCard.tsx';
+import { LegendItem } from './LegendItem.tsx';
+import { DateButtonProps, ScheduleCardProps, SeatStatusProps } from './types.ts';
 
 type SeatStatus = "available" | "reserved" | "selected";
 
-interface SeatProps {
-  seatNumber: string;
-  initialStatus: SeatStatus;
-  onSelect: (seatNumber: string) => void;
-}
-
-// SeatSelection 컴포넌트 정의
 export const SeatSelection: React.FC = () => {
-  const [selectedDate, setSelectedDate] = useState(0); // 선택된 날짜를 상태로 저장
-  const [tripType, setTripType] = useState<'departure' | 'return'>('departure'); // 여행 유형을 상태로 저장
-  const [selectedSchedule, setSelectedSchedule] = useState(2); // 선택된 스케줄을 상태로 저장
-  const [selectedSeat, setSelectedSeat] = useState<string | null>(null); // 선택된 좌석을 상태로 저장
+  const [selectedDate, setSelectedDate] = useState(0);
+  const [tripType, setTripType] = useState<'departure' | 'return'>('departure');
+  const [schedules, setSchedules] = useState<ScheduleCardProps[]>([]);
+  const [selectedSeat, setSelectedSeat] = useState<string | null>(null);
+  const [seats, setSeats] = useState<SeatStatusProps[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [seatSelectionVisible, setSeatSelectionVisible] = useState(false);
+  const lineCode = new URLSearchParams(window.location.search).get('lineCode') || 'defaultCode';
 
-  // 날짜 배열
-  const dates:DateButtonProps[] = [
-    { date: '20일', day: '월' },
-    { date: '21일', day: '화' },
-    { date: '22일', day: '수' },
-    { date: '23일', day: '목' },
-    { date: '24일', day: '금' }
-  ];
+  // 현재 날짜부터 5일치 평일 생성
+  const getWeekdays = (): DateButtonProps[] => {
+    const weekdays: DateButtonProps[] = [];
+    const today = new Date();
+    let daysAdded = 0;
 
-  // 스케줄 배열
-  const schedules:ScheduleCardProps[] = [
-    {
-      time: '16:20',
-      availableSeats: 34,
-      waitingCount: 0
-    },
-    {
-      time: '17:20',
-      availableSeats: 36,
-      waitingCount: 0
-    },
-    {
-      time: '18:20',
-      availableSeats: 41,
-      waitingCount: 0
+    while (daysAdded < 5) {
+      const dayOfWeek = today.getDay();
+      if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+        weekdays.push({ date: `${today.getDate()}일`, day: ['일', '월', '화', '수', '목', '금', '토'][dayOfWeek] });
+        daysAdded++;
+      }
+      today.setDate(today.getDate() + 1);
     }
-  ];
+    return weekdays;
+  };
+  const dates = getWeekdays();
 
-  
+  // 스케줄 데이터 가져오기
+  const fetchBusSchedules = async (dateIndex: number, type: 'departure' | 'return') => {
+    setLoading(true);
+    const selectedDate = dates[dateIndex].date.replace('일', '');
+    const today = new Date();
+    const dateCode = `${today.getFullYear()}${(today.getMonth() + 1).toString().padStart(2, '0')}${selectedDate.padStart(2, '0')}`;
+    const url = `/reserve/time_select_proc.php?lineCode=${lineCode}&dateCode=${dateCode}`;
+
+    try {
+      const response = await axios.get(url, { responseType: 'arraybuffer' });
+      const decodedHtml = new TextDecoder('utf-8').decode(response.data);
+      const $ = cheerio.load(decodedHtml);
+
+      const times: ScheduleCardProps[] = [];
+      $('option').each((_, element) => {
+        const text = $(element).text().trim().replace(/\u00A0/g, ' ');
+        const timeMatch = text.match(/(\d{1,2}:\d{2})/);
+        const seatMatch = text.match(/잔여(\d+)석/);
+        const waitingMatch = text.match(/대기(\d+)명/);
+
+        if (timeMatch && seatMatch && waitingMatch) {
+          const time = timeMatch[0];
+          const availableSeats = parseInt(seatMatch[1], 10);
+          const waitingCount = parseInt(waitingMatch[1], 10);
+          const scheduleType = text.includes('등교') ? 'departure' : 'return';
+
+          if (scheduleType === type) {
+            times.push({ time, availableSeats, waitingCount });
+          }
+        }
+      });
+      setSchedules(times);
+    } catch (error) {
+      console.error('Error fetching schedules:', error);
+      alert('네트워크 오류가 발생했습니다.');
+    }
+    setLoading(false);
+  };
+
+  // 날짜 선택 시 스케줄 데이터 업데이트
+  const handleDateSelect = (index: number) => {
+    setSelectedDate(index);
+    fetchBusSchedules(index, tripType);
+  };
+
+  // 등교/하교 버튼 클릭 시 스케줄 데이터 업데이트
+  const handleTripTypeChange = (type: 'departure' | 'return') => {
+    setTripType(type);
+    fetchBusSchedules(selectedDate, type);
+  };
+
+  // 좌석 데이터 가져오기
+  const fetchSeatData = async () => {
+    const url = `/reserve/seat_status.php?lineCode=${lineCode}`;
+    try {
+      const response = await axios.get(url);
+      const seatData: SeatStatusProps[] = response.data.map((seat: any) => ({
+        number: seat.number,
+        status: seat.status as SeatStatus,
+      }));
+      setSeats(seatData);
+    } catch (error) {
+      console.error('Error fetching seat data:', error);
+      alert('좌석 데이터를 가져오는데 실패했습니다.');
+    }
+  };
+
   // 좌석 선택 핸들러
   const handleSeatSelect = (seatNumber: string) => {
-    if (selectedSeat === seatNumber) {
-      // 이미 선택된 좌석을 다시 클릭하면 선택 해제
-      setSelectedSeat(null);
-    }else{
-      setSelectedSeat(seatNumber)}
+    setSelectedSeat(selectedSeat === seatNumber ? null : seatNumber);
   };
 
   const handleCancelAll = () => {
-    setSelectedSeat(null);// 모든 예약 취소 아직 구현안함
+    setSelectedSeat(null);
+  };
+
+  // 좌석 선택 창 열기
+  const openSeatSelection = () => {
+    setSeatSelectionVisible(true);
+    fetchSeatData();
+  };
+
+  const closeSeatSelection = () => {
+    setSeatSelectionVisible(false);
   };
     
     // 좌석 배열 생성 어떻게 불러오는지 아직몰라서 그냥 다 넣음ㅋㅋㅋㅋㅋㅋㅋ
-  const seats: SeatProps[] = [
+  const newseats: SeatProps[] = [
     { seatNumber: '1', initialStatus: 'available', onSelect: handleSeatSelect },
     { seatNumber: '2', initialStatus: 'reserved', onSelect: handleSeatSelect },
     { seatNumber: '3', initialStatus: 'available', onSelect: handleSeatSelect },
@@ -114,54 +175,54 @@ export const SeatSelection: React.FC = () => {
   // 컴포넌트 렌더링
   return (
     <div className={styles.seatSelection}>
-      {/* 헤더 섹션 */}
       <header className={styles.header}>
-        <a href="/BusSchedule" className={styles.backButton}> {/* 뒤로가기 버튼 */}
-          <img src="/img/icon/arrow-left.png" alt="Back" className={styles.backIcon} /> {/* 뒤로가기 아이콘 */}
+        <a href="/BusSchedule" className={styles.backButton}>
+          <img src="/img/icon/arrow-left.png" alt="Back" className={styles.backIcon} />
         </a>
         <h1 className={styles.title}>좌석 선택</h1>
       </header>
 
-      {/* 날짜 선택 섹션 */}
       <section className={styles.dateSection}>
         {dates.map((date, index) => (
           <DateButton
             key={date.date}
             {...date}
             isActive={selectedDate === index}
-            onClick={() => setSelectedDate(index)}
+            onClick={() => handleDateSelect(index)}
           />
         ))}
       </section>
 
-      {/* 스케줄 선택 섹션 */}
       <section className={styles.scheduleSection}>
         <div className={styles.tripType}>
           <button
             className={`${styles.tripButton} ${tripType === 'departure' ? styles.tripButtonActive : ''}`}
-            onClick={() => setTripType('departure')}
-            aria-pressed={tripType === 'departure'}
+            onClick={() => handleTripTypeChange('departure')}
           >
             등교
           </button>
           <button
             className={`${styles.tripButton} ${tripType === 'return' ? styles.tripButtonActive : ''}`}
-            onClick={() => setTripType('return')}
-            aria-pressed={tripType === 'return'}
+            onClick={() => handleTripTypeChange('return')}
           >
             하교
           </button>
         </div>
         <div className={styles.scheduleDivider} /> {/* 스케줄 구분선 */}
         <div className={styles.scheduleCards}>
-          {schedules.map((schedule, index) => (
-            <ScheduleCard
-              key={schedule.time}
-              {...schedule}
-              isActive={selectedSchedule === index}
-              onClick={() => setSelectedSchedule(index)}
-            />
-          ))}
+          {loading ? (
+            <p>좌석을 불러오고 있습니다.</p>
+          ) : schedules.length === 0 ? (
+            <p>스케줄이 없습니다.</p>
+          ) : (
+            schedules.map((schedule, index) => (
+              <ScheduleCard
+                key={index}
+                {...schedule}
+                onSeatSelect={openSeatSelection}
+              />
+            ))
+          )}
         </div>
       </section>
 
@@ -179,17 +240,17 @@ export const SeatSelection: React.FC = () => {
           </div>
           {/* <img src="/steering-wheel.svg" alt="Steering wheel" className={styles.steeringIcon} /> 운전대 아이콘 */}
           <div className={styles.seatGrid}>
-            {Array.from({ length: Math.ceil(seats.length / 2) }, (_, i) => (
+            {Array.from({ length: Math.ceil(newseats.length / 2) }, (_, i) => (
               <div className={styles.pair} key={i}>
                 <Seat
-                  {...seats[i * 2]}
-                  isSelected={selectedSeat === seats[i * 2].seatNumber}
+                  {...newseats[i * 2]}
+                  isSelected={selectedSeat === newseats[i * 2].seatNumber}
                   onSelect={(seatNumber) => handleSeatSelect(seatNumber)}
                 />
-                {seats[i * 2 + 1] && (
+                {newseats[i * 2 + 1] && (
                   <Seat
-                    {...seats[i * 2 + 1]}
-                    isSelected={selectedSeat === seats[i * 2 + 1].seatNumber}
+                    {...newseats[i * 2 + 1]}
+                    isSelected={selectedSeat === newseats[i * 2 + 1].seatNumber}
                     onSelect={(seatNumber) => handleSeatSelect(seatNumber)}
                   />
                 )}
@@ -199,17 +260,11 @@ export const SeatSelection: React.FC = () => {
         </div>
       </section>
 
-      {/* 푸터 섹션 */}
       <footer className={styles.footer}>
         <a href="/Reservations">
-          <button className={styles.confirmButton}>
-            예약 완료
-          </button>
+          <button className={styles.confirmButton}>예약 완료</button>
         </a>
-
-        <button 
-        className={styles.cancelButton}
-        onClick={handleCancelAll}>
+        <button className={styles.cancelButton} onClick={handleCancelAll}>
           전체 취소
         </button>
       </footer>

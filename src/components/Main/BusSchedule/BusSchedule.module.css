@@ -37,7 +37,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 24px;
+  font-size: 19px;
   font-weight: 700;
   margin: 0;
 }
@@ -76,4 +76,10 @@
 
 .noSchedule {
   color: #f61857;
+}
+
+.loadingbar {
+  align-content: center;
+  justify-content: center;
+  text-align: center;
 }
