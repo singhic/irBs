@@ -298,7 +298,7 @@
 }
 /* 최근 예약현황이 존재합니다----------------------------------- */
 .recentBooking {
-  border-radius: 20px;
+  border-radius: 20px 20px 0 0;
   background-color: #fff;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -307,7 +307,18 @@
   color: rgba(56, 56, 56, 0.9);
   font-weight: 700;
   padding: 6px 0 18px;
+  height: 20vh;
+
+  /* 스와이프 애니메이션 */
+  transition: transform 0.2s ease-in-out;
 }
+.recentBooking.swipedUp {
+  height: 100vh;
+  transform: translateY(-80vh);
+  
+}
+
+
 
 .recentBookingIcon {
   aspect-ratio: 1.1;

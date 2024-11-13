@@ -4,6 +4,13 @@ import styles from './MainPage.module.css';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 
+// 스와이프 모듈
+import { useSwipeable } from "react-swipeable";
+// 페이지 이동 모듈 
+import { useNavigate } from "react-router-dom";
+
+
+
 async function fetchValueFromExternalSite(): Promise<string | null> {
   try {
     const response = await axios.get('/passport/list.php');
@@ -23,8 +30,24 @@ const routeData = [
   { destination: '울산', time: '18:10', seats: '(44/41석)' }
 ];
 
+
+  // --------------------------------------------------------------------------------------------------------------------------------
+// 스와이프 할 시  예약내역으로 이동하는 함수
 export const MainPage: React.FC = () => {
   const [userName, setUserName] = useState<string | null>(null);
+  const [isSwipedUp, setIsSwipedUp] = useState(false);
+  const navigate = useNavigate();
+
+  const handlers = useSwipeable({
+    onSwipedUp: () => {
+      setIsSwipedUp(true);
+      setTimeout(() => {
+        navigate("/Reservations");
+      }, 300); // 애니메이션 지속 시간과 동일하게 설정
+    },
+    preventScrollOnSwipe: true,
+    trackMouse: true
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,6 +57,13 @@ export const MainPage: React.FC = () => {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (isSwipedUp) {
+      window.scrollTo(0, 0); // 페이지 맨 위로 스크롤
+    }
+  }, [isSwipedUp]);
+  // --------------------------------------------------------------------------------------------------------------------------------
 
   return (
     <main className={styles.page}>
@@ -138,7 +168,7 @@ export const MainPage: React.FC = () => {
         </button>
       </a>
 
-      <section className={styles.recentBooking}>
+      <section className={`${styles.recentBooking} ${isSwipedUp ? styles.swipedUp : ''}`} {...handlers}>
         <img 
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/fe829013-c35b-4444-ab77-aaf9850d8c8d?placeholderIfAbsent=true" 
           alt="" 
@@ -151,8 +181,9 @@ export const MainPage: React.FC = () => {
           <p className={styles.recentBookingDetails}>
             2024.01.01 07:50 인제대행
           </p>
-        </div>
+         </div>
       </section>
+      
     </main>
   );
 };
