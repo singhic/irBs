@@ -27,7 +27,7 @@ const busRoutes: BusRoute[] = [
 
 const initializeScheduleData = (): { [key: string]: BusScheduleData } => {
   const initialData: { [key: string]: BusScheduleData } = {};
-  busRoutes.forEach((route) => {
+  busRoutes.forEach((route: BusRoute) => {
     initialData[route.value] = { toSchool: ['배차 없음'], fromSchool: ['배차 없음'] };
   });
   return initialData;
@@ -41,78 +41,55 @@ const BusSchedule: React.FC = () => {
     setLoading(true);
     const today = new Date();
     const date = `${today.getFullYear()}${today.getMonth() + 1}${today.getDate()}`;
-  
+
     try {
-    const requests = busRoutes.map(async (route) => {
-      const url = `/reserve/time_select_proc.php?lineCode=${route.value}&dateCode=${date}`;
-      const response = await axios.get(url, { responseType: 'arraybuffer' });
+      const requests = busRoutes.map(async (route) => {
+        const url = `/reserve/time_select_proc.php?lineCode=${route.value}&dateCode=${date}`;
+        const response = await axios.get(url, { responseType: 'arraybuffer' });
 
-      if (response.status === 200) {
-        const decodedHtml = new TextDecoder('utf-8').decode(response.data);
-        const $ = cheerio.load(decodedHtml);
+        if (response.status === 200) {
+          const decodedHtml = new TextDecoder('utf-8').decode(response.data);
+          const $ = cheerio.load(decodedHtml);
 
-        // 등교 시간과 하교 시간 배열
-        const toSchoolTimes: string[] = [];
-        const fromSchoolTimes: string[] = [];
+          const toSchoolTimes: string[] = [];
+          const fromSchoolTimes: string[] = [];
 
-        // 모든 <option> 태그 반복
-        $('option').each((_, element) => {
-          const text = $(element).text().trim().replace(/\u00A0/g, ' ');
-          
-          // 등교 텍스트 확인
-          if (text.includes('등교')) {
+          $('option').each((_, element) => {
+            const text = $(element).text().trim().replace(/\u00A0/g, ' ');
             const timeMatch = text.match(/(\d{1,2}:\d{2})/);
-            if (timeMatch && timeMatch[0]) {
-              toSchoolTimes.push(timeMatch[0]);
-            }
-          }
-        
-          // 하교 텍스트 확인
-          if (text.includes('하교')) {
-            const timeMatch = text.match(/(\d{1,2}:\d{2})/);
-            if (timeMatch && timeMatch[0]) {
-              fromSchoolTimes.push(timeMatch[0]);
-            }
-          }
-        });
-        
-        console.log('Final To School Times:', toSchoolTimes);
-        console.log('Final From School Times:', fromSchoolTimes);
-        
-        
 
-        return {
-          lineCode: route.value,
-          data: {
-            toSchool: toSchoolTimes.length ? toSchoolTimes : ['배차 없음'],
-            fromSchool: fromSchoolTimes.length ? fromSchoolTimes : ['배차 없음'],
-          },
-        };
-      } else {
-        console.log('Failed to fetch data for route', route.value);
-        return {
-          lineCode: route.value,
-          data: { toSchool: ['배차 없음'], fromSchool: ['배차 없음'] },
-        };
-      }
-    });
+            if (text.includes('등교') && timeMatch) toSchoolTimes.push(timeMatch[0]);
+            if (text.includes('하교') && timeMatch) fromSchoolTimes.push(timeMatch[0]);
+          });
 
-    const results = await Promise.all(requests);
-    const newScheduleData = { ...scheduleData };
+          return {
+            lineCode: route.value,
+            data: {
+              toSchool: toSchoolTimes.length ? toSchoolTimes : ['배차 없음'],
+              fromSchool: fromSchoolTimes.length ? fromSchoolTimes : ['배차 없음'],
+            },
+          };
+        } else {
+          return { lineCode: route.value, data: { toSchool: ['배차 없음'], fromSchool: ['배차 없음'] } };
+        }
+      });
 
-    results.forEach((result) => {
-      const { lineCode, data } = result;
-      newScheduleData[lineCode] = data;
-    });
+      const results = await Promise.all(requests);
+      const newScheduleData = { ...scheduleData };
 
-    setScheduleData(newScheduleData);
-  } catch (error) {
-    console.error('Network or server error:', error);
-    alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
-  }
+      results.forEach((result) => {
+        const { lineCode, data } = result;
+        newScheduleData[lineCode] = data;
+      });
 
-  setLoading(false);
-};  
+      setScheduleData(newScheduleData);
+    } catch (error) {
+      console.error('Network error:', error);
+      alert('네트워크 오류가 발생했습니다.');
+    }
+
+    setLoading(false);
+  };
 
   useEffect(() => {
     fetchBusSchedules();
@@ -122,24 +99,16 @@ const BusSchedule: React.FC = () => {
     <section className={styles.scheduleContainer}>
       <header className={styles.scheduleHeader}>
         <a href="/MainPage">
-          <img 
-            src="\img\icon\arrow-left.png" 
-            alt="arrow-left" 
-            className={styles.headerIcon} 
-          />
+          <img src="\img\icon\arrow-left.png" alt="arrow-left" className={styles.headerIcon} />
         </a>
-        <h2 className={styles.headerTitle}>지역</h2>
+        <h2 className={styles.headerTitle}>지역(금일 버스시간표)</h2>
       </header>
       <main className={styles.scheduleGrid}>
         {loading ? (
-          <p>Loading...</p>
+          <p className={styles.loadingbar}>금일 버스시간표를 불러오고 있습니다.</p>
         ) : (
           busRoutes.map((route) => (
-            <ScheduleCard 
-              key={route.value}
-              route={route}
-              schedule={scheduleData[route.value]}
-            />
+            <ScheduleCard key={route.value} route={route} schedule={scheduleData[route.value]} />
           ))
         )}
       </main>

@@ -24,3 +24,6 @@ yarn-error.log*
 
 .cache_ggshield
 irBs.code-workspace
+
+.idea
+.vscode
