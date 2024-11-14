@@ -100,7 +100,8 @@ const Signup: React.FC = () => {
 
     try {
       const response = await axios.post('/passport/cert_check_proc.php', loginData, {
-        headers: {
+        headers: 
+        {
           "Content-Type": `application/x-www-form-urlencoded`,
           "Accept": "application/json",
           "Access-Control-Allow-Origin": `/passport/cert_check_proc.php`,
