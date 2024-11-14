@@ -12,46 +12,6 @@ const UserProfile: React.FC = () => {
   const [phone, setphone] = useState('');
   const [card, setcard] = useState('');
   const [userName, setUserName] = useState<string | null>(null);
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value); // 상태를 업데이트
-  };
-  const handlePasswordReset = async (event: React.FormEvent) => {
-    event.preventDefault();
-    if (newpass !== pass) {
-      alert('비밀번호가 일치하지 않습니다. 다시 확인해 주세요.'); // 새비번 새비번 재입력 확인 
-      return;
-    }
-    if (!newpass || !pass) {
-      alert('변경할 비밀번호를 입력해주세요.'); //아무것도 입력 x
-      return;
-    }
-    const resetData = new URLSearchParams();
-    resetData.append('id',idx);
-    resetData.append('pass',pass);
-    resetData.append('newpass',newpass);
-    
-    try {
-        const response = await axios.post('/passport/update_pass_proc.php', resetData, {
-        headers: {                        
-          "Content-Type": "application/x-www-form-urlencoded",
-          "Accept": "application/json",
-        },
-      });
-      if (response.status === 200 && response.data.status === 'success') {
-        alert(response.data.message);
-        alert("비밀번호가 변경되었습니다.");
-        window.location.href = '/Login';
-        event.preventDefault();
-       
-      } else {
-        alert(response.data.message);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
-    }
-  };
-
 
   // Function to fetch user data from the server // idx값이랑 사용자 이름 값 가져오기
   async function fetchUserData(): Promise<{ idx: string | null; userName: string | null }> {
