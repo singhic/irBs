@@ -13,6 +13,39 @@ const UserProfile: React.FC = () => {
   const [card, setcard] = useState('');
   const [userName, setUserName] = useState<string | null>(null);
 
+  const handlePasswordReset = async (event: React.FormEvent) => { // 비번 버튼 구현 함수
+    event.preventDefault();
+    if (newpass !== pass) {
+      alert('비밀번호가 일치하지 않습니다. 다시 확인해 주세요.');
+      return;
+    }
+    if (!newpass || !pass) {
+      alert('변경할 비밀번호를 입력해주세요.');
+      return;
+    }
+    const resetData = new URLSearchParams();
+    resetData.append('id', idx);
+    resetData.append('pass', pass);
+    resetData.append('newpass', newpass);
+    try {
+      const response = await axios.post('/passport/update_pass_proc.php', resetData, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Accept": "application/json",
+        },
+      });
+      if (response.status === 200 && response.data.status === 'success') {
+        alert("비밀번호가 변경되었습니다.");
+        window.location.href = '/Login';
+      } else {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
+    }
+  };
+  
   // Function to fetch user data from the server // idx값이랑 사용자 이름 값 가져오기
   async function fetchUserData(): Promise<{ idx: string | null; userName: string | null }> {
     try {
