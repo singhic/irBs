@@ -18,8 +18,10 @@ export interface ScheduleCardProps {
   time: string; // 시간
   availableSeats: number; // 사용 가능한 좌석 수
   waitingCount: number; // 대기 인원 수
+  value: string;
+  index: number;
   isActive?: boolean; // 활성화 여부 (선택적)
-  onClick?: () => void; // 클릭 시 호출되는 함수 (선택적)
+  onClick?: (index:number) => void; // 클릭 시 호출되는 함수 (선택적)
 }
 
 // LegendItemProps 인터페이스 정의
