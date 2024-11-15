@@ -1,12 +1,7 @@
-.container {
-    max-width: none !important;
-  }
-  
   .onboardingWrapper {
     background-color: #fff;
     display: flex;
     max-width: 480px;
-    width: 100%;
     padding: 173px 0 0;
     flex-direction: column;
     overflow: hidden;
@@ -52,7 +47,7 @@
     color: rgba(56, 56, 56, 0.9);
     white-space: nowrap;
     margin: 17px 0 -22px;
-    padding: 12px 190px;
+    padding: 12px 130px;
     border: none;
     cursor: pointer;
     transition: opacity 0.2s;
