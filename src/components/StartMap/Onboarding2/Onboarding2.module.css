@@ -1,11 +1,9 @@
   .onboardingWrapper {
     background-color: #fff;
     display: flex;
-    max-width: 480px;
     padding: 173px 0 0;
     flex-direction: column;
     overflow: hidden;
-    margin: 0 auto;
     font: 700 14px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
   }
   

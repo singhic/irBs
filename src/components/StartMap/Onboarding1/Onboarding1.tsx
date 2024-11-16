@@ -18,9 +18,9 @@ const OnboardingInfo: React.FC = () => {
           간편한 내 정보 수정
         </h1>
         <p className={styles.description}>
-          카드번호 변경, 비밀번호 변경에 불편하신가요?
+          카드번호 변경, 비밀번호 변경에 불편하셨나요?
           <br />
-          새로워진 예약 시스템을 이용해보세요.
+          사용자를 위한 간편한 정보 수정 기능을 제공합니다.
         </p>
         <a href='/Penalty'>
         <button 

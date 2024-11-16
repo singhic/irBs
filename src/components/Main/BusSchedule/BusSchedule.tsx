@@ -105,7 +105,10 @@ const BusSchedule: React.FC = () => {
       </header>
       <main className={styles.scheduleGrid}>
         {loading ? (
-          <p className={styles.loadingbar}>금일 버스시간표를 불러오고 있습니다.</p>
+          <p className={styles.loadingbar}>
+            금일 버스시간표를 불러오고 있습니다.<br/>
+            잠시만 기다려주세요.
+          </p>
         ) : (
           busRoutes.map((route) => (
             <ScheduleCard key={route.value} route={route} schedule={scheduleData[route.value]} />

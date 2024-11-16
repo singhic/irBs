@@ -1,15 +1,14 @@
 .onboardingWrapper {
   background-color: #fff;
   display: flex;
-  max-width: 480px;
+
   flex-direction: column;
   overflow: hidden;
-  margin: 0 auto;
   font: 700 14px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
 }
 
 .heroImage {
-  aspect-ratio: 0.72;
+  aspect-ratio: 0.723;
   object-fit: contain;
   object-position: center;
   width: 100%;
