@@ -1,8 +1,24 @@
 {
   "rewrites": [
     {
-      "source": "/:path*", 
-      "destination": "https://bus.inje.ac.kr/:path*"
+      "source": "/login_proc.php", 
+      "destination": "https://bus.inje.ac.kr/login_proc.php"
+    }
+    {
+      "source": "/findPassProc.php", 
+      "destination": "https://bus.inje.ac.kr/findPassProc.php"
+    }
+    {
+      "source": "/reserve/:path*", 
+      "destination": "https://bus.inje.ac.kr/reserve/:path*"
+    }
+    {
+      "source": "/passport/:path*", 
+      "destination": "https://bus.inje.ac.kr/passport/:path*"
+    }
+    {
+      "source": "/location/:path*", 
+      "destination": "https://bus.inje.ac.kr/location/:path*"
     }
   ]
 }
