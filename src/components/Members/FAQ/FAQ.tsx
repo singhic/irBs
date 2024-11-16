@@ -48,8 +48,6 @@ export const FAQ: React.FC = () => {
             onClick={() => toggleFAQ(index)}
           />
         ))}
-        
-        <p className={styles.helpText}>문제가 있으신가요?</p>
       </main>
     </section>
   );

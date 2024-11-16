@@ -1,16 +1,13 @@
 .container {
-    max-width: 480px;
-    width: 100%;
-    margin: 0 auto;
-    font: 700 14px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font: 700 14px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
   }
-  
+
   .heroImage {
-    aspect-ratio: 0.71;
+    aspect-ratio: 0.713;
     object-fit: contain;
     object-position: center;
     width: 100%;
@@ -48,7 +45,7 @@
     color: rgba(56, 56, 56, 0.9);
     white-space: nowrap;
     margin: 17px 0 -22px;
-    padding: 12px 200px;
+    padding: 12px 140px;
     border: none;
     cursor: pointer;
     transition: opacity 0.2s;

@@ -18,8 +18,7 @@ const PenaltySystem: React.FC = () => {
         
         <p className={styles.description}>
           예약 후 탑승을 하지 않는 학우에 불편을 느꼈나요?<br />
-          패널티 시스템으로 불이익을 받을 수 있습니다.<br />
-          자세한 기준은 자주 묻는 질문탭에서 확인 가능합니다.
+          미탑승 시 패널티 시스템으로 불이익을 받을 수 있습니다.<br />
         </p>
 
         <a href='./Onboarding2'>

@@ -15,9 +15,9 @@ const OnboardingPage: React.FC = () => {
           더욱 간편해진 통합 버스 예약 시스템
         </h1>
         <p className={styles.description}>
-          예약, 탑승까지 원스톱으로!<br />
-          버스 예약 후 탑승권 확인에 번거로움없이<br />
-          빠르고 편리하게 탑승하세요.
+          버스 예약부터 탑승까지!<br />
+          번거로움없는 경험 해보실 준비 되셨나요?<br />
+          기존 사용자는 회원가입 없이 바로 시작 가능합니다.
         </p>
         <a href='/Login'>
         <button 

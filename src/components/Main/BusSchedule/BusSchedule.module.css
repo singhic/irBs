@@ -79,7 +79,5 @@
 }
 
 .loadingbar {
-  align-content: center;
-  justify-content: center;
-  text-align: center;
+  grid-column: 1 / -1;
 }
