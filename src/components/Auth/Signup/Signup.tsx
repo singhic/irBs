@@ -227,7 +227,6 @@ const Signup: React.FC = () => {
           onChange={(e) => setCard(e.target.value)}
           className={styles.cardInput}
           placeholder="카드번호를 입력하세요 이즐(구 케시비) 또는 신한카드 후불교통카드 16자리"
-          
         />
         <br/>
         <button type="submit" className={styles.submitButton} onClick={handleSignup}>
