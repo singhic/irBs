@@ -149,7 +149,12 @@ export const SeatSelection: React.FC = () => {
       alert('좌석 데이터를 가져오는데 실패했습니다.');
     }
   };
-  
+
+  useEffect(() => {
+    if (schedules.length > 0) {
+      fetchSeatData(0);
+    }
+  }, [schedules]);
   
   useEffect(() => {
     console.log('Seats state has changed, force re-render');
@@ -231,11 +236,19 @@ export const SeatSelection: React.FC = () => {
     { seatNumber: '44', initialStatus: 'available', onSelect: handleSeatSelect }
   ]);
 
+  const handleScheduleSelect = (index: number) => {
+    setActiveIndex(index);
+  };
+  
+
   const push_result = async (event: React.FormEvent) => {
     event.preventDefault();
   
-    // 확인용 로그 추가
-    console.log("Selected seat:", selectedSeat);  // selectedSeat 상태를 확인
+    // 스케줄이 선택되지 않은 경우
+    if (activeIndex === null) {
+      alert("스케줄을 선택해주세요.");
+      return;
+    }
   
     // 좌석이 선택되지 않은 경우
     if (selectedSeat === null) {
@@ -245,7 +258,7 @@ export const SeatSelection: React.FC = () => {
   
     // 사용자에게 예약 확인을 요청
     const isConfirmed = window.confirm(`좌석 ${selectedSeat}번을 예약하시겠습니까?`);
-    
+  
     // 사용자가 예약을 확인하지 않은 경우
     if (!isConfirmed) {
       alert("예약이 취소되었습니다.");
@@ -281,7 +294,6 @@ export const SeatSelection: React.FC = () => {
       alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
     }
   };
-  
   
   // 컴포넌트 렌더링
   return (
