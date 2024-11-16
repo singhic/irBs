@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 20%;
+  margin-top: 15%;
   font: 700 14px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
 }
 
@@ -19,12 +19,12 @@
   font-size: 24px;
   text-align: center;
   margin-top: 16px;
+  margin-bottom: 15px;
 }
 
 .loginForm {
   display:contents;  
   width: 100%;
-  margin-top: 45px;
 }
 
 .inputField {
