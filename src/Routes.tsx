@@ -46,6 +46,8 @@ const AppRouter = () => {
           <Route path="/UserProfile" element={<UserProfile />} />
           <Route path="/FAQ" element={<FAQ />} />
         </Route>
+
+        <Route path="*" element={<Navigate to="/MainPage" />} />
       </Routes>
     </Router>
   );
