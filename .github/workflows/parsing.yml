@@ -1,12 +1,8 @@
 name: parsing busschedule data
  
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
   schedule:
-      - cron: "0 15 * * *"
+    - cron: "0 15 * * *"
  
 jobs:
   update-busschedule:

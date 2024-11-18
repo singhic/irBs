@@ -14,6 +14,7 @@ const Signup: React.FC = () => {
   const [isFirstCheck, setIsFirstCheck] = useState(false);
   const [isPhone, setIsPhone] = useState(false);
   const [isPhoneCert, setIsPhoneCert] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handlefirstcheck = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
@@ -50,40 +51,50 @@ const Signup: React.FC = () => {
 
   const handlephone = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
-    
+  
     if (!isFirstCheck) {
       alert('학번과 생년월일을 먼저 인증해주세요.');
       return;
     }
-
-    const loginData = new URLSearchParams();
-    loginData.append('idx', idx);
-    loginData.append('phone', phone);
-
-    try {
-      const response = await axios.post('/passport/cert_insert_proc.php', loginData, {
-        headers: {
-          "Content-Type": `application/x-www-form-urlencoded`,
-          "Accept": "application/json",
-          "Access-Control-Allow-Origin": `/passport/cert_insert_proc.php`,
-          'Access-Control-Allow-Credentials': "true",
+  
+    // 로딩 메시지를 보여주기 위해 상태 변경
+    setLoading(true);
+  
+    // 1~2초 딜레이 후 요청 보내기
+    setTimeout(async () => {
+      const loginData = new URLSearchParams();
+      loginData.append('idx', idx);
+      loginData.append('phone', phone);
+  
+      try {
+        const response = await axios.post('/passport/cert_insert_proc.php', loginData, {
+          headers: {
+            "Content-Type": `application/x-www-form-urlencoded`,
+            "Accept": "application/json",
+            "Access-Control-Allow-Origin": `/passport/cert_insert_proc.php`,
+            'Access-Control-Allow-Credentials': "true",
+          }
+        });
+        if (response.status === 200) {
+          console.log(response.data);
+          if (response.data.status === 'success') {
+            alert('인증번호가 전송되었습니다.');
+            setIsPhone(true);
+          } else {
+            console.error("Signup failed:", response.status);
+            alert('정보가 일치하지 않습니다. 다시 확인해주세요.');
+          }
         }
-      });
-      if (response.status === 200) {
-        console.log(response.data);
-        if (response.data.status === 'success') {
-          alert('인증번호가 전송되었습니다.');
-          setIsPhone(true);
-        } else {
-          console.error("Signup failed:", response.status);
-          alert('정보가 일치하지 않습니다. 다시 확인해주세요.');
-        }
+      } catch (error) {
+        console.error("Network or server error:", error);
+        alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
+      } finally {
+        // 로딩 메시지 숨기기
+        setLoading(false);
       }
-    } catch (error) {
-      console.error("Network or server error:", error);
-      alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
-    }
+    }, 1500); // 1.5초 딜레이 (필요에 따라 조정)
   };
+  
 
   const handlephonecert = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
@@ -193,16 +204,26 @@ const Signup: React.FC = () => {
             인증
           </button>
              <br/>
-          <label htmlFor="phone" className={styles['visually-hidden']}>핸드폰번호</label>
-          <input
-            type="tel"
-            id="phone"
-            onChange={(e) => setPhone(e.target.value)}
-            value={phone}
-            className={styles.formInput_phonenum}
-            placeholder="핸드폰번호"
-          />
-           <button type="submit" className={styles.verifyButton3} onClick={handlephone}>
+             <label htmlFor="phone" className={styles['visually-hidden']}>핸드폰번호</label>
+            <input
+              type="tel"
+              id="phone"
+              onChange={(e) => setPhone(e.target.value)}
+              value={phone}
+              className={styles.formInput_phonenum}
+              placeholder="핸드폰번호"
+            />
+
+            {/* 로딩 중 메시지 */}
+            {loading && <p className={styles.loadingMessage}>인증 요청이 완료되었습니다. 잠시만 기다려 주세요...</p>}
+
+            {/* 인증 버튼 */}
+            <button 
+              type="submit" 
+              className={styles.verifyButton3} 
+              onClick={handlephone} 
+              disabled={loading} // 로딩 중에는 버튼 비활성화
+            >
               인증
             </button>
         <div className={styles.verificationGroup}>
