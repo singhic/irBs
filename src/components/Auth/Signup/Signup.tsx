@@ -134,16 +134,16 @@ const Signup: React.FC = () => {
   const handlephonecert = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     
-    if (certCode.length !== 6) {
-      alert('인증번호는 6자리여야 합니다. 다시 입력해주세요.');
-      return;
-    }
-
     if (!isFirstCheck && !isPhone) {
       alert('핸드폰번호를 먼저 인증해주세요.');
       return;
     }
 
+    if (certCode.length !== 6) {
+      alert('인증번호는 6자리여야 합니다. 다시 입력해주세요.');
+      return;
+    }
+    
     if (loading) {
       alert('인증번호 확인 중 입니다. 잠시만 기다려 주세요.');
       return;
