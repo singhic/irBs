@@ -89,7 +89,7 @@ const fetchBusSchedules = async (session: AxiosInstance): Promise<FetchResult[]>
     const results: FetchResult[] = [];
 
     for (const route of busRoutes) {
-      const url = `https://bus.inje.ac.kr/reserve/time_select_proc.php?lineCode=${route.value}&dateCode=${date}`;
+      const url = `https://bus.inje.ac.kr/reserve/time_select_proc.php?lineCode=${route.value}&dateCode=${date+1}`;
       console.log(`Fetching schedule for line ${route.value}: ${url}`);
 
       try {
