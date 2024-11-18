@@ -90,12 +90,14 @@ export const SeatSelection: React.FC = () => {
   const handleDateSelect = (index: number) => {
     setSelectedDate(index);
     fetchBusSchedules(index, tripType);
+    setSelectedSeat(null);
   };
 
   // 등교/하교 버튼 클릭 시 스케줄 데이터 업데이트
   const handleTripTypeChange = (type: 'departure' | 'return') => {
     setTripType(type);
     fetchBusSchedules(selectedDate, type);
+    setSelectedSeat(null);
   };
   
   // 좌석 데이터 업데이트 함수
@@ -187,6 +189,7 @@ export const SeatSelection: React.FC = () => {
     setActiveIndex(index);
     setSeatSelectionVisible(false);
     fetchSeatData(index);
+    setSelectedSeat(null);
   };
 
   const [newseats, setNewSeats] = useState<SeatProps[]>([
