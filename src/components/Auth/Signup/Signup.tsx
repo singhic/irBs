@@ -15,15 +15,33 @@ const Signup: React.FC = () => {
   const [isPhone, setIsPhone] = useState(false);
   const [isPhoneCert, setIsPhoneCert] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [timeoutReached, setTimeoutReached] = useState(false);
+  const [responseMessage, setResponseMessage] = useState('');
 
   const handlefirstcheck = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
-    
+  
+    if (idx.length !== 8 || birth.length !== 6) {
+      alert('학번/사번은 8자리, 생년월일은 6자리여야 합니다. 다시 입력해주세요.');
+      return;
+    }
+  
+    if (loading) {
+      alert('인증 중입니다. 잠시만 기다려 주세요.');
+      return;
+    }
+  
+    setLoading(true);
+  
+    const timeoutId = setTimeout(() => {
+      alert('응답이 평소와 같지 않네요. 잠시만 기다려 주세요.');
+    }, 300);
+  
     const loginData = new URLSearchParams();
     loginData.append('idx', idx);
     loginData.append('birth', birth);
     loginData.append('check', check);
-
+  
     try {
       const response = await axios.post('/passport/select_proc.php', loginData, {
         headers: {
@@ -33,76 +51,109 @@ const Signup: React.FC = () => {
           'Access-Control-Allow-Credentials': "true",
         }
       });
+  
+      // 타임아웃이 발생했다면 응답을 받지 않으므로 경고 메시지에서 탈출
+      clearTimeout(timeoutId); // 타이머 취소
+  
+      // 응답이 오면 정상 응답 처리
+      if (response.status === 200) {
+        console.log(response.data);
+        alert(response.data.message); // 정상 또는 실패 응답 메시지
+      }
+    } catch (error) {
+      clearTimeout(timeoutId); // 타이머 취소
+      console.error("Network or server error:", error);
+      alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.'); // 네트워크 오류 메시지
+    } finally {
+      // 로딩 상태 해제
+      setLoading(false);
+    }
+  };
+  
+
+  const handlephone = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault();
+
+    if (!isFirstCheck) {
+      alert('학번과 생년월일을 먼저 인증해주세요.');
+      return;
+    }
+
+    if (phone.length !== 9) {
+      alert('휴대폰번호는 9자리여야 합니다. 다시 입력해주세요.');
+      return;
+    }
+    
+    if (loading) {
+      alert('인증번호 전송 중 입니다. 잠시만 기다려 주세요.');
+      return;
+    }
+
+    setLoading(true);
+
+    const timeoutId = setTimeout(() => {
+      alert('응답이 평소와 같지 않네요. 잠시만 기다려 주세요.');
+    }, 300);
+
+    const loginData = new URLSearchParams();
+    loginData.append('idx', idx);
+    loginData.append('phone', phone);
+
+    try {
+      const response = await axios.post('/passport/cert_insert_proc.php', loginData, {
+        headers: {
+          "Content-Type": `application/x-www-form-urlencoded`,
+          "Accept": "application/json",
+          "Access-Control-Allow-Origin": `/passport/cert_insert_proc.php`,
+          'Access-Control-Allow-Credentials': "true",
+        }
+      });
+
+      clearTimeout(timeoutId); 
+
       if (response.status === 200) {
         console.log(response.data);
         if (response.data.status === 'success') {
-          alert(response.data.message);
-          setIsFirstCheck(true);
+          alert('인증번호가 전송되었습니다.');
+          setIsPhone(true);
         } else {
-        console.error("School Cert failed:", response.status);
-        alert(response.data.message);
+          clearTimeout(timeoutId); 
+          console.error("Signup failed:", response.status);
+          alert('정보가 일치하지 않습니다. 다시 확인해주세요.');
         }
       }
     } catch (error) {
       console.error("Network or server error:", error);
       alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
+    } finally {
+      // 로딩 상태 해제
+      setLoading(false);
     }
   };
-
-  const handlephone = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    event.preventDefault();
-  
-    if (!isFirstCheck) {
-      alert('학번과 생년월일을 먼저 인증해주세요.');
-      return;
-    }
-  
-    // 로딩 메시지를 보여주기 위해 상태 변경
-    setLoading(true);
-  
-    // 1~2초 딜레이 후 요청 보내기
-    setTimeout(async () => {
-      const loginData = new URLSearchParams();
-      loginData.append('idx', idx);
-      loginData.append('phone', phone);
-  
-      try {
-        const response = await axios.post('/passport/cert_insert_proc.php', loginData, {
-          headers: {
-            "Content-Type": `application/x-www-form-urlencoded`,
-            "Accept": "application/json",
-            "Access-Control-Allow-Origin": `/passport/cert_insert_proc.php`,
-            'Access-Control-Allow-Credentials': "true",
-          }
-        });
-        if (response.status === 200) {
-          console.log(response.data);
-          if (response.data.status === 'success') {
-            alert('인증번호가 전송되었습니다.');
-            setIsPhone(true);
-          } else {
-            console.error("Signup failed:", response.status);
-            alert('정보가 일치하지 않습니다. 다시 확인해주세요.');
-          }
-        }
-      } catch (error) {
-        console.error("Network or server error:", error);
-        alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
-      } finally {
-        // 로딩 메시지 숨기기
-        setLoading(false);
-      }
-    }, 1500); // 1.5초 딜레이 (필요에 따라 조정)
-  };
-  
 
   const handlephonecert = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     
+    if (certCode.length !== 6) {
+      alert('인증번호는 6자리여야 합니다. 다시 입력해주세요.');
+      return;
+    }
+
     if (!isFirstCheck && !isPhone) {
       alert('핸드폰번호를 먼저 인증해주세요.');
       return;
     }
+
+    if (loading) {
+      alert('인증번호 확인 중 입니다. 잠시만 기다려 주세요.');
+      return;
+    }
+
+    setLoading(true);
+
+    const timeoutId = setTimeout(() => {
+      alert('응답이 평소와 같지 않네요. 잠시만 기다려 주세요.');
+    }, 300);
 
     const loginData = new URLSearchParams();
     loginData.append('idx', idx);
@@ -119,12 +170,16 @@ const Signup: React.FC = () => {
           'Access-Control-Allow-Credentials': "true",
         }
       });
+
+      clearTimeout(timeoutId); 
+
       if (response.status === 200) {
         console.log(response.data);
         if (response.data.status === 'success') {
           alert('인증되었습니다.');
           setIsPhoneCert(true);
         } else {
+          clearTimeout(timeoutId); 
           console.error("Phone Cert failed:", response.status);
           alert('인증번호가 일치하지 않습니다. 다시 확인해주세요.');
         }
@@ -132,6 +187,9 @@ const Signup: React.FC = () => {
     } catch (error) {
       console.error("Network or server error:", error);
       alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
+    } finally {
+      // 로딩 상태 해제
+      setLoading(false);
     }
   };
 
@@ -142,6 +200,17 @@ const Signup: React.FC = () => {
         alert('학번, 생년월일, 핸드폰번호 인증을 모두 완료해주세요.');
         return;
       }
+
+      if (loading) {
+        alert('요청을 처리 중 입니다. 잠시만 기다려 주세요.');
+        return;
+      }
+
+      setLoading(true);
+
+      const timeoutId = setTimeout(() => {
+        alert('응답이 평소와 같지 않네요. 잠시만 기다려 주세요.');
+      }, 300);
 
       const loginData = new URLSearchParams();
       loginData.append('phone', phone);
@@ -160,19 +229,27 @@ const Signup: React.FC = () => {
             'Access-Control-Allow-Credentials': "true",
           }
         });
+
+        clearTimeout(timeoutId); 
+
         if (response.status === 200) {
           console.log(response.data);
           if (response.data.status === 'success') {
             alert(response.data.message);
             window.location.href = '/MainPage';
           } else {
+            clearTimeout(timeoutId); 
             console.error("Signup failed:", response.status);
             alert(response.data.message);
           }
         }
       } catch (error) {
+        clearTimeout(timeoutId); 
         console.error("Network or server error:", error);
         alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
+      } finally {
+        // 로딩 상태 해제
+        setLoading(false);
       }
     };
 
@@ -180,50 +257,53 @@ const Signup: React.FC = () => {
     <main className={styles.container}>
       <h1 className={styles.title}>회원가입</h1>
       <form>
-            <label htmlFor="studentId" className={styles['visually-hidden']}>학번/사번</label>
-            <input
-              type="number"
-              id="studentId"
-              onChange={(e) => setIdx(e.target.value)}
-              value={idx}
-              className={styles.formInput}
-              placeholder="학번/사번"
+          <label htmlFor="studentId" className={styles['visually-hidden']}>학번/사번</label>
+          <input
+            type="number"
+            id="studentId"
+            onChange={(e) => setIdx(e.target.value)}
+            value={idx}
+            className={styles.formInput}
+            placeholder="학번/사번"
+          />
 
-            />
-            <br/>   
-              <label htmlFor="birthdate" className={styles['visually-hidden']}>생년월일</label>
-            <input
-              type="number"
-              id="birthdate"
-              onChange={(e) => setBirth(e.target.value)}
-              value={birth}
-              className={styles.formInput2}
-              placeholder="생년월일(주민번호 앞자리)"
-        
-            /> <button type="submit" className={styles.verifyButton} onClick={handlefirstcheck}>
+          <br/>
+
+          <label htmlFor="birthdate" className={styles['visually-hidden']}>생년월일</label>
+          <input
+            type="number"
+            id="birthdate"
+            onChange={(e) => setBirth(e.target.value)}
+            value={birth}
+            className={styles.formInput2}
+            placeholder="생년월일(주민번호 앞자리)"
+          />
+
+          {/* 인증 버튼 */}
+          <button 
+            type="submit" 
+            className={styles.verifyButton} 
+            onClick={handlefirstcheck} 
+            disabled={loading} // 로딩 중에는 버튼 비활성화
+          >
             인증
           </button>
              <br/>
-             <label htmlFor="phone" className={styles['visually-hidden']}>핸드폰번호</label>
-            <input
-              type="tel"
-              id="phone"
-              onChange={(e) => setPhone(e.target.value)}
-              value={phone}
-              className={styles.formInput_phonenum}
-              placeholder="핸드폰번호"
-            />
-
-            {/* 로딩 중 메시지 */}
-            {loading && <p className={styles.loadingMessage}>인증 요청이 완료되었습니다. 잠시만 기다려 주세요...</p>}
-
-            {/* 인증 버튼 */}
-            <button 
-              type="submit" 
-              className={styles.verifyButton3} 
-              onClick={handlephone} 
-              disabled={loading} // 로딩 중에는 버튼 비활성화
-            >
+          <label htmlFor="phone" className={styles['visually-hidden']}>핸드폰번호</label>
+          <input
+            type="tel"
+            id="phone"
+            onChange={(e) => setPhone(e.target.value)}
+            value={phone}
+            className={styles.formInput_phonenum}
+            placeholder="핸드폰번호"
+          />
+           <button
+           type="submit"
+           className={styles.verifyButton3}
+           onClick={handlephone}
+           disabled={loading}
+           >
               인증
             </button>
         <div className={styles.verificationGroup}>
@@ -236,7 +316,12 @@ const Signup: React.FC = () => {
             className={styles.formInput}
             placeholder="인증번호"
           />
-          <button type="submit" className={styles.verifyButton2} onClick={handlephonecert}>
+          <button
+          type="submit"
+          className={styles.verifyButton2}
+          onClick={handlephonecert}
+          disabled={loading}
+          >
               인증
         </button>
         </div>
@@ -250,7 +335,12 @@ const Signup: React.FC = () => {
           placeholder="카드번호를 입력하세요 이즐(구 케시비) 또는 신한카드 후불교통카드 16자리"
         />
         <br/>
-        <button type="submit" className={styles.submitButton} onClick={handleSignup}>
+        <button
+        type="submit"
+        className={styles.submitButton}
+        onClick={handleSignup}
+        disabled={loading}
+        >
           <span>회원가입 완료</span>
         </button>
       </form>
