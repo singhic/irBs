@@ -27,8 +27,10 @@ jobs:
       - name: Run Bus Schedule Parser
         run: BUS_ID=${{secrets.BUS_ID}} BUS_PS=${{secrets.BUS_PS}} npx ts-node busschedule-parser.ts
 
-      - name: Checkout main branch (Ensure we are on the correct branch)
-        run: git checkout main
+      - name: Ensure we are on the correct branch
+        run: |
+          git fetch origin main
+          git checkout main
 
       - name: Commit and Push Updates
         run: |
