@@ -50,9 +50,6 @@ export const ReservationStatus: FC = () => {
         {/* Timeline content */}
       </section>
 
-      <h2 className={styles.seatMapTitle}>예약 좌석 위치</h2>
-      <SeatView/>
-      <hr className={styles.separator} />
 
       <Ticket
         routeName="양산-북정"
