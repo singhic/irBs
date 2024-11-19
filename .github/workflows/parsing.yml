@@ -2,8 +2,8 @@ name: parsing busschedule data
  
 on:
   schedule:
-    - cron: "0 16 * * *"
- 
+      - cron: "0 16 * * *"
+
 jobs:
   update-busschedule:
     runs-on: ubuntu-latest
@@ -16,6 +16,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+
+      - name: Set timezone to KST
+        run: |
+          sudo ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+          echo "Timezone set to KST: $(date)"
 
       - name: Install Dependencies
         run: npm install
