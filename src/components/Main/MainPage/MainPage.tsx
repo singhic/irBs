@@ -6,37 +6,108 @@ import * as cheerio from 'cheerio';
 
 // 스와이프 모듈
 import { useSwipeable } from "react-swipeable";
-// 페이지 이동 모듈 
+// 페이지 이동 모듈
 import { useNavigate } from "react-router-dom";
 
-
-
+// 사용자 이름 가져오기 함수
 async function fetchValueFromExternalSite(): Promise<string | null> {
   try {
     const response = await axios.get('/passport/list.php');
     const html = response.data;
     const $ = cheerio.load(html);
     const value = $('#p_name').attr('value');
-
-    return value || null; // Ensure the return type is string or null
+    return value || null;
   } catch (error) {
-    console.error('Error fetching value:', error);
+    console.error('Error fetching user name:', error);
     return null;
   }
-}// 가져오기
+}
 
-const routeData = [
-  { destination: '동래', time: '16:20', seats: '(44/33석)' },
-  { destination: '울산', time: '18:10', seats: '(44/41석)' }
-];
+// 최근 예약 정보 가져오기 함수
+async function fetchReservation(): Promise<string | null> {
+  try {
+    const response = await axios.get('/index.php');
+    const html = response.data;
+    const $ = cheerio.load(html);
 
+    const reservationElement = $('ul[data-role="listview"] li').first();
+    if (!reservationElement.length) {
+      return null;
+    }
 
-  // --------------------------------------------------------------------------------------------------------------------------------
-// 스와이프 할 시  예약내역으로 이동하는 함수
+    const dateText = reservationElement.find('h2').text().trim();
+    const dateMatch = dateText.match(/(\d+)-(\d+).*?(\d{2}:\d{2})/);
+
+    if (!dateMatch) {
+      return null;
+    }
+
+    const [, month, day, time] = dateMatch;
+    const routeText = reservationElement.find('p').first().text().trim();
+    const route = routeText.split(':').pop()?.trim();
+
+    if (!month || !day || !time || !route) {
+      return null;
+    }
+
+    const now = new Date();
+    let year = now.getFullYear();
+
+    if (Number(month) < now.getMonth() + 1) {
+      year += 1;
+    }
+
+    // 예약 날짜 및 시간 생성
+    const reservationDate = new Date(`${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T${time}:00`);
+
+    // 예약 시간이 지나지 않은 경우만 반환
+    if (reservationDate > now) {
+      return `${year}.${String(month).padStart(2, '0')}.${String(day).padStart(2, '0')} ${time} ${route}`;
+    } else {
+      // 지나간 예약을 건너뛰고 다음 예약을 찾아야 할 경우
+      const nextReservationElement = $('ul[data-role="listview"] li').eq(1); // 두 번째 예약을 가져옴
+      if (!nextReservationElement.length) {
+        return null;
+      }
+
+      const nextDateText = nextReservationElement.find('h2').text().trim();
+      const nextDateMatch = nextDateText.match(/(\d+)-(\d+).*?(\d{2}:\d{2})/);
+      if (!nextDateMatch) {
+        return null;
+      }
+
+      const [, nextMonth, nextDay, nextTime] = nextDateMatch;
+      const nextRouteText = nextReservationElement.find('p').first().text().trim();
+      const nextRoute = nextRouteText.split(':').pop()?.trim();
+
+      const nextReservationDate = new Date(`${year}-${String(nextMonth).padStart(2, '0')}-${String(nextDay).padStart(2, '0')}T${nextTime}:00`);
+
+      if (nextReservationDate > now) {
+        return `${year}.${String(nextMonth).padStart(2, '0')}.${String(nextDay).padStart(2, '0')} ${nextTime} ${nextRoute}`;
+      } else {
+        return null; // 예약이 모두 지나간 경우
+      }
+    }
+  } catch (error) {
+    console.error('Error fetching reservation:', error);
+    return null;
+  }
+}
+
+// ------------------------------------------------------------------------
+// 메인 페이지 컴포넌트
 export const MainPage: React.FC = () => {
   const [userName, setUserName] = useState<string | null>(null);
+  const [recentReservation, setRecentReservation] = useState<string | null>(null);
   const [isSwipedUp, setIsSwipedUp] = useState(false);
   const navigate = useNavigate();
+  const [reservation, setReservation] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const routeData = [
+    { destination: '동래', time: '16:20', seats: '(44/33석)' },
+    { destination: '울산', time: '18:10', seats: '(44/41석)' }
+  ];
 
   const handlers = useSwipeable({
     onSwipedUp: () => {
@@ -48,10 +119,23 @@ export const MainPage: React.FC = () => {
     preventScrollOnSwipe: true,
     trackMouse: true
   });
+
   useEffect(() => {
     const fetchData = async () => {
-      const value = await fetchValueFromExternalSite();
-      setUserName(value); // value is now guaranteed to be string or null
+      const userName = await fetchValueFromExternalSite();
+      const reservation = await fetchReservation();
+      setUserName(userName);
+      setRecentReservation(reservation);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const result = await fetchReservation();
+      setReservation(result);
+      setLoading(false);
     };
 
     fetchData();
@@ -62,55 +146,58 @@ export const MainPage: React.FC = () => {
       window.scrollTo(0, 0); // 페이지 맨 위로 스크롤
     }
   }, [isSwipedUp]);
-  // --------------------------------------------------------------------------------------------------------------------------------
 
   return (
     <main className={styles.page}>
+      {/* 헤더 */}
       <header className={styles.notificationBar}>
         <div className={styles.notificationContent}>
-          <img 
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/3ef9aedfc9b62a5ef5418720705177a18d6ad3a44771951bd8bc03bb620b248e?placeholderIfAbsent=true" 
-            alt="Warning icon" 
-            className={styles.notificationIcon} 
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/3ef9aedfc9b62a5ef5418720705177a18d6ad3a44771951bd8bc03bb620b248e?placeholderIfAbsent=true"
+            alt="Warning icon"
+            className={styles.notificationIcon}
           />
           <p className={styles.notificationText}>
             경고: 패널티 1회(2024.10.15 장유 08:20)
           </p>
         </div>
         <a href='/MyPage'>
-          <img 
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/000f5f913f98483ee512f05f509b6c27a28917768973c443b3543c86a04612d4?placeholderIfAbsent=true" 
-            alt="Settings" 
-            className={styles.settingsIcon} 
+          <img
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/000f5f913f98483ee512f05f509b6c27a28917768973c443b3543c86a04612d4?placeholderIfAbsent=true"
+            alt="Settings"
+            className={styles.settingsIcon}
           />
         </a>
       </header>
 
+      {/* 날씨 카드 */}
       <section className={styles.weatherCard}>
         <div className={styles.weatherInfo}>
           <p className={styles.weatherStatus}>
             금일 캠퍼스 날씨는 맑음입니다.
           </p>
           <h1 className={styles.greeting}>
-            안녕하세요. {userName}님
+            안녕하세요. {userName || '사용자'}님
           </h1>
         </div>
-        <img 
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/e4e208546ef4b7480e5ab6a347461c87993eeabd950ffebecb7912371e49e91a?placeholderIfAbsent=true" 
-          alt="Weather" 
-          className={styles.weatherIcon} 
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/e4e208546ef4b7480e5ab6a347461c87993eeabd950ffebecb7912371e49e91a?placeholderIfAbsent=true"
+          alt="Weather"
+          className={styles.weatherIcon}
         />
       </section>
 
+      {/* 예약 버튼 */}
       <a href='./BusSchedule' className={styles.bookingButton}>
         <span className={styles.bookingText}>예약하기</span>
-        <img 
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/406181a727603b6744c65a734692215707f5036ec231fe2445b98845343e8c94?placeholderIfAbsent=true" 
-          alt="예약하기 버튼" 
-          className={styles.bookingIcon} 
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/406181a727603b6744c65a734692215707f5036ec231fe2445b98845343e8c94?placeholderIfAbsent=true"
+          alt="예약하기 버튼"
+          className={styles.bookingIcon}
         />
       </a>
 
+      {/* 빠른 예약 섹션 */}
       <section className={styles.quickBooking}>
         <h2 className={styles.quickBookingTitle}>빠른 예약하기</h2>
         <div className={styles.quickBookingContent}>
@@ -165,22 +252,29 @@ export const MainPage: React.FC = () => {
         </button>
       </a>
 
+      {/* 최근 예약 섹션 */}
       <section className={`${styles.recentBooking} ${isSwipedUp ? styles.swipedUp : ''}`} {...handlers}>
-        <img 
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/fe829013-c35b-4444-ab77-aaf9850d8c8d?placeholderIfAbsent=true" 
-          alt="" 
-          className={styles.recentBookingIcon} 
-        />
-        <div className={styles.recentBookingContent}>
-          <h2 className={styles.recentBookingTitle}>
-            최근 예약 현황이 존재합니다
-          </h2>
-          <p className={styles.recentBookingDetails}>
-            2024.01.01 07:50 인제대행
-          </p>
-         </div>
-      </section>
-      
+  <img
+    src="https://cdn.builder.io/api/v1/image/assets/TEMP/fe829013-c35b-4444-ab77-aaf9850d8c8d?placeholderIfAbsent=true"
+    alt=""
+    className={styles.recentBookingIcon}
+  />
+  <div className={styles.recentBookingContent}>
+    {loading ? (
+      <h2 className={styles.recentBookingTitle}>
+        열심히 받아오고 있는데, 응답이 평소와 같지 않네요.<br/>잠시만 기다려 주세요.
+      </h2>
+    ) : reservation ? (
+      <>
+        <h2 className={styles.recentBookingTitle}>최근 예약 현황이 존재합니다</h2>
+        <p className={styles.recentBookingDetails}>{reservation}</p>
+      </>
+    ) : (
+      <h2 className={styles.recentBookingTitle}>최근 예약이 존재하지 않습니다</h2>
+    )}
+  </div>
+</section>
+
     </main>
   );
 };
