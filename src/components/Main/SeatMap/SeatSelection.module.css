@@ -258,6 +258,7 @@
   align-items: center; /* 세로 방향 가운데 정렬 */
   flex-direction: column; /* 세로로 정렬 */
   width: 17vw;
+  max-width:90px;
   aspect-ratio: 1 / 1; /* 1:1 비율 유지 */
 }
 .seatImg{

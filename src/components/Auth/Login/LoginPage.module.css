@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 15%;
+  height: 100vh;
   font: 700 14px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
 }
 
