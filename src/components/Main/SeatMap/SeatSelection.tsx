@@ -388,7 +388,7 @@ export const SeatSelection: React.FC = () => {
       </section>
 
       <footer className={styles.footer}>
-          <button className={styles.confirmButton} onClick={push_result}>예약 완료</button>
+          <button className={styles.confirmButton} onClick={push_result}>예약하기</button>
       </footer>
     </div>
   );
