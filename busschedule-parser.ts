@@ -82,12 +82,21 @@ const login = async (): Promise<AxiosInstance | null> => {
 // 버스 스케줄 파싱 함수
 const fetchBusSchedules = async (session: AxiosInstance): Promise<FetchResult[]> => {
     const today = new Date();
-    const year = String(today.getFullYear());
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
+    // 현재 날짜에 하루를 더함 (KST 기준으로 조정하려면 9시간 추가 후 계산)
+    const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
+    
+    // 연도, 월, 일 계산
+    const year = String(tomorrow.getFullYear());
+    const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
+    const day = String(tomorrow.getDate()).padStart(2, '0');
+    
+    // 원하는 형식으로 날짜 조합
     const date = `${year}${month}${day}`;
+    
+    console.log(`Adjusted date for schedule: ${date}`);
+    
     const results: FetchResult[] = [];
-
+    
     for (const route of busRoutes) {
       const url = `https://bus.inje.ac.kr/reserve/time_select_proc.php?lineCode=${route.value}&dateCode=${date}`;
       console.log(`Fetching schedule for line ${route.value}: ${url}`);
