@@ -21,17 +21,17 @@
   .title {
     color: #000;
     text-align: center;
-    margin-top: 16px;
+    margin-top: 20px;
     font: 700 24px Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif;
   }
   
   .movePage{
-    padding-bottom: 47px;
-    height: 10vh;
+    padding: 10px;
+    height: 13vh;
     width: 100%;
       /* 스와이프 애니메이션 */
 
-  transition: transform 3s ease-in-out;
+    transition: transform 3s ease-in-out;
   }
   .movePage .swipedDown {
     height: 100vh;
