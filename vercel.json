@@ -19,6 +19,10 @@
     {
       "source": "/location/:path*", 
       "destination": "https://bus.inje.ac.kr/location/:path*"
+    },
+    {
+      "source": "/index.php", 
+      "destination": "https://bus.inje.ac.kr/index.php"
     }
   ]
 }
