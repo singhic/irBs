@@ -102,16 +102,14 @@ export const MainPage: React.FC = () => {
         />
       </section>
 
-      <button className={styles.bookingButton}>
-        <a href='./BusSchedule'>
+      <a href='./BusSchedule' className={styles.bookingButton}>
         <span className={styles.bookingText}>예약하기</span>
         <img 
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/406181a727603b6744c65a734692215707f5036ec231fe2445b98845343e8c94?placeholderIfAbsent=true" 
           alt="예약하기 버튼" 
           className={styles.bookingIcon} 
         />
-        </a>
-      </button>
+      </a>
 
       <section className={styles.quickBooking}>
         <h2 className={styles.quickBookingTitle}>빠른 예약하기</h2>
