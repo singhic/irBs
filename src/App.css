@@ -1,8 +1,11 @@
 .container {
   width: 100%;
-  min-width: 360px;
-  /* box-sizing: border-box;  */
-  /* justify-content: center;  */
+  max-width: 800px; /* 최대 너비를 1200px로 제한 */
+  margin: 0 auto; /* 여백이 생기면 가운데 정렬 */
+  justify-content: center; 
+  /* 수평으로 가운데 정렬 */
+  /* align-items: center; 수직으로 가운데 정렬 */
+  box-sizing: border-box;
 }
 
 .App {
