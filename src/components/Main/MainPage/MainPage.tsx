@@ -177,7 +177,7 @@ export const MainPage: React.FC = () => {
             금일 캠퍼스 날씨는 맑음입니다.
           </p>
           <h1 className={styles.greeting}>
-            안녕하세요. {userName || '사용자'}님
+            안녕하세요. {userName ? userName+'님' : ''}
           </h1>
         </div>
         <img
@@ -262,7 +262,7 @@ export const MainPage: React.FC = () => {
   <div className={styles.recentBookingContent}>
     {loading ? (
       <h2 className={styles.recentBookingTitle}>
-        열심히 받아오고 있는데, 응답이 평소와 같지 않네요.<br/>잠시만 기다려 주세요.
+        열심히 받아오고 있는데<br/>응답이 평소와 같지 않네요.<br/>잠시만 기다려 주세요.
       </h2>
     ) : reservation ? (
       <>
