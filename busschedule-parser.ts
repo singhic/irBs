@@ -82,18 +82,18 @@ const login = async (): Promise<AxiosInstance | null> => {
 // 버스 스케줄 파싱 함수
 const fetchBusSchedules = async (session: AxiosInstance): Promise<FetchResult[]> => {
     const today = new Date();
-    // 현재 날짜에 하루를 더함 (KST 기준으로 조정하려면 9시간 추가 후 계산)
+    // 현재 날짜에 하루를 더함 (KST 기준으로 9시간 추가 후 하루 계산)
     const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
     
     // 연도, 월, 일 계산
-    const year = String(tomorrow.getFullYear());
-    const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
-    const day = String(tomorrow.getDate()).padStart(2, '0');
+    const year = tomorrow.getFullYear().toString();
+    const month = (tomorrow.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 +1 필요
+    const day = tomorrow.getDate().toString().padStart(2, '0'); // 날짜를 2자리로 맞춤
     
     // 원하는 형식으로 날짜 조합
     const date = `${year}${month}${day}`;
     
-    console.log(`Adjusted date for schedule: ${date}`);
+    console.log(`Adjusted date for schedule: ${date}`); // 여기서 20241120 형식이 출력돼야 함
     
     const results: FetchResult[] = [];
     
