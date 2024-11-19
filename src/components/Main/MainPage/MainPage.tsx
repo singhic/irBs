@@ -262,7 +262,7 @@ export const MainPage: React.FC = () => {
   <div className={styles.recentBookingContent}>
     {loading ? (
       <h2 className={styles.recentBookingTitle}>
-        열심히 받아오고 있는데<br/>응답이 평소와 같지 않네요.<br/>잠시만 기다려 주세요.
+        열심히 받아오고 있는데<br/>응답이 평소와 같지 않네요.
       </h2>
     ) : reservation ? (
       <>
