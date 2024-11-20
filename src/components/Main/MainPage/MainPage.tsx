@@ -114,7 +114,7 @@ export const MainPage: React.FC = () => {
       setIsSwipedUp(true);
       setTimeout(() => {
         navigate("/Reservations");
-      }, 300); // 애니메이션 지속 시간과 동일하게 설정
+      }, 100); // 애니메이션 지속 시간과 동일하게 설정
     },
     preventScrollOnSwipe: true,
     trackMouse: true,
