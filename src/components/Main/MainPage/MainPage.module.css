@@ -302,7 +302,7 @@
 /* 최근 예약현황이 존재합니다----------------------------------- */
 .recentBooking {
   position: fixed; /* 화면 하단에 고정 */
-  bottom: 0; /* 하단에 위치 */
+  bottom: 0%; /* 하단에 위치 */
   width: 100%; /* 전체 너비를 차지하도록 설정 */
   max-width: 500px;
   border-radius: 20px 20px 0 0;
