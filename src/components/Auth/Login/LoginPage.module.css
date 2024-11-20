@@ -1,11 +1,11 @@
 .loginContainer {
   background: #fff;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  font: 700 14px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
+  height: 90vh;
+  font: 700 14px "Noto Sans KR", -apple-system, Roboto, Helvetica, sans-serif;
 }
 
 .logo {
@@ -23,7 +23,7 @@
 }
 
 .loginForm {
-  display:contents;  
+  display: contents;
   width: 100%;
 }
 
@@ -62,7 +62,6 @@
 }
 
 .loginButton {
-
   width: 250px;
   margin-top: 15px;
   padding: 14px;
@@ -83,11 +82,10 @@
 }
 
 .loginButtonText {
-  position:relative;
+  position: relative;
   z-index: 1;
   text-align: center;
-  font-size:12px;
-  
+  font-size: 12px;
 }
 
 .helpLinks {
