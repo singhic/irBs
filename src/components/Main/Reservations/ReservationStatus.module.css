@@ -1,177 +1,173 @@
 .container {
-    /* max-width: none !important; */
-    background: #fff;
-    display: flex;
-    width: 100%;
-    
-    flex-direction: column;
-    overflow: hidden;
-    align-items: center;
-    /* margin: 0 auto; */
+  /* max-width: none !important; */
+  background: #fff;
+  display: flex;
+  width: 100%;
 
-  }
-  
-  .logo {
-    aspect-ratio: 3.5;
-    object-fit: contain;
-    object-position: center;
-    width: 35px;
-  }
-  
-  .title {
-    color: #000;
-    text-align: center;
-    margin-top: 20px;
-    font: 700 24px Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif;
-  }
-  
-  .movePage{
-    padding: 10px;
-    height: 13vh;
-    width: 100%;
-      /* 스와이프 애니메이션 */
+  flex-direction: column;
+  overflow: hidden;
+  align-items: center;
+  /* margin: 0 auto; */
+}
 
-    transition: transform 3s ease-in-out;
-  }
-  .movePage .swipedDown {
-    height: 100vh;
-    transform: translateY(-90vh);
-  }
+.logo {
+  aspect-ratio: 3.5;
+  object-fit: contain;
+  object-position: center;
+  width: 35px;
+}
 
+.title {
+  color: #000;
+  text-align: center;
+  margin-top: 20px;
+  font: 700 24px Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif;
+}
 
-  .busLayout {
-    aspect-ratio: 1.20;
-    object-fit: contain;
-    object-position: center;
-    width: 98%;
-    align-self: stretch;
+.movePage {
+  padding: 10px;
+  height: 13vh;
+  width: 100%;
+  /* 스와이프 애니메이션 */
 
-  }
-  
-  .timelineContainer {
-    align-self: stretch;
-    display: flex;
-    margin-top: 15px;
-    gap: 2px;
-    color: #000;
-    text-align: center;
-  }
-  
-  .timelineWrapper {
-    display: flex;
-    margin-right: -94px;
-    width: 10%;
-    flex-direction: column;
-    align-items: start;
-  }
-  
-  .duration {
-    display: flex;
-    margin-top: 6px;
-    font-size: 11px;
-  }
-  
-  .durationText {
-    z-index: 10;
-    border-radius: 20px;
-    background-color: rgba(176, 224, 230, 0.9);
-    margin: auto -194px auto 0;
-    padding: -4px 70px 0;
-  }
-  
-  .durationDot {
-    background-color: rgba(176, 224, 230, 0.9);
-    border-radius: 50%;
-    display: flex;
-    width: 20px;
-    height: 20px;
-  }
-  
-  .minutes {
-    font-size: 11px;
-    align-self: end;
-    margin-top: 24px;
-    flex-basis: auto;
-  }
-  
-  .locationContainer {
-    display: flex;
-    margin-top: 5px;
-    width: 90%;
-    align-items: start;
-    gap: 20px;
-    justify-content: space-between;
+  transition: transform 3s ease-in-out;
+}
+.movePage .swipedDown {
+  height: 100vh;
+  transform: translateY(-90vh);
+}
 
-  }
-  
-  .locationTime {
-    font: 400 15px Niramit, sans-serif;
-  }
-  
-  .locationName {
-    align-self: center;
-    font: 400 11px Niramit, sans-serif;
-  }
-  
-  .ticketContainer {
-    border-radius: 20px;
-    background-color: #f3f4f6;
-    display: flex;
-    margin-top: 34px;
-    width: 85%;
-    align-items: center;
-    gap: 2px;
-    font-family: Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif;
-    color: #000;
-    text-align: center;
-    justify-content: space-evenly;
-    margin: 2% ;
-  }
-  .ticketB {
-    display: flex; /* Flexbox 사용 */
-    flex-direction: row; /* 기본값이지만 명시적으로 설정 */
-    justify-content: flex-start; /* 자식 요소들을 왼쪽 정렬 (필요에 따라 변경 가능) */
-    align-items: center; /* 자식 요소들을 수직으로 가운데 정렬 */
-    margin: 0 5%;
-  }
-  
-  .ticketInfo {
-    align-self: stretch;
-    display: flex;
-    flex-direction: column;
-    font-weight: 700;
-    margin:  0 13px;
-    justify-content: center; 
-  }
-  
-  .routeName {
-    font-size: 30px;
-    color: rgba(56, 56, 56, 0.9);
-    margin:2px;
-  }
-  
-  .departureTime {
-    font-size: 15px;
-    margin: 0px;
-    color: rgba(56, 56, 56, 0.9);
-  }
-  
-  .seatNumber {
-    font-size: 30px;
-    font-weight: 700;
-    align-self: stretch;
-    margin: auto 0;
-    color: rgba(56, 56, 56, 0.9);
-  }
-  
-  .ticketDivider {
-    align-self: stretch;
-    width: 1px;
-    height: 130px;
-    border: 1px dashed rgba(0, 0, 0, 0.2);
-  }
-  
-  .cancle {
-    margin: 50px 10px;
-    color: #fb3c3c;
-  }
+.busLayout {
+  aspect-ratio: 1.2;
+  object-fit: contain;
+  object-position: center;
+  width: 98%;
+  align-self: stretch;
+}
+
+.timelineContainer {
+  align-self: stretch;
+  display: flex;
+  margin-top: 15px;
+  gap: 2px;
+  color: #000;
+  text-align: center;
+}
+
+.timelineWrapper {
+  display: flex;
+  margin-right: -94px;
+  width: 10%;
+  flex-direction: column;
+  align-items: start;
+}
+
+.duration {
+  display: flex;
+  margin-top: 6px;
+  font-size: 11px;
+}
+
+.durationText {
+  z-index: 10;
+  border-radius: 20px;
+  background-color: rgba(176, 224, 230, 0.9);
+  margin: auto -194px auto 0;
+  padding: -4px 70px 0;
+}
+
+.durationDot {
+  background-color: rgba(176, 224, 230, 0.9);
+  border-radius: 50%;
+  display: flex;
+  width: 20px;
+  height: 20px;
+}
+
+.minutes {
+  font-size: 11px;
+  align-self: end;
+  margin-top: 24px;
+  flex-basis: auto;
+}
+
+.locationContainer {
+  display: flex;
+  margin-top: 5px;
+  width: 90%;
+  align-items: start;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.locationTime {
+  font: 400 15px Niramit, sans-serif;
+}
+
+.locationName {
+  align-self: center;
+  font: 400 11px Niramit, sans-serif;
+}
+
+.ticketContainer {
+  border-radius: 20px;
+  background-color: #f3f4f6;
+  display: flex;
+  margin-top: 34px;
+  width: 85%;
+  align-items: center;
+  gap: 2px;
+  font-family: Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif;
+  color: #000;
+  text-align: center;
+  justify-content: space-evenly;
+  margin: 2%;
+}
+.ticketB {
+  display: flex; /* Flexbox 사용 */
+  flex-direction: row; /* 기본값이지만 명시적으로 설정 */
+  justify-content: flex-start; /* 자식 요소들을 왼쪽 정렬 (필요에 따라 변경 가능) */
+  align-items: center; /* 자식 요소들을 수직으로 가운데 정렬 */
+  margin: 0 5%;
+}
+
+.ticketInfo {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  margin: 0 13px;
+  justify-content: center;
+}
+
+.routeName {
+  font-size: 30px;
+  color: rgba(56, 56, 56, 0.9);
+  margin: 2px;
+}
+
+.departureTime {
+  font-size: 15px;
+  margin: 0px;
+  color: rgba(56, 56, 56, 0.9);
+}
+
+.seatNumber {
+  font-size: 30px;
+  font-weight: 700;
+  align-self: stretch;
+  margin: auto 0;
+  color: rgba(56, 56, 56, 0.9);
+}
+
+.ticketDivider {
+  align-self: stretch;
+  width: 1px;
+  height: 130px;
+  border: 1px dashed rgba(0, 0, 0, 0.2);
+}
+
+.cancle {
+  margin: 50px 10px;
+  color: #fb3c3c;
+}
