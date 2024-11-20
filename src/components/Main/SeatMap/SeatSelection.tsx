@@ -146,7 +146,7 @@ export const SeatSelection: React.FC = () => {
         if (seatNumber >= 1 && seatNumber <= 44) {
           const seatElement = $(
             ".ui-grid-d .ui-block-a, .ui-block-b, .ui-block-d, .ui-block-e"
-          ).eq(seatNumber - 1);
+          ).eq(seatNumber);
           const seatStatus = seatElement.find("a").text().trim();
 
           if (seatStatus === "X") {
