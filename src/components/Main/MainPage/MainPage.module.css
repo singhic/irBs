@@ -320,7 +320,7 @@
 }
 
 .recentBooking.swipedUp {
-  bottom:0%;
+  bottom: -15vh;
   height: 100vh;
   transform: translateY(-85vh);
 }
