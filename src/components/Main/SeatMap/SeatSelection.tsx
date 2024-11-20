@@ -243,6 +243,12 @@ export const SeatSelection: React.FC = () => {
       // 예약 성공 시
       if (response.status === 200 && response.data.status === "success") {
         alert(response.data.message);
+
+        // 예약 성공 후 좌석 데이터를 다시 불러옴
+        if (activeIndex !== null && schedules.length > 0) {
+          await fetchSeatData(activeIndex); // 현재 활성화된 스케줄의 좌석 상태를 다시 가져오기
+          setSelectedSeat(null);
+        }
       } else {
         // 예약 실패 시
         alert(response.data.message);
