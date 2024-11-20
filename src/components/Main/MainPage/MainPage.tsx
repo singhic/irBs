@@ -114,7 +114,7 @@ export const MainPage: React.FC = () => {
       setIsSwipedUp(true);
       setTimeout(() => {
         navigate("/Reservations");
-      }, 100); // 애니메이션 지속 시간과 동일하게 설정
+      }, 300); // 애니메이션 지속 시간과 동일하게 설정
     },
     preventScrollOnSwipe: true,
     trackMouse: true,
@@ -233,8 +233,8 @@ export const MainPage: React.FC = () => {
           <a className={styles.noUnderline} href="https://www.inje.ac.kr/kor/campus-life/welfare-0104.asp">  
             <li>🔔시간예약제 관련 안내</li>
           </a>
-
         </ul>
+
         {/* ----------------------------------------------------------------- */}
         
         <hr className={styles.noticeDivider} />
@@ -255,26 +255,26 @@ export const MainPage: React.FC = () => {
 
       {/* 최근 예약 섹션 */}
       <section className={`${styles.recentBooking} ${isSwipedUp ? styles.swipedUp : ''}`} {...handlers}>
-  <img
-    src="https://cdn.builder.io/api/v1/image/assets/TEMP/fe829013-c35b-4444-ab77-aaf9850d8c8d?placeholderIfAbsent=true"
-    alt=""
-    className={styles.recentBookingIcon}
-  />
-  <div className={styles.recentBookingContent}>
-    {loading ? (
-      <h2 className={styles.recentBookingTitle}>
-        열심히 받아오고 있는데<br/>응답이 평소와 같지 않네요.
-      </h2>
-    ) : reservation ? (
-      <>
-        <h2 className={styles.recentBookingTitle}>최근 예약 현황이 존재합니다</h2>
-        <p className={styles.recentBookingDetails}>{reservation}</p>
-      </>
-    ) : (
-      <h2 className={styles.recentBookingTitle}>최근 예약이 존재하지 않습니다</h2>
-    )}
-  </div>
-</section>
+        <img
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/fe829013-c35b-4444-ab77-aaf9850d8c8d?placeholderIfAbsent=true"
+          alt=""
+          className={styles.recentBookingIcon}
+        />
+        <div className={styles.recentBookingContent}>
+          {loading ? (
+            <h2 className={styles.recentBookingTitle}>
+              열심히 받아오고 있는데<br/>응답이 평소와 같지 않네요.
+            </h2>
+          ) : reservation ? (
+            <>
+              <h2 className={styles.recentBookingTitle}>최근 예약 현황이 존재합니다</h2>
+              <p className={styles.recentBookingDetails}>{reservation}</p>
+            </>
+          ) : (
+            <h2 className={styles.recentBookingTitle}>최근 예약이 존재하지 않습니다</h2>
+          )}
+        </div>
+      </section>
 
     </main>
   );
