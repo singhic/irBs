@@ -200,14 +200,18 @@ export const SeatSelection: React.FC = () => {
     // 스케줄이 선택되지 않은 경우
     if (activeIndex === null) {
       alert("스케줄을 선택해주세요.");
+      setSelectedSeat(null);
       return;
     }
 
     // 좌석이 선택되지 않은 경우
     if (!seatNumber) {
       alert("좌석을 선택해주세요.");
+      setSelectedSeat(null);
       return;
     }
+
+    setSelectedSeat(seatNumber);
 
     // 사용자에게 예약 확인 요청
     const isConfirmed = window.confirm(
@@ -217,6 +221,7 @@ export const SeatSelection: React.FC = () => {
     // 사용자가 예약을 확인하지 않은 경우
     if (!isConfirmed) {
       alert("예약이 취소되었습니다.");
+      setSelectedSeat(null);
       return;
     }
 
@@ -252,9 +257,11 @@ export const SeatSelection: React.FC = () => {
       } else {
         // 예약 실패 시
         alert(response.data.message);
+        setSelectedSeat(null);
       }
     } catch (error) {
       console.error("Error:", error);
+      setSelectedSeat(null);
       alert("네트워크 오류가 발생했습니다. 다시 시도해주세요.");
     }
   };
