@@ -1,28 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import * as cheerio from 'cheerio';
-import styles from './SeatSelection.module.css';
-import { Seat } from './Seat.tsx';
-import { DateButton } from './DateButton.tsx';
-import { ScheduleCard } from './ScheduleCard.tsx';
-import { LegendItem } from './LegendItem.tsx';
-import { DateButtonProps, ScheduleCardProps, SeatProps, SeatStatusProps } from './types.ts';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import * as cheerio from "cheerio";
+import styles from "./SeatSelection.module.css";
+import { Seat } from "./Seat.tsx";
+import { DateButton } from "./DateButton.tsx";
+import { ScheduleCard } from "./ScheduleCard.tsx";
+import { LegendItem } from "./LegendItem.tsx";
+import {
+  DateButtonProps,
+  ScheduleCardProps,
+  SeatProps,
+  SeatStatusProps,
+} from "./types.ts";
 
 type SeatStatus = "available" | "reserved" | "selected";
 
 export const SeatSelection: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(0);
-  const [tripType, setTripType] = useState<'departure' | 'return'>('departure');
+  const [tripType, setTripType] = useState<"departure" | "return">("departure");
   const [schedules, setSchedules] = useState<ScheduleCardProps[]>([]);
   const [selectedSeat, setSelectedSeat] = useState<string | null>(null);
   const [seats, setSeats] = useState<SeatStatusProps[]>([]);
   const [loading, setLoading] = useState(false);
   const [seatSelectionVisible, setSeatSelectionVisible] = useState(false);
-  const lineCode = new URLSearchParams(window.location.search).get('lineCode') || 'defaultCode';
+  const lineCode =
+    new URLSearchParams(window.location.search).get("lineCode") ||
+    "defaultCode";
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [busCode, setBusCode] = useState<string>(''); // busCode 상태 변수
+  const [busCode, setBusCode] = useState<string>(""); // busCode 상태 변수
   const [seat, setSeat] = useState<number | null>(null); // 선택된 좌석의 index
-  
+
   // 현재 날짜부터 5일치 평일 생성
   const getWeekdays = (): DateButtonProps[] => {
     const weekdays: DateButtonProps[] = [];
@@ -32,7 +39,10 @@ export const SeatSelection: React.FC = () => {
     while (daysAdded < 5) {
       const dayOfWeek = today.getDay();
       if (dayOfWeek !== 0 && dayOfWeek !== 6) {
-        weekdays.push({ date: `${today.getDate()}일`, day: ['일', '월', '화', '수', '목', '금', '토'][dayOfWeek] });
+        weekdays.push({
+          date: `${today.getDate()}일`,
+          day: ["일", "월", "화", "수", "목", "금", "토"][dayOfWeek],
+        });
         daysAdded++;
       }
       today.setDate(today.getDate() + 1);
@@ -42,46 +52,54 @@ export const SeatSelection: React.FC = () => {
   const dates = getWeekdays();
 
   // 스케줄 데이터 가져오기
-  const fetchBusSchedules = async (dateIndex: number, type: 'departure' | 'return') => {
+  const fetchBusSchedules = async (
+    dateIndex: number,
+    type: "departure" | "return"
+  ) => {
     setLoading(true);
-    const selectedDate = dates[dateIndex].date.replace('일', '');
+    const selectedDate = dates[dateIndex].date.replace("일", "");
     const today = new Date();
-    const dateCode = `${today.getFullYear()}${(today.getMonth() + 1).toString().padStart(2, '0')}${selectedDate.padStart(2, '0')}`;
+    const dateCode = `${today.getFullYear()}${(today.getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}${selectedDate.padStart(2, "0")}`;
     const url = `/reserve/time_select_proc.php?lineCode=${lineCode}&dateCode=${dateCode}`;
-  
+
     try {
-      const response = await axios.get(url, { responseType: 'arraybuffer' });
-      const decodedHtml = new TextDecoder('utf-8').decode(response.data);
+      const response = await axios.get(url, { responseType: "arraybuffer" });
+      const decodedHtml = new TextDecoder("utf-8").decode(response.data);
       const $ = cheerio.load(decodedHtml);
-  
+
       const times: ScheduleCardProps[] = [];
-      $('option').each((_, element) => {
-        const value = $(element).attr('value') || '';
-        const text = $(element).text().trim().replace(/\u00A0/g, ' ');
+      $("option").each((_, element) => {
+        const value = $(element).attr("value") || "";
+        const text = $(element)
+          .text()
+          .trim()
+          .replace(/\u00A0/g, " ");
         const timeMatch = text.match(/(\d{1,2}:\d{2})/);
         const seatMatch = text.match(/잔여(\d+)석/);
         const waitingMatch = text.match(/대기(\d+)명/);
-  
+
         if (timeMatch && seatMatch && waitingMatch) {
           const time = timeMatch[0];
           const availableSeats = parseInt(seatMatch[1], 10);
           const waitingCount = parseInt(waitingMatch[1], 10);
-          const scheduleType = text.includes('등교') ? 'departure' : 'return';
-  
+          const scheduleType = text.includes("등교") ? "departure" : "return";
+
           if (scheduleType === type) {
             // value 값도 함께 추가
-            times.push({ time, availableSeats, waitingCount, value});
+            times.push({ time, availableSeats, waitingCount, value });
           }
         }
       });
       setSchedules(times);
     } catch (error) {
-      console.error('Error fetching schedules:', error);
-      alert('네트워크 오류가 발생했습니다.');
+      console.error("Error fetching schedules:", error);
+      alert("네트워크 오류가 발생했습니다.");
     }
     setLoading(false);
   };
-  
+
   useEffect(() => {
     fetchBusSchedules(selectedDate, tripType);
   }, []);
@@ -94,22 +112,22 @@ export const SeatSelection: React.FC = () => {
   };
 
   // 등교/하교 버튼 클릭 시 스케줄 데이터 업데이트
-  const handleTripTypeChange = (type: 'departure' | 'return') => {
+  const handleTripTypeChange = (type: "departure" | "return") => {
     setTripType(type);
     fetchBusSchedules(selectedDate, type);
     setSelectedSeat(null);
   };
-  
+
   // 좌석 데이터 업데이트 함수
   const fetchSeatData = async (index: number) => {
     const scheduleItem = schedules[index];
     const timeCode = scheduleItem?.value;
-  
+
     if (!timeCode) {
-      alert('유효한 시간 코드가 없습니다.');
+      alert("유효한 시간 코드가 없습니다.");
       return;
     }
-  
+
     const url = `/reserve/select_seat.php?lineCode=${lineCode}&timeCode=${timeCode}`;
     try {
       const response = await axios.get(url);
@@ -120,52 +138,47 @@ export const SeatSelection: React.FC = () => {
       if (busCodeMatch) {
         setBusCode(busCodeMatch[1]); // 첫 번째 숫자 117201 추출하여 busCode 상태에 저장
       }
-  
+
       // 좌석 상태를 업데이트하기 위한 새로운 배열
       const updatedSeats = newseats.map((seat) => {
         const seatNumber = parseInt(seat.seatNumber); // 좌석 번호를 숫자로 변환
 
-        // UI에서의 좌석 번호는 1번부터 시작하므로 seatNumber와 DOM의 인덱스를 정확히 매칭
         if (seatNumber >= 1 && seatNumber <= 44) {
-          // DOM에서 해당 좌석의 상태를 가져옴
-          const seatElement = $('.ui-grid-d .ui-block-a, .ui-block-b, .ui-block-d, .ui-block-e').eq(seatNumber + 1 - 1);
-          const seatStatus = seatElement.find('a').text().trim(); // "X" 상태 확인
-  
-          // 상태를 "reserved" 또는 "available"로 설정
+          const seatElement = $(
+            ".ui-grid-d .ui-block-a, .ui-block-b, .ui-block-d, .ui-block-e"
+          ).eq(seatNumber - 1);
+          const seatStatus = seatElement.find("a").text().trim();
+
           if (seatStatus === "X") {
-            console.log(seatNumber, 'is reserved');
-            return { ...seat, initialStatus: 'reserved' }; // 예약된 좌석
+            console.log(seatNumber, "is reserved");
+            return { ...seat, initialStatus: "reserved" };
           } else {
-            return { ...seat, initialStatus: 'available' }; // 예약되지 않은 좌석
+            return { ...seat, initialStatus: "available" };
           }
         }
-        return seat; // 1~44번 사이의 좌석만 업데이트
+        return seat;
       });
-  
-      // 상태 업데이트
+
       setNewSeats(updatedSeats);
-      console.log("Updated newseats:", updatedSeats); // 상태 업데이트 후 콘솔 확인
-  
+      console.log("Updated newseats:", updatedSeats);
     } catch (error) {
-      console.error('Error fetching seat data:', error);
-      alert('좌석 데이터를 가져오는데 실패했습니다.');
+      console.error("Error fetching seat data:", error);
+      alert("좌석 데이터를 가져오는데 실패했습니다.");
     }
   };
 
   useEffect(() => {
-    if (schedules.length > 0) {
-      fetchSeatData(0);
+    if (activeIndex !== null && schedules.length > 0) {
+      fetchSeatData(activeIndex);
     }
-  }, [schedules]);
-  
-  useEffect(() => {
-    console.log('Seats state has changed, force re-render');
-  }, [seats]);
-  
-  const handleSeatSelect = (seatNumber: string) => {
-    const updatedSeats = seats.map(seat => {
-      if (seat.seatNumber === seatNumber && seat.initialStatus !== 'reserved') {
-        const newStatus = seat.initialStatus === 'available' ? 'selected' : 'available';
+  }, [activeIndex, schedules]);
+
+  const handleSeatSelect = async (seatNumber: string) => {
+    // 좌석 업데이트 로직
+    const updatedSeats = seats.map((seat) => {
+      if (seat.seatNumber === seatNumber && seat.initialStatus !== "reserved") {
+        const newStatus =
+          seat.initialStatus === "available" ? "selected" : "available";
         return {
           ...seat,
           initialStatus: newStatus,
@@ -173,16 +186,72 @@ export const SeatSelection: React.FC = () => {
       }
       return seat;
     });
-  
+
     setSeats(updatedSeats); // 상태 업데이트
-  
-    if (selectedSeat === seatNumber) {
-      setSelectedSeat(null); // 선택된 좌석 해제
-    } else {
-      setSelectedSeat(seatNumber); // 새로 선택된 좌석 설정
+
+    // `selectedSeat` 상태를 업데이트하고 바로 예약 요청을 실행
+    setSelectedSeat(seatNumber);
+
+    // 최신 선택된 좌석 정보를 push_result로 전달
+    await push_result(seatNumber); // 선택된 좌석 넘기기
+  };
+
+  const push_result = async (seatNumber: string) => {
+    // 스케줄이 선택되지 않은 경우
+    if (activeIndex === null) {
+      alert("스케줄을 선택해주세요.");
+      return;
+    }
+
+    // 좌석이 선택되지 않은 경우
+    if (!seatNumber) {
+      alert("좌석을 선택해주세요.");
+      return;
+    }
+
+    // 사용자에게 예약 확인 요청
+    const isConfirmed = window.confirm(
+      `좌석 ${seatNumber}번을 예약하시겠습니까?`
+    );
+
+    // 사용자가 예약을 확인하지 않은 경우
+    if (!isConfirmed) {
+      alert("예약이 취소되었습니다.");
+      return;
+    }
+
+    // 예약 처리 시작
+    const result = new URLSearchParams();
+    result.append("busCode", busCode); // busCode 상태에서 가져옴
+    result.append("seatNum", seatNumber); // 선택된 좌석의 index (seatNumber)을 추가
+    result.append("oriCode", busCode);
+
+    try {
+      const response = await axios.post(
+        "/reserve/insert_reserve_proc.php",
+        result,
+        {
+          headers: {
+            "Content-Type": `application/x-www-form-urlencoded`,
+            Accept: "application/json",
+            "Access-Control-Allow-Origin": `/reserve/insert_reserve_proc.php`,
+            "Access-Control-Allow-Credentials": "true",
+          },
+        }
+      );
+
+      // 예약 성공 시
+      if (response.status === 200 && response.data.status === "success") {
+        alert(response.data.message);
+      } else {
+        // 예약 실패 시
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("네트워크 오류가 발생했습니다. 다시 시도해주세요.");
     }
   };
-  
 
   // 좌석 선택 창 열기
   const openSeatSelection = (index: number) => {
@@ -193,117 +262,202 @@ export const SeatSelection: React.FC = () => {
   };
 
   const [newseats, setNewSeats] = useState<SeatProps[]>([
-    { seatNumber: '1', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '2', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '3', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '4', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '5', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '6', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '7', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '8', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '9', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '10', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '11', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '12', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '13', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '14', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '15', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '16', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '17', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '18', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '19', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '20', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '21', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '22', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '23', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '24', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '25', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '26', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '27', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '28', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '29', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '30', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '31', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '32', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '33', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '34', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '35', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '36', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '37', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '38', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '39', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '40', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '41', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '42', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '43', initialStatus: 'available', onSelect: handleSeatSelect },
-    { seatNumber: '44', initialStatus: 'available', onSelect: handleSeatSelect }
+    { seatNumber: "1", initialStatus: "available", onSelect: handleSeatSelect },
+    { seatNumber: "2", initialStatus: "available", onSelect: handleSeatSelect },
+    { seatNumber: "3", initialStatus: "available", onSelect: handleSeatSelect },
+    { seatNumber: "4", initialStatus: "available", onSelect: handleSeatSelect },
+    { seatNumber: "5", initialStatus: "available", onSelect: handleSeatSelect },
+    { seatNumber: "6", initialStatus: "available", onSelect: handleSeatSelect },
+    { seatNumber: "7", initialStatus: "available", onSelect: handleSeatSelect },
+    { seatNumber: "8", initialStatus: "available", onSelect: handleSeatSelect },
+    { seatNumber: "9", initialStatus: "available", onSelect: handleSeatSelect },
+    {
+      seatNumber: "10",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "11",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "12",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "13",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "14",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "15",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "16",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "17",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "18",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "19",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "20",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "21",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "22",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "23",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "24",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "25",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "26",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "27",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "28",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "29",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "30",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "31",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "32",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "33",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "34",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "35",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "36",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "37",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "38",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "39",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "40",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "41",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "42",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "43",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
+    {
+      seatNumber: "44",
+      initialStatus: "available",
+      onSelect: handleSeatSelect,
+    },
   ]);
 
-  const handleScheduleSelect = (index: number) => {
-    setActiveIndex(index);
-  };
-  
-
-  const push_result = async (event: React.FormEvent) => {
-    event.preventDefault();
-  
-    // 스케줄이 선택되지 않은 경우
-    if (activeIndex === null) {
-      alert("스케줄을 선택해주세요.");
-      return;
-    }
-  
-    // 좌석이 선택되지 않은 경우
-    if (selectedSeat === null) {
-      alert("좌석을 선택해주세요.");
-      return;
-    }
-  
-    // 사용자에게 예약 확인을 요청
-    const isConfirmed = window.confirm(`좌석 ${selectedSeat}번을 예약하시겠습니까?`);
-  
-    // 사용자가 예약을 확인하지 않은 경우
-    if (!isConfirmed) {
-      alert("예약이 취소되었습니다.");
-      return;
-    }
-  
-    // 예약 처리 시작
-    const result = new URLSearchParams();
-    result.append('busCode', busCode);  // busCode 상태에서 가져옴
-    result.append('seatNum', selectedSeat.toString());  // 선택된 좌석의 index (selectedSeat)을 문자열로 변환하여 추가
-    result.append('oriCode', busCode);
-  
-    try {
-      const response = await axios.post('/reserve/insert_reserve_proc.php', result, {
-        headers: {
-          "Content-Type": `application/x-www-form-urlencoded`,
-          "Accept": "application/json",
-          "Access-Control-Allow-Origin": `/reserve/insert_reserve_proc.php`,
-          'Access-Control-Allow-Credentials': "true",
-        },
-      });
-  
-      // 예약 성공 시
-      if (response.status === 200 && response.data.status === 'success') {
-        alert(response.data.message);
-        window.location.href = '/Reservations'; // 예약 성공 후 예약 목록 페이지로 이동
-      } else {
-        // 예약 실패 시
-        alert(response.data.message);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
-    }
-  };
-  
   // 컴포넌트 렌더링
   return (
     <div className={styles.seatSelection}>
       <header className={styles.header}>
         <a href="/BusSchedule" className={styles.backButton}>
-          <img src="/img/icon/arrow-left.png" alt="Back" className={styles.backIcon} />
+          <img
+            src="/img/icon/arrow-left.png"
+            alt="Back"
+            className={styles.backIcon}
+          />
         </a>
         <h1 className={styles.title}>좌석 선택</h1>
       </header>
@@ -322,14 +476,18 @@ export const SeatSelection: React.FC = () => {
       <section className={styles.scheduleSection}>
         <div className={styles.tripType}>
           <button
-            className={`${styles.tripButton} ${tripType === 'departure' ? styles.tripButtonActive : ''}`}
-            onClick={() => handleTripTypeChange('departure')}
+            className={`${styles.tripButton} ${
+              tripType === "departure" ? styles.tripButtonActive : ""
+            }`}
+            onClick={() => handleTripTypeChange("departure")}
           >
             등교
           </button>
           <button
-            className={`${styles.tripButton} ${tripType === 'return' ? styles.tripButtonActive : ''}`}
-            onClick={() => handleTripTypeChange('return')}
+            className={`${styles.tripButton} ${
+              tripType === "return" ? styles.tripButtonActive : ""
+            }`}
+            onClick={() => handleTripTypeChange("return")}
           >
             하교
           </button>
@@ -355,40 +513,66 @@ export const SeatSelection: React.FC = () => {
 
       {/* 좌석 선택 섹션 */}
       <section className={styles.seatingSection}>
-        <div className={styles.legend}> {/* 전설 아이템 */}
-          <LegendItem icon="/img/seat/seat_WHITE.png" label="빈좌석" alt="Empty seat icon" /> {/* 빈 좌석 아이콘 */}
-          <LegendItem icon="/img/seat/seat_GRAY.png" label="예약석" alt="Reserved seat icon" /> {/* 예약 좌석 아이콘 */}
-          <LegendItem icon="/img/seat/seat_GREEN.png" label="선택좌석" alt="Selected seat icon" /> {/* 선택 좌석 아이콘 */}
+        <div className={styles.legend}>
+          {" "}
+          {/* 전설 아이템 */}
+          <LegendItem
+            icon="/img/seat/seat_WHITE.png"
+            label="빈좌석"
+            alt="Empty seat icon"
+          />{" "}
+          {/* 빈 좌석 아이콘 */}
+          <LegendItem
+            icon="/img/seat/seat_GRAY.png"
+            label="예약석"
+            alt="Reserved seat icon"
+          />{" "}
+          {/* 예약 좌석 아이콘 */}
+          <LegendItem
+            icon="/img/seat/seat_GREEN.png"
+            label="선택좌석"
+            alt="Selected seat icon"
+          />{" "}
+          {/* 선택 좌석 아이콘 */}
         </div>
 
-        <div className={styles.busLayout}> {/* 버스 레이아웃 */}
+        <div className={styles.busLayout}>
+          {" "}
+          {/* 버스 레이아웃 */}
           <div className={styles.driverLayout}>
-            <img src="/img/seat/driver.png" alt="Driver" className={styles.driverIcon} /> {/* 운전사 아이콘 */}
+            <img
+              src="/img/seat/driver.png"
+              alt="Driver"
+              className={styles.driverIcon}
+            />{" "}
+            {/* 운전사 아이콘 */}
           </div>
           {/* <img src="/steering-wheel.svg" alt="Steering wheel" className={styles.steeringIcon} /> 운전대 아이콘 */}
           <div className={styles.seatGrid}>
-          {Array.from({ length: Math.ceil(newseats.length / 2) }, (_, i) => (
-            <div className={styles.pair} key={i}>
-              <Seat
-                {...newseats[i * 2]}
-                isSelected={selectedSeat === newseats[i * 2].seatNumber}
-                onSelect={(seatNumber) => handleSeatSelect(seatNumber)}
-              />
-              {newseats[i * 2 + 1] && (
+            {Array.from({ length: Math.ceil(newseats.length / 2) }, (_, i) => (
+              <div className={styles.pair} key={i}>
                 <Seat
-                  {...newseats[i * 2 + 1]}
-                  isSelected={selectedSeat === newseats[i * 2 + 1].seatNumber}
+                  {...newseats[i * 2]}
+                  isSelected={selectedSeat === newseats[i * 2].seatNumber}
                   onSelect={(seatNumber) => handleSeatSelect(seatNumber)}
                 />
-              )}
-            </div>
-          ))}
+                {newseats[i * 2 + 1] && (
+                  <Seat
+                    {...newseats[i * 2 + 1]}
+                    isSelected={selectedSeat === newseats[i * 2 + 1].seatNumber}
+                    onSelect={(seatNumber) => handleSeatSelect(seatNumber)}
+                  />
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       <footer className={styles.footer}>
-          <button className={styles.confirmButton} onClick={push_result}>예약하기</button>
+        <a href="/reservations">
+          <button className={styles.confirmButton}>예약 마치기</button>
+        </a>
       </footer>
     </div>
   );
