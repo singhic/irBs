@@ -137,13 +137,15 @@
   }
   
   .routeName {
-    font-size: 20px;
-    margin-top: 15px;
+    font-size: 23px;
+    margin: 10px;
+    color: rgba(56, 56, 56, 0.9);
   }
   
   .departureTime {
     font-size: 15px;
     margin-top: 1px;
+    color: rgba(56, 56, 56, 0.9);
   }
   
   .seatNumber {
@@ -151,6 +153,7 @@
     font-weight: 700;
     align-self: stretch;
     margin: auto 0;
+    color: rgba(56, 56, 56, 0.9);
   }
   
   .ticketDivider {
@@ -161,6 +164,6 @@
   }
   
   .cancle {
-    width: 10px;
-    margin: 5px;
+    margin: 50px 10px;
+    color: #fb3c3c;
   }
