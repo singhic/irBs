@@ -137,6 +137,7 @@ export const ReservationStatus: FC = () => {
     },
     preventScrollOnSwipe: true,
     trackMouse: true,
+    delta: 2
   });
 
   useEffect(() => {

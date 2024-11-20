@@ -117,7 +117,8 @@ export const MainPage: React.FC = () => {
       }, 300); // 애니메이션 지속 시간과 동일하게 설정
     },
     preventScrollOnSwipe: true,
-    trackMouse: true
+    trackMouse: true,
+    delta: 2
   });
 
   useEffect(() => {

@@ -1,9 +1,10 @@
 .container {
   width: 100%;
-  max-width: 800px;
+  max-width: 500px;
   margin: 0 auto;
   justify-content: center;
   box-sizing: border-box;
+  user-select: none;
 }
 
 .App {
