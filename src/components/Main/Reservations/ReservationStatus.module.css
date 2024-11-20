@@ -127,6 +127,13 @@
     justify-content: space-evenly;
     margin: 2% ;
   }
+  .ticketB {
+    display: flex; /* Flexbox 사용 */
+    flex-direction: row; /* 기본값이지만 명시적으로 설정 */
+    justify-content: flex-start; /* 자식 요소들을 왼쪽 정렬 (필요에 따라 변경 가능) */
+    align-items: center; /* 자식 요소들을 수직으로 가운데 정렬 */
+    margin: 0 5%;
+  }
   
   .ticketInfo {
     align-self: stretch;
