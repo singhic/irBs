@@ -4,6 +4,7 @@
   margin: 0 auto;
   justify-content: center;
   box-sizing: border-box;
+  user-select: none;
 }
 
 .App {
