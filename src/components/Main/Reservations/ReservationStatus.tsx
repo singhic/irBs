@@ -282,7 +282,7 @@ export const ReservationStatus: FC = () => {
             <div
               style={{
                 color: "#71b3ff",
-                fontSize: "19px",
+                fontSize: "18px",
                 fontWeight: "600",
                 textAlign: "center",
               }}
