@@ -105,8 +105,7 @@ const cancel = async () => {
 
   const isConfirmed = window.confirm(`예약을 취소하시겠습니까?`);
 
-  // 사용자가 예약을 확인하지 않은 경우
-  if (!isConfirmed) {
+  if (isConfirmed) {
     alert("예약이 취소되었습니다.");
     return;
   }
