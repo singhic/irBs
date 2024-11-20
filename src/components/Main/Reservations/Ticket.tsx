@@ -23,16 +23,19 @@ export const Ticket: FC<TicketProps> = ({
     <section className={styles.ticketContainer}>
       {" "}
       {/* 클릭 시 onClick 함수 호출 */}
-      <div className={styles.ticketInfo} onClick={onClick}>
-        <h3 className={styles.routeName}>{routeName}</h3>
-        <p className={styles.departureTime}>{departuredate}</p>
-        <p className={styles.departureTime}>{departureTime}</p>
-      </div>
-      <p className={styles.seatNumber} onClick={onClick}>
-        {seatNumber}번
-        <br />
-        <span className={styles.seatLabel}>좌석</span>
-      </p>
+      <section className={styles.ticketB } onClick={onClick}>
+        <div className={styles.ticketInfo}>
+          <h3 className={styles.routeName}>{routeName}</h3>
+          <p className={styles.departureTime}>{departuredate}</p>
+          <p className={styles.departureTime}>{departureTime}</p>
+        </div>
+        <p className={styles.seatNumber} >
+          {seatNumber}번
+          <br />
+          <span className={styles.seatLabel}>좌석</span>
+        </p>
+      </section>
+      
       <div className={styles.ticketDivider} />
       <h3 className={styles.cancle} onClick={onClick2}>
         예약 취소
