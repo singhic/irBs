@@ -7,7 +7,8 @@ interface TicketProps {
   departuredate: string;
   departureTime: string;
   seatNumber: string;
-  onClick: () => void; // 클릭 시 호출될 함수
+  onClick: () => void;
+  onClick2: () => void;
 }
 
 export const Ticket: FC<TicketProps> = ({
@@ -15,24 +16,27 @@ export const Ticket: FC<TicketProps> = ({
   departuredate,
   departureTime,
   seatNumber,
-  onClick, // onClick prop 받아오기
+  onClick,
+  onClick2,
 }) => {
   return (
-    <section className={styles.ticketContainer} onClick={onClick}>
+    <section className={styles.ticketContainer}>
       {" "}
       {/* 클릭 시 onClick 함수 호출 */}
-      <div className={styles.ticketInfo}>
+      <div className={styles.ticketInfo} onClick={onClick}>
         <h3 className={styles.routeName}>{routeName}</h3>
         <p className={styles.departureTime}>{departuredate}</p>
         <p className={styles.departureTime}>{departureTime}</p>
       </div>
-      <p className={styles.seatNumber}>
+      <p className={styles.seatNumber} onClick={onClick}>
         {seatNumber}번
         <br />
         <span className={styles.seatLabel}>좌석</span>
       </p>
       <div className={styles.ticketDivider} />
-      <h3 className={styles.cancle}>예약 취소</h3>
+      <h3 className={styles.cancle} onClick={onClick2}>
+        예약 취소
+      </h3>
     </section>
   );
 };

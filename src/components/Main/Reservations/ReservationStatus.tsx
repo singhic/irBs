@@ -13,6 +13,7 @@ async function fetchReservation(): Promise<Array<{
   departureTime: string;
   seatNumber: string;
   departuredate: string;
+  cancel_num: string;
 }> | null> {
   try {
     const response = await axios.get("/index.php");
@@ -25,93 +26,119 @@ async function fetchReservation(): Promise<Array<{
       departureTime: string;
       seatNumber: string;
       departuredate: string;
+      cancel_num: string;
     }> = [];
 
-    // 오늘 날짜를 'YYYY.MM.DD' 형식으로 가져오기 (한국 시간)
-    const now = new Date();
-    const todayDate = `${now.getFullYear()}${(now.getMonth() + 1)
-      .toString()
-      .padStart(2, "0")}${now.getDate().toString().padStart(2, "0")}`;
-
     reservationElements.each((index, element) => {
-      const dateText = $(element).find("h2").text().trim(); // 날짜 정보
-      const routeNameText = $(element).find("p").first().text().trim(); // "노선 : 장유"
-      const seatInfo = $(element).find("p").eq(1).text().trim(); // "차량 : 1호차 - 6번"
+      const dateText = $(element).find("h2").text().trim();
+      const routeNameText = $(element).find("p").first().text().trim();
+      const seatInfo = $(element).find("p").eq(1).text().trim();
 
-      // 예시 "노선 : 장유"에서 "장유"만 추출
       const routeNameMatch = routeNameText.match(/노선\s*:\s*([가-힣]+)/);
-      if (!routeNameMatch) return; // "노선 : "이 없는 항목은 건너뛰기
-      const routeName = routeNameMatch[1]; // "장유"
+      if (!routeNameMatch) return;
+      const routeName = routeNameMatch[1];
 
-      // 좌석 번호만 추출
       const seatNumberMatch = seatInfo.match(/(\d+)번/);
-      if (!seatNumberMatch) return; // 좌석 번호가 없으면 건너뛰기
-      const seatNumber = seatNumberMatch[1]; // "6"
+      if (!seatNumberMatch) return;
+      const seatNumber = seatNumberMatch[1];
 
-      // 날짜 추출 및 변환 (예: "11-19 (화) 18:10" -> 2024.11.19 18:10)
-      const dateTextMatch = dateText.match(/(\d{1,2})-(\d{1,2})/); // "11-19"
+      const dateTextMatch = dateText.match(/(\d{1,2})-(\d{1,2})/);
       if (!dateTextMatch) return;
       const [_, month, day] = dateTextMatch;
 
+      const now = new Date();
       let year = now.getFullYear();
-      if (Number(month) < now.getMonth() + 1) {
-        year += 1; // 만약 현재 월보다 작은 월이면 1년 더함
-      }
+      if (Number(month) < now.getMonth() + 1) year += 1;
 
       const departuredate = `${year}.${String(month).padStart(2, "0")}.${String(
         day
       ).padStart(2, "0")}`;
 
-      // 시간 추출 및 변환 (예: "18:10" -> 하교: 18:10)
-      const timeText = dateText.match(/(\d{2}:\d{2})/);
-      if (!timeText) return;
-      let departureTime = timeText[0]; // 시간 부분
-      const [hour, minute] = departureTime.split(":").map(Number);
+      const timeTextMatch = dateText.match(/(\d{2}:\d{2})/);
+      if (!timeTextMatch) return;
+      const departureTime = timeTextMatch[1];
 
-      // 시간에 따라 "등교" 또는 "하교"로 변환
-      if (hour >= 12) {
-        departureTime = `하교: ${departureTime}`;
-      } else {
-        departureTime = `등교: ${departureTime}`;
-      }
+      const fnCancelCall = $(element)
+        .find('a[onclick*="fnCancel"]')
+        .attr("onclick");
+      const cancelNumMatch = fnCancelCall?.match(/fnCancel\((\d+),/);
+      const cancel_num = cancelNumMatch ? cancelNumMatch[1] : null;
 
-      // 예약 날짜와 시간을 Date 객체로 생성 (한국 시간 기준)
-      const reservationDate = new Date(
-        `${departuredate}T${departureTime.split(":")[1]}:${
-          departureTime.split(":")[2]
-        }:00+09:00`
-      ); // 한국 시간 +9
+      if (!cancel_num) return;
 
-      // 오늘 날짜와 예약 날짜가 같으면, 시간까지 비교하여 지나지 않은 예약만 반환
-      const reservationDateOnly = `${reservationDate.getFullYear()}.${String(
-        reservationDate.getMonth() + 1
-      ).padStart(2, "0")}.${String(reservationDate.getDate()).padStart(
-        2,
-        "0"
-      )}`;
-
-      // 예약 날짜가 오늘 날짜보다 이후이거나, 오늘 날짜면 시간도 비교하여 지나지 않은 예약만 필터링
-      // 예약 시간이 지나지 않았으면 배열에 추가
-      if (
-        reservationDateOnly > todayDate ||
-        (reservationDateOnly === todayDate && reservationDate > now)
-      ) {
-        reservations.push({
-          routeName: routeName,
-          departureTime: departureTime,
-          seatNumber: seatNumber,
-          departuredate: departuredate,
-        });
-      }
+      reservations.push({
+        routeName,
+        departureTime,
+        seatNumber,
+        departuredate,
+        cancel_num,
+      });
     });
 
-    // 예약 항목이 하나라도 있으면 반환
     return reservations.length ? reservations : null;
   } catch (error) {
     console.error("Error fetching reservation:", error);
     return null;
   }
 }
+
+const cancel = async () => {
+  const reservations = await fetchReservation();
+  if (!reservations || reservations.length === 0) {
+    alert("취소 가능한 예약이 없습니다.");
+    return;
+  }
+
+  // 예약 리스트 렌더링 예시
+  reservations.forEach((reservation) => {
+    console.log(
+      `노선: ${reservation.routeName}, 시간: ${reservation.departureTime}, 좌석: ${reservation.seatNumber}, 취소 번호: ${reservation.cancel_num}`
+    );
+  });
+
+  // 특정 예약을 선택해 취소 (예시로 첫 번째 예약을 취소)
+  const cancel_num = reservations[0].cancel_num;
+  if (!cancel_num) {
+    alert("해당 예약에 대한 취소 번호가 없습니다.");
+    return;
+  }
+
+  const isConfirmed = window.confirm(`예약을 취소하시겠습니까?`);
+
+  // 사용자가 예약을 확인하지 않은 경우
+  if (!isConfirmed) {
+    alert("예약이 취소되었습니다.");
+    return;
+  }
+
+  const cancel_post = new URLSearchParams();
+  cancel_post.append("seq", cancel_num);
+
+  console.log(cancel_num);
+
+  try {
+    const response = await axios.post("/reserve/cancel_proc.php", cancel_post, {
+      headers: {
+        "Content-Type": `application/x-www-form-urlencoded`,
+        Accept: "application/json",
+        "Access-Control-Allow-Origin": `/reserve/cancel_proc.php`,
+        "Access-Control-Allow-Credentials": "true",
+      },
+    });
+
+    // 예약 성공 시
+    if (response.status === 200 && response.data.status === "success") {
+      alert(response.data.message);
+      window.location.reload(); // 새로고침
+    } else {
+      // 예약 실패 시
+      alert(response.data.message);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("네트워크 오류가 발생했습니다. 다시 시도해주세요.");
+  }
+};
 
 export const ReservationStatus: FC = () => {
   const [reservations, setReservations] = useState<Array<{
@@ -137,7 +164,7 @@ export const ReservationStatus: FC = () => {
     },
     preventScrollOnSwipe: true,
     trackMouse: true,
-    delta: 2
+    delta: 2,
   });
 
   useEffect(() => {
@@ -182,6 +209,7 @@ export const ReservationStatus: FC = () => {
             departureTime={reservation.departureTime}
             seatNumber={reservation.seatNumber}
             onClick={handleTicketClick} // Ticket 클릭 시 이미지 보이기
+            onClick2={cancel}
           />
         ))
       ) : (
