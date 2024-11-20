@@ -302,7 +302,7 @@
 /* 최근 예약현황이 존재합니다----------------------------------- */
 .recentBooking {
   position: fixed; /* 화면 하단에 고정 */
-  bottom: 0%; /* 하단에 위치 */
+  bottom: 0; /* 하단에 위치 */
   width: 100%; /* 전체 너비를 차지하도록 설정 */
   max-width: 500px;
   border-radius: 20px 20px 0 0;
@@ -314,13 +314,15 @@
   font-weight: 700;
   padding: 6px 0 18px;
   z-index: 1000; /* 다른 요소들 위에 표시되도록 설정 */
-  transition: transform 0.2s ease-in-out; /* 스와이프 애니메이션 */
+  transition: transform 1s ease-in-out; /* 스와이프 애니메이션 */
   overflow-y: auto; /* 내부 콘텐츠가 스크롤 가능하도록 설정 */
+  height: 15vh; /* 초기 높이 설정 */
 }
 
 .recentBooking.swipedUp {
+  bottom:0%;
   height: 100vh;
-  transform: translateY(-80vh);
+  transform: translateY(-85vh);
 }
 
 
@@ -344,20 +346,20 @@
   font-size: 20px;
 }
 
-@media (max-width: 640px) {
+/* @media (max-width: 640px) {
   .recentBookingTitle {
     margin-right: -5px;
   }
-}
+} */
 
-.recentBookingDetails {
+/* .recentBookingDetails {
   font-size: 16px;
   margin-top: 5px;
   margin-right: 10px;
-}
+} */
 
-@media (max-width: 640px) {
+/* @media (max-width: 640px) {
   .recentBookingDetails {
     margin-top: -1px;
   }
-}
+} */
