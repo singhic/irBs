@@ -1,32 +1,32 @@
 .profileContainer {
-    margin: 0 auto;
-    padding: 5%;
+    /* margin: 0 auto; */
+    padding: 20px;
     background: linear-gradient(180deg, #87ceeb -7.29%, #f3f4f6 100%);
     font-family: Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    min-height: 100vh; /* 전체 화면 높이를 차지하도록 설정 */
+    height: 95vh; /* 전체 화면 높이를 차지하도록 설정 */
+    max-height: 1000px;
+    min-height: 800px;
     
   }
 
   .headerSection {
     position: relative;
     display: flex;
-    align-items: center; /* 세로 정렬 */
+    
     justify-content: center; /* 가로 정렬 */
     max-width: 100%;
     font-size: 10px;
     color: #000;
     font-weight: 700;
     text-align: center;
+    height: 40px;
 }
 
-  h1 
-  {
+  .myPageTitle {
     font-size: 24px;
-    text-align: center; /* 텍스트 중앙 정렬 */
-    margin: 0;
   }
   
   .backIcon {
@@ -35,31 +35,32 @@
     object-fit: contain;
     width: 39px;
     align-self: start;
-    margin-top: -2.5%;
+    /* margin-top: -2.5%; */
     left:0;
   }
 
   
   .userInfoSection {
     display: flex;
-    gap: 3%;
+    gap: 20px;
     font-size: 18px;
     color: #000;
     font-weight: 700;
-    margin-top: 8%;
-    margin-bottom: 8%;
-    justify-content: center;  /* 수평 중앙 정렬 */
-    align-items: center;      /* 수직 중앙 정렬 */
+    margin: 70px 0 0 0;
+    align-items: center;
   }
   
   .userAvatar {
     aspect-ratio: 1.09;
     object-fit: contain;
-    width: 10%;
+    width: 80px;
+    
+    
   }
   
   .userName {
-    margin: auto 0;
+    margin: 0;
+    font-size: 25px;
   }
   
   .formCard {
@@ -120,9 +121,9 @@
   
   .deactivateLink {
     color: #0088ff;
-    text-align: center;
+    /* text-align: center; */
     align-self: end;
-    margin-top: 143px;
+    margin-top: auto;
     font: 400 15px Niramit, sans-serif;
   }
   
