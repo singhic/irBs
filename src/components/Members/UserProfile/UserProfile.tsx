@@ -184,15 +184,6 @@ const UserProfile: React.FC = () => {
         <a className={styles .myPageTitle}>내 정보 수정</a>
       </header>
 
-      <section className={styles.userInfoSection}>
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/6596c95482616e0247ca02575e9d69257aa06be47f4bdd62637ebf1c9344ba88?placeholderIfAbsent=true"
-          alt="User avatar"
-          className={styles.userAvatar}
-        />
-        <span className={styles.userName}>{userName}님</span>
-      </section>
-
       <FormCard
         title="카드번호 변경"
         inputs={cardInputs.cardNumber}
@@ -208,6 +199,7 @@ const UserProfile: React.FC = () => {
         buttonDisabled={!newpass || !pass}
         onSubmit={handlePasswordReset}
       />
+      
       <a href="#" className={styles.deactivateLink}>
         회원탈퇴를 찾으시나요?
       </a>
