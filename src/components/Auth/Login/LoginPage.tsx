@@ -33,12 +33,6 @@ const LoginPage: React.FC = () => {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault();
-    const phpSessionId = Cookies.get("PHPSESSID");
-
-    if (!phpSessionId) {
-      alert("세션 ID를 가져올 수 없습니다. 다시 시도해주세요.");
-      return;
-    }
 
     const loginData = new URLSearchParams();
     loginData.append("id", userId);
@@ -54,14 +48,12 @@ const LoginPage: React.FC = () => {
           "Access-Control-Allow-Credentials": "true",
         },
       });
-
       if (response.status === 200) {
         console.log(response.data);
         if (response.data.status === "success") {
           alert(response.data.message);
-          // 로그인 후 쿠키 설정
-          Cookies.set("Id", phpSessionId, { secure: true, sameSite: "Lax" });
-          window.location.href = "/MainPage"; // 리다이렉트
+          Cookies.set("id", userId, { secure: true, sameSite: "Lax" });
+          window.location.href = "/MainPage";
         } else {
           console.error("Login failed:", response.status);
           alert(response.data.message);
