@@ -3,12 +3,10 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    /*margin: 1 auto;
-    height: 740px;*/
-    /* max-width: 360px; */
-    /* max-height: 740px; */
+
     width:100%;
-    height:100%;
+    height:100vh;
+    max-height: 1000px;
   }
   /*마이페이지 text*/
   .header {
@@ -18,7 +16,7 @@
     flex-direction: column;
     color: #000;
     text-align: center;
-    padding: 36px 0px 61px 0px;
+    padding: 0px 0px 0px 0px;
     font: 700 11px 'Noto Sans KR', sans-serif;
   }
   
@@ -27,54 +25,74 @@
     width: 100%;
     padding-bottom: 5%;
     justify-content: center;
+    
   }
 
-
+/* -------------------------------------- */
   .myHeader {
-    width: 100%;
-    display: flex;
-    flex-direction: row; /* 가로 방향으로 설정 */
     position: relative;
-    justify-content: center;
-    margin-top: %;
+    padding: 20px 21px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
   }
-  
+
+  .myTitle{
+    color: #000000;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+  }
+  .backicon{
+    align-items: center;
+    aspect-ratio: 1.05;
+  }
+  /* ---------------------------------------------- */
+  .profileImage { 
+    aspect-ratio: 1.09;
+    object-fit: contain;
+    width: 120px;
+  }
   .userProfile {
     display: flex;
-    margin: 0 auto;
-    margin-top: 15px; /* 간격 조정 */
+    margin-top: 60px; /* 간격 조정 */
     gap: 6px;
     align-items: center; 
     flex-direction: column; /* 세로 정렬 */
   }
 
-  .backicon{
-    position: absolute;
-    left: 3%;
-    margin-top: -0.5%;
+  .userNP{
+    position: relative;
+    display: flex;
+    align-items: center; /* 자식 요소를 세로로 가운데 정렬 */
+    width: 100%;
+    padding:20px 0;
+    
   }
-
-  .profileImage {
-    aspect-ratio: 1.09;
-    object-fit: contain;
-    width: 90%; /* 적절한 이미지 크기로 설정 */
-  }
-  
   .userName {
-    margin-top: 11px;
-    font: 700 17px 'Noto Sans KR', sans-serif;
+    font: 700 20px 'Noto Sans KR', sans-serif;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* 정확히 가운데 정렬 */
+    
   }
-
   .move_userprofile{
-   padding-left: 5px;;
+    position: absolute;
+    left: calc(50% + 50px);
   }
 
   
   .mainContent {
     display: flex;
     flex-direction: column;
-    padding: 5%;
-    max-height: 100%; /* 원하는 높이로 설정 */
+    padding: 20px;
+    padding-bottom: 60px;
+    height: 70vh;
+    max-height: 800px; /* 원하는 높이로 설정 */
     overflow-y: auto; /* 스크롤 활성화 */
   }
   

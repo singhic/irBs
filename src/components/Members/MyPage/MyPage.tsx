@@ -64,23 +64,24 @@ const MyPage: React.FC = () => {
   return (
     <main className={styles.page}>
       <header className={styles.header}>
-        <div className={styles.headerTop}>
-          <div className={styles.myHeader}>
-            <a href='/MainPage'>
-              <img id="icon" src="https://cdn.builder.io/api/v1/image/assets/TEMP/c6f39fd7de10126956016a660e84671a37b66231dcc86d58ff090a6a35e1599c?placeholderIfAbsent=true" alt="뒤로가기 아이콘" className={styles.backicon}/>
-            </a>
-            <h1>마이페이지</h1>
-          </div>
-          </div>
 
-          <div className={styles.userProfile}>
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/6596c95482616e0247ca02575e9d69257aa06be47f4bdd62637ebf1c9344ba88?placeholderIfAbsent=true" alt="프로필 이미지" className={styles.profileImage} />
+        <div className={styles.myHeader}>
+          <a href='/MainPage'>
+            <img id="icon" src="https://cdn.builder.io/api/v1/image/assets/TEMP/c6f39fd7de10126956016a660e84671a37b66231dcc86d58ff090a6a35e1599c?placeholderIfAbsent=true" alt="뒤로가기 아이콘" className={styles.backicon}/>
+          </a>
+          <p className={styles.myTitle}>마이페이지</p>
+        </div>
+
+        <div className={styles.userProfile}>
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/6596c95482616e0247ca02575e9d69257aa06be47f4bdd62637ebf1c9344ba88?placeholderIfAbsent=true" alt="프로필 이미지" className={styles.profileImage} />
+          <div className={styles.userNP}>
             <span className={styles.userName}>{userName}님
+            </span>
             <a href='/userprofile' className={styles.move_userprofile}>
               <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/942bad32bb7686b37623a7bbd94277cca6dfadef154afacbe543d2856ad9a096?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30" alt="내 정보 수정" />
             </a>
-            </span>
           </div>
+        </div>
       </header>
 
       <section className={styles.mainContent}>
