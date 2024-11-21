@@ -2,191 +2,195 @@
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  font: 12px "Noto Sans KR", sans-serif;
+  font: 12px 'Noto Sans KR', sans-serif;
   justify-content: center;
   align-items: center;
-  height: 90vh;
-}
+  margin-top: 17%;
+  }
+  
+  .title 
+  {
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+  }
+  
+  .inputGroup 
+  {
+    margin-top: 18px;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  .formInput {
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    color: rgba(0, 0, 0, 0.7);
+    float: inline-start;
+    width: 180px;
+    height: 40px;
+    position: relative;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-top: 12px;
+    padding-left: 10px;
+  }
 
-.title {
-  color: rgba(0, 0, 0, 0.8);
-  font-size: 24px;
-  font-weight: 700;
-  text-align: center;
-}
+  .formInput2
+  {
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    color: rgba(0, 0, 0, 0.7);
+    float: inline-start;
+    width: 180px;
+    height: 40px;
+    position: relative;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    padding-left: 10px;
+  }
+ 
+  .formInput_phonenum {
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    color: rgba(0, 0, 0, 0.7);
+    text-align: left;
+    width: 180px;
+    height: 40px;
+    margin-left: 10px;
+    padding-left: 10px;
+  }
 
-.inputGroup {
-  margin-top: 31px;
-  gap: 10px;
-  text-align: center;
-}
+  input::placeholder {
+    text-align:left;
+  }
 
-.formInput {
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  color: rgba(0, 0, 0, 0.7);
-  float: inline-start;
-  width: 180px;
-  height: 40px;
-  position: relative;
-  margin-bottom: 20px;
-  margin-left: 10px;
-  margin-top: 12px;
-  padding-left: 10px;
-}
-
-.formInput2 {
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  color: rgba(0, 0, 0, 0.7);
-  float: inline-start;
-  width: 180px;
-  height: 40px;
-  position: relative;
-  margin-bottom: 20px;
-  margin-left: 10px;
-  padding-left: 10px;
-}
-
-.formInput_phonenum {
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  color: rgba(0, 0, 0, 0.7);
-  text-align: left;
-  width: 180px;
-  height: 40px;
-  margin-left: 10px;
-  padding-left: 10px;
-}
-
-input::placeholder {
-  text-align: left;
-}
-
-.verificationGroup {
-  margin-top: 10px;
-  gap: 9px;
-}
-
-.verifyButton {
-  aspect-ratio: 1.69;
-  object-fit: contain;
-  width: 81px;
-  height: 100px;
-  border-radius: 10px;
-  margin-right: 10px;
-  position: relative;
-  font-weight: 800px;
-  border: 5px;
-  border-radius: 8px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-  font-size: 17px;
-  color: rgba(56, 56, 56, 0.9);
-  font-weight: 700;
-  background-color: rgb(176, 224, 230);
-  margin-bottom: 10px;
-  margin-left: 10px;
-}
-.verifyButton2 {
-  aspect-ratio: 1.69;
-  object-fit: contain;
-  width: 81px;
-  height: 46px;
-  border-radius: 8px;
-  margin-left: 3px;
-  position: relative;
-  margin-top: 10px;
-  border: 5px;
-  border-radius: 10px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-  font-size: 17px;
-  color: rgba(56, 56, 56, 0.9);
-  font-weight: 700;
-  background-color: rgb(176, 224, 230);
-}
-.verifyButton3 {
-  aspect-ratio: 1.69;
-  object-fit: contain;
-  width: 81px;
-  height: 46px;
-  border-radius: 8px;
-  margin-right: 10px;
-  position: relative;
-  margin-left: 10px;
-  margin-bottom: 7px;
-  border: 5px;
-  border-radius: 10px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-  font-size: 17px;
-  color: rgba(56, 56, 56, 0.9);
-  font-weight: 700;
-  background-color: rgb(176, 224, 230);
-}
-
-.cardInput {
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  color: rgba(0, 0, 0, 0.7);
-  float: inline-start;
-  margin-bottom: 10px;
-  margin-top: 20px;
-  text-align: left;
-  position: relative;
-  width: 270px;
-  height: 45px;
-  white-space: pre-wrap;
-  margin-left: 10px;
-  padding-left: 10px;
-}
-
-.submitButton {
-  border-radius: 8px;
-  background-color: rgb(176, 224, 230);
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-  border: 5px;
-  color: rgba(56, 56, 56, 0.9);
-  float: inline-start;
-  margin-bottom: 10px;
-  margin-top: 20px;
-  text-align: center;
-  position: relative;
-  width: 280px;
-  height: 40px;
-  font-size: 20px;
-  font-weight: 700;
-  margin-left: 10px;
-}
-
-.submitBackground {
-  position: absolute;
-  inset: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-
-.loginPrompt {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  font: 14px "Noto Sans KR", sans-serif;
-}
-
-.loginText {
-  color: rgba(0, 0, 0, 0.8);
-  font-weight: 500;
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
+  .verificationGroup {
+    margin-top: 10px;
+    gap: 9px;
+  }
+  
+  .verifyButton {
+    aspect-ratio: 1.69;
+    object-fit: contain;
+    width: 81px;
+    height: 100px;
+    border-radius: 10px;
+    margin-right: 10px;
+    position: relative;
+    font-weight: 800px;
+    border: 5px;
+    border-radius: 8px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    font-size: 17px;
+    color: rgba(56, 56, 56, 0.9);
+    font-weight: 700;
+    background-color: rgb(176, 224, 230);
+    margin-bottom:10px;
+    margin-left: 10px;
+    margin-top:10px;
+  }
+  .verifyButton2 {
+    aspect-ratio: 1.69;
+    object-fit: contain;
+    width: 81px;
+    height:46px;
+    border-radius: 8px;
+    margin-left: 3px;
+    position: relative;
+    margin-top: 10px;
+    border: 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    font-size: 17px;
+    color: rgba(56, 56, 56, 0.9);
+    font-weight: 700;
+    background-color: rgb(176, 224, 230);
+  }
+  .verifyButton3 {
+    aspect-ratio: 1.69;
+    object-fit: contain;
+    width: 81px;
+    height:46px;
+    border-radius: 8px;
+    margin-right: 10px;
+    position: relative;
+    margin-left: 10px;
+    margin-bottom: 7px;
+    border: 5px;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    font-size: 17px;
+    color: rgba(56, 56, 56, 0.9);
+    font-weight: 700;
+    background-color: rgb(176, 224, 230);
+  }
+  
+  .cardInput {
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    color: rgba(0, 0, 0, 0.7);
+    float: inline-start;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: left;
+    position: relative;
+    width:270px;
+    height:45px;
+    white-space: pre-wrap;
+    margin-left: 10px;
+    padding-left: 10px;
+  }
+  
+  .submitButton {
+    border-radius: 8px;
+    background-color: rgb(176, 224, 230);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    border: 5px;
+    color: rgba(56, 56, 56, 0.9);
+    float: inline-start;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: center;
+    position: relative;
+    width:280px;
+    height:40px ;
+    font-size:20px;
+    font-weight: 700;
+    margin-left: 10px;
+  }
+  
+  .submitBackground {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .loginPrompt {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    font: 14px 'Noto Sans KR', sans-serif;
+  }
+  
+  .loginText {
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 500;
+  }
+  
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }

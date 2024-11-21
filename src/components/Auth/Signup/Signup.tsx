@@ -254,103 +254,110 @@ const Signup: React.FC = () => {
     };
 
   return (
-    <main className={styles.container}>
-      <h1 className={styles.title}>회원가입</h1>
-      <form>
-          <label htmlFor="studentId" className={styles['visually-hidden']}>학번/사번</label>
-          <input
-            type="number"
-            id="studentId"
-            onChange={(e) => setIdx(e.target.value)}
-            value={idx}
-            className={styles.formInput}
-            placeholder="학번/사번"
-          />
+<main className={styles.container}>
+  <h1 className={styles.title}>회원가입</h1>
+  <form>
+    <div className={styles.inputGroup}>
+      <label htmlFor="studentId" className={styles['visually-hidden']}>학번/사번</label>
+      <input
+        type="number"
+        id="studentId"
+        onChange={(e) => setIdx(e.target.value)}
+        value={idx}
+        className={styles.formInput}
+        placeholder="학번/사번"
+      />
+    </div>
 
-          <br/>
-
-          <label htmlFor="birthdate" className={styles['visually-hidden']}>생년월일</label>
-          <input
-            type="number"
-            id="birthdate"
-            onChange={(e) => setBirth(e.target.value)}
-            value={birth}
-            className={styles.formInput2}
-            placeholder="생년월일(주민번호 앞자리)"
-          />
-
-          {/* 인증 버튼 */}
-          <button 
-            type="submit" 
-            className={styles.verifyButton} 
-            onClick={handlefirstcheck} 
-            disabled={loading} // 로딩 중에는 버튼 비활성화
-          >
-            인증
-          </button>
-             <br/>
-          <label htmlFor="phone" className={styles['visually-hidden']}>핸드폰번호</label>
-          <input
-            type="tel"
-            id="phone"
-            onChange={(e) => setPhone(e.target.value)}
-            value={phone}
-            className={styles.formInput_phonenum}
-            placeholder="핸드폰번호"
-          />
-           <button
-           type="submit"
-           className={styles.verifyButton3}
-           onClick={handlephone}
-           disabled={loading}
-           >
-              인증
-            </button>
-        <div className={styles.verificationGroup}>
-          <label htmlFor="verificationCode" className={styles['visually-hidden']}>인증번호</label>
-          <input
-            type="number"
-            id="verificationCode"
-            onChange={(e) => setcertCode(e.target.value)}
-            value={certCode}
-            className={styles.formInput}
-            placeholder="인증번호"
-          />
-          <button
-          type="submit"
-          className={styles.verifyButton2}
-          onClick={handlephonecert}
-          disabled={loading}
-          >
-              인증
-        </button>
-        </div>
-        <label htmlFor="cardNumber" className={styles['visually-hidden']}>카드번호</label>
-        <input
-          type="number"
-          id="cardNumber"
-          value={card}
-          onChange={(e) => setCard(e.target.value)}
-          className={styles.cardInput}
-          placeholder="카드번호를 입력하세요 이즐(구 케시비) 또는 신한카드 후불교통카드 16자리"
-        />
-        <br/>
-        <button
+    <div className={styles.inputGroup}>
+      <label htmlFor="birthdate" className={styles['visually-hidden']}>생년월일</label>
+      <input
+        type="number"
+        id="birthdate"
+        onChange={(e) => setBirth(e.target.value)}
+        value={birth}
+        className={styles.formInput2}
+        placeholder="생년월일(주민번호 앞자리)"
+      />
+      <button
         type="submit"
-        className={styles.submitButton}
-        onClick={handleSignup}
+        className={styles.verifyButton}
+        onClick={handlefirstcheck}
         disabled={loading}
-        >
-          <span>회원가입 완료</span>
-        </button>
-      </form>
+      >
+        인증
+      </button>
+    </div>
 
-      <div className={styles.loginPrompt}>
-      <a href='/Login'>
-        <p className={styles.loginText}>아이디가 있나요?</p>
-      </a>
-      </div>
-    </main>
+    <div className={styles.inputGroup}>
+      <label htmlFor="phone" className={styles['visually-hidden']}>핸드폰번호</label>
+      <input
+        type="tel"
+        id="phone"
+        onChange={(e) => setPhone(e.target.value)}
+        value={phone}
+        className={styles.formInput_phonenum}
+        placeholder="핸드폰번호"
+      />
+      <button
+        type="submit"
+        className={styles.verifyButton3}
+        onClick={handlephone}
+        disabled={loading}
+      >
+        인증
+      </button>
+    </div>
+
+    <div className={styles.inputGroup}>
+      <label htmlFor="verificationCode" className={styles['visually-hidden']}>인증번호</label>
+      <input
+        type="number"
+        id="verificationCode"
+        onChange={(e) => setcertCode(e.target.value)}
+        value={certCode}
+        className={styles.formInput}
+        placeholder="인증번호"
+      />
+      <button
+        type="submit"
+        className={styles.verifyButton2}
+        onClick={handlephonecert}
+        disabled={loading}
+      >
+        인증
+      </button>
+    </div>
+
+    <div className={styles.inputGroup}>
+      <label htmlFor="cardNumber" className={styles['visually-hidden']}>카드번호</label>
+      <input
+        type="number"
+        id="cardNumber"
+        value={card}
+        onChange={(e) => setCard(e.target.value)}
+        className={styles.cardInput}
+        placeholder="카드번호를 입력하세요 이즐(구 케시비) 또는 신한카드 후불교통카드 16자리"
+      />
+    </div>
+
+    <button
+      type="submit"
+      className={styles.submitButton}
+      onClick={handleSignup}
+      disabled={loading}
+    >
+      <span>회원가입 완료</span>
+    </button>
+  </form>
+
+  <div className={styles.loginPrompt}>
+    <a href="/Login">
+      <p className={styles.loginText}>아이디가 있나요?</p>
+    </a>
+  </div>
+</main>
+
   );
 };
 
