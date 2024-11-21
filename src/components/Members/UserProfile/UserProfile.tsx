@@ -38,7 +38,7 @@ const UserProfile: React.FC = () => {
       
       const phone2 = $('#p_phone2').attr('value') || null;
       const phone3 = $('#p_phone3').attr('value') || null;
-      const phone = phone2+phone3;
+      const phone = (phone2 || '') + (phone3 || '');
 
       console.log({phone2, phone3, phone });
       return { idx, userName, phone ,phone2,phone3};
@@ -179,24 +179,14 @@ const UserProfile: React.FC = () => {
           />
         </a>
 
-        <IconButton sx={{ textAlign: 'center' }}></IconButton>
+        {/* <IconButton sx={{ textAlign: 'center' }}></IconButton> */}
 
-        <h1>내 정보 수정</h1>
+        <a className={styles .myPageTitle}>내 정보 수정</a>
       </header>
-
-      <section className={styles.userInfoSection}>
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/6596c95482616e0247ca02575e9d69257aa06be47f4bdd62637ebf1c9344ba88?placeholderIfAbsent=true"
-          alt="User avatar"
-          className={styles.userAvatar}
-        />
-        <span className={styles.userName}>{userName}님</span>
-      </section>
 
       <FormCard
         title="카드번호 변경"
         inputs={cardInputs.cardNumber}
-        submitButtonSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/d02499e6f4144a4f444d0ac404794178a86350f292f81844d4a8ecafbbd84876?placeholderIfAbsent=true"
         buttonText="카드번호 변경"
         buttonDisabled={!isCardValid(card)}
         onSubmit={handleCardNumberChange}
@@ -205,11 +195,11 @@ const UserProfile: React.FC = () => {
       <FormCard
         title="비밀번호 변경"
         inputs={passwordInputs.password}
-        submitButtonSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/ebb3d84a5c2f4cc3eb994d8431c0402baaedfce83b320239cdb47457321352b1?placeholderIfAbsent=true"
         buttonText="비밀번호 변경"
         buttonDisabled={!newpass || !pass}
         onSubmit={handlePasswordReset}
       />
+      
       <a href="#" className={styles.deactivateLink}>
         회원탈퇴를 찾으시나요?
       </a>
