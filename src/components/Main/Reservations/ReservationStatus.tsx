@@ -10,6 +10,7 @@ import { Map, MapMarker } from "react-kakao-maps-sdk";
 
 // 예약 정보를 가져오는 함수
 async function fetchReservation(): Promise<Array<{
+  index: number;
   routeName: string;
   departureTime: string;
   seatNumber: string;
@@ -24,6 +25,7 @@ async function fetchReservation(): Promise<Array<{
 
     const reservationElements = $('ul[data-role="listview"] li'); // 예약 항목 모두 선택
     const reservations: Array<{
+      index: number;
       routeName: string;
       departureTime: string;
       seatNumber: string;
@@ -77,6 +79,7 @@ async function fetchReservation(): Promise<Array<{
       if (!cancel_num) return;
 
       reservations.push({
+        index,
         routeName,
         departureTime,
         seatNumber,
@@ -93,29 +96,33 @@ async function fetchReservation(): Promise<Array<{
   }
 }
 
-const cancel = async () => {
+const cancel = async (index: number) => {
   const reservations = await fetchReservation();
+  console.log("Fetched reservations:", reservations);
+
   if (!reservations || reservations.length === 0) {
     alert("취소 가능한 예약이 없습니다.");
     return;
   }
 
-  // 예약 리스트 렌더링 예시
-  reservations.forEach((reservation) => {
-    console.log(
-      `노선: ${reservation.routeName}, 시간: ${reservation.departureTime}, 좌석: ${reservation.seatNumber}, 취소 번호: ${reservation.cancel_num}, 루트 번호: ${reservation.route_num}`
-    );
-  });
+  if (index < 0 || index >= reservations.length) {
+    console.error("Invalid index:", index);
+    alert("잘못된 예약 번호입니다.");
+    return;
+  }
 
-  // 특정 예약을 선택해 취소 (예시로 첫 번째 예약을 취소)
-  const cancel_num = reservations[0].cancel_num;
+  const selectedReservation = reservations[index];
+  console.log("Selected reservation:", selectedReservation);
+
+  const cancel_num = selectedReservation?.cancel_num; // 안전한 접근
+  console.log("Cancel number:", cancel_num);
+
   if (!cancel_num) {
     alert("해당 예약에 대한 취소 번호가 없습니다.");
     return;
   }
 
   const isConfirmed = window.confirm(`예약을 취소하시겠습니까?`);
-
   if (!isConfirmed) {
     return;
   }
@@ -156,8 +163,8 @@ export const ReservationStatus: FC = () => {
     seatNumber: string;
     departuredate: string;
   }> | null>(null);
-  const [isSwipedDown, setIsSwipedDown] = useState(false);
   const navigate = useNavigate();
+  const [isSwipedDown, setIsSwipedDown] = useState(false);
   const [showImage, setShowImage] = useState(false);
   const [locationData, setLocationData] = useState<{
     new_lat: string | null;
@@ -169,32 +176,54 @@ export const ReservationStatus: FC = () => {
     new_time: null,
   });
 
-  const handleTicketClick = (reservation: { departureTime: string }) => {
+  const handleTicketClick = (reservation: {
+    departuredate?: string;
+    departureTime?: string;
+  }) => {
+    // 예약 날짜와 시간 값이 없는 경우 처리
+    if (!reservation.departuredate || !reservation.departureTime) {
+      alert("예약 날짜 또는 시간이 없습니다.");
+      return;
+    }
+
+    // 예약 날짜와 시간 형식 검증 (예: "2024-11-25"와 "18:10")
+    const dateParts = reservation.departuredate.split(".");
+    const timeParts = reservation.departureTime.split(":");
+
+    if (
+      dateParts.length !== 3 ||
+      timeParts.length !== 2 ||
+      dateParts.some((part) => isNaN(parseInt(part, 10))) ||
+      timeParts.some((part) => isNaN(parseInt(part, 10)))
+    ) {
+      alert("날짜 또는 시간 형식이 잘못되었습니다.");
+      return;
+    }
+
+    // 예약된 날짜와 시간 변환
+    const [year, month, day] = dateParts.map((str) => parseInt(str, 10));
+    const [hours, minutes] = timeParts.map((str) => parseInt(str, 10));
+
+    const departuredate = new Date(year, month - 1, day); // 예약 날짜 (00:00 기준)
+    const departureTime = new Date(year, month - 1, day, hours, minutes); // 예약 날짜 및 시간
+
     // 현시간 구하기 (한국시간)
     const now = new Date();
-    const nowTime = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate(),
-      now.getHours(),
-      now.getMinutes()
-    ); // 현재 시간 (분 단위로)
+    const nowDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // 현재 날짜 (00:00 기준)
 
-    // 예약된 시간 (18:10 형식)
-    const [hours, minutes] = reservation.departureTime
-      .split(":")
-      .map((str) => parseInt(str, 10));
-    const departureTime = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate(),
-      hours,
-      minutes
-    );
+    // 날짜 차이 계산
+    const dateDifference =
+      (departuredate.getTime() - nowDate.getTime()) / (1000 * 60 * 60 * 24); // 일 단위
 
-    // 40분 전 시간 구하기
+    if (dateDifference !== 0) {
+      // 날짜가 다를 경우
+      alert(`예약 날짜까지 ${Math.abs(dateDifference)}일 남았습니다.`);
+      return;
+    }
+
+    // 시간 차이 계산
     const timeDifference =
-      (departureTime.getTime() - nowTime.getTime()) / 1000 / 60; // 분 단위로 차이 계산
+      (departureTime.getTime() - now.getTime()) / (1000 * 60); // 분 단위
 
     if (timeDifference <= 40) {
       // 40분 이내로 다가오면 클릭 가능
@@ -205,20 +234,21 @@ export const ReservationStatus: FC = () => {
     }
   };
 
-  const fetchLocationData = async (reservation: {
+  const fetchLocationData = async ({
+    route_num,
+    departureTime,
+  }: {
     route_num: string;
     departureTime: string;
   }): Promise<void> => {
     try {
-      const targetUrl = `/location/view.php?lineCode=${reservation.route_num}`;
+      const targetUrl = `/location/view.php?lineCode=${route_num}`;
       const response = await axios.get(targetUrl);
       const html = response.data;
 
       const $ = cheerio.load(html);
 
-      const matchingLink = $(`a:contains("${reservation.departureTime}")`).attr(
-        "href"
-      );
+      const matchingLink = $(`a:contains("${departureTime}")`).attr("href");
       if (!matchingLink) {
         console.error(
           "No matching link found for the provided departure time."
@@ -282,8 +312,8 @@ export const ReservationStatus: FC = () => {
             <div
               style={{
                 color: "#71b3ff",
-                fontSize: "18px",
-                fontWeight: "600",
+                fontSize: "14px",
+                fontWeight: "500",
                 textAlign: "center",
               }}
             >
@@ -296,11 +326,6 @@ export const ReservationStatus: FC = () => {
       </div>
     );
   };
-
-  useEffect(() => {
-    const reservation = { route_num: "7", departureTime: "18:10" };
-    fetchLocationData(reservation);
-  }, []);
 
   const handlers = useSwipeable({
     onSwipedDown: () => {
@@ -350,7 +375,7 @@ export const ReservationStatus: FC = () => {
             departureTime={reservation.departureTime}
             seatNumber={reservation.seatNumber}
             onClick={() => handleTicketClick(reservation)} // Ticket 클릭 시 이미지 보이기
-            onClick2={cancel}
+            onClick2={() => cancel(index)}
           />
         ))
       ) : (
