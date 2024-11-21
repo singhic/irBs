@@ -177,6 +177,7 @@ export const ReservationStatus: FC = () => {
   });
 
   const handleTicketClick = (reservation: {
+    route_num: string;
     departuredate?: string;
     departureTime?: string;
   }) => {
@@ -227,6 +228,10 @@ export const ReservationStatus: FC = () => {
 
     if (timeDifference <= 40) {
       // 40분 이내로 다가오면 클릭 가능
+      fetchLocationData({
+        route_num: reservation.route_num,
+        departureTime: reservation.departureTime,
+      });
       setShowImage((prev) => !prev); // 상태 반전 (이미지 보이기)
     } else {
       // 40분 이상 남았다면 알림
@@ -319,7 +324,7 @@ export const ReservationStatus: FC = () => {
             >
               {new_time
                 ? new_time + "시 기준 위치"
-                : "시간이 존재하지 않습니다"}
+                : "위치가 존재하지 않습니다"}
             </div>
           </MapMarker>
         </Map>
