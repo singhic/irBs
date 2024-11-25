@@ -261,7 +261,7 @@ const Signup: React.FC = () => {
         console.log(response.data);
         if (response.data.status === "success") {
           alert(response.data.message);
-          window.location.href = "/MainPage";
+          window.location.href = "/Login";
         } else {
           clearTimeout(timeoutId);
           console.error("Signup failed:", response.status);
