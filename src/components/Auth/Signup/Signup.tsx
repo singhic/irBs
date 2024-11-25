@@ -89,8 +89,8 @@ const Signup: React.FC = () => {
       return;
     }
 
-    if (phone.length !== 9) {
-      alert("휴대폰번호는 9자리여야 합니다. 다시 입력해주세요.");
+    if (phone.length !== 11) {
+      alert("휴대폰번호는 11자리여야 합니다. 다시 입력해주세요.");
       return;
     }
 
