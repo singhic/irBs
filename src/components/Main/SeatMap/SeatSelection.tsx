@@ -49,6 +49,7 @@ export const SeatSelection: React.FC = () => {
     }
     return weekdays;
   };
+
   const dates = getWeekdays();
 
   // 스케줄 데이터 가져오기
@@ -57,11 +58,27 @@ export const SeatSelection: React.FC = () => {
     type: "departure" | "return"
   ) => {
     setLoading(true);
-    const selectedDate = dates[dateIndex].date.replace("일", "");
+
+    // 현재 날짜 기준으로 처리
     const today = new Date();
-    const dateCode = `${today.getFullYear()}${(today.getMonth() + 1)
+    const selectedDate = parseInt(dates[dateIndex].date.replace("일", ""), 10);
+
+    // 날짜 객체 생성
+    let year = today.getFullYear();
+    let month = today.getMonth() + 1; // 1월이 0부터 시작하므로 1 더함
+
+    // 현재 날짜의 월 경계 처리
+    if (selectedDate < today.getDate()) {
+      // 선택한 날짜가 오늘보다 작다면 다음 달로 간주
+      month += 1;
+      if (month > 12) {
+        month = 1; // 12월에서 넘어가면 1월로 변경
+        year += 1; // 연도 증가
+      }
+    }
+    const dateCode = `${year}${month.toString().padStart(2, "0")}${selectedDate
       .toString()
-      .padStart(2, "0")}${selectedDate.padStart(2, "0")}`;
+      .padStart(2, "0")}`;
     const url = `/reserve/time_select_proc.php?lineCode=${lineCode}&dateCode=${dateCode}`;
 
     try {
