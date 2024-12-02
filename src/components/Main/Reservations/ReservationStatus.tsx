@@ -245,20 +245,20 @@ export const ReservationStatus: FC = () => {
   }: {
     route_num: string;
     departureTime: string;
-  }): Promise<LocationData> => {
+  }): Promise<void> => {
     try {
       const targetUrl = `/location/view.php?lineCode=${route_num}`;
       const response = await axios.get(targetUrl);
       const html = response.data;
 
       const $ = cheerio.load(html);
-      const matchingLink = $(`a:contains("${departureTime}")`).attr("href");
 
+      const matchingLink = $(`a:contains("${departureTime}")`).attr("href");
       if (!matchingLink) {
         console.error(
           "No matching link found for the provided departure time."
         );
-        return { new_lat: null, new_lng: null, new_time: null };
+        return;
       }
 
       const detailUrl = `${matchingLink}`;
@@ -269,12 +269,11 @@ export const ReservationStatus: FC = () => {
       const scriptText = detail$(
         'script:contains("new daum.maps.LatLng")'
       ).html();
-
       if (!scriptText) {
         console.error(
           "Could not find script containing map data on detail page."
         );
-        return { new_lat: null, new_lng: null, new_time: null };
+        return;
       }
 
       const latLngMatch = scriptText.match(
@@ -282,40 +281,18 @@ export const ReservationStatus: FC = () => {
       );
       const titleMatch = scriptText.match(/title\s*:\s*'[^']*([\d]{2}:\d{2})/);
 
-      return {
-        new_lat: latLngMatch ? latLngMatch[1] : null,
-        new_lng: latLngMatch ? latLngMatch[2] : null,
-        new_time: titleMatch ? titleMatch[1] : null,
-      };
+      const new_lat = latLngMatch ? latLngMatch[1] : null;
+      const new_lng = latLngMatch ? latLngMatch[2] : null;
+      const new_time = titleMatch ? titleMatch[1] : null;
+
+      setLocationData({ new_lat, new_lng, new_time });
     } catch (error) {
       console.error("Error fetching location data:", error);
-      return { new_lat: null, new_lng: null, new_time: null };
+      setLocationData({ new_lat: null, new_lng: null, new_time: null });
     }
   };
 
-  const TheaterLocation: FC<{ route_num: string; departureTime: string }> = ({
-    route_num,
-    departureTime,
-  }) => {
-    const [locationData, setLocationData] = useState<LocationData>({
-      new_lat: null,
-      new_lng: null,
-      new_time: null,
-    });
-
-    // 10초마다 위치 데이터 갱신
-    useEffect(() => {
-      const updateLocationData = async () => {
-        const data = await fetchLocationData({ route_num, departureTime });
-        setLocationData(data);
-      };
-
-      updateLocationData(); // 초기 호출
-      const interval = setInterval(updateLocationData, 10000);
-
-      return () => clearInterval(interval); // 컴포넌트 언마운트 시 클리어
-    }, [route_num, departureTime]);
-
+  const TheaterLocation = () => {
     const { new_lat, new_lng, new_time } = locationData;
 
     return (
@@ -346,7 +323,7 @@ export const ReservationStatus: FC = () => {
               }}
             >
               {new_time
-                ? `${new_time}시 기준 위치`
+                ? new_time + "시 기준 위치"
                 : "위치가 존재하지 않습니다"}
             </div>
           </MapMarker>
@@ -376,6 +353,17 @@ export const ReservationStatus: FC = () => {
       window.scrollTo(0, 0); // 페이지 맨 위로 스크롤
     }
   }, [isSwipedDown]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (reservations && reservations.length > 0) {
+        const { route_num, departureTime } = reservations[0]; // 첫 번째 예약 정보
+        fetchLocationData({ route_num, departureTime });
+      }
+    }, 10000); // 10초마다 실행
+
+    return () => clearInterval(intervalId); // 컴포넌트 언마운트 시 interval 해제
+  }, [reservations]);
 
   return (
     <main className={styles.container}>
