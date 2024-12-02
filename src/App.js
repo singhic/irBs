@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import "./App.css";
 import AppRouter from "./Routes.tsx";
 
@@ -19,6 +20,7 @@ function App() {
         <main>
           <Suspense fallback={<div>로딩중...</div>}>
             <AppRouter />
+            <Analytics />
           </Suspense>
         </main>
       </div>
