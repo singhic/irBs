@@ -1,6 +1,6 @@
 {
-  "short_name": "인제대 버스",
-  "name": "인제대 통합버스 예약 시스탬",
+  "short_name": "인제대학교 통합 버스",
+  "name": "인제대학교 통합 버스 예약 시스탬",
   "icons": [
     {
       "src": "favicon.ico",
