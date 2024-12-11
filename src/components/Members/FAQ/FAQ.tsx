@@ -51,6 +51,12 @@ const initialFAQs: FAQItem[] = [
       "문의하기를 통해 문의바랍니다. 문의하기는 메인페이지 우측 상단 프로필 -> 문의하기 탭에서 가능합니다.",
     isOpen: false,
   },
+  {
+    question: "문의하기가 안들어가져요.",
+    answer:
+      "현재 문의하기 기능은 구현되어있지 않습니다. 문의사항은 singhic@outlook.kr 으로 문의바랍니다.",
+    isOpen: false,
+  },
 ];
 
 export const FAQ: React.FC = () => {
