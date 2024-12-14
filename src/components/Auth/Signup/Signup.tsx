@@ -23,13 +23,6 @@ const Signup: React.FC = () => {
   ) => {
     event.preventDefault();
 
-    if (idx.length !== 8 || birth.length !== 6) {
-      alert(
-        "학번/사번은 8자리, 생년월일은 6자리여야 합니다. 다시 입력해주세요."
-      );
-      return;
-    }
-
     if (loading) {
       alert("인증 중입니다. 잠시만 기다려 주세요.");
       return;
@@ -287,7 +280,7 @@ const Signup: React.FC = () => {
             학번/사번
           </label>
           <input
-            type="number"
+            type="id"
             id="studentId"
             onChange={(e) => setIdx(e.target.value)}
             value={idx}
