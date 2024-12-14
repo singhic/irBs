@@ -83,7 +83,7 @@ const LoginPage: React.FC = () => {
           아이디 (학번/사번)
         </label>
         <input
-          type="number"
+          type="id"
           value={userId}
           onChange={(e) => setUserId(e.target.value)}
           className={styles.inputField}
