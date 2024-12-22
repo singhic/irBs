@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import MainPage from "./components/Main/MainPage/MainPage.tsx";
 import BusSchedule from "./components/Main/BusSchedule/BusSchedule.tsx";
 import SeatMap from "./components/Main/SeatMap/SeatSelection.tsx";

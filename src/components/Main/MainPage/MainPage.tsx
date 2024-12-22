@@ -3,6 +3,7 @@ import { RouteCard } from "./RouteCard.tsx";
 import styles from "./MainPage.module.css";
 import axios from "axios";
 import * as cheerio from "cheerio";
+import Weather from "./Weather.tsx";
 
 // 스와이프 모듈
 import { useSwipeable } from "react-swipeable";
@@ -194,16 +195,13 @@ export const MainPage: React.FC = () => {
       {/* 날씨 카드 */}
       <section className={styles.weatherCard}>
         <div className={styles.weatherInfo}>
-          <p className={styles.weatherStatus}>금일 캠퍼스 날씨는 맑음입니다.</p>
+          <p className={styles.weatherStatus}>
+            <Weather />
+          </p>
           <h1 className={styles.greeting}>
             안녕하세요. {userName ? userName + "님" : ""}
           </h1>
         </div>
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/e4e208546ef4b7480e5ab6a347461c87993eeabd950ffebecb7912371e49e91a?placeholderIfAbsent=true"
-          alt="Weather"
-          className={styles.weatherIcon}
-        />
       </section>
 
       {/* 예약 버튼 */}
