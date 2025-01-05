@@ -52,7 +52,10 @@ const LoginPage: React.FC = () => {
         console.log(response.data);
         if (response.data.status === "success") {
           alert(response.data.message);
-          Cookies.set("id", userId, { secure: true, sameSite: "Lax" });
+          Cookies.set("id", userId, {
+            secure: true,
+            sameSite: "lax",
+          });
           window.location.href = "/MainPage";
         } else {
           console.error("Login failed:", response.status);

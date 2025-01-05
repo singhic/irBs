@@ -22,7 +22,10 @@ const AuthLayout = () => {
         console.log("Fetched Data:", data);
 
         if (data && data.id) {
-          Cookies.set("id", data.id, { secure: true, sameSite: "Lax" });
+          Cookies.set("id", data.id, {
+            secure: true,
+            sameSite: "lax",
+          });
         } else {
           navigate("/Login", { state: { from: pathname } });
         }
