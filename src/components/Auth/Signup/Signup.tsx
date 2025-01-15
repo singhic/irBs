@@ -383,9 +383,13 @@ const Signup: React.FC = () => {
       </form>
 
       <div className={styles.loginPrompt}>
-        <a href="/Login">
+        <span
+          role="button"
+          onClick={() => (window.location.href = "/Login")}
+          tabIndex={0}
+        >
           <p className={styles.loginText}>아이디가 있나요?</p>
-        </a>
+        </span>
       </div>
     </main>
   );
