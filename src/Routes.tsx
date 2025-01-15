@@ -22,7 +22,7 @@ import FAQ from "./components/Members/FAQ/FAQ.tsx";
 import OnboardingPage from "./components/StartMap/Onboarding/OnboardingPage.tsx";
 import Onboarding1 from "./components/StartMap/Onboarding1/Onboarding1.tsx";
 import Onboarding2 from "./components/StartMap/Onboarding2/Onboarding2.tsx";
-import PenaltySystem from "./components/StartMap/PenaltySystem/PenaltySystem.tsx";
+import Onboarding3 from "./components/StartMap/Onboarding3/Onboarding3.tsx";
 
 import AuthLayout from "./components/layout/AuthLayout.tsx";
 import PublicLayout from "./components/layout/PublicLayout.tsx";
@@ -35,8 +35,8 @@ const AppRouter = () => {
         <Route element={<PublicLayout />}>
           <Route path="/Onboarding" element={<OnboardingPage />} />
           <Route path="/Onboarding1" element={<Onboarding1 />} />
-          <Route path="/Penalty" element={<PenaltySystem />} />
           <Route path="/Onboarding2" element={<Onboarding2 />} />
+          <Route path="/Onboarding3" element={<Onboarding3 />} />
 
           <Route path="/Login" element={<LoginPage />} />
           <Route path="/PasswordReset" element={<PasswordReset />} />
