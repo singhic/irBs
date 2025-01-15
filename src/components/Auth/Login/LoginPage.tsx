@@ -72,7 +72,7 @@ const LoginPage: React.FC = () => {
     <main className={styles.loginContainer}>
       <CookieAlert />
       <img
-        src="https://www.inje.ac.kr/kor/assets/images/sub/ui-logo.png"
+        src="img/icon/ui-logo.png"
         alt="인제대학교 로고"
         className={styles.logo}
       />
@@ -113,11 +113,7 @@ const LoginPage: React.FC = () => {
         </div>
 
         <button className={styles.loginButton} onClick={handleLogin}>
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/27ab334dd17dc9de946c30c832cb0a06db7c8dbea05cb2dacbcfc926384075b5?placeholderIfAbsent=true"
-            alt=""
-            className={styles.loginButtonBg}
-          />
+         
           <span className={styles.loginButtonText}>로그인</span>
         </button>
       </form>

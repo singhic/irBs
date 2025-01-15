@@ -173,7 +173,7 @@ const UserProfile: React.FC = () => {
       <header className={styles.headerSection}>
         <a href="/MyPage">
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/c6f39fd7de10126956016a660e84671a37b66231dcc86d58ff090a6a35e1599c?placeholderIfAbsent=true"
+            src="/img/icon/big-arrow-left.svg"
             alt="Back"
             className={styles.backIcon}
           />

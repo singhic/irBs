@@ -66,7 +66,7 @@ const MyPage: React.FC = () => {
           <a href="/MainPage">
             <img
               id="icon"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/c6f39fd7de10126956016a660e84671a37b66231dcc86d58ff090a6a35e1599c?placeholderIfAbsent=true"
+              src="/img/icon/big-arrow-left.svg"
               alt="뒤로가기 아이콘"
               className={styles.backicon}
             />
@@ -76,7 +76,7 @@ const MyPage: React.FC = () => {
 
         <div className={styles.userProfile}>
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/6596c95482616e0247ca02575e9d69257aa06be47f4bdd62637ebf1c9344ba88?placeholderIfAbsent=true"
+            src="/img/icon/profilelogo.svg"
             alt="프로필 이미지"
             className={styles.profileImage}
           />
@@ -84,7 +84,7 @@ const MyPage: React.FC = () => {
             <span className={styles.userName}>{userName}님</span>
             <a href="/userprofile" className={styles.move_userprofile}>
               <img
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/942bad32bb7686b37623a7bbd94277cca6dfadef154afacbe543d2856ad9a096?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30"
+                src="/img/icon/small-arrow-right.svg"
                 alt="내 정보 수정"
               />
             </a>
@@ -97,7 +97,7 @@ const MyPage: React.FC = () => {
 
         <SectionHeader
           title="예약"
-          icon="https://cdn.builder.io/api/v1/image/assets/TEMP/e93cc959cb72382063af44ef50d63c214975ce83016a1d9db492a7ef89ca62c8?placeholderIfAbsent=true"
+          icon="/img/icon/asklogo.svg"
         />
         {/* <div className={styles.contentCard}>
           <div className={styles.recentList}>
@@ -118,7 +118,7 @@ const MyPage: React.FC = () => {
 
         <SectionHeader
           title="문의"
-          icon="https://cdn.builder.io/api/v1/image/assets/TEMP/e93cc959cb72382063af44ef50d63c214975ce83016a1d9db492a7ef89ca62c8?placeholderIfAbsent=true"
+          icon="/img/icon/asklogo.svg"
         />
         {/*<div className={styles.contentCard}>
           <div className={styles.recentList}>
