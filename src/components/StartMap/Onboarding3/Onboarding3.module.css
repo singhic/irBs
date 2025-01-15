@@ -1,23 +1,23 @@
-.onboardingWrapper {
+.container {
   background-color: #fff;
   display: flex;
-  padding: 173px 0 0;
   flex-direction: column;
   overflow: hidden;
   font: 700 14px "Noto Sans KR", -apple-system, Roboto, Helvetica, sans-serif;
 }
 
 .heroImage {
-  aspect-ratio: 1.45;
+  aspect-ratio: 0.713;
   object-fit: contain;
   object-position: center;
   width: 100%;
+  z-index: 10;
+  margin-left: 35px;
 }
 
 .contentSection {
   background: linear-gradient(180deg, #87ceeb -7.29%, #f3f4f6 100%);
   display: flex;
-  margin-top: 111px;
   width: 100%;
   flex-direction: column;
   align-items: start;
@@ -27,17 +27,18 @@
 .title {
   color: #333;
   font-size: 20px;
+  text-align: left;
 }
 
 .description {
   color: #000;
   font-weight: 400;
   line-height: 20px;
-  margin: 7px 0 0;
+  margin-top: 7px;
   text-align: left;
 }
 
-.startButton {
+.nextButton {
   z-index: 10;
   border-radius: 20px;
   background-color: rgba(176, 224, 230, 0.9);
@@ -45,24 +46,17 @@
   color: rgba(56, 56, 56, 0.9);
   white-space: nowrap;
   margin: 17px 0 -22px;
-  padding: 12px 130px;
+  padding: 12px 140px;
   border: none;
   cursor: pointer;
   transition: opacity 0.2s;
 }
 
-.startButton:hover {
-  background-color: rgba(176, 224, 230, 1);
+.nextButton:hover {
+  opacity: 0.9;
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+.nextButton:focus {
+  outline: 2px solid #333;
+  outline-offset: 2px;
 }

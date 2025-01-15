@@ -9,7 +9,7 @@ const OnboardingInfo: React.FC = () => {
   return (
     <main className={styles.container}>
       <img
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/6461bb6e39fe3abfff37f1da48ec1c5f8741bc365f466629151fd3e7115d4635?placeholderIfAbsent=true"
+        src="img/icon/introdoctionimage2.png"
         alt="Onboarding illustration"
         className={styles.heroImage}
       />

@@ -10,7 +10,7 @@ const OnboardingPage: React.FC = () => {
     <main className={styles.onboardingWrapper}>
       <img
         loading="lazy"
-        src="/img/icon/introdoctionimage3.png"
+        src="/img/icon/introdoctionimage3.gif"
         className={styles.heroImage}
         alt="Bus reservation system illustration"
       />
