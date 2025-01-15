@@ -119,13 +119,30 @@ const LoginPage: React.FC = () => {
       </form>
 
       <nav className={styles.helpLinks}>
-        <a href="/passwordreset">비밀번호 찾기</a>
+        <span
+          role="button"
+          onClick={() => (window.location.href = "/passwordreset")}
+          tabIndex={0}
+        >
+          비밀번호 찾기
+        </span>
         <div className={styles.divider} aria-hidden="true" />
-        <a href="/signup">회원가입</a>
+        <span
+          role="button"
+          onClick={() => (window.location.href = "/signup")}
+          tabIndex={0}
+        >
+          회원가입
+        </span>
       </nav>
-
       <p className={styles.newUserText}>
-        <a href="/Onboarding">처음이신가요?</a>
+        <span
+          role="button"
+          onClick={() => (window.location.href = "/Onboarding")}
+          tabIndex={0}
+        >
+          처음이신가요?
+        </span>
       </p>
     </main>
   );

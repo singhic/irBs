@@ -96,9 +96,10 @@
   align-items: center;
   justify-content: center;
   margin-top: 14px;
-  color: #0088ff;
+  color: rgb(0, 0, 0);
   font-weight: 500;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .divider {
@@ -108,11 +109,12 @@
 }
 
 .newUserText {
-  color: #0088ff;
+  color: rgb(0, 0, 0);
   font-weight: 500;
   margin-top: 50px;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .visually-hidden {
