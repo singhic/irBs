@@ -1,0 +1,24 @@
+.card {
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  width: 100%;
+  max-width: 305px;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 18px 17px;
+  margin-top: 11px;
+}
+
+.title {
+  font: 400 16px "Noto Sans KR", -apple-system, sans-serif;
+}
+
+.arrow {
+  aspect-ratio: 1.18;
+  object-fit: contain;
+  object-position: center;
+  width: 13px;
+  align-self: start;
+}

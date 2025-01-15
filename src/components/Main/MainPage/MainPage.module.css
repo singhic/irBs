@@ -280,6 +280,7 @@
   font-size: 14px;
   color: rgba(0, 0, 0, 0.45);
   font-weight: 700;
+  text-decoration-line: none;
   justify-content: space-between;
 }
 

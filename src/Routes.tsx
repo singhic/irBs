@@ -9,6 +9,7 @@ import MainPage from "./components/Main/MainPage/MainPage.tsx";
 import BusSchedule from "./components/Main/BusSchedule/BusSchedule.tsx";
 import SeatMap from "./components/Main/SeatMap/SeatSelection.tsx";
 import Reservations from "./components/Main/Reservations/ReservationStatus.tsx";
+import Notification from "./components/Main/Notification/NotificationList.tsx";
 
 import LoginPage from "./components/Auth/Login/LoginPage.tsx";
 import PasswordReset from "./components/Auth/PasswordReset/PasswordReset.tsx";
@@ -43,6 +44,7 @@ const AppRouter = () => {
         </Route>
         <Route element={<AuthLayout />}>
           <Route path="/MainPage" element={<MainPage />} />
+          <Route path="/Notification" element={<Notification />} />
           <Route path="/BusSchedule" element={<BusSchedule />} />
           <Route path="/SeatMap" element={<SeatMap />} />
           <Route path="/Reservations" element={<Reservations />} />

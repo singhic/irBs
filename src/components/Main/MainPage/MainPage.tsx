@@ -266,14 +266,16 @@ export const MainPage: React.FC = () => {
         {/* ----------------------------------------------------------------- */}
 
         <hr className={styles.noticeDivider} />
-        <div className={styles.noticeFooter}>
-          <span className={styles.noticeText}>전체공지 보기</span>
-          <img
-            src="/img/icon/reservelogo.svg"
-            alt=""
-            className={styles.noticeIcon}
-          />
-        </div>
+        <a className={styles.noticeFooter} href="/Notification">
+          <div className={styles.noticeFooter}>
+            <span className={styles.noticeText}>전체 공지사항 보기</span>
+            <img
+              src="/img/icon/reservelogo.svg"
+              alt=""
+              className={styles.noticeIcon}
+            />
+          </div>
+        </a>
       </section>
       <a href="/FAQ">
         <button className={styles.supportText}>문제가 있으신가요?</button>
