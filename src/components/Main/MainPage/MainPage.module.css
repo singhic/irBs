@@ -20,7 +20,7 @@
   color: #000;
   font-weight: 350;
   text-align: center;
-  padding: 3px 3px;
+  padding: 3px 3px ;
 }
 
 .notificationContent {
@@ -69,12 +69,14 @@
   justify-content: space-between;
   padding: 10px 20px;
   margin: 2% 2%;
+  
 }
 
 .weatherInfo {
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* 왼쪽 정렬 */
+
 }
 
 .weatherStatus {
@@ -98,7 +100,7 @@
   /* object-fit: contain; */
   /* object-position: center; */
   width: 50px;
-  align-items: right;
+  /* align-self: start; */
 }
 /* 예약하기 버튼 ----------------------------------------------- */
 .bookingButton {
@@ -117,8 +119,12 @@
   align-items: center;
   text-decoration: none; /* 밑줄 제거 */
   color: inherit; /* 텍스트 색상 상속 */
+  transition: background-color 200ms ease-in-out;
 }
-
+.bookingButton:hover , .bookingButton:focus
+{
+  background-color: #e1f1ff;
+}
 .bookingText {
   margin: auto 0;
   /* align-items: center;  */
@@ -127,6 +133,7 @@
   /* align-self: left; */
   text-align: left;
   color: inherit; /* 텍스트 색상 상속 */
+
 }
 
 .bookingIcon {
@@ -213,6 +220,7 @@
   font-weight: 500;
   /* align-self: end; */
   margin-top: 4px;
+  
 }
 /* 공지사항 ---------------------------------------------------------------------------- */
 .noticeSection {
@@ -282,7 +290,7 @@
 }
 
 .noticeText {
-  flex-grow: 1; /* 텍스트 영역을 확장 */
+  flex-grow: 1; /* 텍스트 영역을 확장 */ 
   text-align: center; /* 텍스트 가운데 정렬 */
   object-position: center;
   font-weight: 700;
@@ -325,6 +333,7 @@
   height: 100vh;
   transform: translateY(-85vh);
 }
+
 
 .recentBookingIcon {
   aspect-ratio: 1.1;

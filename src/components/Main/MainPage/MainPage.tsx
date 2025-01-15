@@ -175,7 +175,7 @@ export const MainPage: React.FC = () => {
       <header className={styles.notificationBar}>
         <div className={styles.notificationContent}>
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/3ef9aedfc9b62a5ef5418720705177a18d6ad3a44771951bd8bc03bb620b248e?placeholderIfAbsent=true"
+            src="/img/icon/warninglogo.svg"
             alt="Warning icon"
             className={styles.notificationIcon}
           />
@@ -185,7 +185,7 @@ export const MainPage: React.FC = () => {
         </div>
         <a href="/MyPage">
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/000f5f913f98483ee512f05f509b6c27a28917768973c443b3543c86a04612d4?placeholderIfAbsent=true"
+            src="/img/icon/settinglogo.svg"
             alt="Settings"
             className={styles.settingsIcon}
           />
@@ -208,7 +208,7 @@ export const MainPage: React.FC = () => {
       <a href="./BusSchedule" className={styles.bookingButton}>
         <span className={styles.bookingText}>예약하기</span>
         <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/406181a727603b6744c65a734692215707f5036ec231fe2445b98845343e8c94?placeholderIfAbsent=true"
+          src="/img/icon/reservelogo.svg"
           alt="예약하기 버튼"
           className={styles.bookingIcon}
         />
@@ -269,7 +269,7 @@ export const MainPage: React.FC = () => {
         <div className={styles.noticeFooter}>
           <span className={styles.noticeText}>전체공지 보기</span>
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/39d3da592bbe83d18c101160fb790b68b8b3c44297531c445b233d2f5354dec7?placeholderIfAbsent=true"
+            src="/img/icon/reservelogo.svg"
             alt=""
             className={styles.noticeIcon}
           />
@@ -287,7 +287,7 @@ export const MainPage: React.FC = () => {
         {...handlers}
       >
         <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/fe829013-c35b-4444-ab77-aaf9850d8c8d?placeholderIfAbsent=true"
+          src="/img/icon/arrow-top.png"
           alt=""
           className={styles.recentBookingIcon}
         />
