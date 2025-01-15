@@ -6,7 +6,7 @@ const OnboardingPage: React.FC = () => {
     <main className={styles.onboardingWrapper}>
       <img 
         loading="lazy" 
-        src="https://cdn.builder.io/api/v1/image/assets/TEMP/5c5bac3f88aab697059b3aadf82d2b250f9a6772de9c41d201614c05d07bd294?placeholderIfAbsent=true" 
+        src="/img/icon/introdoctionimage3.png" 
         className={styles.heroImage} 
         alt="Bus reservation system illustration"
       />

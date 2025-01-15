@@ -374,7 +374,7 @@ export const ReservationStatus: FC = () => {
         {...handlers}
       >
         <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/8746e8b4f306405ef2fe1ae0cea531f94bb78c78ef47147a23f5a296136d09d6?placeholderIfAbsent=true"
+          src="/img/icon/companylogo.svg"
           alt="Company Logo"
           className={styles.logo}
         />

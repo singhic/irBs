@@ -75,7 +75,7 @@ export const FAQ: React.FC = () => {
       <header className={styles.faqHeader}>
         <button onClick={() => window.history.back()}>
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/6658073b441adbc80f3e37bb689f9ebf88f65cb1a25c860f9ec8adcbbf83fe3c?placeholderIfAbsent=true"
+            src="/img/icon/big-arrow-left.svg"
             alt="뒤로가기 아이콘"
             className={styles.headerIcon}
           />
