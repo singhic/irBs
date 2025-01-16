@@ -3,7 +3,7 @@ import styles from "./MyPage.module.css";
 import { UserStats } from "./UserStats.tsx";
 import { SectionHeader } from "./SectionHeader.tsx";
 import { RecentItem } from "./RecentItem.tsx";
-import { Button } from "@mui/material";
+import { Button, hexToRgb } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
@@ -50,13 +50,21 @@ const MyPage: React.FC = () => {
 
   const recentItems = [
     { title: "예약 내역", icon: "/light-left-arrow.svg", href: "/Bookinglist" },
-    { title: "패널티 내역", icon: "/light-left-arrow.svg" },
-    { title: "비매너 내역", icon: "/light-left-arrow.svg" },
+    {
+      title: "패널티 내역",
+      icon: "/light-left-arrow.svg",
+      href: "/Penaltylist",
+    },
+    {
+      title: "비매너 내역",
+      icon: "/light-left-arrow.svg",
+      href: "/Mannerlist",
+    },
   ];
 
   const inquiryItems = [
-    { title: "문의하기", icon: "/light-left-arrow.svg" },
-    { title: "문의 내역", icon: "/light-left-arrow.svg" },
+    { title: "문의하기", icon: "/light-left-arrow.svg", href: "/Inquiry" },
+    { title: "문의 내역", icon: "/light-left-arrow.svg", href: "/Inquirylist" },
   ];
 
   return (

@@ -1,0 +1,93 @@
+.inquiryContainer {
+  background-color: rgb(243, 244, 246);
+  display: flex;
+  padding: 0 0 50px;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.7);
+  font: 400 12px "Noto Sans KR", -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.header {
+  background-color: #fff;
+  align-self: stretch;
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  font-size: 24px;
+  color: #000;
+  font-weight: 700;
+  text-align: center;
+  justify-content: space-between;
+  padding: 19px 23px;
+}
+
+.headerIcon {
+  aspect-ratio: 1.05;
+  object-fit: contain;
+  width: 39px;
+}
+
+.headerTitle {
+  margin: 0;
+  font-size: 24px;
+}
+
+.categorySelect {
+  border-radius: 10px;
+  background-color: #fff;
+  display: flex;
+  margin-top: 13px;
+  width: 313px;
+  max-width: 100%;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 16px 25px 16px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.dropdownIcon {
+  aspect-ratio: 1.56;
+  object-fit: contain;
+  width: 14px;
+  margin: auto 0;
+}
+
+.inquiryInput {
+  border-radius: 10px;
+  background-color: #fff;
+  margin-top: 6px;
+  width: 313px;
+  max-width: 100%;
+  padding: 16px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.submitButton {
+  position: relative;
+  border-radius: 20px;
+  margin-top: 43px;
+  width: 312px;
+  max-width: 312px;
+  padding: 14px 70px;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.buttonBackground {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.buttonText {
+  position: relative;
+  font-size: 14px;
+  color: rgba(56, 56, 56, 0.9);
+  font-weight: 700;
+}

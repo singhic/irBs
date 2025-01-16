@@ -1,0 +1,110 @@
+.container {
+  background-color: rgb(243, 244, 246);
+  display: flex;
+  padding-bottom: 385px;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: center;
+  font-family: Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.header {
+  background-color: #fff;
+  align-self: stretch;
+  display: flex;
+  gap: 35px;
+  padding: 19px 23px;
+}
+
+.headerIcon {
+  aspect-ratio: 1.05;
+  object-fit: contain;
+  object-position: center;
+  width: 39px;
+}
+
+.headerTitle {
+  flex-grow: 1;
+  width: 232px;
+  font-size: 24px;
+  color: #000;
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+}
+
+.scoreCard {
+  border-radius: 20px;
+  background-color: #fff;
+  display: flex;
+  margin-top: 25px;
+  width: 100%;
+  max-width: 307px;
+  flex-direction: column;
+  text-align: center;
+  padding: 21px 46px 13px;
+}
+
+.scoreLabel {
+  color: #000;
+  font-size: 20px;
+  font-weight: 400;
+  align-self: start;
+}
+
+.scoreValue {
+  color: rgb(0, 136, 255);
+  font-size: 25px;
+  font-weight: 700;
+  align-self: end;
+  margin-top: 10px;
+}
+
+.historyItem {
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  margin-top: 13px;
+  width: 100%;
+  max-width: 307px;
+  align-items: start;
+  gap: 20px;
+  color: #000;
+  font-weight: 400;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.historyContent {
+  display: flex;
+  gap: 26px;
+}
+
+.historyDate {
+  font-size: 16px;
+}
+
+.historyDescription {
+  font-size: 15px;
+}
+
+.historyIcon {
+  aspect-ratio: 1.15;
+  object-fit: contain;
+  object-position: center;
+  width: 15px;
+}
+
+.penaltyNotice {
+  border-radius: 10px;
+  background-color: rgba(176, 224, 230, 0.9);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 17px;
+  width: 100%;
+  max-width: 307px;
+  font-size: 15px;
+  color: rgba(56, 56, 56, 0.9);
+  font-weight: 400;
+  padding: 7px 50px;
+}
