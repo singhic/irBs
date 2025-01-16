@@ -49,14 +49,14 @@ const MyPage: React.FC = () => {
   }, []);
 
   const recentItems = [
-    { title: "최근 예약 내역", icon: "/light-left-arrow.svg" },
-    { title: "최근 패널티 내역", icon: "/light-left-arrow.svg" },
-    { title: "최근 비매너 내역", icon: "/light-left-arrow.svg" },
+    { title: "예약 내역", icon: "/light-left-arrow.svg", href: "/Bookinglist" },
+    { title: "패널티 내역", icon: "/light-left-arrow.svg" },
+    { title: "비매너 내역", icon: "/light-left-arrow.svg" },
   ];
 
   const inquiryItems = [
     { title: "문의하기", icon: "/light-left-arrow.svg" },
-    { title: "최근 문의 내역", icon: "/light-left-arrow.svg" },
+    { title: "문의 내역", icon: "/light-left-arrow.svg" },
   ];
 
   return (
@@ -83,10 +83,7 @@ const MyPage: React.FC = () => {
           <div className={styles.userNP}>
             <span className={styles.userName}>{userName}님</span>
             <a href="/userprofile" className={styles.move_userprofile}>
-              <img
-                src="/img/icon/small-arrow-right.svg"
-                alt="내 정보 수정"
-              />
+              <img src="/img/icon/small-arrow-right.svg" alt="내 정보 수정" />
             </a>
           </div>
         </div>
@@ -95,10 +92,7 @@ const MyPage: React.FC = () => {
       <section className={styles.mainContent}>
         <UserStats penaltyCount="조회불가" mannerScore="측정불가" />
 
-        <SectionHeader
-          title="예약"
-          icon="/img/icon/asklogo.svg"
-        />
+        <SectionHeader title="예약" icon="/img/icon/asklogo.svg" />
         {/* <div className={styles.contentCard}>
           <div className={styles.recentList}>
             {recentItems.map((item, index) => (
@@ -116,10 +110,7 @@ const MyPage: React.FC = () => {
           </Stack>
         </Paper>
 
-        <SectionHeader
-          title="문의"
-          icon="/img/icon/asklogo.svg"
-        />
+        <SectionHeader title="문의" icon="/img/icon/asklogo.svg" />
         {/*<div className={styles.contentCard}>
           <div className={styles.recentList}>
             {inquiryItems.map((item, index) => (
