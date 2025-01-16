@@ -24,6 +24,12 @@ import Onboarding1 from "./components/StartMap/Onboarding1/Onboarding1.tsx";
 import Onboarding2 from "./components/StartMap/Onboarding2/Onboarding2.tsx";
 import Onboarding3 from "./components/StartMap/Onboarding3/Onboarding3.tsx";
 
+import BookList from "./components/List/Booking/RecentBookings.tsx";
+import PenaltyList from "./components/List/Penalty/RecentPenalties.tsx";
+import MannerList from "./components/List/Manner/MannerHistory.tsx";
+import Inquiry from "./components/List/Inquiry/InquiryForm.tsx";
+import InquiryList from "./components/List/InquiryList/InquiryList.tsx";
+
 import AuthLayout from "./components/layout/AuthLayout.tsx";
 import PublicLayout from "./components/layout/PublicLayout.tsx";
 
@@ -52,6 +58,12 @@ const AppRouter = () => {
           <Route path="/MyPage" element={<Mypage />} />
           <Route path="/UserProfile" element={<UserProfile />} />
           <Route path="/FAQ" element={<FAQ />} />
+
+          <Route path="/BookList" element={<BookList />} />
+          <Route path="/PenaltyList" element={<PenaltyList />} />
+          <Route path="/MannerList" element={<MannerList />} />
+          <Route path="/Inquiry" element={<Inquiry />} />
+          <Route path="/InquiryList" element={<InquiryList />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/MainPage" />} />

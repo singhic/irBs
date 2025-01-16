@@ -10,17 +10,13 @@ export const UserStats: React.FC<UserStatsProps> = ({
     <div className={styles.statCard}>
       <div className={styles.statTitle}>
         <span>패널티 누적</span>
-        <img
-          src="/img/icon/warninglogo.svg"
-          alt=""
-          className={styles.icon}
-        />
+        <img src="/img/icon/warninglogo.svg" alt="" className={styles.icon} />
       </div>
-      <div className={styles.statValue}>{penaltyCount}</div>
+      <div className={styles.penaltystatValue}>{penaltyCount}</div>
     </div>
     <div className={styles.statCard}>
-      <div className={styles.statTitle}>비매너 점수</div>
-      <div className={styles.statValue}>{mannerScore}</div>
+      <div className={styles.statTitle}>매너 점수</div>
+      <div className={styles.mannerstatValue}>{mannerScore}</div>
     </div>
   </div>
 );
