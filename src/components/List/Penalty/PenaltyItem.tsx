@@ -13,7 +13,14 @@ export const PenaltyItem: React.FC<PenaltyItemProps> = ({
         <div className={styles.penaltyDate}>{date}</div>
         <div className={styles.penaltyLocation}>{location}</div>
       </div>
-      <img loading="lazy" src={iconSrc} className={styles.penaltyIcon} alt="" />
+      <a href="/Booklist" className={styles.penaltyIcon}>
+        <img
+          loading="lazy"
+          src={iconSrc}
+          className={styles.penaltyIcon}
+          alt=""
+        />
+      </a>
     </div>
   );
 };

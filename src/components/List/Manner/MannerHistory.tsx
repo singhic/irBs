@@ -24,12 +24,7 @@ export const MannerHistory: React.FC = () => {
     <div className={styles.container}>
       <header className={styles.header}>
         <a href="/Mypage" className={styles.headerIcon}>
-          <img
-            loading="lazy"
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/dbbf29bacc63dc6ef82359fb45b0d56eb2145ad6cfe9c9af8b776f8fd57d5005?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30"
-            alt=""
-            className={styles.headerIcon}
-          />
+          <img loading="lazy" src="img/icon/arrow-left.png" alt="뒤로가기" />
         </a>
         <h1 className={styles.headerTitle}>비매너 내역</h1>
       </header>

@@ -24,7 +24,7 @@ import Onboarding1 from "./components/StartMap/Onboarding1/Onboarding1.tsx";
 import Onboarding2 from "./components/StartMap/Onboarding2/Onboarding2.tsx";
 import Onboarding3 from "./components/StartMap/Onboarding3/Onboarding3.tsx";
 
-import BookingList from "./components/List/Booking/RecentBookings.tsx";
+import BookList from "./components/List/Booking/RecentBookings.tsx";
 import PenaltyList from "./components/List/Penalty/RecentPenalties.tsx";
 import MannerList from "./components/List/Manner/MannerHistory.tsx";
 import Inquiry from "./components/List/Inquiry/InquiryForm.tsx";
@@ -59,7 +59,7 @@ const AppRouter = () => {
           <Route path="/UserProfile" element={<UserProfile />} />
           <Route path="/FAQ" element={<FAQ />} />
 
-          <Route path="/BookingList" element={<BookingList />} />
+          <Route path="/BookList" element={<BookList />} />
           <Route path="/PenaltyList" element={<PenaltyList />} />
           <Route path="/MannerList" element={<MannerList />} />
           <Route path="/Inquiry" element={<Inquiry />} />

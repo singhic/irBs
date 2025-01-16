@@ -3,8 +3,7 @@
   background-color: #fff;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
-  width: 100%;
-  max-width: 350px;
+  width: 80%;
   align-items: center;
   gap: 20px;
   justify-content: space-between;
@@ -13,14 +12,11 @@
 }
 
 .bookingInfo {
-  align-self: stretch;
   display: flex;
   flex-direction: column;
-  align-items: center;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   white-space: nowrap;
-  margin: auto 0;
 }
 
 .route {
@@ -30,21 +26,20 @@
 
 .date {
   font-weight: 400;
-  margin-top: 12px;
+  margin-top: 5px;
 }
 
 .time {
-  margin-top: 11px;
+  margin-top: 5px;
 }
 
 .seatDisplay {
+  margin-bottom: 10px;
   font-size: 40px;
-  align-self: stretch;
-  margin: auto 0;
 }
 
 .seatNumber {
-  font-size: 35px;
+  font-size: 25px;
 }
 
 .seatLabel {
@@ -54,14 +49,13 @@
 .divider {
   align-self: stretch;
   width: 1px;
-  height: 112px;
   border: 1px dashed rgba(0, 0, 0, 0.2);
 }
 
 .status {
-  font-size: 30px;
+  font-size: 25px;
   align-self: stretch;
-  margin: auto 0;
+  margin: auto 10px;
 }
 
 .notBoarded {

@@ -12,3 +12,9 @@ export interface InquiryInputProps {
   onChange: (value: string) => void;
   placeholder: string;
 }
+
+export interface DetailInputProps {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder: string;
+}

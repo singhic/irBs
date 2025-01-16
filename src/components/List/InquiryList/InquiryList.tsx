@@ -29,12 +29,7 @@ export const InquiryList: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <a href="/Mypage" className={styles.headerIcon}>
-          <img
-            loading="lazy"
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/dbbf29bacc63dc6ef82359fb45b0d56eb2145ad6cfe9c9af8b776f8fd57d5005?placeholderIfAbsent=true&apiKey=c37b27135006443aab5f3858d3155b30"
-            alt=""
-            className={styles.headerIcon}
-          />
+          <img loading="lazy" src="img/icon/arrow-left.png" alt="뒤로가기" />
         </a>
         <div className={styles.headerTitle}>문의 내역</div>
       </div>

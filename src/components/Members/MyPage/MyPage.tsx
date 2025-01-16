@@ -49,14 +49,14 @@ const MyPage: React.FC = () => {
   }, []);
 
   const recentItems = [
-    { title: "예약 내역", icon: "/light-left-arrow.svg", href: "/Bookinglist" },
+    { title: "예약 내역", icon: "/light-left-arrow.svg", href: "/Booklist" },
     {
       title: "패널티 내역",
       icon: "/light-left-arrow.svg",
       href: "/Penaltylist",
     },
     {
-      title: "비매너 내역",
+      title: "매너 내역",
       icon: "/light-left-arrow.svg",
       href: "/Mannerlist",
     },
@@ -98,7 +98,7 @@ const MyPage: React.FC = () => {
       </header>
 
       <section className={styles.mainContent}>
-        <UserStats penaltyCount="조회불가" mannerScore="측정불가" />
+        <UserStats penaltyCount="조회불가" mannerScore="85점" />
 
         <SectionHeader title="예약" icon="/img/icon/asklogo.svg" />
         {/* <div className={styles.contentCard}>

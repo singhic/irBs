@@ -1,7 +1,6 @@
 .container {
   background-color: #f3f4f6;
   display: flex;
-  max-width: 414px;
   padding-bottom: 23px;
   flex-direction: column;
   overflow: hidden;
@@ -10,6 +9,9 @@
   color: #000;
   font-weight: 900;
   text-align: center;
+  width: 100%;
+  height: 100vh;
+  max-height: 1000px;
 }
 
 .header {
@@ -30,18 +32,6 @@
 }
 
 .headerTitle {
-  flex-grow: 1;
-  width: 221px;
-  margin-left: -3px;
-}
-
-.qrCode {
-  aspect-ratio: 2.76;
-  object-fit: contain;
-  object-position: center;
-  width: 100%;
-  border-radius: 20px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  margin-top: 13px;
-  max-width: 350px;
+  flex-grow: 0.5;
+  width: 100px;
 }
