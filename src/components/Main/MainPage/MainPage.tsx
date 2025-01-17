@@ -5,6 +5,8 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 import Weather from "./Weather.tsx";
 
+import  QuickBooking  from "./QuickBooking.tsx";
+
 // 스와이프 모듈
 import { useSwipeable } from "react-swipeable";
 // 페이지 이동 모듈
@@ -128,6 +130,25 @@ export const MainPage: React.FC = () => {
   const routeData = [
     { destination: "동래", time: "16:20", seats: "(44/33석)" },
     { destination: "울산", time: "18:10", seats: "(44/41석)" },
+    { destination: "대구", time: "19:20", seats: "(44/4석)" },
+    { destination: "부산", time: "09:30", seats: "(44/4석)" },
+    { destination: "대구", time: "11:50", seats: "(44/44석)" },
+    { destination: "인천", time: "07:50", seats: "(44/21석)" },
+    { destination: "울산", time: "11:10", seats: "(44/38석)" },
+    { destination: "서울", time: "08:20", seats: "(44/13석)" },
+    { destination: "인천", time: "21:40", seats: "(44/44석)" },
+    { destination: "대구", time: "17:30", seats: "(44/35석)" },
+    { destination: "광주", time: "14:20", seats: "(44/18석)" },
+    { destination: "울산", time: "15:10", seats: "(44/11석)" },
+    { destination: "울산", time: "18:10", seats: "(44/39석)" },
+    { destination: "서울", time: "14:40", seats: "(44/9석)" },
+    { destination: "울산", time: "18:50", seats: "(44/14석)" },
+    { destination: "인천", time: "18:20", seats: "(44/10석)" },
+    { destination: "서울", time: "12:30", seats: "(44/41석)" },
+    { destination: "광주", time: "21:10", seats: "(44/32석)" },
+    { destination: "울산", time: "18:50", seats: "(44/31석)" },
+    { destination: "광주", time: "12:20", seats: "(44/32석)" },
+
   ];
 
   const handlers = useSwipeable({
@@ -214,7 +235,7 @@ export const MainPage: React.FC = () => {
         />
       </a>
 
-      {/* 빠른 예약 섹션 */}
+      {/* 빠른 예약 섹션
       <section className={styles.quickBooking}>
         <h2 className={styles.quickBookingTitle}>빠른 예약하기</h2>
         <div className={styles.quickBookingContent}>
@@ -227,7 +248,10 @@ export const MainPage: React.FC = () => {
             />
           ))}
         </div>
-      </section>
+      </section> */}
+      <div>      
+      <QuickBooking routeData={routeData} />
+      </div>
 
       <section className={styles.noticeSection}>
         <h2 className={styles.noticeTitle}>공지사항</h2>
