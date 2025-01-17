@@ -20,7 +20,7 @@
   color: #000;
   font-weight: 350;
   text-align: center;
-  padding: 3px 3px ;
+  padding: 3px 3px;
 }
 
 .notificationContent {
@@ -69,14 +69,12 @@
   justify-content: space-between;
   padding: 10px 20px;
   margin: 2% 2%;
-  
 }
 
 .weatherInfo {
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* 왼쪽 정렬 */
-
 }
 
 .weatherStatus {
@@ -121,8 +119,8 @@
   color: inherit; /* 텍스트 색상 상속 */
   transition: background-color 200ms ease-in-out;
 }
-.bookingButton:hover , .bookingButton:focus
-{
+.bookingButton:hover,
+.bookingButton:focus {
   background-color: #e1f1ff;
 }
 .bookingText {
@@ -133,7 +131,6 @@
   /* align-self: left; */
   text-align: left;
   color: inherit; /* 텍스트 색상 상속 */
-
 }
 
 .bookingIcon {
@@ -141,6 +138,47 @@
   margin-left: auto; /* 부모 요소 내에서 오른쪽 정렬 */
   position: relative; /* 부모 요소 내에서 상대 위치 */
 }
+
+/* 버스위치 ----------------------------------------------------------*/
+.locationButton {
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  margin: 0 2%;
+  margin-top: 2%;
+  font-size: 20px;
+
+  padding: 11px 27px;
+  cursor: pointer;
+  border: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-decoration: none; /* 밑줄 제거 */
+  color: inherit; /* 텍스트 색상 상속 */
+  transition: background-color 200ms ease-in-out;
+}
+.locationButton:hover,
+.locationButton:focus {
+  background-color: #e1f1ff;
+}
+.locationText {
+  margin: auto 0;
+  /* align-items: center;  */
+  font-size: 20px;
+  font-weight: 600;
+  /* align-self: left; */
+  text-align: left;
+  color: inherit; /* 텍스트 색상 상속 */
+}
+
+.locationIcon {
+  width: 34px;
+  margin-left: auto; /* 부모 요소 내에서 오른쪽 정렬 */
+  position: relative; /* 부모 요소 내에서 상대 위치 */
+}
+
 /* 빠른예약 ----------------------------------------------------------*/
 .quickBooking {
   border-radius: 18px;
@@ -220,7 +258,6 @@
   font-weight: 500;
   /* align-self: end; */
   margin-top: 4px;
-  
 }
 /* 공지사항 ---------------------------------------------------------------------------- */
 .noticeSection {
@@ -291,7 +328,7 @@
 }
 
 .noticeText {
-  flex-grow: 1; /* 텍스트 영역을 확장 */ 
+  flex-grow: 1; /* 텍스트 영역을 확장 */
   text-align: center; /* 텍스트 가운데 정렬 */
   object-position: center;
   font-weight: 700;
@@ -334,7 +371,6 @@
   height: 100vh;
   transform: translateY(-85vh);
 }
-
 
 .recentBookingIcon {
   aspect-ratio: 1.1;

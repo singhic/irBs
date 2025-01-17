@@ -113,7 +113,6 @@ const LoginPage: React.FC = () => {
         </div>
 
         <button className={styles.loginButton} onClick={handleLogin}>
-         
           <span className={styles.loginButtonText}>로그인</span>
         </button>
       </form>

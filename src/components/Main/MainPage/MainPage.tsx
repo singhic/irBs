@@ -213,6 +213,14 @@ export const MainPage: React.FC = () => {
           className={styles.bookingIcon}
         />
       </a>
+      <a href="./Location" className={styles.locationButton}>
+        <span className={styles.locationText}>현재 버스 위치 조회</span>
+        <img
+          src="/img/icon/reservelogo.svg"
+          alt="예약하기 버튼"
+          className={styles.locationIcon}
+        />
+      </a>
 
       {/* 빠른 예약 섹션 */}
       <section className={styles.quickBooking}>

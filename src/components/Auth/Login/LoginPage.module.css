@@ -71,7 +71,8 @@
   transition: background-color 200ms ease-in-out;
   background-color: rgb(176, 224, 230);
 }
-.loginButton:hover, .loginButton:focus {
+.loginButton:hover,
+.loginButton:focus {
   background-color: #e1f1ff;
 }
 .loginButtonBg {
@@ -141,4 +142,3 @@
   border: none;
   cursor: pointer;
 }
-
