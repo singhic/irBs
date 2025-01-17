@@ -96,66 +96,6 @@ async function fetchReservation(): Promise<Array<{
   }
 }
 
-const cancel = async (index: number) => {
-  const reservations = await fetchReservation();
-  console.log("Fetched reservations:", reservations);
-
-  if (!reservations || reservations.length === 0) {
-    alert("취소 가능한 예약이 없습니다.");
-    return;
-  }
-
-  if (index < 0 || index >= reservations.length) {
-    console.error("Invalid index:", index);
-    alert("잘못된 예약 번호입니다.");
-    return;
-  }
-
-  const selectedReservation = reservations[index];
-  console.log("Selected reservation:", selectedReservation);
-
-  const cancel_num = selectedReservation?.cancel_num; // 안전한 접근
-  console.log("Cancel number:", cancel_num);
-
-  if (!cancel_num) {
-    alert("해당 예약에 대한 취소 번호가 없습니다.");
-    return;
-  }
-
-  const isConfirmed = window.confirm(`예약을 취소하시겠습니까?`);
-  if (!isConfirmed) {
-    return;
-  }
-
-  const cancel_post = new URLSearchParams();
-  cancel_post.append("seq", cancel_num);
-
-  console.log(cancel_num);
-
-  try {
-    const response = await axios.post("/reserve/cancel_proc.php", cancel_post, {
-      headers: {
-        "Content-Type": `application/x-www-form-urlencoded`,
-        Accept: "application/json",
-        "Access-Control-Allow-Origin": `/reserve/cancel_proc.php`,
-        "Access-Control-Allow-Credentials": "true",
-      },
-    });
-
-    // 예약 성공 시
-    if (response.status === 200 && response.data.status === "success") {
-      alert(response.data.message);
-      window.location.reload(); // 새로고침
-    } else {
-      // 예약 실패 시
-      alert(response.data.message);
-    }
-  } catch (error) {
-    console.error("Error:", error);
-    alert("네트워크 오류가 발생했습니다. 다시 시도해주세요.");
-  }
-};
-
 export const ReservationStatus: FC = () => {
   const [reservations, setReservations] = useState<Array<{
     routeName: string;
@@ -367,19 +307,16 @@ export const ReservationStatus: FC = () => {
 
   return (
     <main className={styles.container}>
-      <div
-        className={`${styles.movePage} ${
-          isSwipedDown ? styles.swipedDown : ""
-        }`}
-        {...handlers}
-      >
-        <img
-          src="/img/icon/companylogo.svg"
-          alt="Company Logo"
-          className={styles.logo}
-        />
-        <h1 className={styles.title}>예약현황</h1>
-      </div>
+      <header className={styles.scheduleHeader}>
+        <a href="/MainPage">
+          <img
+            src="\img\icon\arrow-left.png"
+            alt="arrow-left"
+            className={styles.headerIcon}
+          />
+        </a>
+        <h1 className={styles.title}>현재 버스 위치</h1>
+      </header>
       {showImage && <TheaterLocation />}
 
       {reservations && reservations.length > 0 ? (
@@ -387,11 +324,9 @@ export const ReservationStatus: FC = () => {
           <Ticket
             key={index}
             routeName={reservation.routeName}
-            departuredate={reservation.departuredate}
             departureTime={reservation.departureTime}
-            seatNumber={reservation.seatNumber}
+            busNumber={reservation.busNumber}
             onClick={() => handleTicketClick(reservation)} // Ticket 클릭 시 이미지 보이기
-            onClick2={() => cancel(index)}
           />
         ))
       ) : (

@@ -4,20 +4,16 @@ import React from "react";
 
 interface TicketProps {
   routeName: string;
-  departuredate: string;
   departureTime: string;
-  seatNumber: string;
+  busNumber: string;
   onClick: () => void;
-  onClick2: () => void;
 }
 
 export const Ticket: FC<TicketProps> = ({
   routeName,
-  departuredate,
   departureTime,
-  seatNumber,
+  busNumber,
   onClick,
-  onClick2,
 }) => {
   return (
     <section className={styles.ticketContainer}>
@@ -26,19 +22,13 @@ export const Ticket: FC<TicketProps> = ({
       <section className={styles.ticketB} onClick={onClick}>
         <div className={styles.ticketInfo}>
           <h3 className={styles.routeName}>{routeName}</h3>
-          <p className={styles.departureTime}>{departuredate}</p>
           <p className={styles.departureTime}>{departureTime}</p>
         </div>
         <p className={styles.seatNumber}>
-          {seatNumber}번
-          <br />
-          <span className={styles.seatLabel}>좌석</span>
+          <p className={styles.seatLabel}>차량번호</p>
+          <p className={styles.seatLabel}>{busNumber}</p>
         </p>
       </section>
-      <div className={styles.ticketDivider} />
-      <h3 className={styles.cancle} onClick={onClick2}>
-        예약 취소
-      </h3>
     </section>
   );
 };

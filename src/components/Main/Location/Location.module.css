@@ -10,18 +10,27 @@
   /* margin: 0 auto; */
 }
 
-.logo {
-  aspect-ratio: 3.5;
-  object-fit: contain;
-  object-position: center;
-  width: 35px;
+.scheduleHeader {
+  background: #fff;
+  padding: 20px 16px;
+  display: flex;
+  gap: 40px;
+  margin-right: 20px;
+  align-items: center;
+}
+
+.headerIcon {
+  width: 39px;
+  aspect-ratio: 1.05;
+  margin-top: 10px;
+  margin-right: 15px;
 }
 
 .title {
   color: #000;
-  text-align: center;
   margin-top: 20px;
-  font: 700 24px Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif;
+  font: 700 20px Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif;
+  margin-right: 75px;
 }
 
 .movePage {
@@ -120,7 +129,6 @@
   font-family: Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif;
   color: #000;
   text-align: center;
-  justify-content: space-evenly;
   margin: 2%;
 }
 .ticketB {
@@ -128,7 +136,8 @@
   flex-direction: row; /* 기본값이지만 명시적으로 설정 */
   justify-content: flex-start; /* 자식 요소들을 왼쪽 정렬 (필요에 따라 변경 가능) */
   align-items: center; /* 자식 요소들을 수직으로 가운데 정렬 */
-  margin: 0 5%;
+  margin: 3% 5%;
+  margin-left: 15%;
 }
 
 .ticketInfo {
@@ -141,7 +150,7 @@
 }
 
 .routeName {
-  font-size: 30px;
+  font-size: 25px;
   color: rgba(56, 56, 56, 0.9);
   margin: 2px;
 }
@@ -153,21 +162,13 @@
 }
 
 .seatNumber {
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 700;
   align-self: stretch;
-  margin: auto 0;
+  margin: auto 25px;
   color: rgba(56, 56, 56, 0.9);
 }
 
-.ticketDivider {
-  align-self: stretch;
-  width: 1px;
-  height: 130px;
-  border: 1px dashed rgba(0, 0, 0, 0.2);
-}
-
-.cancle {
-  margin: 50px 10px;
-  color: #fb3c3c;
+.seatLabel {
+  margin: 10px auto;
 }
