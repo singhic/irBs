@@ -126,6 +126,7 @@ export const MainPage: React.FC = () => {
   const navigate = useNavigate();
   const [reservation, setReservation] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  
 
   const routeData = [
     { destination: "동래", time: "16:20", seats: "(44/33석)" },
@@ -190,19 +191,48 @@ export const MainPage: React.FC = () => {
     }
   }, [isSwipedUp]);
 
+  // 알림창 animation loop
+  const [notifications, setNotifications] = useState([]);
+  const [animationDuration, setAnimationDuration] = useState(0);
+
+  useEffect(() => {
+    const initialNotifications = [
+      "1-빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.",
+      "2-빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.",
+      "3-빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.",
+      "4-빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.",
+    ];
+  
+    if (initialNotifications.length > 0) {
+      setNotifications([...initialNotifications, ...initialNotifications]); 
+    }
+  
+    const durationPerNotification = 3;
+    const totalDuration = initialNotifications.length * durationPerNotification;
+  
+    setAnimationDuration(totalDuration || 1); 
+  }, []);
+
   return (
     <main className={styles.page}>
       {/* 헤더 */}
       <header className={styles.notificationBar}>
-        <div className={styles.notificationContent}>
-          <img
-            src="/img/icon/warninglogo.svg"
-            alt="Warning icon"
-            className={styles.notificationIcon}
-          />
-          <p className={styles.notificationText}>
-            빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.
-          </p>
+        <div className={styles.notificationContainer}>
+          <div 
+            className={styles.notificationWrapper} 
+            style={{animationDuration: `${animationDuration}s`}}>
+            {notifications.map((text,index)=>(
+              <div className={styles.notificationContent} key={index}>
+              <img
+                src="/img/icon/warninglogo.svg"
+                alt="Warning icon"
+                className={styles.notificationIcon}/>
+              <p className={styles.notificationText}>
+                {text}
+              </p>
+            </div>
+            ))}
+          </div>
         </div>
         <a href="/MyPage">
           <img

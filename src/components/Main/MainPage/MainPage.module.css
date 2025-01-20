@@ -14,21 +14,50 @@
 .notificationBar {
   background-color: #fff;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  gap: 40px 60px;
+  gap: 40px 50px;
   font-size: 13px;
   color: #000;
   font-weight: 350;
   text-align: center;
   padding: 3px 3px;
+  box-sizing: border-box;
+  height: 65px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notificationContainer{
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 30px;
+}
+
+.notificationWrapper{
+  display: flex;
+  flex-direction: column;
+  animation: slide linear infinite;
+  animation-duration: var(--animation-duration, 5s);
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .notificationContent {
   display: flex;
+  justify-content: space-around;
+  align-items: center;
   gap: 14px;
   flex-grow: 1;
   flex-basis: auto;
   margin: auto 0;
+  height: 30px;
 }
 
 .notificationIcon {
@@ -40,10 +69,17 @@
 }
 
 .notificationText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   flex-basis: auto;
+  flex-grow: 1;
 }
 
 @media (max-width: 640px) {
+  .notificationBar{
+    gap: 40px 30px;
+  }
   .notificationText {
     margin: 2px -42px 0 -4px;
   }
@@ -55,6 +91,15 @@
   object-position: center;
   width: 31px;
   margin-right: 10px;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
 }
 
 /* 안녕하세요 사용자님 ----------------------------------------------------------------- */
