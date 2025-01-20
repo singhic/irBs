@@ -34,9 +34,16 @@ export const SeatSelection: React.FC = () => {
   const getWeekdays = (): DateButtonProps[] => {
     const weekdays: DateButtonProps[] = [];
     const today = new Date();
-    let daysAdded = 0;
 
-    while (daysAdded < 5) {
+    //수요일 자정 이후 시점
+    const Wednesday = today.getDay() === 3 && today.getHours() >= 0;
+
+    //수요일 자정 이후면 그 다음주 주중날짜 포함(목,금,월,화,수,목,금)
+    const totalDays = Wednesday ? 7 : 5;
+  
+    //주중 날짜 계산
+    let daysAdded = 0;
+    while (daysAdded < totalDays) {
       const dayOfWeek = today.getDay();
       if (dayOfWeek !== 0 && dayOfWeek !== 6) {
         weekdays.push({
@@ -47,9 +54,10 @@ export const SeatSelection: React.FC = () => {
       }
       today.setDate(today.getDate() + 1);
     }
+  
     return weekdays;
   };
-
+  
   const dates = getWeekdays();
 
   // 스케줄 데이터 가져오기
@@ -493,14 +501,14 @@ export const SeatSelection: React.FC = () => {
       </header>
 
       <section className={styles.dateSection}>
-        {dates.map((date, index) => (
-          <DateButton
-            key={date.date}
-            {...date}
-            isActive={selectedDate === index}
-            onClick={() => handleDateSelect(index)}
-          />
-        ))}
+          {dates.map((date, index) => (
+            <DateButton
+              key={date.date}
+              {...date}
+              isActive={selectedDate === index}
+              onClick={() => handleDateSelect(index)}
+            />
+          ))}
       </section>
 
       <section className={styles.scheduleSection}>
