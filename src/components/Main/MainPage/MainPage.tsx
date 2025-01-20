@@ -204,10 +204,10 @@ export const MainPage: React.FC = () => {
     ];
   
     if (initialNotifications.length > 0) {
-      setNotifications([...initialNotifications, initialNotifications[0]]); 
+      setNotifications([...initialNotifications, ...initialNotifications]); 
     }
   
-    const durationPerNotification = 3.5;
+    const durationPerNotification = 3;
     const totalDuration = initialNotifications.length * durationPerNotification;
   
     setAnimationDuration(totalDuration || 1); 
