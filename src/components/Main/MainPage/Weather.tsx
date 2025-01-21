@@ -129,10 +129,15 @@ const WeatherComponent = ({
   }
 
   return (
-    <div>
-      <p className={styles.weatherStatus}>
-        금일 김해캠퍼스 날씨는 {weather.description}입니다.
-      </p>
+    <div className = {styles.weatherDiv}>
+      <div>
+        <p className={styles.weatherInfo}>
+          금일 김해캠퍼스 날씨는 
+        </p>
+        <p className={styles.weatherInfo}>
+         {weather.description}입니다.
+        </p>
+      </div>
       <img
         src={weather.icon}
         alt={weather.description}
