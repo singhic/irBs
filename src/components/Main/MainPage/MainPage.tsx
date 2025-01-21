@@ -157,7 +157,7 @@ export const MainPage: React.FC = () => {
       setIsSwipedUp(true);
       setTimeout(() => {
         navigate("/Reservations");
-      }, 300); // 애니메이션 지속 시간과 동일하게 설정
+      }, 50); // 애니메이션 지속 시간과 동일하게 설정
     },
     preventScrollOnSwipe: true,
     trackMouse: true,
@@ -342,6 +342,11 @@ export const MainPage: React.FC = () => {
       <a href="/FAQ">
         <button className={styles.supportText}>문제가 있으신가요?</button>
       </a>
+
+
+      <div className={styles.emptyBox}>
+      {/* 여백을 가진 상자 */}
+      </div>
 
       {/* 최근 예약 섹션 */}
       <section
