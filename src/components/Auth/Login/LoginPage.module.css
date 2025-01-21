@@ -71,9 +71,7 @@
   transition: background-color 200ms ease-in-out;
   background-color: rgb(176, 224, 230);
 }
-.loginButton:focus {
-  background-color: #e1f1ff;
-}
+
 .loginButtonBg {
   position: absolute;
   inset: 0;

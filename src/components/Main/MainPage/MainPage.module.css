@@ -165,9 +165,6 @@
   transition: background-color 200ms ease-in-out;
 }
 
-.bookingButton:focus {
-  background-color: #e1f1ff;
-}
 .bookingText {
   margin: auto 0;
   /* align-items: center;  */
@@ -205,9 +202,6 @@
   transition: background-color 200ms ease-in-out;
 }
 
-.locationButton:focus {
-  background-color: #e1f1ff;
-}
 .locationText {
   margin: auto 0;
   /* align-items: center;  */
