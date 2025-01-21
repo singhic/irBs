@@ -254,19 +254,22 @@
   width: 17vw;
   max-width: 90px;
   aspect-ratio: 1 / 1; /* 1:1 비율 유지 */
+  position: relative;
 }
 .seatImg {
+  
   width: 15vw;
   max-width: 50px;
   aspect-ratio: 1 / 1; /* 1:1 비율 유지 */
 }
 .seatText {
+  position: absolute;
   font-size: 15px;
   line-height: 1;
   white-space: nowrap; /* 텍스트 줄바꿈 방지 */
-
-  /* width: 100%;  */
-  /* text-align: center;  */
+  top: 50%; /* 세로 가운데 정렬 */
+  left: 50%; /* 가로 가운데 정렬 */
+  transform: translate(-50%, -50%); /* 가운데 정렬을 위한 보정 */
 }
 
 /* ------------------------------------------------------------------------------------------------------- */
