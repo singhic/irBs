@@ -215,12 +215,21 @@
   margin-top: 20px;
   position: relative;
 }
-
+.driverAndEntrance{
+  display: flex;
+  margin-top: 20px;
+}
 .driverLayout {
   display: flex;
   justify-content: center; /* 안쪽 요소를 가로 중앙에 정렬 */
   align-items: center; /* 안쪽 요소를 세로 중앙에 정렬 */
   width: 50%;
+}
+.driverText{
+  font-size: 15px;
+  font-weight: 700;
+  color: #6b6b6b;
+
 }
 
 .driverIcon {
@@ -265,11 +274,13 @@
 .seatText {
   position: absolute;
   font-size: 15px;
+  color: #414141;
   line-height: 1;
   white-space: nowrap; /* 텍스트 줄바꿈 방지 */
   top: 50%; /* 세로 가운데 정렬 */
   left: 50%; /* 가로 가운데 정렬 */
   transform: translate(-50%, -50%); /* 가운데 정렬을 위한 보정 */
+  margin: auto;
 }
 
 /* ------------------------------------------------------------------------------------------------------- */
