@@ -7,7 +7,7 @@
   /* font-family: Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif; */
   /* margin: 0 12px; */
   /* padding: 0 12px 0 0; */
-  height: 960px;
+  /* height: 960px; */
 }
 
 /* 앱바 ---------------------------------------------------------------------------  */
@@ -401,13 +401,17 @@
   font-weight: 700;
   padding: 6px 0 18px;
   z-index: 1000; /* 다른 요소들 위에 표시되도록 설정 */
-  transition: transform 3s ease-in-out; /* 스와이프 애니메이션 */
+  transition: transform 1s ease-in-out; /* 스와이프 애니메이션 */
   overflow-y: auto; /* 내부 콘텐츠가 스크롤 가능하도록 설정 */
-  height: 150px; /* 초기 높이 설정 */
+  height: 120px; /* 초기 높이 설정 */
 }
+.emptyBox {
+  height: 200px;
+}
+
 @media (min-height: 960px) {
   .recentBooking {
-    bottom: calc(100vh - 980px); /* 화면 높이에서 960px을 뺀 값으로 설정 */
+    bottom: calc(100vh - 1100px); /* 화면 높이에서 960px을 뺀 값으로 설정 */
   }
 }
 
@@ -436,21 +440,3 @@
 .recentBookingTitle {
   font-size: 20px;
 }
-
-/* @media (max-width: 640px) {
-  .recentBookingTitle {
-    margin-right: -5px;
-  }
-} */
-
-/* .recentBookingDetails {
-  font-size: 16px;
-  margin-top: 5px;
-  margin-right: 10px;
-} */
-
-/* @media (max-width: 640px) {
-  .recentBookingDetails {
-    margin-top: -1px;
-  }
-} */
