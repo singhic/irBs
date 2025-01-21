@@ -30,7 +30,7 @@
   text-overflow: ellipsis;
 }
 
-.notificationContainer{
+.notificationContainer {
   overflow: hidden;
   width: 100%;
   display: flex;
@@ -39,7 +39,7 @@
   height: 30px;
 }
 
-.notificationWrapper{
+.notificationWrapper {
   display: flex;
   flex-direction: column;
   animation: slide linear infinite;
@@ -77,7 +77,7 @@
 }
 
 @media (max-width: 640px) {
-  .notificationBar{
+  .notificationBar {
     gap: 40px 30px;
   }
   .notificationText {
@@ -164,10 +164,7 @@
   color: inherit; /* 텍스트 색상 상속 */
   transition: background-color 200ms ease-in-out;
 }
-.bookingButton:hover,
-.bookingButton:focus {
-  background-color: #e1f1ff;
-}
+
 .bookingText {
   margin: auto 0;
   /* align-items: center;  */
@@ -204,10 +201,7 @@
   color: inherit; /* 텍스트 색상 상속 */
   transition: background-color 200ms ease-in-out;
 }
-.locationButton:hover,
-.locationButton:focus {
-  background-color: #e1f1ff;
-}
+
 .locationText {
   margin: auto 0;
   /* align-items: center;  */

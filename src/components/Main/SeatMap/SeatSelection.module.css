@@ -7,7 +7,6 @@
   flex-direction: column;
   /* overflow: hidden; */
   margin: 0 auto;
-
 }
 
 .header {
@@ -17,7 +16,6 @@
   padding: 20px 21px;
   align-items: center;
   position: relative;
-
 }
 
 .backIcon {
@@ -27,13 +25,12 @@
 
 .title {
   color: #000000;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 24px;
   font-weight: 700;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  
 }
 
 .dateSection {
@@ -46,7 +43,7 @@
   border-radius: 20px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
   padding: 10px;
-  margin: 10px ;
+  margin: 10px;
   background-color: #ffffff;
   justify-content: space-around;
 }
@@ -68,7 +65,7 @@
   /* min-width: fit-content; */
   padding: 10px 0;
   /* justify-content: space-around; */
-  width:15%;
+  width: 15%;
   height: 60px;
 }
 
@@ -77,13 +74,13 @@
 }
 
 .dateText {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 10px;
   color: #0c0c0c;
 }
 
 .dayText {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-weight: 700;
   font-size: 15px;
   color: #0c0c0c;
@@ -110,7 +107,7 @@
   padding: 16px 26px 10px;
   border: none;
   cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 24px;
   font-weight: 700;
   color: #727272;
@@ -160,21 +157,21 @@
 }
 
 .scheduleTime {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 10px;
   font-weight: 600;
   margin: 0;
 }
 
 .seatsInfo {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 10px;
   font-weight: 400;
   margin: 4px 0;
 }
 
 .waitingInfo {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 7px;
   font-weight: 300;
   margin: 0;
@@ -184,7 +181,6 @@
 .seatingSection {
   display: flex;
   flex-direction: column; /* 세로 정렬 */
-  
 
   background-color: #ffffff;
   border-radius: 20px;
@@ -207,7 +203,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 .legendIcon {
@@ -227,13 +223,11 @@
   width: 50%;
 }
 
-
 .driverIcon {
   width: 30px;
   height: 47px;
   padding: 4%;
 }
-
 
 .seatGrid {
   display: grid;
@@ -243,7 +237,7 @@
 
 .pair {
   display: flex;
-  padding:3%;
+  padding: 3%;
   margin: 2%;
   grid-template-columns: repeat(2, auto);
   justify-content: center; /* 가로 방향 가운데 정렬 */
@@ -252,30 +246,28 @@
 
 /* 시트아이콘 영역------------------------------------------------------------------------------------------------------------- */
 
-.seatButton{
+.seatButton {
   display: flex;
   justify-content: center; /* 가로 방향 가운데 정렬 */
   align-items: center; /* 세로 방향 가운데 정렬 */
   flex-direction: column; /* 세로로 정렬 */
   width: 17vw;
-  max-width:90px;
+  max-width: 90px;
   aspect-ratio: 1 / 1; /* 1:1 비율 유지 */
 }
-.seatImg{
+.seatImg {
   width: 15vw;
   max-width: 50px;
   aspect-ratio: 1 / 1; /* 1:1 비율 유지 */
-
 }
 .seatText {
   font-size: 15px;
-  line-height: 1; 
+  line-height: 1;
   white-space: nowrap; /* 텍스트 줄바꿈 방지 */
-  
+
   /* width: 100%;  */
   /* text-align: center;  */
 }
-
 
 /* ------------------------------------------------------------------------------------------------------- */
 /* 예약 완료 누를시 뜨는 모달? */
@@ -298,7 +290,6 @@
   text-align: center;
 }
 
-
 /* ------------------------------------------------------------------------------------------------------- */
 
 .footer {
@@ -316,7 +307,7 @@
   padding: 14px 70px 14px;
   border: none;
   cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 24px;
   font-weight: 700;
   color: #666666;
@@ -324,20 +315,15 @@
   /* transition: all 0.2s ease; */
 }
 
-
 .cancelButton {
   border-radius: 20px;
   background-color: rgba(248, 146, 148, 0.9);
   padding: 15px 70px 3px;
   border: none;
   cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-size: 24px;
   font-weight: 700;
   color: #ffffff;
   transition: all 0.2s ease;
-}
-
-.cancelButton:hover {
-  background-color: rgba(228, 126, 128, 0.9);
 }
