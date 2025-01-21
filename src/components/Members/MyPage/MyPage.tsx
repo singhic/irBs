@@ -10,6 +10,7 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import axios from "axios";
 import * as cheerio from "cheerio";
+import Grid from "@mui/material/Grid";
 
 async function fetchValueFromExternalSite(): Promise<string | null> {
   try {
@@ -33,6 +34,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
   ...theme.applyStyles("dark", {
     backgroundColor: "#1A2027",
+    border: "15px 10px solid",
   }),
 }));
 
@@ -89,11 +91,24 @@ const MyPage: React.FC = () => {
             className={styles.profileImage}
           />
           <div className={styles.userNP}>
-            <span className={styles.userName}>{userName}님</span>
-            <a href="/userprofile" className={styles.move_userprofile}>
+            <span className={styles.userName}>{userName}</span>
+            {/*<a href="/userprofile" className={styles.move_userprofile}>
               <img src="/img/icon/small-arrow-right.svg" alt="내 정보 수정" />
-            </a>
+            </a>*/}
           </div>
+          <Button
+            variant="outlined"
+            size="small"
+            sx={{
+              borderRadius: "10px",
+              backgroundColor: "rgb(176, 224, 230)",
+              border: "rgba(0, 0, 0, 0.4)",
+              color: "text.secondary",
+            }}
+            href="/userprofile"
+          >
+            내정보 수정
+          </Button>
         </div>
       </header>
 
