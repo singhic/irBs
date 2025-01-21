@@ -20,7 +20,7 @@ const penaltyRecords: PenaltyRecord[] = [
     iconSrc: "img/icon/arrow-right.png",
   },
   {
-    date: "2024. 9. 24",
+    date: "2024. 09. 24",
     location: "장유",
     iconSrc: "img/icon/arrow-right.png",
   },

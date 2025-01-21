@@ -3,7 +3,7 @@
   background-color: #fff;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  width: 80%;
+  width: 85%;
   gap: 20px;
   justify-content: space-between;
   padding: 16px;
@@ -24,7 +24,7 @@
 }
 
 .icon {
-  aspect-ratio: 1.15;
+  aspect-ratio: 0.8;
   object-fit: contain;
   object-position: center;
   width: 15px;

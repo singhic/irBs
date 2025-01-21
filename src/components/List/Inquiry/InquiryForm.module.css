@@ -28,7 +28,7 @@
 
 .headerTitle {
   margin: 0;
-  margin-left: 22%;
+  flex-grow: 0.73;
   font-size: 24px;
 }
 
@@ -64,7 +64,7 @@
   background-color: #fff;
   margin-top: 6px;
   width: 90%;
-  height: 30%;
+  height: 80%;
   padding: 16px 12px;
   border: 1px solid rgba(0, 0, 0, 0.4);
   justify-content: center;
@@ -74,10 +74,10 @@
 .submitButton {
   position: relative;
   border-radius: 20px;
-  margin-top: 43px;
+  margin-top: 30px;
   width: 312px;
   max-width: 312px;
-  padding: 14px 70px;
+  padding: 14px 0px;
   border: none;
   cursor: pointer;
   overflow: hidden;
