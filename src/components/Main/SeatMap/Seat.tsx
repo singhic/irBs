@@ -37,6 +37,7 @@ export const Seat: React.FC<SeatComponentProps> = ({ seatNumber, initialStatus, 
       <span className={styles.seatText}>
         {displayStatus === 'selected' ? '선택좌석' : seatNumber}
       </span>
+
     </button>
   );
 };

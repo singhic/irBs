@@ -408,7 +408,7 @@
   z-index: 1000; /* 다른 요소들 위에 표시되도록 설정 */
   transition: transform 1s ease-in-out; /* 스와이프 애니메이션 */
   overflow-y: auto; /* 내부 콘텐츠가 스크롤 가능하도록 설정 */
-  height: 120px; /* 초기 높이 설정 */
+  height: 150px; /* 초기 높이 설정 */
 }
 .emptyBox {
   height: 200px;
@@ -444,4 +444,5 @@
 
 .recentBookingTitle {
   font-size: 20px;
+  overflow: hidden;
 }
