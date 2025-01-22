@@ -19,7 +19,7 @@ export const FAQAccordionItem: React.FC<FAQAccordionItemProps> = ({ item, onClic
           aria-controls={`answer-${item.question}`}
         >
           <img 
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/dda08242ab8984b6f5737f72fbf8069fbf4c6323514b801bca6a49ee3862a76d?placeholderIfAbsent=true" 
+            src="/img/icon/arrow-bottom.svg" 
             alt={item.isOpen ? "펼치기" : "접기"} 
             className={styles.toggleIcon}
           />

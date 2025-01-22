@@ -52,7 +52,10 @@ const LoginPage: React.FC = () => {
         console.log(response.data);
         if (response.data.status === "success") {
           alert(response.data.message);
-          Cookies.set("id", userId, { secure: true, sameSite: "Lax" });
+          Cookies.set("id", userId, {
+            secure: true,
+            sameSite: "lax",
+          });
           window.location.href = "/MainPage";
         } else {
           console.error("Login failed:", response.status);
@@ -69,7 +72,7 @@ const LoginPage: React.FC = () => {
     <main className={styles.loginContainer}>
       <CookieAlert />
       <img
-        src="https://www.inje.ac.kr/kor/assets/images/sub/ui-logo.png"
+        src="img/icon/ui-logo.png"
         alt="인제대학교 로고"
         className={styles.logo}
       />
@@ -110,23 +113,35 @@ const LoginPage: React.FC = () => {
         </div>
 
         <button className={styles.loginButton} onClick={handleLogin}>
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/27ab334dd17dc9de946c30c832cb0a06db7c8dbea05cb2dacbcfc926384075b5?placeholderIfAbsent=true"
-            alt=""
-            className={styles.loginButtonBg}
-          />
           <span className={styles.loginButtonText}>로그인</span>
         </button>
       </form>
 
       <nav className={styles.helpLinks}>
-        <a href="/passwordreset">비밀번호 찾기</a>
+        <span
+          role="button"
+          onClick={() => (window.location.href = "/passwordreset")}
+          tabIndex={0}
+        >
+          비밀번호 찾기
+        </span>
         <div className={styles.divider} aria-hidden="true" />
-        <a href="/signup">회원가입</a>
+        <span
+          role="button"
+          onClick={() => (window.location.href = "/signup")}
+          tabIndex={0}
+        >
+          회원가입
+        </span>
       </nav>
-
       <p className={styles.newUserText}>
-        <a href="/Onboarding">처음이신가요?</a>
+        <span
+          role="button"
+          onClick={() => (window.location.href = "/Onboarding")}
+          tabIndex={0}
+        >
+          처음이신가요?
+        </span>
       </p>
     </main>
   );

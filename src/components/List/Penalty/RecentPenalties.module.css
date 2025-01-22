@@ -1,0 +1,109 @@
+.penaltyContainer {
+  background-color: rgb(243, 244, 246);
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  max-height: 1000px;
+  padding-bottom: 267px;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.penaltyHeader {
+  background-color: #fff;
+  display: flex;
+  gap: 15%;
+  font-size: 24px;
+  color: #000;
+  font-weight: 700;
+  text-align: center;
+  padding: 19px 23px;
+}
+
+.headerIcon {
+  width: 39px;
+}
+
+.headerTitle {
+  flex-grow: 0.5;
+  font-size: 24px;
+  margin: 0;
+}
+
+.penaltyContent {
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+  padding: 0 20px;
+}
+
+.penaltyStatus {
+  border-radius: 20px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 11px 44px 7px;
+}
+
+.statusLabel {
+  color: #000;
+  font-size: 20px;
+  font-weight: 400;
+  align-self: start;
+}
+
+.statusCount {
+  color: #ff0000;
+  font-size: 25px;
+  font-weight: 700;
+  align-self: end;
+  margin-top: 10px;
+}
+
+.penaltyRecord {
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  margin-top: 15px;
+  gap: 20px;
+  color: #000;
+  font-weight: 400;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+.penaltyInfo {
+  display: flex;
+  gap: 26px;
+}
+
+.penaltyDate {
+  font-size: 16px;
+}
+
+.penaltyLocation {
+  font-size: 17px;
+}
+
+.penaltyIcon {
+  aspect-ratio: 1.08;
+  object-fit: contain;
+  object-position: center;
+  width: 14px;
+  align-self: start;
+}
+
+.penaltySuspension {
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
+  font-size: 13px;
+  color: rgba(255, 0, 0, 10);
+  font-weight: 700;
+  padding: 7px 56px;
+  text-align: center;
+}

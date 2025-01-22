@@ -1,0 +1,32 @@
+.card {
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  width: 85%;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 16px;
+  margin-top: 13px;
+}
+
+.content {
+  display: flex;
+  gap: 26px;
+}
+
+.date {
+  font-size: 16px;
+}
+
+.type {
+  font-size: 15px;
+}
+
+.icon {
+  aspect-ratio: 0.8;
+  object-fit: contain;
+  object-position: center;
+  width: 15px;
+  align-self: start;
+}

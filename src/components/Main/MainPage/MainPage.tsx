@@ -3,6 +3,9 @@ import { RouteCard } from "./RouteCard.tsx";
 import styles from "./MainPage.module.css";
 import axios from "axios";
 import * as cheerio from "cheerio";
+import Weather from "./Weather.tsx";
+
+import  QuickBooking  from "./QuickBooking.tsx";
 
 // 스와이프 모듈
 import { useSwipeable } from "react-swipeable";
@@ -123,10 +126,30 @@ export const MainPage: React.FC = () => {
   const navigate = useNavigate();
   const [reservation, setReservation] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  
 
   const routeData = [
     { destination: "동래", time: "16:20", seats: "(44/33석)" },
     { destination: "울산", time: "18:10", seats: "(44/41석)" },
+    { destination: "대구", time: "19:20", seats: "(44/4석)" },
+    { destination: "부산", time: "09:30", seats: "(44/4석)" },
+    { destination: "대구", time: "11:50", seats: "(44/44석)" },
+    { destination: "인천", time: "07:50", seats: "(44/21석)" },
+    { destination: "울산", time: "11:10", seats: "(44/38석)" },
+    { destination: "서울", time: "08:20", seats: "(44/13석)" },
+    { destination: "인천", time: "21:40", seats: "(44/44석)" },
+    { destination: "대구", time: "17:30", seats: "(44/35석)" },
+    { destination: "광주", time: "14:20", seats: "(44/18석)" },
+    { destination: "울산", time: "15:10", seats: "(44/11석)" },
+    { destination: "울산", time: "18:10", seats: "(44/39석)" },
+    { destination: "서울", time: "14:40", seats: "(44/9석)" },
+    { destination: "울산", time: "18:50", seats: "(44/14석)" },
+    { destination: "인천", time: "18:20", seats: "(44/10석)" },
+    { destination: "서울", time: "12:30", seats: "(44/41석)" },
+    { destination: "광주", time: "21:10", seats: "(44/32석)" },
+    { destination: "울산", time: "18:50", seats: "(44/31석)" },
+    { destination: "광주", time: "12:20", seats: "(44/32석)" },
+
   ];
 
   const handlers = useSwipeable({
@@ -134,7 +157,7 @@ export const MainPage: React.FC = () => {
       setIsSwipedUp(true);
       setTimeout(() => {
         navigate("/Reservations");
-      }, 300); // 애니메이션 지속 시간과 동일하게 설정
+      }, 50); // 애니메이션 지속 시간과 동일하게 설정
     },
     preventScrollOnSwipe: true,
     trackMouse: true,
@@ -168,23 +191,52 @@ export const MainPage: React.FC = () => {
     }
   }, [isSwipedUp]);
 
+  // 알림창 animation loop
+  const [notifications, setNotifications] = useState([]);
+  const [animationDuration, setAnimationDuration] = useState(0);
+
+  useEffect(() => {
+    const initialNotifications = [
+      "1-빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.",
+      "2-빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.",
+      "3-빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.",
+      "4-빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.",
+    ];
+  
+    if (initialNotifications.length > 0) {
+      setNotifications([...initialNotifications, ...initialNotifications]); 
+    }
+  
+    const durationPerNotification = 3;
+    const totalDuration = initialNotifications.length * durationPerNotification;
+  
+    setAnimationDuration(totalDuration || 1); 
+  }, []);
+
   return (
     <main className={styles.page}>
       {/* 헤더 */}
       <header className={styles.notificationBar}>
-        <div className={styles.notificationContent}>
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/3ef9aedfc9b62a5ef5418720705177a18d6ad3a44771951bd8bc03bb620b248e?placeholderIfAbsent=true"
-            alt="Warning icon"
-            className={styles.notificationIcon}
-          />
-          <p className={styles.notificationText}>
-            빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.
-          </p>
+        <div className={styles.notificationContainer}>
+          <div 
+            className={styles.notificationWrapper} 
+            style={{animationDuration: `${animationDuration}s`}}>
+            {notifications.map((text,index)=>(
+              <div className={styles.notificationContent} key={index}>
+              <img
+                src="/img/icon/warninglogo.svg"
+                alt="Warning icon"
+                className={styles.notificationIcon}/>
+              <p className={styles.notificationText}>
+                {text}
+              </p>
+            </div>
+            ))}
+          </div>
         </div>
         <a href="/MyPage">
           <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/000f5f913f98483ee512f05f509b6c27a28917768973c443b3543c86a04612d4?placeholderIfAbsent=true"
+            src="/img/icon/settinglogo.svg"
             alt="Settings"
             className={styles.settingsIcon}
           />
@@ -194,29 +246,34 @@ export const MainPage: React.FC = () => {
       {/* 날씨 카드 */}
       <section className={styles.weatherCard}>
         <div className={styles.weatherInfo}>
-          <p className={styles.weatherStatus}>금일 캠퍼스 날씨는 맑음입니다.</p>
+          <p className={styles.weatherStatus}>
+            <Weather />
+          </p>
           <h1 className={styles.greeting}>
             안녕하세요. {userName ? userName + "님" : ""}
           </h1>
         </div>
-        <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/e4e208546ef4b7480e5ab6a347461c87993eeabd950ffebecb7912371e49e91a?placeholderIfAbsent=true"
-          alt="Weather"
-          className={styles.weatherIcon}
-        />
       </section>
 
       {/* 예약 버튼 */}
       <a href="./BusSchedule" className={styles.bookingButton}>
         <span className={styles.bookingText}>예약하기</span>
         <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/406181a727603b6744c65a734692215707f5036ec231fe2445b98845343e8c94?placeholderIfAbsent=true"
+          src="/img/icon/reservelogo.svg"
           alt="예약하기 버튼"
           className={styles.bookingIcon}
         />
       </a>
+      <a href="./Location" className={styles.locationButton}>
+        <span className={styles.locationText}>현재 버스 위치 조회</span>
+        <img
+          src="/img/icon/reservelogo.svg"
+          alt="예약하기 버튼"
+          className={styles.locationIcon}
+        />
+      </a>
 
-      {/* 빠른 예약 섹션 */}
+      {/* 빠른 예약 섹션
       <section className={styles.quickBooking}>
         <h2 className={styles.quickBookingTitle}>빠른 예약하기</h2>
         <div className={styles.quickBookingContent}>
@@ -229,7 +286,10 @@ export const MainPage: React.FC = () => {
             />
           ))}
         </div>
-      </section>
+      </section> */}
+      <div>      
+      <QuickBooking routeData={routeData} />
+      </div>
 
       <section className={styles.noticeSection}>
         <h2 className={styles.noticeTitle}>공지사항</h2>
@@ -268,18 +328,25 @@ export const MainPage: React.FC = () => {
         {/* ----------------------------------------------------------------- */}
 
         <hr className={styles.noticeDivider} />
-        <div className={styles.noticeFooter}>
-          <span className={styles.noticeText}>전체공지 보기</span>
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/39d3da592bbe83d18c101160fb790b68b8b3c44297531c445b233d2f5354dec7?placeholderIfAbsent=true"
-            alt=""
-            className={styles.noticeIcon}
-          />
-        </div>
+        <a className={styles.noticeFooter} href="/Notification">
+          <div className={styles.noticeFooter}>
+            <span className={styles.noticeText}>전체 공지사항 보기</span>
+            <img
+              src="/img/icon/reservelogo.svg"
+              alt=""
+              className={styles.noticeIcon}
+            />
+          </div>
+        </a>
       </section>
       <a href="/FAQ">
         <button className={styles.supportText}>문제가 있으신가요?</button>
       </a>
+
+
+      <div className={styles.emptyBox}>
+      {/* 여백을 가진 상자 */}
+      </div>
 
       {/* 최근 예약 섹션 */}
       <section
@@ -289,7 +356,7 @@ export const MainPage: React.FC = () => {
         {...handlers}
       >
         <img
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/fe829013-c35b-4444-ab77-aaf9850d8c8d?placeholderIfAbsent=true"
+          src="/img/icon/arrow-top.png"
           alt=""
           className={styles.recentBookingIcon}
         />

@@ -1,0 +1,99 @@
+.inquiryContainer {
+  background-color: rgb(243, 244, 246);
+  display: flex;
+  padding: 0 0 50px;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100vh;
+  max-height: 1000px;
+  font: 400 12px "Noto Sans KR", -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.header {
+  background-color: #fff;
+  align-self: stretch;
+  display: flex;
+  width: 100%;
+  color: #000;
+  text-align: center;
+  padding: 19px 23px;
+}
+
+.headerIcon {
+  width: 39px;
+}
+
+.headerTitle {
+  margin: 0;
+  flex-grow: 0.73;
+  font-size: 24px;
+}
+
+.categorySelect {
+  border-radius: 10px;
+  background-color: #fff;
+  display: flex;
+  margin-top: 13px;
+  width: 95%;
+  padding: 16px 25px 16px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.dropdownIcon {
+  aspect-ratio: 1.56;
+  object-fit: contain;
+  width: 14px;
+  margin: auto 0;
+}
+
+.inquiryInput {
+  border-radius: 10px;
+  background-color: #fff;
+  margin-top: 6px;
+  width: 90%;
+  padding: 16px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.DetailInput {
+  border-radius: 10px;
+  background-color: #fff;
+  margin-top: 6px;
+  width: 90%;
+  height: 80%;
+  padding: 16px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  font: 400 12px "Noto Sans KR", -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.submitButton {
+  position: relative;
+  border-radius: 20px;
+  margin-top: 30px;
+  width: 312px;
+  max-width: 312px;
+  padding: 14px 0px;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.buttonBackground {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.buttonText {
+  position: relative;
+  font-size: 14px;
+  color: rgba(56, 56, 56, 0.9);
+  font-weight: 700;
+}

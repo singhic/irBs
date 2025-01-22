@@ -7,28 +7,57 @@
   /* font-family: Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif; */
   /* margin: 0 12px; */
   /* padding: 0 12px 0 0; */
-  height: 960px;
+  /* height: 960px; */
 }
 
 /* 앱바 ---------------------------------------------------------------------------  */
 .notificationBar {
   background-color: #fff;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  gap: 40px 60px;
+  gap: 40px 50px;
   font-size: 13px;
   color: #000;
   font-weight: 350;
   text-align: center;
-  padding: 3px 3px ;
+  padding: 3px 3px;
+  box-sizing: border-box;
+  height: 65px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notificationContainer {
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 30px;
+}
+
+.notificationWrapper {
+  display: flex;
+  flex-direction: column;
+  animation: slide linear infinite;
+  animation-duration: var(--animation-duration, 5s);
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .notificationContent {
   display: flex;
+  justify-content: space-around;
+  align-items: center;
   gap: 14px;
   flex-grow: 1;
   flex-basis: auto;
   margin: auto 0;
+  height: 30px;
 }
 
 .notificationIcon {
@@ -40,10 +69,17 @@
 }
 
 .notificationText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   flex-basis: auto;
+  flex-grow: 1;
 }
 
 @media (max-width: 640px) {
+  .notificationBar {
+    gap: 40px 30px;
+  }
   .notificationText {
     margin: 2px -42px 0 -4px;
   }
@@ -55,6 +91,15 @@
   object-position: center;
   width: 31px;
   margin-right: 10px;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
 }
 
 /* 안녕하세요 사용자님 ----------------------------------------------------------------- */
@@ -69,14 +114,14 @@
   justify-content: space-between;
   padding: 10px 20px;
   margin: 2% 2%;
-  
 }
 
 .weatherInfo {
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* 왼쪽 정렬 */
-
+  margin:2px 0;
+  width: 100%;
 }
 
 .weatherStatus {
@@ -86,7 +131,16 @@
   line-height: 1;
   align-self: start;
   margin-bottom: 3px;
+  width: 100%;
 }
+.weatherDiv{
+  display: flex;
+  align-items: center; /* 세로 방향 중앙 정렬 */
+  position: relative;
+  width: 100%;
+}
+
+
 
 .greeting {
   color: #333;
@@ -94,13 +148,13 @@
   font-weight: 700;
   margin-top: 0px;
 }
-
 .weatherIcon {
   /* aspect-ratio: 1; */
   /* object-fit: contain; */
   /* object-position: center; */
   width: 50px;
-  /* align-self: start; */
+  position: absolute;
+  right: 0; /* 부모의 가장 오른쪽 끝으로 이동 */
 }
 /* 예약하기 버튼 ----------------------------------------------- */
 .bookingButton {
@@ -119,6 +173,7 @@
   align-items: center;
   text-decoration: none; /* 밑줄 제거 */
   color: inherit; /* 텍스트 색상 상속 */
+  transition: background-color 200ms ease-in-out;
 }
 
 .bookingText {
@@ -129,7 +184,6 @@
   /* align-self: left; */
   text-align: left;
   color: inherit; /* 텍스트 색상 상속 */
-
 }
 
 .bookingIcon {
@@ -137,6 +191,44 @@
   margin-left: auto; /* 부모 요소 내에서 오른쪽 정렬 */
   position: relative; /* 부모 요소 내에서 상대 위치 */
 }
+
+/* 버스위치 ----------------------------------------------------------*/
+.locationButton {
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  margin: 0 2%;
+  margin-top: 2%;
+  font-size: 20px;
+
+  padding: 11px 27px;
+  cursor: pointer;
+  border: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-decoration: none; /* 밑줄 제거 */
+  color: inherit; /* 텍스트 색상 상속 */
+  transition: background-color 200ms ease-in-out;
+}
+
+.locationText {
+  margin: auto 0;
+  /* align-items: center;  */
+  font-size: 20px;
+  font-weight: 600;
+  /* align-self: left; */
+  text-align: left;
+  color: inherit; /* 텍스트 색상 상속 */
+}
+
+.locationIcon {
+  width: 34px;
+  margin-left: auto; /* 부모 요소 내에서 오른쪽 정렬 */
+  position: relative; /* 부모 요소 내에서 상대 위치 */
+}
+
 /* 빠른예약 ----------------------------------------------------------*/
 .quickBooking {
   border-radius: 18px;
@@ -157,7 +249,7 @@
   display: flex;
   /* flex-direction: column; */
   /* width: 200px; */
-  gap: 10px;
+  /* gap: 10px; */
 }
 
 .quickBookingTitle {
@@ -178,7 +270,7 @@
   gap: 16px;
   /* white-space: nowrap; */
   padding: 16px 19px 8px;
-  /* margin-top: 22px; */
+  margin-bottom: 6px;
 }
 
 .routeInfo {
@@ -216,7 +308,6 @@
   font-weight: 500;
   /* align-self: end; */
   margin-top: 4px;
-  
 }
 /* 공지사항 ---------------------------------------------------------------------------- */
 .noticeSection {
@@ -276,6 +367,7 @@
   font-size: 14px;
   color: rgba(0, 0, 0, 0.45);
   font-weight: 700;
+  text-decoration-line: none;
   justify-content: space-between;
 }
 
@@ -286,7 +378,7 @@
 }
 
 .noticeText {
-  flex-grow: 1; /* 텍스트 영역을 확장 */ 
+  flex-grow: 1; /* 텍스트 영역을 확장 */
   text-align: center; /* 텍스트 가운데 정렬 */
   object-position: center;
   font-weight: 700;
@@ -302,7 +394,7 @@
 /* 최근 예약현황이 존재합니다----------------------------------- */
 .recentBooking {
   position: fixed; /* 화면 하단에 고정 */
-  bottom: 0 ; /* 하단에 위치 */
+  bottom: 0; /* 하단에 위치 */
   width: 100%; /* 전체 너비를 차지하도록 설정 */
   max-width: 500px;
   border-radius: 20px 20px 0 0;
@@ -314,13 +406,17 @@
   font-weight: 700;
   padding: 6px 0 18px;
   z-index: 1000; /* 다른 요소들 위에 표시되도록 설정 */
-  transition: transform 3s ease-in-out; /* 스와이프 애니메이션 */
+  transition: transform 1s ease-in-out; /* 스와이프 애니메이션 */
   overflow-y: auto; /* 내부 콘텐츠가 스크롤 가능하도록 설정 */
   height: 150px; /* 초기 높이 설정 */
 }
+.emptyBox {
+  height: 200px;
+}
+
 @media (min-height: 960px) {
   .recentBooking {
-    bottom: calc(100vh - 980px); /* 화면 높이에서 960px을 뺀 값으로 설정 */
+    bottom: calc(100vh - 1100px); /* 화면 높이에서 960px을 뺀 값으로 설정 */
   }
 }
 
@@ -329,7 +425,6 @@
   height: 100vh;
   transform: translateY(-85vh);
 }
-
 
 .recentBookingIcon {
   aspect-ratio: 1.1;
@@ -344,27 +439,10 @@
   display: flex;
   /* margin-top: 10px; */
   flex-direction: column;
-  padding: 0 16px ;
+  padding: 0 16px;
 }
 
 .recentBookingTitle {
   font-size: 20px;
+  overflow: hidden;
 }
-
-/* @media (max-width: 640px) {
-  .recentBookingTitle {
-    margin-right: -5px;
-  }
-} */
-
-/* .recentBookingDetails {
-  font-size: 16px;
-  margin-top: 5px;
-  margin-right: 10px;
-} */
-
-/* @media (max-width: 640px) {
-  .recentBookingDetails {
-    margin-top: -1px;
-  }
-} */
