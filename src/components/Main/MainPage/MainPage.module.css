@@ -17,7 +17,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  gap: 40px 50px;
+  gap: 40px 30px;
   font-size: 13px;
   color: #000;
   font-weight: 350;
@@ -42,21 +42,18 @@
 .notificationWrapper {
   display: flex;
   flex-direction: column;
-  animation: slide linear infinite;
-  animation-duration: var(--animation-duration, 5s);
   position: absolute;
   top: 0;
   left: 0;
 }
 
 .notificationContent {
+  width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
   gap: 14px;
-  flex-grow: 1;
-  flex-basis: auto;
-  margin: 0 0 10px;
+  margin-bottom: 10px;
   height: 30px;
 }
 
@@ -74,16 +71,22 @@
   word-break: break-word; 
   overflow: hidden; 
   text-overflow: ellipsis; 
-  flex-basis: auto;
   flex-grow: 1;
 }
 
+.settingsIcon {
+  object-fit: contain;
+  object-position: center;
+  width: 31px;
+  padding: 0 15px;
+}
+
 @media (max-width: 640px) {
-  .notificationBar {
-    gap: 40px 30px;
+  .notificationBar{
+    gap: 40px 15px
   }
   .notificationContent{
-    width: 88%;
+    width: 92%;
   }
   .notificationText {
     margin: 2px -42px 0 -4px;
@@ -91,22 +94,22 @@
   }
 }
 
-.settingsIcon {
-  aspect-ratio: 0.89;
-  object-fit: contain;
-  object-position: center;
-  width: 31px;
-  margin-right: 10px;
+@media (max-width: 440px) {
+  .notificationBar{
+    gap: 40px 10px
+  }
+  .notificationContent{
+    width: 84%;
+  }
+  .settingsIconDiv{
+    width: 16vw;
+  }
+  .settingsIcon {
+    padding: 0;
+  }
 }
 
-@keyframes slide {
-  0% {
-    transform: translateY(0%);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
-}
+
 
 /* 안녕하세요 사용자님 ----------------------------------------------------------------- */
 .weatherCard {
