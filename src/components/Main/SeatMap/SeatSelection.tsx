@@ -591,13 +591,15 @@ export const SeatSelection: React.FC = () => {
         <div className={styles.busLayout}>
           {" "}
           {/* 버스 레이아웃 */}
-          <div className={styles.driverLayout}>
-            <img
-              src="/img/seat/driver.png"
-              alt="Driver"
-              className={styles.driverIcon}
-            />{" "}
-            {/* 운전사 아이콘 */}
+          <div className={styles.driverAndEntrance}>
+            <div className={styles.driverLayout}>
+              <p className={styles.driverText}>
+                운전석
+              </p>
+            </div>
+            <div className={styles.driverLayout}>
+              <p className={styles.driverText}>출입구</p>
+            </div>
           </div>
           {/* <img src="/steering-wheel.svg" alt="Steering wheel" className={styles.steeringIcon} /> 운전대 아이콘 */}
           <div className={styles.seatGrid}>

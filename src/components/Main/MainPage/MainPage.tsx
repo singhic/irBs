@@ -126,6 +126,7 @@ export const MainPage: React.FC = () => {
   const navigate = useNavigate();
   const [reservation, setReservation] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  
 
   const routeData = [
     { destination: "동래", time: "16:20", seats: "(44/33석)" },
@@ -156,7 +157,7 @@ export const MainPage: React.FC = () => {
       setIsSwipedUp(true);
       setTimeout(() => {
         navigate("/Reservations");
-      }, 300); // 애니메이션 지속 시간과 동일하게 설정
+      }, 50); // 애니메이션 지속 시간과 동일하게 설정
     },
     preventScrollOnSwipe: true,
     trackMouse: true,
@@ -190,21 +191,84 @@ export const MainPage: React.FC = () => {
     }
   }, [isSwipedUp]);
 
+  // 알림창 animation loop
+  const [notifications, setNotifications] = useState([]);
+  const [animationDuration, setAnimationDuration] = useState(0);
+  const [dynamicKeyframes, setDynamicKeyframes] = useState('');
+
+  useEffect(() => {
+    const initialNotifications = [
+      "1-빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.",
+      "2-빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.",
+      "3-빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.",
+      "4-빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.",
+    ];
+  
+    if (initialNotifications.length > 0) {
+      setNotifications([...initialNotifications, ...initialNotifications]); 
+    }
+  
+    const pauseDuration = 3; //정지 시간
+    const transitionDuration = 0.8; //전환 시간
+    const originalCount = initialNotifications.length;
+    const totalDuration = originalCount * (pauseDuration + transitionDuration);
+  
+    setAnimationDuration(totalDuration); 
+
+    let keyframesStr = '';
+
+    for (let i = 0; i < originalCount; i++) {
+      const startPercent = (i * (pauseDuration + transitionDuration)) / totalDuration * 100;
+      const pauseEndPercent = ((i * (pauseDuration + transitionDuration)) + pauseDuration) / totalDuration * 100;
+      const nextPercent = ((i + 1) * (pauseDuration + transitionDuration)) / totalDuration * 100;
+
+      // 각 구간마다 transform 값은 0%부터 -50%까지 균등하게 분할
+      const currentTranslate = ((i * 50) / originalCount).toFixed(2);
+      const nextTranslate = (((i + 1) * 50) / originalCount).toFixed(2);
+
+      keyframesStr += `
+        ${startPercent.toFixed(2)}% { transform: translateY(-${currentTranslate}%); }
+        ${pauseEndPercent.toFixed(2)}% { transform: translateY(-${currentTranslate}%); }
+        ${nextPercent.toFixed(2)}% { transform: translateY(-${nextTranslate}%); }
+      `;
+    }
+
+    const dynamicStyles = `
+      @keyframes slideNotifications {
+        ${keyframesStr}
+      }
+    `;
+    setDynamicKeyframes(dynamicStyles);
+  }, []);
+
   return (
     <main className={styles.page}>
       {/* 헤더 */}
+      <style>{dynamicKeyframes}</style>
       <header className={styles.notificationBar}>
-        <div className={styles.notificationContent}>
-          <img
-            src="/img/icon/warninglogo.svg"
-            alt="Warning icon"
-            className={styles.notificationIcon}
-          />
-          <p className={styles.notificationText}>
-            빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.
-          </p>
+        <div className={styles.notificationContainer}>
+          <div 
+            className={styles.notificationWrapper} 
+            style={{
+              animationName: 'slideNotifications',
+              animationDuration: `${animationDuration}s`,
+              animationTimingFunction: 'linear',
+              animationIterationCount: 'infinite',
+              }}>
+            {notifications.map((text,index)=>(
+              <div className={styles.notificationContent} key={index}>
+              <img
+                src="/img/icon/warninglogo.svg"
+                alt="Warning icon"
+                className={styles.notificationIcon}/>
+              <p className={styles.notificationText}>
+                {text}
+              </p>
+            </div>
+            ))}
+          </div>
         </div>
-        <a href="/MyPage">
+        <a href="/MyPage" className={styles.settingsIconDiv}>
           <img
             src="/img/icon/settinglogo.svg"
             alt="Settings"
@@ -312,6 +376,11 @@ export const MainPage: React.FC = () => {
       <a href="/FAQ">
         <button className={styles.supportText}>문제가 있으신가요?</button>
       </a>
+
+
+      <div className={styles.emptyBox}>
+      {/* 여백을 가진 상자 */}
+      </div>
 
       {/* 최근 예약 섹션 */}
       <section

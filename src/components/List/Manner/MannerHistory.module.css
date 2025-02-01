@@ -38,7 +38,7 @@
   background-color: #fff;
   display: flex;
   margin-top: 25px;
-  width: 70%;
+  width: 75%;
   flex-direction: column;
   text-align: center;
   padding: 21px 46px 13px;
@@ -65,7 +65,7 @@
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   margin-top: 13px;
-  width: 83%;
+  width: 87%;
   align-items: start;
   gap: 20px;
   color: #000;
@@ -95,13 +95,13 @@
 }
 
 .penaltyNotice {
-  border-radius: 10px;
-  background-color: rgba(176, 224, 230, 0.9);
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
   margin-top: 17px;
-  width: 70%;
+  width: 74%;
   font-size: 15px;
-  color: rgba(56, 56, 56, 0.9);
-  font-weight: 400;
+  color: rgb(0, 136, 255);
+  font-weight: 700;
   padding: 7px 50px;
 }

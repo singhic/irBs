@@ -3,7 +3,7 @@
   background-color: #fff;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
-  width: 80%;
+  width: 85%;
   align-items: center;
   gap: 20px;
   justify-content: space-between;
@@ -17,6 +17,8 @@
   font-size: 16px;
   font-weight: 600;
   white-space: nowrap;
+  margin-left: 10px;
+  margin-right: 5%;
 }
 
 .route {
@@ -35,7 +37,8 @@
 
 .seatDisplay {
   margin-bottom: 10px;
-  font-size: 40px;
+  font-size: 35px;
+  margin-right: 5%;
 }
 
 .seatNumber {
@@ -56,9 +59,13 @@
   font-size: 25px;
   align-self: stretch;
   margin: auto 10px;
+  margin-right: 10%;
 }
 
 .notBoarded {
   color: #ff0000;
   font-size: 25px;
+  align-self: stretch;
+  margin: auto 10px;
+  margin-right: 5%;
 }

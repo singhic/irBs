@@ -7,28 +7,54 @@
   /* font-family: Noto Sans KR, -apple-system, Roboto, Helvetica, sans-serif; */
   /* margin: 0 12px; */
   /* padding: 0 12px 0 0; */
-  height: 960px;
+  /* height: 960px; */
 }
 
 /* 앱바 ---------------------------------------------------------------------------  */
 .notificationBar {
   background-color: #fff;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  gap: 40px 60px;
+  gap: 40px 30px;
   font-size: 13px;
   color: #000;
   font-weight: 350;
   text-align: center;
   padding: 3px 3px;
+  box-sizing: border-box;
+  height: 65px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notificationContainer {
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 30px;
+}
+
+.notificationWrapper {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .notificationContent {
+  width: 100%;
   display: flex;
+  justify-content: space-around;
+  align-items: center;
   gap: 14px;
-  flex-grow: 1;
-  flex-basis: auto;
-  margin: auto 0;
+  margin-bottom: 10px;
+  height: 30px;
 }
 
 .notificationIcon {
@@ -40,22 +66,50 @@
 }
 
 .notificationText {
-  flex-basis: auto;
-}
-
-@media (max-width: 640px) {
-  .notificationText {
-    margin: 2px -42px 0 -4px;
-  }
+  white-space: normal; 
+  overflow-wrap: break-word; 
+  word-break: break-word; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  flex-grow: 1;
 }
 
 .settingsIcon {
-  aspect-ratio: 0.89;
   object-fit: contain;
   object-position: center;
   width: 31px;
-  margin-right: 10px;
+  padding: 0 15px;
 }
+
+@media (max-width: 640px) {
+  .notificationBar{
+    gap: 40px 15px
+  }
+  .notificationContent{
+    width: 92%;
+  }
+  .notificationText {
+    margin: 2px -42px 0 -4px;
+    line-height: 17px;
+  }
+}
+
+@media (max-width: 440px) {
+  .notificationBar{
+    gap: 40px 10px
+  }
+  .notificationContent{
+    width: 84%;
+  }
+  .settingsIconDiv{
+    width: 16vw;
+  }
+  .settingsIcon {
+    padding: 0;
+  }
+}
+
+
 
 /* 안녕하세요 사용자님 ----------------------------------------------------------------- */
 .weatherCard {
@@ -75,6 +129,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* 왼쪽 정렬 */
+  margin:2px 0;
+  width: 100%;
 }
 
 .weatherStatus {
@@ -84,7 +140,16 @@
   line-height: 1;
   align-self: start;
   margin-bottom: 3px;
+  width: 100%;
 }
+.weatherDiv{
+  display: flex;
+  align-items: center; /* 세로 방향 중앙 정렬 */
+  position: relative;
+  width: 100%;
+}
+
+
 
 .greeting {
   color: #333;
@@ -92,13 +157,13 @@
   font-weight: 700;
   margin-top: 0px;
 }
-
 .weatherIcon {
   /* aspect-ratio: 1; */
   /* object-fit: contain; */
   /* object-position: center; */
   width: 50px;
-  /* align-self: start; */
+  position: absolute;
+  right: 0; /* 부모의 가장 오른쪽 끝으로 이동 */
 }
 /* 예약하기 버튼 ----------------------------------------------- */
 .bookingButton {
@@ -119,10 +184,7 @@
   color: inherit; /* 텍스트 색상 상속 */
   transition: background-color 200ms ease-in-out;
 }
-.bookingButton:hover,
-.bookingButton:focus {
-  background-color: #e1f1ff;
-}
+
 .bookingText {
   margin: auto 0;
   /* align-items: center;  */
@@ -159,10 +221,7 @@
   color: inherit; /* 텍스트 색상 상속 */
   transition: background-color 200ms ease-in-out;
 }
-.locationButton:hover,
-.locationButton:focus {
-  background-color: #e1f1ff;
-}
+
 .locationText {
   margin: auto 0;
   /* align-items: center;  */
@@ -220,7 +279,7 @@
   gap: 16px;
   /* white-space: nowrap; */
   padding: 16px 19px 8px;
-  /* margin-top: 22px; */
+  margin-bottom: 6px;
 }
 
 .routeInfo {
@@ -356,13 +415,17 @@
   font-weight: 700;
   padding: 6px 0 18px;
   z-index: 1000; /* 다른 요소들 위에 표시되도록 설정 */
-  transition: transform 3s ease-in-out; /* 스와이프 애니메이션 */
+  transition: transform 1s ease-in-out; /* 스와이프 애니메이션 */
   overflow-y: auto; /* 내부 콘텐츠가 스크롤 가능하도록 설정 */
   height: 150px; /* 초기 높이 설정 */
 }
+.emptyBox {
+  height: 200px;
+}
+
 @media (min-height: 960px) {
   .recentBooking {
-    bottom: calc(100vh - 980px); /* 화면 높이에서 960px을 뺀 값으로 설정 */
+    bottom: calc(100vh - 1100px); /* 화면 높이에서 960px을 뺀 값으로 설정 */
   }
 }
 
@@ -390,22 +453,5 @@
 
 .recentBookingTitle {
   font-size: 20px;
+  overflow: hidden;
 }
-
-/* @media (max-width: 640px) {
-  .recentBookingTitle {
-    margin-right: -5px;
-  }
-} */
-
-/* .recentBookingDetails {
-  font-size: 16px;
-  margin-top: 5px;
-  margin-right: 10px;
-} */
-
-/* @media (max-width: 640px) {
-  .recentBookingDetails {
-    margin-top: -1px;
-  }
-} */

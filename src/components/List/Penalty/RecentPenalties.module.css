@@ -26,16 +26,16 @@
 }
 
 .headerTitle {
-  flex-grow: 0.45;
+  flex-grow: 0.5;
   font-size: 24px;
   margin: 0;
 }
 
 .penaltyContent {
   display: flex;
-  margin-top: 24px;
+  margin-top: 20px;
   flex-direction: column;
-  padding: 0 27px;
+  padding: 0 20px;
 }
 
 .penaltyStatus {
@@ -97,13 +97,13 @@
 }
 
 .penaltySuspension {
-  border-radius: 10px;
-  background-color: rgba(176, 224, 230, 0.9);
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
   margin-top: 15px;
   font-size: 13px;
-  color: rgba(56, 56, 56, 0.9);
-  font-weight: 500;
+  color: rgba(255, 0, 0, 10);
+  font-weight: 700;
   padding: 7px 56px;
   text-align: center;
 }
