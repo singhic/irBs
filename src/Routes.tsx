@@ -18,6 +18,7 @@ import Signup from "./components/Auth/Signup/Signup.tsx";
 
 import Mypage from "./components/Members/MyPage/MyPage.tsx";
 import UserProfile from "./components/Members/UserProfile/UserProfile.tsx";
+import UserDelection from "./components/Members/UserProfile/UserDelection.tsx"
 import FAQ from "./components/Members/FAQ/FAQ.tsx";
 
 import OnboardingPage from "./components/StartMap/Onboarding/OnboardingPage.tsx";
@@ -59,6 +60,7 @@ const AppRouter = () => {
 
           <Route path="/MyPage" element={<Mypage />} />
           <Route path="/UserProfile" element={<UserProfile />} />
+          <Route path="/UserDelection" element={<UserDelection />} />
           <Route path="/FAQ" element={<FAQ />} />
 
           <Route path="/BookList" element={<BookList />} />

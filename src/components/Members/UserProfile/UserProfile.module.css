@@ -142,3 +142,81 @@
     margin: 70px 0 0 0;
     align-items: center;
   }
+
+  /* 회원탈퇴 ---------------------------------------------------------------------------  */
+  .DelectionSection {
+    margin: 0 auto;
+    background: #f8f8f8;
+    color: #000;
+    padding-bottom: 31px;
+    min-height: 100vh; /* 전체 화면 높이를 차지하도록 설정 */
+  }
+  
+  .DelectionHeader {
+    background: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .headerIcon {
+    width: 39px;
+    aspect-ratio: 1.05;
+    object-fit: contain;
+    margin-top: 8px;
+  }
+  
+  .headerTitle {
+    font: 700 24px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
+    flex-grow: 1;
+    margin-right: 30px;
+  }
+
+  .DelectionContent {
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    margin: 0 auto;
+    box-sizing: border-box; /* 패딩을 포함해 중앙 정렬 */
+    justify-content: center;
+  }
+
+  .contentSection{
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    padding: 17px 20px;
+  }
+  
+  .contentTitle {
+    font: 700 16px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
+  }
+  
+  .content {
+    font: 400 16px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
+  }
+
+  .DelectionButtonWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5%;
+  }
+  
+  .DelectionButton{
+    height: 47px;
+    width: 100%;
+    border-radius: 10px;
+    align-self: center;
+    display: block; 
+    padding: 0; 
+    border: none; 
+    background: none; 
+    background-color: rgb(176, 224, 230);
+    font: 700 16px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  

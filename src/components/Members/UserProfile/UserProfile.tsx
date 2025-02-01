@@ -200,7 +200,7 @@ const UserProfile: React.FC = () => {
         onSubmit={handlePasswordReset}
       />
       
-      <a href="#" className={styles.deactivateLink}>
+      <a href="/UserDelection" className={styles.deactivateLink}>
         회원탈퇴를 찾으시나요?
       </a>
     </main>
