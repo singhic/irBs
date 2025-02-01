@@ -12,6 +12,10 @@ import {
   SeatProps,
   SeatStatusProps,
 } from "./types.ts";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FreeMode } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/free-mode";
 
 type SeatStatus = "available" | "reserved" | "selected";
 
@@ -501,14 +505,24 @@ export const SeatSelection: React.FC = () => {
       </header>
 
       <section className={styles.dateSection}>
+        <Swiper 
+          freeMode={true}
+          slidesPerView="auto"
+          spaceBetween={20}
+          className="seatSwiper"
+          style={{ padding: "0 0 6px 0", marginLeft: "0" }}
+        >
           {dates.map((date, index) => (
-            <DateButton
-              key={date.date}
-              {...date}
-              isActive={selectedDate === index}
-              onClick={() => handleDateSelect(index)}
-            />
+            <SwiperSlide key={index} style={{ width: "auto" }}>
+              <DateButton
+                {...date}
+                isActive={selectedDate === index}
+                onClick={() => handleDateSelect(index)}
+              >
+              </DateButton>
+            </SwiperSlide>
           ))}
+        </Swiper>
       </section>
 
       <section className={styles.scheduleSection}>
