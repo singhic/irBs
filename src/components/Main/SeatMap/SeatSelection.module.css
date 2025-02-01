@@ -33,6 +33,7 @@
   transform: translateX(-50%);
 }
 
+
 .dateSection {
   display: flex;
   /* gap: 15px; */
@@ -42,10 +43,16 @@
   /* 박스  */
   border-radius: 20px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  margin: 10px;
+  padding: 10px 25px;
+  margin: 10px ;
   background-color: #ffffff;
   justify-content: space-around;
+}
+
+@media (max-width: 460px) {
+  .dateSection {
+    padding: 10px 20px;
+  }
 }
 
 .dateSection::-webkit-scrollbar {
@@ -65,7 +72,8 @@
   /* min-width: fit-content; */
   padding: 10px 0;
   /* justify-content: space-around; */
-  width: 15%;
+  /* width: 15%; */
+  min-width: 70px;
   height: 60px;
 }
 
