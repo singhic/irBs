@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./RecentPenalties.module.css";
 import { PenaltyItem } from "./PenaltyItem.tsx";
 import { PenaltyRecord } from "./types.ts";
+import axios from "axios";
+
+
 
 const penaltyRecords: PenaltyRecord[] = [
   {
+    
     date: "2024. 10. 22",
     location: "양산-북정",
     iconSrc: "img/icon/arrow-right.png",
@@ -25,8 +29,11 @@ const penaltyRecords: PenaltyRecord[] = [
     iconSrc: "img/icon/arrow-right.png",
   },
 ];
-
+const penaltyCount = penaltyRecords.length; // 전체 패널티 횟수
+const maxPenalties = 3; // 사용 정지 기준 패널티 횟수
+const isSuspended = penaltyCount >= maxPenalties;
 export const RecentPenalties: React.FC = () => {
+  const [message, setMessage] = useState("");
   return (
     <div className={styles.penaltyContainer}>
       <header className={styles.penaltyHeader}>
@@ -39,7 +46,7 @@ export const RecentPenalties: React.FC = () => {
       <div className={styles.penaltyContent}>
         <div className={styles.penaltyStatus}>
           <div className={styles.statusLabel}>패널티 현황</div>
-          <div className={styles.statusCount}>1회</div>
+          <div className={styles.statusCount}>{penaltyCount}회</div>
         </div>
 
         {penaltyRecords.map((record, index) => (

@@ -113,7 +113,7 @@ const MyPage: React.FC = () => {
       </header>
 
       <section className={styles.mainContent}>
-        <UserStats penaltyCount="조회불가" mannerScore="85점" />
+        <UserStats penaltyCount="현재 패널티" mannerScore="85점" />
 
         <SectionHeader title="예약" icon="/img/icon/asklogo.svg" />
         {/* <div className={styles.contentCard}>

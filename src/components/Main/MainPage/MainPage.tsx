@@ -194,6 +194,7 @@ export const MainPage: React.FC = () => {
   // 알림창 animation loop
   const [notifications, setNotifications] = useState([]);
   const [animationDuration, setAnimationDuration] = useState(0);
+  const [dynamicKeyframes, setDynamicKeyframes] = useState('');
 
   useEffect(() => {
     const initialNotifications = [
@@ -207,20 +208,53 @@ export const MainPage: React.FC = () => {
       setNotifications([...initialNotifications, ...initialNotifications]); 
     }
   
-    const durationPerNotification = 3;
-    const totalDuration = initialNotifications.length * durationPerNotification;
+    const pauseDuration = 3; //정지 시간
+    const transitionDuration = 0.8; //전환 시간
+    const originalCount = initialNotifications.length;
+    const totalDuration = originalCount * (pauseDuration + transitionDuration);
   
-    setAnimationDuration(totalDuration || 1); 
+    setAnimationDuration(totalDuration); 
+
+    let keyframesStr = '';
+
+    for (let i = 0; i < originalCount; i++) {
+      const startPercent = (i * (pauseDuration + transitionDuration)) / totalDuration * 100;
+      const pauseEndPercent = ((i * (pauseDuration + transitionDuration)) + pauseDuration) / totalDuration * 100;
+      const nextPercent = ((i + 1) * (pauseDuration + transitionDuration)) / totalDuration * 100;
+
+      // 각 구간마다 transform 값은 0%부터 -50%까지 균등하게 분할
+      const currentTranslate = ((i * 50) / originalCount).toFixed(2);
+      const nextTranslate = (((i + 1) * 50) / originalCount).toFixed(2);
+
+      keyframesStr += `
+        ${startPercent.toFixed(2)}% { transform: translateY(-${currentTranslate}%); }
+        ${pauseEndPercent.toFixed(2)}% { transform: translateY(-${currentTranslate}%); }
+        ${nextPercent.toFixed(2)}% { transform: translateY(-${nextTranslate}%); }
+      `;
+    }
+
+    const dynamicStyles = `
+      @keyframes slideNotifications {
+        ${keyframesStr}
+      }
+    `;
+    setDynamicKeyframes(dynamicStyles);
   }, []);
 
   return (
     <main className={styles.page}>
       {/* 헤더 */}
+      <style>{dynamicKeyframes}</style>
       <header className={styles.notificationBar}>
         <div className={styles.notificationContainer}>
           <div 
             className={styles.notificationWrapper} 
-            style={{animationDuration: `${animationDuration}s`}}>
+            style={{
+              animationName: 'slideNotifications',
+              animationDuration: `${animationDuration}s`,
+              animationTimingFunction: 'linear',
+              animationIterationCount: 'infinite',
+              }}>
             {notifications.map((text,index)=>(
               <div className={styles.notificationContent} key={index}>
               <img
@@ -234,7 +268,7 @@ export const MainPage: React.FC = () => {
             ))}
           </div>
         </div>
-        <a href="/MyPage">
+        <a href="/MyPage" className={styles.settingsIconDiv}>
           <img
             src="/img/icon/settinglogo.svg"
             alt="Settings"
