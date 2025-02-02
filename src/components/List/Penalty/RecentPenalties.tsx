@@ -1,39 +1,34 @@
 import React, { useEffect, useState } from "react";
 import styles from "./RecentPenalties.module.css";
-import { PenaltyItem } from "./PenaltyItem.tsx";
-import { PenaltyRecord } from "./types.ts";
 import axios from "axios";
+import * as cheerio from 'cheerio';
 
+const RecentPenalties: React.FC = () => {
+  const [htmlContent, setHtmlContent] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
+  const fetchHtmlContent = async () => {
+    setIsLoading(true);
+    try {
+      console.log("데이터 요청 시작...");
+      const response = await axios.get("/penalty/list.php");
+      console.log("서버 응답 데이터:", response.data);
 
-const penaltyRecords: PenaltyRecord[] = [
-  {
-    
-    date: "2024. 10. 22",
-    location: "양산-북정",
-    iconSrc: "img/icon/arrow-right.png",
-  },
-  {
-    date: "2024. 10. 12",
-    location: "장유",
-    iconSrc: "img/icon/arrow-right.png",
-  },
-  {
-    date: "2024. 10. 05",
-    location: "장유",
-    iconSrc: "img/icon/arrow-right.png",
-  },
-  {
-    date: "2024. 09. 24",
-    location: "장유",
-    iconSrc: "img/icon/arrow-right.png",
-  },
-];
-const penaltyCount = penaltyRecords.length; // 전체 패널티 횟수
-const maxPenalties = 3; // 사용 정지 기준 패널티 횟수
-const isSuspended = penaltyCount >= maxPenalties;
-export const RecentPenalties: React.FC = () => {
-  const [message, setMessage] = useState("");
+      const html = response.data;
+      setHtmlContent(html);
+    } catch (err) {
+      console.error("데이터 크롤링 중 오류:", err);
+      setError("패널티 데이터를 불러오는 중 오류가 발생했습니다.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchHtmlContent();
+  }, []);
+
   return (
     <div className={styles.penaltyContainer}>
       <header className={styles.penaltyHeader}>
@@ -44,23 +39,13 @@ export const RecentPenalties: React.FC = () => {
       </header>
 
       <div className={styles.penaltyContent}>
-        <div className={styles.penaltyStatus}>
-          <div className={styles.statusLabel}>패널티 현황</div>
-          <div className={styles.statusCount}>{penaltyCount}회</div>
-        </div>
-
-        {penaltyRecords.map((record, index) => (
-          <PenaltyItem
-            key={index}
-            date={record.date}
-            location={record.location}
-            iconSrc={record.iconSrc}
-          />
-        ))}
-
-        <div className={styles.penaltySuspension}>
-          패널티 3회로 인한 사용 정지 3일
-        </div>
+        {isLoading ? (
+          <p>로딩 중...</p>
+        ) : error ? (
+          <p className={styles.error}>{error}</p>
+        ) : (
+          <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+        )}
       </div>
     </div>
   );
