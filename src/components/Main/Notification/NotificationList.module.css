@@ -1,35 +1,91 @@
 .container {
-  background-color: #f3f4f6;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  align-items: center;
-  color: #000;
-  width: 100%;
-  height: 100vh;
-  max-height: 1000px;
-  font: 400 16px "Noto Sans KR", -apple-system, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+  color: #333;
 }
 
 .header {
-  background-color: #fff;
-  align-self: stretch;
   display: flex;
-  font-size: 24px;
-  font-weight: 700;
-  text-align: center;
-  padding: 19px 28px;
+  align-items: center;
+  margin-bottom: 20px;
+  margin:20px auto
 }
 
 .icon {
-  aspect-ratio: 1.05;
-  object-fit: contain;
-  object-position: center;
-  width: 39px;
+  margin-right: 12px;
 }
 
 .title {
-  padding-right: 30px;
-  flex-grow: 1;
-  width: 218px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.error {
+  background-color: #ffe0e0;
+  color: #d9534f;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin:20px auto
+}
+
+.notificationBox {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  transition: box-shadow 0.3s ease;
+  width:250px;
+  background-color:  #87ceeb;
+}
+
+.notificationBox:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.dropdownButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dropdownButton:hover {
+  color: #007bff;
+}
+
+.description {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: black;
+  font-weight: 700;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+}
+
+.empty {
+  text-align: center;
+  font-size: 1rem;
+  color: #999;
 }
