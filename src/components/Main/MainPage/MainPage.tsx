@@ -363,7 +363,7 @@ export const MainPage: React.FC = () => {
             target="_blank" // 새 탭에서 열기
             rel="noopener noreferrer" // 보안 설정
           >
-            <li>📢 [필독]통학버스 이용 에티켓 안내내</li>
+            <li>📢 [필독]통학버스 이용 에티켓 안내</li>
           </a>
         </ul>
 
