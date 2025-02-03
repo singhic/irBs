@@ -23,6 +23,14 @@
     {
       "source": "/index.php", 
       "destination": "https://bus.inje.ac.kr/index.php"
+    },
+    {
+      "source": "/penalty/:path*", 
+      "destination": "https://bus.inje.ac.kr/penalty/:path*"
+    },
+    {
+      "source": "/notice/:path*", 
+      "destination": "https://bus.inje.ac.kr/notice/:path*"
     }
   ]
 }
