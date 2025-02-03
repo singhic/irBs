@@ -332,30 +332,38 @@ export const MainPage: React.FC = () => {
         <ul className={styles.noticeList}>
           <a
             className={styles.noUnderline}
-            href="https://www.inje.ac.kr/kor/campus-life/welfare-0101.asp"
+            href="\NoticePDF\2024학년도 동계방학 통학버스 운행 시간표.pdf"
+            target="_blank" // 새 탭에서 열기
+            rel="noopener noreferrer" // 보안 설정
           >
-            <li>📅2024년도 2학기 통학버스 운행안내</li>
+            <li>🕒 2024학년도 동계방학 통학버스 운행 시간표 </li>
           </a>
 
           <a
             className={styles.noUnderline}
-            href="https://www.inje.ac.kr/kor/campus-life/welfare-0102-1.asp"
+            href="\NoticePDF\통학버스 이용안내.pdf"
+            target="_blank" // 새 탭에서 열기
+            rel="noopener noreferrer" // 보안 설정
           >
-            <li>🕒통학버스 운행 시간표</li>
+            <li>🚌 통학버스 이용 안내 </li>
           </a>
 
           <a
             className={styles.noUnderline}
             href="https://www.inje.ac.kr/kor/campus-life/welfare-0103.asp"
+            target="_blank" // 새 탭에서 열기
+            rel="noopener noreferrer" // 보안 설정
           >
-            <li>📍통합버스 승차장소 안내</li>
+            <li>⭐ 분실물 문의 관련 안내</li>
           </a>
 
           <a
             className={styles.noUnderline}
             href="https://www.inje.ac.kr/kor/campus-life/welfare-0104.asp"
+            target="_blank" // 새 탭에서 열기
+            rel="noopener noreferrer" // 보안 설정
           >
-            <li>🔔시간예약제 관련 안내</li>
+            <li>📢 [필독]통학버스 이용 에티켓 안내내</li>
           </a>
         </ul>
 

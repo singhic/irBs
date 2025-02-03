@@ -21,10 +21,7 @@ import UserProfile from "./components/Members/UserProfile/UserProfile.tsx";
 import UserDelection from "./components/Members/UserProfile/UserDelection.tsx"
 import FAQ from "./components/Members/FAQ/FAQ.tsx";
 
-import OnboardingPage from "./components/StartMap/Onboarding/OnboardingPage.tsx";
-import Onboarding1 from "./components/StartMap/Onboarding1/Onboarding1.tsx";
-import Onboarding2 from "./components/StartMap/Onboarding2/Onboarding2.tsx";
-import Onboarding3 from "./components/StartMap/Onboarding3/Onboarding3.tsx";
+// 처음이신가요 페이지 삭제
 
 import BookList from "./components/List/Booking/RecentBookings.tsx";
 import PenaltyList from "./components/List/Penalty/RecentPenalties.tsx";
@@ -41,10 +38,7 @@ const AppRouter = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/Login" />} />
         <Route element={<PublicLayout />}>
-          <Route path="/Onboarding" element={<OnboardingPage />} />
-          <Route path="/Onboarding1" element={<Onboarding1 />} />
-          <Route path="/Onboarding2" element={<Onboarding2 />} />
-          <Route path="/Onboarding3" element={<Onboarding3 />} />
+          {/* 처음이신가요 페이지 삭제  */}
 
           <Route path="/Login" element={<LoginPage />} />
           <Route path="/PasswordReset" element={<PasswordReset />} />
