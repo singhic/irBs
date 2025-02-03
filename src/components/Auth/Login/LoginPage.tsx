@@ -134,15 +134,6 @@ const LoginPage: React.FC = () => {
           회원가입
         </span>
       </nav>
-      <p className={styles.newUserText}>
-        <span
-          role="button"
-          onClick={() => (window.location.href = "/Onboarding")}
-          tabIndex={0}
-        >
-          처음이신가요?
-        </span>
-      </p>
     </main>
   );
 };
