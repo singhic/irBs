@@ -341,7 +341,7 @@ export const MainPage: React.FC = () => {
 
           <a
             className={styles.noUnderline}
-            href="\NoticePDF\통학버스 이용안내.pdf"
+            href="\NoticePDF\Shuttle_Bus_Usage_Guide.pdf"
             target="_blank" // 새 탭에서 열기
             rel="noopener noreferrer" // 보안 설정
           >
