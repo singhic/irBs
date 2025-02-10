@@ -65,6 +65,20 @@ const NotificationList = () => {
     );
   };
 
+  // description 내 URL을 링크로 변환하는 함수
+  const addDownloadLinkToDescription = (description: string) => {
+    const downloadText = "첨부파일 다운로드";
+    const regex = /첨부파일 다운로드/;
+
+    if (regex.test(description)) {
+      // description 내에 첨부파일 다운로드 텍스트가 있을 경우 링크 추가
+      const fileLink = "/path/to/file.pdf"; // 실제 파일 링크
+      return description.replace(regex, `<a href="${fileLink}" target="_blank" rel="noopener noreferrer" class="${styles.downloadButton}">${downloadText}</a>`);
+    }
+    
+    return description;
+  };
+
   return (
     <div className={styles.container}>
       {/* 헤더 */}
@@ -99,9 +113,10 @@ const NotificationList = () => {
               <div
                 className={styles.description}
                 style={{ display: notification.isExpanded ? 'block' : 'none' }}
-              >
-                {notification.description}
-              </div>
+                dangerouslySetInnerHTML={{
+                  __html: addDownloadLinkToDescription(notification.description)
+                }}
+              />
             </div>
           ))
         ) : (
