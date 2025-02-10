@@ -373,11 +373,13 @@ export const MainPage: React.FC = () => {
         <a className={styles.noticeFooter} href="/Notification">
           <div className={styles.noticeFooter}>
             <span className={styles.noticeText}>전체 공지사항 보기</span>
-            <img
-              src="/img/icon/reservelogo.svg"
-              alt=""
-              className={styles.noticeIcon}
-            />
+            <div className={styles.noticeIconDiv}>
+              <img
+                src="/img/icon/reservelogo.svg"
+                alt=""
+                className={styles.noticeIcon}
+              />
+            </div>
           </div>
         </a>
       </section>

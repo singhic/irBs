@@ -328,31 +328,33 @@
   flex-direction: column;
   align-items: start;
   text-align: center;
-  padding: 23px 18px 8px;
-  margin: 0 2%;
+  /* padding: 23px 18px 8px; */
+  padding: 16px 10px 25px 10px;
+  margin: 2% 2%;
 }
 
 .noticeTitle {
   color: #000;
   font-size: 20px;
   font-weight: 600;
-  margin-left: 10px;
+  margin-left: 20px;
 }
 .noticeDivider {
-  width: 97%;
+  width: 100%;
   max-width: 100%;
   height: 1px;
   margin: auto 0;
   border: 1px solid rgba(0, 0, 0, 0.4);
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 /* 공지사항 내용 */
 .noticeList {
   /* list-style-type: none; */
   padding: 0;
-  margin: 20px 0 13px 5px;
+  /* margin: 20px 0 13px 5px; */
   text-align: left;
-  margin: 20px;
+  /* margin: 20px; */
+  margin: 0 0 5px 25px;
 }
 
 .noticeList li {
@@ -365,9 +367,16 @@
 .noUnderline {
   text-decoration: none;
 }
+
+.noticeIconDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+}
 /* ---------------------------------------------------------------------- */
 .noticeFooter {
-  align-self: end;
+  /* align-self: end; */
   display: flex;
   margin-top: 6px;
   width: 100%;
@@ -377,7 +386,8 @@
   color: rgba(0, 0, 0, 0.45);
   font-weight: 700;
   text-decoration-line: none;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  align-items: center;
 }
 
 .noticeIcon {
@@ -387,10 +397,12 @@
 }
 
 .noticeText {
-  flex-grow: 1; /* 텍스트 영역을 확장 */
-  text-align: center; /* 텍스트 가운데 정렬 */
-  object-position: center;
+  flex-grow: 1; 
+  text-align: center; 
+  /* object-position: center; */
   font-weight: 700;
+  line-height: 25px;
+  margin-left: 26px;
 }
 /* 문제가 있으신가요 ------------------------------------------- */
 .supportText {
