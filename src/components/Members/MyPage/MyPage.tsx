@@ -89,7 +89,7 @@ const MyPage: React.FC = () => {
 
       <section className={styles.mainContent}>
         {/* ✅ 패널티 횟수 값 적용 */}
-        <UserStats penaltyCount={`${penaltyCount}회`} mannerScore="85점" />
+        <UserStats penaltyCount={penaltyCount} mannerScore="85점" />
 
         <SectionHeader title="예약" icon="/img/icon/asklogo.svg" />
 
