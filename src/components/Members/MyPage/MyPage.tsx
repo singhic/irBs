@@ -123,6 +123,6 @@ return (
     </section>
   </main>
 );
-
+};
 
 export default MyPage;
