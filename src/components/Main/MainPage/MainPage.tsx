@@ -129,7 +129,7 @@ export const MainPage: React.FC = () => {
   
 
   const routeData = [
-    { destination: "미실시 서비스", time: "추후 제공 예정입니다.", seats: "(44/33석)" },
+    { destination: "추후 제공", time: "09:00", seats: "(33/33석)" },
   ];
 
   const handlers = useSwipeable({
@@ -179,8 +179,8 @@ export const MainPage: React.FC = () => {
   useEffect(() => {
     const initialNotifications = [
       "🔥 2025년 1학기 시간표 최신화 완료!",
-      "❌ 빠른 예약, 매너, 문의 등 추후 적용 될 서비스가 존재합니다.",
-      "📢 마이페이지는 우측 상단에서 확인 가능합니다.",
+      "❌ 빠른 예약, 매너, 문의 등 서비스 추후 적용 예정",
+      "📢 마이페이지는 우측 상단에서 확인 가능!",
       "Made by Dept. of CE, Team MEGABRAIN",
     ];
   
@@ -278,14 +278,21 @@ export const MainPage: React.FC = () => {
           className={styles.bookingIcon}
         />
       </a>
-      <a href="./Location" className={styles.locationButton}>
-        <span className={styles.locationText}>현재 버스 위치 조회</span>
-        <img
-          src="/img/icon/reservelogo.svg"
-          alt="예약하기 버튼"
-          className={styles.locationIcon}
-        />
-      </a>
+      <a
+  href="#"
+  className={styles.locationButton}
+  onClick={(e) => {
+    e.preventDefault(); // 기본 이동 동작 방지
+    alert("추후 제공 예정 서비스입니다.");
+  }}
+>
+  <span className={styles.locationText}>현재 버스 위치 조회</span>
+  <img
+    src="/img/icon/reservelogo.svg"
+    alt="예약하기 버튼"
+    className={styles.locationIcon}
+  />
+</a>
 
       {/* 빠른 예약 섹션
       <section className={styles.quickBooking}>
