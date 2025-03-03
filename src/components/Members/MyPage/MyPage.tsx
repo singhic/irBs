@@ -56,63 +56,73 @@ const MyPage: React.FC = () => {
     { title: "문의 내역", icon: "/light-left-arrow.svg", href: "/Inquirylist" },
   ];
 
-  return (
-    <main className={styles.page}>
-      <header className={styles.header}>
-        <div className={styles.myHeader}>
-          <a href="/MainPage">
-            <img id="icon" src="/img/icon/big-arrow-left.svg" alt="뒤로가기 아이콘" className={styles.backicon} />
-          </a>
-          <p className={styles.myTitle}>마이페이지</p>
-        </div>
-
-        <div className={styles.userProfile}>
-          <img src="/img/icon/profilelogo.svg" alt="프로필 이미지" className={styles.profileImage} />
-          <div className={styles.userNP}>
-            <span className={styles.userName}>{userName}</span>
-          </div>
-          <Button
-            variant="outlined"
-            size="small"
-            sx={{
-              borderRadius: "10px",
-              backgroundColor: "rgb(176, 224, 230)",
-              border: "rgba(0, 0, 0, 0.4)",
-              color: "text.secondary",
-            }}
-            href="/userprofile"
-          >
-            내정보 수정
-          </Button>
-        </div>
-      </header>
-
-      <section className={styles.mainContent}>
-        {/* ✅ 패널티 횟수 값 적용 */}
-        <UserStats penaltyCount={penaltyCount} mannerScore="85점" />
-
-        <SectionHeader title="예약" icon="/img/icon/asklogo.svg" />
-
-        <Paper square={false} sx={{ padding: 2, backgroundColor: "white" }}>
-          <Stack spacing={2}>
-            {recentItems.map((item, index) => (
-              <RecentItem key={index} {...item} />
-            ))}
-          </Stack>
-        </Paper>
-
-        <SectionHeader title="문의" icon="/img/icon/asklogo.svg" />
-
-        <Paper square={false} sx={{ padding: 2, backgroundColor: "white" }}>
-          <Stack spacing={2}>
-            {inquiryItems.map((item, index) => (
-              <RecentItem key={index} {...item} />
-            ))}
-          </Stack>
-        </Paper>
-      </section>
-    </main>
-  );
+  const handleItemClick = (e: React.MouseEvent, title: string) => {
+  if (["예약 내역", "매너 내역", "문의하기", "문의 내역"].includes(title)) {
+    e.preventDefault();
+    alert("추후 제공 예정입니다.");
+  }
 };
+
+return (
+  <main className={styles.page}>
+    <header className={styles.header}>
+      <div className={styles.myHeader}>
+        <a href="/MainPage">
+          <img id="icon" src="/img/icon/big-arrow-left.svg" alt="뒤로가기 아이콘" className={styles.backicon} />
+        </a>
+        <p className={styles.myTitle}>마이페이지</p>
+      </div>
+
+      <div className={styles.userProfile}>
+        <img src="/img/icon/profilelogo.svg" alt="프로필 이미지" className={styles.profileImage} />
+        <div className={styles.userNP}>
+          <span className={styles.userName}>{userName}</span>
+        </div>
+        <Button
+          variant="outlined"
+          size="small"
+          sx={{
+            borderRadius: "10px",
+            backgroundColor: "rgb(176, 224, 230)",
+            border: "rgba(0, 0, 0, 0.4)",
+            color: "text.secondary",
+          }}
+          href="/userprofile"
+        >
+          내정보 수정
+        </Button>
+      </div>
+    </header>
+
+    <section className={styles.mainContent}>
+      <UserStats penaltyCount={penaltyCount} mannerScore="100점" />
+
+      <SectionHeader title="예약" icon="/img/icon/asklogo.svg" />
+
+      <Paper square={false} sx={{ padding: 2, backgroundColor: "white" }}>
+        <Stack spacing={2}>
+          {recentItems.map((item, index) => (
+            <a key={index} href={item.href} onClick={(e) => handleItemClick(e, item.title)}>
+              <RecentItem {...item} />
+            </a>
+          ))}
+        </Stack>
+      </Paper>
+
+      <SectionHeader title="문의" icon="/img/icon/asklogo.svg" />
+
+      <Paper square={false} sx={{ padding: 2, backgroundColor: "white" }}>
+        <Stack spacing={2}>
+          {inquiryItems.map((item, index) => (
+            <a key={index} href={item.href} onClick={(e) => handleItemClick(e, item.title)}>
+              <RecentItem {...item} />
+            </a>
+          ))}
+        </Stack>
+      </Paper>
+    </section>
+  </main>
+);
+
 
 export default MyPage;
