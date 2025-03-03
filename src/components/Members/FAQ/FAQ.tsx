@@ -148,15 +148,9 @@ const initialFAQs: FAQItem[] = [
     isOpen: false,
   },
   {
-    question: "문의하기가 안들어가져요.",
-    answer:
-      "현재 문의하기 기능은 구현되어있지 않습니다. 문의사항은 singhic@outlook.kr 으로 문의바랍니다.",
+    question: "개선된 사이트가 불편해요.",
+    answer: "문의사항은 singhic@outlook.kr 으로 문의바랍니다. 사이트 오류 문의라면, 오류가 생긴 휴대폰 기종, 날짜, 시간, 어떤 증상인지 자세히 적어주시면 감사하겠습니다.",
     isOpen: false,
-  },
-  {
-    question: "여기부터 새로운 질문",
-    answer: "야야야야야야야야야",
-    isOpen: true,
   },
   {
     question: "통학버스를 이용하려면 반드시 예약해야 하나요?",
