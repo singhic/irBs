@@ -129,27 +129,7 @@ export const MainPage: React.FC = () => {
   
 
   const routeData = [
-    { destination: "동래", time: "16:20", seats: "(44/33석)" },
-    { destination: "울산", time: "18:10", seats: "(44/41석)" },
-    { destination: "대구", time: "19:20", seats: "(44/4석)" },
-    { destination: "부산", time: "09:30", seats: "(44/4석)" },
-    { destination: "대구", time: "11:50", seats: "(44/44석)" },
-    { destination: "인천", time: "07:50", seats: "(44/21석)" },
-    { destination: "울산", time: "11:10", seats: "(44/38석)" },
-    { destination: "서울", time: "08:20", seats: "(44/13석)" },
-    { destination: "인천", time: "21:40", seats: "(44/44석)" },
-    { destination: "대구", time: "17:30", seats: "(44/35석)" },
-    { destination: "광주", time: "14:20", seats: "(44/18석)" },
-    { destination: "울산", time: "15:10", seats: "(44/11석)" },
-    { destination: "울산", time: "18:10", seats: "(44/39석)" },
-    { destination: "서울", time: "14:40", seats: "(44/9석)" },
-    { destination: "울산", time: "18:50", seats: "(44/14석)" },
-    { destination: "인천", time: "18:20", seats: "(44/10석)" },
-    { destination: "서울", time: "12:30", seats: "(44/41석)" },
-    { destination: "광주", time: "21:10", seats: "(44/32석)" },
-    { destination: "울산", time: "18:50", seats: "(44/31석)" },
-    { destination: "광주", time: "12:20", seats: "(44/32석)" },
-
+    { destination: "미실시 서비스", time: "추후 제공 예정입니다.", seats: "(44/33석)" },
   ];
 
   const handlers = useSwipeable({
@@ -198,10 +178,10 @@ export const MainPage: React.FC = () => {
 
   useEffect(() => {
     const initialNotifications = [
-      "1-빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.",
-      "2-빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.",
-      "3-빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.",
-      "4-빠른 예약, 패널티, 비매너 등 서비스는 추후 적용 될 예정입니다.",
+      "🔥 2025년 1학기 시간표 최신화 완료!",
+      "❌ 빠른 예약, 매너, 문의 등 추후 적용 될 서비스가 존재합니다.",
+      "📢 마이페이지는 우측 상단에서 확인 가능합니다.",
+      "Made by Dept. of CE, Team MEGABRAIN",
     ];
   
     if (initialNotifications.length > 0) {
@@ -332,11 +312,11 @@ export const MainPage: React.FC = () => {
         <ul className={styles.noticeList}>
           <a
             className={styles.noUnderline}
-            href="\NoticePDF\winter_bus_schedule.pdf"
+            href="\NoticePDF\first_bus_schedule.pdf"
             target="_blank" // 새 탭에서 열기
             rel="noopener noreferrer" // 보안 설정
           >
-            <li>🕒 2024학년도 동계방학 통학버스 운행 시간표 </li>
+            <li>🕒 2025학년도 1학기 통학버스 운행 시간표 </li>
           </a>
 
           <a
