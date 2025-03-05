@@ -94,8 +94,8 @@ const RecentPenalties: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles.penaltyContainer}>
-      <header className={styles.penaltyHeader}>
+    <div className={styles.container}>
+      <header className={styles.header}>
         <a href="/Mypage" className={styles.headerIcon}>
           <img loading="lazy" src="img/icon/arrow-left.png" alt="뒤로가기" />
         </a>
