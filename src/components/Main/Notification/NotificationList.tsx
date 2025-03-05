@@ -30,7 +30,7 @@ const NotificationList = () => {
       $("div[data-role='collapsible']").each((index, element) => {
         const title = $(element).find("h3").text().trim();
         const description = $(element).find("p").text().trim();
-        const onclick = $(element).find("h3").attr("onclick") || null;
+        const onclick = $(element).find("a").attr("onclick") || null;
 
         console.log(`추출된 데이터 (${index}):`, { title, description, onclick });
 
