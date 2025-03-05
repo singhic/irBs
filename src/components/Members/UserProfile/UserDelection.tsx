@@ -46,7 +46,7 @@ const UserDelection: React.FC = () => {
 
   return (
     <section className={styles.DelectionSection}>
-      <header className={styles.DelectionHeader}>
+      <header className={styles.header}>
         <button onClick={() => window.history.back()}>
           <img
             src="/img/icon/big-arrow-left.svg"
