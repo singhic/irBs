@@ -1,339 +1,373 @@
 import { FC, useEffect, useState } from "react";
-import styles from "./Location.module.css"; // CSS 확인
-import { Ticket } from "./Ticket.tsx";
-import { useSwipeable } from "react-swipeable";
-import { useNavigate } from "react-router-dom";
+import styles from "./Location.module.css";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import React from "react";
+import { Ticket } from "./Ticket.tsx";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 
-// 예약 정보를 가져오는 함수
-async function fetchReservation(): Promise<Array<{
-  index: number;
-  routeName: string;
-  departureTime: string;
-  seatNumber: string;
-  departuredate: string;
-  cancel_num: string;
-  route_num: string;
-}> | null> {
+// 버스 노선 타입 정의
+interface BusRoute {
+  location: string;
+  value: string;
+}
+
+// 버스 노선 목록 (추후 동적으로 변경될 수 있음)
+const busRoutes: BusRoute[] = [
+  { location: "동래", value: "3" },
+  { location: "마산", value: "2" },
+  { location: "양산-물금", value: "18" },
+  { location: "양산-북정", value: "11" },
+  { location: "영도/부산역", value: "7" },
+  { location: "울산", value: "12" },
+  { location: "장유", value: "10" },
+  { location: "진해", value: "9" },
+  { location: "창원", value: "8" },
+  { location: "창원-마산", value: "21" },
+  { location: "하단", value: "4" },
+  { location: "해운대", value: "5" },
+];
+
+// 처리된 cid 목록을 추적하기 위한 세트
+const processedCids = new Set<string>();
+
+// 라우트 목록 가져오기 함수
+async function fetchAvailableRoutes(): Promise<string[] | null> {
   try {
-    const response = await axios.get("/index.php");
+    const response = await axios.get("/location/list.php");
     const html = response.data;
     const $ = cheerio.load(html);
 
-    const reservationElements = $('ul[data-role="listview"] li'); // 예약 항목 모두 선택
-    const reservations: Array<{
-      index: number;
-      routeName: string;
-      departureTime: string;
-      seatNumber: string;
-      departuredate: string;
-      cancel_num: string;
-      route_num: string;
-    }> = [];
-
-    reservationElements.each((index, element) => {
-      const dateText = $(element).find("h2").text().trim();
-      const routeNameText = $(element).find("p").first().text().trim();
-      const seatInfo = $(element).find("p").eq(1).text().trim();
-
-      const routeNameMatch = routeNameText.match(/노선\s*:\s*([가-힣]+)/);
-      if (!routeNameMatch) return;
-      const routeName = routeNameMatch[1];
-
-      const seatNumberMatch = seatInfo.match(/(\d+)번/);
-      if (!seatNumberMatch) return;
-      const seatNumber = seatNumberMatch[1];
-
-      const dateTextMatch = dateText.match(/(\d{1,2})-(\d{1,2})/);
-      if (!dateTextMatch) return;
-      const [_, month, day] = dateTextMatch;
-
-      const now = new Date();
-      let year = now.getFullYear();
-      if (Number(month) < now.getMonth() + 1) year += 1;
-
-      const departuredate = `${year}.${String(month).padStart(2, "0")}.${String(
-        day
-      ).padStart(2, "0")}`;
-
-      const timeTextMatch = dateText.match(/(\d{2}:\d{2})/);
-      if (!timeTextMatch) return;
-      const departureTime = timeTextMatch[1];
-
-      const fnCancelCall = $(element)
-        .find('a[onclick*="fnCancel"]')
-        .attr("onclick");
-      const cancelNumMatch = fnCancelCall?.match(/fnCancel\((\d+),/);
-      const cancel_num = cancelNumMatch ? cancelNumMatch[1] : null;
-
-      const fnlocation = $(element)
-        .find("a")
-        .filter((_, el) => $(el).attr("onclick")?.includes("fnLocation")) // "fnLocation" 포함 필터링
-        .attr("onclick");
-      const locationMatch = fnlocation.match(/fnLocation\((\d+)\)/); // 정규식 적용
-      const route_num = locationMatch ? locationMatch[1] : null;
-
-      if (!cancel_num) return;
-
-      reservations.push({
-        index,
-        routeName,
-        departureTime,
-        seatNumber,
-        departuredate,
-        cancel_num,
-        route_num,
-      });
-    });
-
-    return reservations.length ? reservations : null;
+    const availableRoutes = $('a').map((_, el) => $(el).text().trim()).get();
+    return availableRoutes.length > 0 ? availableRoutes : null;
   } catch (error) {
-    console.error("Error fetching reservation:", error);
+    console.error("Error fetching available routes:", error);
     return null;
   }
 }
 
-export const ReservationStatus: FC = () => {
-  const [reservations, setReservations] = useState<Array<{
+// 버스 목록 크롤링 함수
+async function fetchBusList(availableRoutes: string[]): Promise<Array<{
+  lineCode: string;
+  location: string;
+  busRoutes: Array<{
     routeName: string;
-    departureTime: string;
-    seatNumber: string;
-    departuredate: string;
-  }> | null>(null);
-  const navigate = useNavigate();
-  const [isSwipedDown, setIsSwipedDown] = useState(false);
-  const [showImage, setShowImage] = useState(false);
-  const [locationData, setLocationData] = useState<{
-    new_lat: string | null;
-    new_lng: string | null;
-    new_time: string | null;
-  }>({
-    new_lat: null,
-    new_lng: null,
-    new_time: null,
-  });
+    departureInfo: string;
+    cid: string;
+  }>;
+}> | null> {
+  try {
+    const busRoutesList: Array<{
+      lineCode: string;
+      location: string;
+      busRoutes: Array<{
+        routeName: string;
+        departureInfo: string;
+        cid: string;
+      }>;
+    }> = [];
 
-  const handleTicketClick = (reservation: {
-    route_num: string;
-    departuredate?: string;
-    departureTime?: string;
-  }) => {
-    // 예약 날짜와 시간 값이 없는 경우 처리
-    if (!reservation.departuredate || !reservation.departureTime) {
-      alert("예약 날짜 또는 시간이 없습니다.");
-      return;
-    }
+    // cid 중복 추적을 위한 세트 초기화
+    processedCids.clear();
 
-    // 예약 날짜와 시간 형식 검증 (예: "2024-11-25"와 "18:10")
-    const dateParts = reservation.departuredate.split(".");
-    const timeParts = reservation.departureTime.split(":");
-
-    if (
-      dateParts.length !== 3 ||
-      timeParts.length !== 2 ||
-      dateParts.some((part) => isNaN(parseInt(part, 10))) ||
-      timeParts.some((part) => isNaN(parseInt(part, 10)))
-    ) {
-      alert("날짜 또는 시간 형식이 잘못되었습니다.");
-      return;
-    }
-
-    // 예약된 날짜와 시간 변환
-    const [year, month, day] = dateParts.map((str) => parseInt(str, 10));
-    const [hours, minutes] = timeParts.map((str) => parseInt(str, 10));
-
-    const departuredate = new Date(year, month - 1, day); // 예약 날짜 (00:00 기준)
-    const departureTime = new Date(year, month - 1, day, hours, minutes); // 예약 날짜 및 시간
-
-    // 현시간 구하기 (한국시간)
-    const now = new Date();
-    const nowDate = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // 현재 날짜 (00:00 기준)
-
-    // 날짜 차이 계산
-    const dateDifference =
-      (departuredate.getTime() - nowDate.getTime()) / (1000 * 60 * 60 * 24); // 일 단위
-
-    if (dateDifference !== 0) {
-      // 날짜가 다를 경우
-      alert(`예약 날짜까지 ${Math.abs(dateDifference)}일 남았습니다.`);
-      return;
-    }
-
-    // 시간 차이 계산
-    const timeDifference =
-      (departureTime.getTime() - now.getTime()) / (1000 * 60); // 분 단위
-
-    if (timeDifference <= 40) {
-      // 40분 이내로 다가오면 클릭 가능
-      fetchLocationData({
-        route_num: reservation.route_num,
-        departureTime: reservation.departureTime,
-      });
-      setShowImage((prev) => !prev); // 상태 반전 (이미지 보이기)
-    } else {
-      // 40분 이상 남았다면 알림
-      alert("예약시간까지 40분 이상 남았습니다.");
-    }
-  };
-
-  const fetchLocationData = async ({
-    route_num,
-    departureTime,
-  }: {
-    route_num: string;
-    departureTime: string;
-  }): Promise<void> => {
-    try {
-      const targetUrl = `/location/view.php?lineCode=${route_num}`;
-      const response = await axios.get(targetUrl);
-      const html = response.data;
-
-      const $ = cheerio.load(html);
-
-      const matchingLink = $(`a:contains("${departureTime}")`).attr("href");
-      if (!matchingLink) {
-        console.error(
-          "No matching link found for the provided departure time."
-        );
-        return;
-      }
-
-      const detailUrl = `${matchingLink}`;
-      const detailResponse = await axios.get(detailUrl);
-      const detailHtml = detailResponse.data;
-
-      const detail$ = cheerio.load(detailHtml);
-      const scriptText = detail$(
-        'script:contains("new daum.maps.LatLng")'
-      ).html();
-      if (!scriptText) {
-        console.error(
-          "Could not find script containing map data on detail page."
-        );
-        return;
-      }
-
-      const latLngMatch = scriptText.match(
-        /new daum\.maps\.LatLng\(\s*([-+]?\d*\.\d+),\s*([-+]?\d*\.\d+)\s*\)/
+    for (const availableRoute of availableRoutes) {
+      // 노선명과 일치하는 route 찾기
+      const matchingRoute = busRoutes.find(route =>
+          availableRoute.includes(route.location) || route.location.includes(availableRoute)
       );
-      const titleMatch = scriptText.match(/title\s*:\s*'[^']*([\d]{2}:\d{2})/);
 
-      const new_lat = latLngMatch ? latLngMatch[1] : null;
-      const new_lng = latLngMatch ? latLngMatch[2] : null;
-      const new_time = titleMatch ? titleMatch[1] : null;
+      if (matchingRoute) {
+        const response = await axios.get(`/location/view.php?lineCode=${matchingRoute.value}`);
+        const html = response.data;
+        const $ = cheerio.load(html);
 
-      setLocationData({ new_lat, new_lng, new_time });
-    } catch (error) {
-      console.error("Error fetching location data:", error);
-      setLocationData({ new_lat: null, new_lng: null, new_time: null });
+        const busRoutesForLocation: Array<{
+          routeName: string;
+          departureInfo: string;
+          cid: string;
+        }> = [];
+
+        $('a[href^="/location/gps.php?cid="]').each((_, el) => {
+          const href = $(el).attr('href');
+          const cid = href ? href.split('cid=')[1] : '';
+
+          // 이미 처리된 cid인지 확인
+          if (cid && !processedCids.has(cid)) {
+            processedCids.add(cid);
+
+            const routeName = $(el).text().trim().split(' ')[0];
+            const departureInfo = $(el).find('span').text().trim();
+
+            busRoutesForLocation.push({
+              routeName,
+              departureInfo,
+              cid
+            });
+          }
+        });
+
+        if (busRoutesForLocation.length > 0) {
+          busRoutesList.push({
+            lineCode: matchingRoute.value,
+            location: matchingRoute.location,
+            busRoutes: busRoutesForLocation
+          });
+        }
+      }
     }
-  };
 
-  const TheaterLocation = () => {
-    const { new_lat, new_lng, new_time } = locationData;
+    return busRoutesList.length ? busRoutesList : null;
+  } catch (error) {
+    console.error("Error fetching bus list:", error);
+    return null;
+  }
+}
 
-    return (
-      <div>
-        <Map
-          center={{
-            lat: new_lat ? parseFloat(new_lat) : 35.248694,
-            lng: new_lng ? parseFloat(new_lng) : 128.902572,
-          }}
-          style={{
-            width: "350px",
-            height: "400px",
-            borderRadius: "20px",
-          }}
-        >
-          <MapMarker
-            position={{
-              lat: new_lat ? parseFloat(new_lat) : 35.248694,
-              lng: new_lng ? parseFloat(new_lng) : 128.902572,
-            }}
-          >
-            <div
-              style={{
-                color: "#71b3ff",
-                fontSize: "14px",
-                fontWeight: "500",
-                textAlign: "center",
-              }}
-            >
-              {new_time
-                ? new_time + "시 기준 위치"
-                : "위치가 존재하지 않습니다"}
-            </div>
-          </MapMarker>
-        </Map>
-      </div>
-    );
-  };
+// 버스 위치 타입 정의
+interface BusLocation {
+  lat: string | null;
+  lng: string | null;
+  time: string | null;
+}
 
-  const handlers = useSwipeable({
-    onSwipedDown: () => {
-      setIsSwipedDown(true);
-      setTimeout(() => {
-        navigate("/MainPage");
-      }, 300); // 애니메이션 지속 시간과 동일하게 설정
-    },
-    preventScrollOnSwipe: true,
-    trackMouse: true,
-    delta: 2,
+// 개별 버스 위치 크롤링 함수
+async function fetchBusLocation(cid: string): Promise<BusLocation | null> {
+  try {
+    const response = await axios.get(`/location/gps.php?cid=${cid}`);
+    const html = response.data;
+    const $ = cheerio.load(html);
+
+    const scriptContent = $('script:contains("markers.push")').html();
+    if (!scriptContent) {
+      console.error("Could not find map script.");
+      return null;
+    }
+
+    const firstMarkerMatch = scriptContent.match(/new daum\.maps\.LatLng\(([-+]?\d*\.\d+),([-+]?\d*\.\d+)\)/);
+    const lat = firstMarkerMatch ? firstMarkerMatch[1] : null;
+    const lng = firstMarkerMatch ? firstMarkerMatch[2] : null;
+
+    const timeMatch = scriptContent.match(/title\s*:\s*'([^']+)'/);
+    const time = timeMatch ? timeMatch[1] : null;
+
+    return { lat, lng, time };
+  } catch (error) {
+    console.error("Error fetching bus location:", error);
+    return null;
+  }
+}
+
+export const BusLocationTracker: FC = () => {
+  const [busList, setBusList] = useState<Array<{
+    lineCode: string;
+    location: string;
+    busRoutes: Array<{
+      routeName: string;
+      departureInfo: string;
+      cid: string;
+    }>;
+  }> | null>(null);
+
+  const [selectedBus, setSelectedBus] = useState<{
+    cid: string | null;
+    location: {
+      lat: number;
+      lng: number;
+      time: string | null;
+    } | null;
+  }>({
+    cid: null,
+    location: null
   });
 
-  useEffect(() => {
-    fetchReservation().then((data) => {
-      setReservations(data);
-    });
+  // 로딩 상태 추가
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [loadingMessage, setLoadingMessage] = useState<string>("버스 정보를 불러오는 중...");
+  const [loadingBusLocation, setLoadingBusLocation] = useState<boolean>(false);
 
-    if (isSwipedDown) {
-      window.scrollTo(0, 0); // 페이지 맨 위로 스크롤
+  const handleBusSelect = async (cid: string) => {
+    // 이미 선택된 버스를 다시 선택하면 선택 해제
+    if (selectedBus.cid === cid) {
+      setSelectedBus({ cid: null, location: null });
+      return;
     }
-  }, [isSwipedDown]);
+
+    setLoadingBusLocation(true);
+
+    try {
+      const location = await fetchBusLocation(cid);
+      if (location) {
+        setSelectedBus({
+          cid,
+          location: {
+            lat: location.lat ? parseFloat(location.lat) : 35.248694,
+            lng: location.lng ? parseFloat(location.lng) : 128.902572,
+            time: location.time
+          }
+        });
+      }
+    } catch (error) {
+      console.error("버스 위치 정보를 가져오는 중 오류 발생:", error);
+    } finally {
+      setLoadingBusLocation(false);
+    }
+  };
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      if (reservations && reservations.length > 0) {
-        const { route_num, departureTime } = reservations[0]; // 첫 번째 예약 정보
-        fetchLocationData({ route_num, departureTime });
-      }
-    }, 10000); // 10초마다 실행
+    const fetchRoutes = async () => {
+      setIsLoading(true);
+      setLoadingMessage("버스 정보를 불러오는 중입니다. 인터넷 상태에 따라 30초에서 1분 정도 소요될 수 있습니다.");
 
-    return () => clearInterval(intervalId); // 컴포넌트 언마운트 시 interval 해제
-  }, [reservations]);
+      try {
+        const availableRoutes = await fetchAvailableRoutes();
+        if (availableRoutes) {
+          const busListResult = await fetchBusList(availableRoutes);
+          console.log("버스 리스트 가져옴:", busListResult); // 디버깅용 로그
+          setBusList(busListResult);
+        } else {
+          console.log("사용 가능한 노선이 없습니다.");
+        }
+      } catch (error) {
+        console.error("버스 정보를 가져오는 중 오류 발생:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchRoutes();
+  }, []);
+
+  useEffect(() => {
+    let intervalId: NodeJS.Timeout | null = null;
+
+    if (selectedBus.cid) {
+      intervalId = setInterval(async () => {
+        const location = await fetchBusLocation(selectedBus.cid!);
+        if (location) {
+          setSelectedBus(prev => ({
+            ...prev,
+            location: {
+              lat: location.lat ? parseFloat(location.lat) : 35.248694,
+              lng: location.lng ? parseFloat(location.lng) : 128.902572,
+              time: location.time
+            }
+          }));
+        }
+      }, 10000); // 10초마다 새로고침
+    }
+
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [selectedBus.cid]);
+
+  // const renderNoDataMessage = () => {
+  //   if (!isLoading && (!busList || busList.length === 0)) {
+  //     return (
+  //         <div className={styles.noDataMessage}>
+  //           <p>위치 확인이 가능한 버스가 존재하지않습니다.</p>
+  //           <p>다시 시도해주세요.</p>
+  //           <button
+  //               className={styles.retryButton}
+  //               onClick={() => window.location.reload()}
+  //           >
+  //             새로고침
+  //           </button>
+  //         </div>
+  //     );
+  //   }
+  //   return null;
+  // };
 
   return (
-    <main className={styles.container}>
-      <header className={styles.scheduleHeader}>
-        <a href="/MainPage">
-          <img
-            src="\img\icon\arrow-left.png"
-            alt="arrow-left"
-            className={styles.headerIcon}
-          />
-        </a>
-        <h1 className={styles.title}>현재 버스 위치</h1>
-      </header>
-      {showImage && <TheaterLocation />}
+      <main className={styles.container}>
+        <header className={styles.scheduleHeader}>
+          <a href="/MainPage">
+            <img
+                src="\img\icon\arrow-left.png"
+                alt="arrow-left"
+                className={styles.headerIcon}
+            />
+          </a>
+          <h1 className={styles.title}>버스 현재 위치</h1>
+        </header>
 
-      {reservations && reservations.length > 0 ? (
-        reservations.map((reservation, index) => (
-          <Ticket
-            key={index}
-            routeName={reservation.routeName}
-            departureTime={reservation.departureTime}
-            busNumber={reservation.busNumber}
-            onClick={() => handleTicketClick(reservation)} // Ticket 클릭 시 이미지 보이기
-          />
-        ))
-      ) : (
-        <p>조회가능한 버스가 없습니다.</p>
-      )}
-    </main>
+        {isLoading && (
+            <div className={styles.loadingContainer}>
+              <div className={styles.spinner}></div>
+              <p className={styles.loadingText}>{loadingMessage}</p>
+            </div>
+        )}
+
+        {/*{renderNoDataMessage()}*/}
+
+        {loadingBusLocation && (
+            <div className={styles.loadingContainer}>
+              <div className={styles.spinner}></div>
+              <p className={styles.loadingText}>버스 위치를 불러오는 중...</p>
+            </div>
+        )}
+
+        {!loadingBusLocation && selectedBus.location && (
+            <div className={styles.mapContainer}>
+              <Map
+                  center={{
+                    lat: selectedBus.location.lat,
+                    lng: selectedBus.location.lng,
+                  }}
+                  style={{
+                    width: "350px",
+                    height: "400px",
+                    borderRadius: "20px",
+                  }}
+                  level={3}
+              >
+                <MapMarker
+                    position={{
+                      lat: selectedBus.location.lat,
+                      lng: selectedBus.location.lng,
+                    }}
+                >
+                  <div
+                      style={{
+                        color: "#71b3ff",
+                        fontSize: "14px",
+                        fontWeight: "500",
+                        textAlign: "center",
+                      }}
+                  >
+                    {selectedBus.location.time
+                        ? `${selectedBus.location.time} 기준 위치`
+                        : "위치 정보 없음"}
+                  </div>
+                </MapMarker>
+              </Map>
+            </div>
+        )}
+
+        {!isLoading && busList && busList.length > 0 && busList.map((route) => (
+            <div key={route.lineCode} className={styles.routeSection}>
+              <h2 className={styles.routeTitle}>{route.location}</h2>
+              {route.busRoutes.length > 0 ? (
+                  route.busRoutes.map((bus) => (
+                      <div
+                          key={bus.cid}
+                          className={`${styles.busCard} ${selectedBus.cid === bus.cid ? styles.selectedBusCard : ''}`}
+                          onClick={() => handleBusSelect(bus.cid)}
+                      >
+                        <Ticket
+                            routeName={bus.routeName}
+                            departureTime={bus.departureInfo}
+                        />
+                      </div>
+                  ))
+              ) : (
+                  <p className={styles.noBusMessage}>이 노선에 운행 중인 버스가 없습니다.</p>
+              )}
+            </div>
+        ))}
+      </main>
   );
 };
 
-export default ReservationStatus;
+export default BusLocationTracker;
