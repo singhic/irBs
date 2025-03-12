@@ -278,21 +278,12 @@ export const MainPage: React.FC = () => {
           className={styles.bookingIcon}
         />
       </a>
-      <a
-  href="#"
-  className={styles.locationButton}
-  onClick={(e) => {
-    e.preventDefault(); // 기본 이동 동작 방지
-    alert("추후 제공 예정 서비스입니다.");
-  }}
->
   <span className={styles.locationText}>현재 버스 위치 조회</span>
   <img
     src="/img/icon/reservelogo.svg"
     alt="예약하기 버튼"
     className={styles.locationIcon}
   />
-</a>
 
       {/* 빠른 예약 섹션
       <section className={styles.quickBooking}>
