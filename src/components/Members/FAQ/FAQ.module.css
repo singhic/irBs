@@ -1,82 +1,15 @@
-.faqSection {
-    margin: 0 auto;
-    background: #f8f8f8;
-    color: #000;
-    padding-bottom: 31px;
-    min-height: 100vh; /* 전체 화면 높이를 차지하도록 설정 */
-  }
-  
-  .faqHeader {
-    background: #fff;
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .headerIcon {
-    width: 39px;
-    aspect-ratio: 1.05;
-    object-fit: contain;
-    margin-top: 8px;
-  }
-  
-  .headerTitle {
-    font: 700 24px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
-    flex-grow: 1;
-    margin-right: 30px;
-  }
-  
-  .faqContent {
-    padding: 5%;
-    display: flex;
-    flex-direction: column;
-    font-size: 16px;
-    margin: 0 auto;
-    box-sizing: border-box; /* 패딩을 포함해 중앙 정렬 */
-    justify-content: center;
-  }
-  
-  .accordionItem {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-    padding: 17px 20px;
-    margin-bottom: 13px;
-  }
-  
-  .questionWrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-  
-  .question {
-    font: 400 16px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
-    margin: 0;
-  }
-  
-  .toggleButton {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-  }
-  
-  .toggleIcon {
-    width: 16px;
-    aspect-ratio: 1.6;
-    object-fit: contain;
-    margin-top: 8px;
-  }
-  
-  .answer {
-    font: 700 16px 'Noto Sans KR', -apple-system, Roboto, Helvetica, sans-serif;
-    margin: 16px 0 0;
-    text-align: left;
-  }
+.header-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
-  button {
-    border: none;
-    background: none;
-  }
+.backicon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.section-title {
+  margin: 0;
+}
