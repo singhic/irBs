@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FaqData from "react-faq-component";
+import styles from "./FAQ.module.css";
 
 function Faq() {
   const [rows, setRowsOption] = useState(null);
@@ -88,25 +89,70 @@ function Faq() {
       },
     ],
   };
+  // 스타일 추가
+  const faqStyles = {
+    bgColor: "white",
+    titleTextColor: "black",
+    rowTitleColor: "black",
+    rowContentColor: "grey",
+    arrowColor: "black",
+  };
 
-  const styles = {
-    //css 수정
-    bgColor: "white", // Background color of the FAQ container
-    titleTextColor: "black", // Title text color
-    rowTitleColor: "black", // Row title color
-    rowContentColor: "grey", // Row content color
-    arrowColor: "black", // Arrow color
+  const headerStyle = {
+    display: "flex",
+    alignItems: "center",
+    gap: "33%",
+    padding: "20px",
+  };
+
+  const iconStyle = {
+    width: "24px",
+    height: "24px",
+  };
+
+  const titleStyle = {
+    margin: 0,
   };
 
   return (
     <div>
-      <h2 className="section-title">My FAQ&apos;s</h2>
+      <div style={headerStyle}>
+        <a href="/MainPage">
+          <img
+            id="icon"
+            src="/img/icon/big-arrow-left.svg"
+            alt="뒤로가기 아이콘"
+            style={iconStyle}
+          />
+        </a>
+        <h2 style={titleStyle}>My FAQ&apos;s</h2>
+      </div>
       <div className="faq-style-wrapper">
-        <FaqData data={data1} styles={styles} getRowOptions={setRowsOption} />
-        <FaqData data={data2} styles={styles} getRowOptions={setRowsOption} />
-        <FaqData data={data3} styles={styles} getRowOptions={setRowsOption} />
-        <FaqData data={data4} styles={styles} getRowOptions={setRowsOption} />
-        <FaqData data={data5} styles={styles} getRowOptions={setRowsOption} />
+        <FaqData
+          data={data1}
+          styles={faqStyles}
+          getRowOptions={setRowsOption}
+        />
+        <FaqData
+          data={data2}
+          styles={faqStyles}
+          getRowOptions={setRowsOption}
+        />
+        <FaqData
+          data={data3}
+          styles={faqStyles}
+          getRowOptions={setRowsOption}
+        />
+        <FaqData
+          data={data4}
+          styles={faqStyles}
+          getRowOptions={setRowsOption}
+        />
+        <FaqData
+          data={data5}
+          styles={faqStyles}
+          getRowOptions={setRowsOption}
+        />
       </div>
     </div>
   );

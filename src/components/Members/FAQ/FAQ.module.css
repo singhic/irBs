@@ -1,0 +1,15 @@
+.header-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.backicon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.section-title {
+  margin: 0;
+}
