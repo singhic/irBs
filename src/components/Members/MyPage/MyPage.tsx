@@ -57,7 +57,7 @@ const MyPage: React.FC = () => {
   ];
 
   const handleItemClick = (e: React.MouseEvent, title: string) => {
-  if (["예약 내역", "매너 내역", "문의하기", "문의 내역"].includes(title)) {
+  if (["매너 내역", "문의하기", "문의 내역"].includes(title)) {
     e.preventDefault();
     alert("추후 제공 예정 서비스입니다.");
   }

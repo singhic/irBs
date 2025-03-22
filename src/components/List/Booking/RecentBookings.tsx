@@ -9,7 +9,7 @@ const ReservationStatus = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('use/list.php');
+        const response = await axios.get('/use/list.php');
         const $ = load(response.data);
 
         const reservationDetails = [];
