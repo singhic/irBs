@@ -1,54 +1,88 @@
-import React from "react";
-import styles from "./RecentBookings.module.css";
-import { BookingCard } from "./BookingCard.tsx";
-import { BookingData } from "./types.ts";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { load } from 'cheerio';
+import styles from './RecentBookings.module.css';
 
-export const RecentBookings: React.FC = () => {
-  const bookings: BookingData[] = [
-    {
-      route: "양산-북정",
-      date: "2024.10.22",
-      time: "18:10",
-      seatNumber: "22",
-      status: "BOARDED",
-    },
-    {
-      route: "양산-북정",
-      date: "2024.10.22",
-      time: "18:10",
-      seatNumber: "22",
-      status: "NOT_BOARDED",
-    },
-    {
-      route: "양산-북정",
-      date: "2024.10.22",
-      time: "18:10",
-      seatNumber: "22",
-      status: "BOARDED",
-    },
-    {
-      route: "양산-북정",
-      date: "2024.10.22",
-      time: "18:10",
-      seatNumber: "22",
-      status: "CANCELLED",
-    },
-  ];
+const ReservationStatus = () => {
+  const [reservations, setReservations] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('use/list.php');
+        const $ = load(response.data);
+
+        const reservationDetails = [];
+
+        $('ul[data-role="listview"]').each((i, ulElem) => {
+          const date = $(ulElem).find('li[data-role="list-divider"]').text().trim();
+        
+          const li = $(ulElem).find('li').not('[data-role="list-divider"]');
+          const h2s = li.find('h2');
+        
+          const category = $(h2s[0]).text().replace('구분 :', '').trim();
+          const rawDetail = $(h2s[1]).text().replace('내역 :', '').trim().replace(/\s+/g, ' ');
+          const cancelInfo = $(h2s[2]).text().replace('탑승여부 :', '').trim();
+        
+          // 분리
+          const parts = rawDetail.split('/').map(part => part.trim());
+          const time = parts[0] || '';
+          const route = `${parts[1] || ''} / ${parts[2] || ''}`;
+          const vehicle = `${parts[3] || ''} / ${parts[4] || ''}`;
+        
+          reservationDetails.push({
+            timestamp: date,
+            category,
+            time,
+            route,
+            vehicle,
+            cancelInfo,
+          });
+        });
+        
+
+        setReservations(reservationDetails);
+      } catch (error) {
+        console.error('Error fetching the page:', error);
+        setReservations([]);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <a href="/Mypage" className={styles.headerIcon}>
-          <img src="img/icon/arrow-left.png" alt="뒤로가기" />
-        </a>
-        <div className={styles.headerTitle}>예약 내역</div>
+      <h1 className={styles.title}>예약 현황</h1>
+
+      <div className={styles.ticketList}>
+        {reservations.length > 0 ? (
+          reservations.map((res, index) => (
+            <div key={index} className={styles.ticket}>
+              <div className={styles.ticketRow}>
+                <span className={styles.label}>시간:</span>
+                <span className={styles.value}>{res.time}</span>
+              </div>
+              <div className={styles.ticketRow}>
+                <span className={styles.label}>경로:</span>
+                <span className={styles.value}>{res.route}</span>
+              </div>
+              <div className={styles.ticketRow}>
+                <span className={styles.label}>차량:</span>
+                <span className={styles.value}>{res.vehicle}</span>
+              </div>
+              <div className={styles.ticketRow}>
+                <span className={styles.labelRed}>탑승여부:</span>
+                <span className={styles.value}>{res.cancelInfo}</span>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className={styles.noData}>예약 내역이 없습니다.</p>
+        )}
       </div>
-      <BookingCard booking={bookings[0]} />
-      {bookings.slice(1).map((booking, index) => (
-        <BookingCard key={index} booking={booking} />
-      ))}
     </div>
   );
 };
 
-export default RecentBookings;
+export default ReservationStatus;
