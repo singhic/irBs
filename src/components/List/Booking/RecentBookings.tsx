@@ -16,20 +16,19 @@ const ReservationStatus = () => {
 
         $('ul[data-role="listview"]').each((i, ulElem) => {
           const date = $(ulElem).find('li[data-role="list-divider"]').text().trim();
-        
+
           const li = $(ulElem).find('li').not('[data-role="list-divider"]');
           const h2s = li.find('h2');
-        
+
           const category = $(h2s[0]).text().replace('구분 :', '').trim();
           const rawDetail = $(h2s[1]).text().replace('내역 :', '').trim().replace(/\s+/g, ' ');
           const cancelInfo = $(h2s[2]).text().replace('탑승여부 :', '').trim();
-        
-          // 분리
+
           const parts = rawDetail.split('/').map(part => part.trim());
           const time = parts[0] || '';
           const route = `${parts[1] || ''} / ${parts[2] || ''}`;
           const vehicle = `${parts[3] || ''} / ${parts[4] || ''}`;
-        
+
           reservationDetails.push({
             timestamp: date,
             category,
@@ -39,7 +38,6 @@ const ReservationStatus = () => {
             cancelInfo,
           });
         });
-        
 
         setReservations(reservationDetails);
       } catch (error) {
@@ -53,12 +51,19 @@ const ReservationStatus = () => {
 
   return (
     <div className={styles.container}>
+      {/* 🔹 상단 네비게이션 바 */}
+      <div className={styles.navBar}>
+        <a href="/MainPage" className={styles.navLink}>🏠 홈으로</a>
+        <a href="/Mypage" className={styles.navLink}>👤 마이페이지</a>
+      </div>
+
       <h1 className={styles.title}>예약 현황</h1>
 
       <div className={styles.ticketList}>
         {reservations.length > 0 ? (
           reservations.map((res, index) => (
             <div key={index} className={styles.ticket}>
+              <div className={styles.date}>{res.timestamp}</div>
               <div className={styles.ticketRow}>
                 <span className={styles.label}>시간:</span>
                 <span className={styles.value}>{res.time}</span>

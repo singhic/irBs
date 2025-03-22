@@ -19,34 +19,42 @@
 }
 
 .ticket {
-  background-color: #f5faff;
-  border: 1px solid #d0e4ff;
+  background-color: #f9f9f9;
   border-radius: 12px;
+  border: 1px solid #ddd;
   padding: 1rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-.ticketRow {
-  display: flex;
-  justify-content: space-between;
-  margin: 0.5rem 0;
+.timestamp {
+  background-color: #297fb9;
+  color: white;
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.line {
+  margin: 0.3rem 0;
+  font-size: 1rem;
+  color: #333;
 }
 
 .label {
   font-weight: bold;
-  color: #333;
+  margin-right: 0.5rem;
+}
+
+.labelBlue {
+  color: #0456c8;
+  font-weight: bold;
 }
 
 .labelRed {
-  font-weight: bold;
   color: #d60000;
-}
-
-.value {
-  color: #555;
-  text-align: right;
-  flex: 1;
-  margin-left: 1rem;
+  font-weight: bold;
 }
 
 .noData {
