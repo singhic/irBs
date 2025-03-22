@@ -63,3 +63,23 @@
   color: #999;
   padding: 2rem;
 }
+
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.navLink {
+  background-color: #e4eaf2;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  color: #1a1a1a;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.navLink:hover {
+  background-color: #cdd8e6;
+}
