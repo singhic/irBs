@@ -31,6 +31,10 @@
     {
       "source": "/notice/:path*", 
       "destination": "https://bus.inje.ac.kr/notice/:path*"
+    },
+    {
+      "source": "/use/:path*", 
+      "destination": "https://bus.inje.ac.kr/use/:path*"
     }
   ]
 }
