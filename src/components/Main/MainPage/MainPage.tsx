@@ -271,7 +271,7 @@ export const MainPage: React.FC = () => {
 
       {/* 예약 버튼 */}
       <a href="./BusSchedule" className={styles.bookingButton}>
-        <span className={styles.bookingText}>예약하기</span>
+        <span className={styles.bookingText}>✔️ 예약하기</span>
         <img
           src="/img/icon/reservelogo.svg"
           alt="예약하기 버튼"
@@ -279,10 +279,10 @@ export const MainPage: React.FC = () => {
         />
       </a>
   <a href="./Location" className={styles.locationButton}>
-        <span className={styles.locationText}>현재 버스 위치 조회</span>
+        <span className={styles.locationText}>🚌 현재 버스 위치 조회</span>
         <img
           src="/img/icon/reservelogo.svg"
-          alt="예약하기 버튼"
+          alt="현재 버스 위치 조회"
           className={styles.locationIcon}
         />
       </a>
@@ -306,7 +306,7 @@ export const MainPage: React.FC = () => {
       </div>
 
       <section className={styles.noticeSection}>
-        <h2 className={styles.noticeTitle}>공지사항</h2>
+        <h2 className={styles.noticeTitle}>❗공지사항</h2>
         {/* ----------------------------------------------------------------- */}
         {/* 목차 */}
         <ul className={styles.noticeList}>
