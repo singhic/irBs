@@ -312,11 +312,11 @@ export const MainPage: React.FC = () => {
         <ul className={styles.noticeList}>
           <a
             className={styles.noUnderline}
-            href="\NoticePDF\first_bus_schedule.pdf"
+            href="\NoticePDF\summer_vacation_schedule.pdf"
             target="_blank" // 새 탭에서 열기
             rel="noopener noreferrer" // 보안 설정
           >
-            <li>🕒 2025학년도 1학기 통학버스 운행 시간표 </li>
+            <li>🕒 2025학년도 하계방학 통학버스 운행 시간표 </li>
           </a>
 
           <a
