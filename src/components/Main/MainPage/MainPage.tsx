@@ -178,7 +178,7 @@ export const MainPage: React.FC = () => {
 
   useEffect(() => {
     const initialNotifications = [
-      "🔥 2025년 1학기 시간표 최신화 완료!",
+      "🔥 2025년 하계방학 시간표 최신화 완료!",
       "❌ 빠른 예약, 매너, 문의 등 서비스 추후 적용 예정",
       "📢 마이페이지는 우측 상단에서 확인 가능!",
       "Made by Dept. of CE, Team MEGABRAIN",
